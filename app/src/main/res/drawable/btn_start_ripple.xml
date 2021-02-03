@@ -2,5 +2,5 @@
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/myBlue">
-    <item android:drawable="@drawable/btn_start_inactive"/>
+    <item android:drawable="@drawable/circle_white"/>
 </ripple>
