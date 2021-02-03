@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Workout App</string>
+    <string name="name_title"><u>Workout App</u></string>
+    <string name="st_start">Start</string>
+    <string name="st_bmi">BMI</string>
+    <string name="st_calculator">Calculator</string>
+    <string name="st_history">History</string>
+</resources>
