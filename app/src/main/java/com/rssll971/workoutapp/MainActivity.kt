@@ -16,8 +16,21 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        //start exercises
         binding.llStart.setOnClickListener {
             val intent = Intent(this, ExerciseActivity::class.java)
+            startActivity(intent)
+        }
+
+        //bmi calculator
+        binding.llCalculator.setOnClickListener {
+            val intent = Intent(this, BmiCalculatorActivity::class.java)
+            startActivity(intent)
+        }
+
+        //history
+        binding.llHistory.setOnClickListener {
+            val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
 

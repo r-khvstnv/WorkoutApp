@@ -1,12 +1,15 @@
 package com.rssll971.workoutapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.workoutapp.databinding.ActivityExerciseBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,6 +29,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     //exercise list
     private var exerciseList: ArrayList<ExerciseModel>? = null
     private var currentExerciseIndex = 0
+    //adapter for RecyclerView
+    private lateinit var exerciseAdapter: ExerciseStatusAdapter
+    //finish exercise phrase
+    private var exerciseFinishedPhrase: String = "Закончили упражнение"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /** Create view using Binding**/
@@ -42,7 +49,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         //start rest Timer
         setupRestProgress()
 
-
+        //setup rv
+        setupExerciseRecyclerView()
     }
 
     /** On finish activity**/
@@ -123,13 +131,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             override fun onFinish() {
+                //mark as finished
+                exerciseList!![currentExerciseIndex].setIsFinished(true)
+
                 //increment current exercise position
                 currentExerciseIndex++
+
+                //speak that current exercise is finished
+                speakOut(exerciseFinishedPhrase)
+                //notify RV about changes
+                exerciseAdapter.notifyDataSetChanged()
 
                 if (currentExerciseIndex < exerciseList!!.size){
                 setupRestProgress()
                 }else{
-                    Toast.makeText(this@ExerciseActivity, "Complete", Toast.LENGTH_SHORT).show()
+                    showFinishActivity()
                 }
 
             }
@@ -152,6 +168,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
     /** BLOCK ENDS */
 
+
     /**
      * Next fun load exercise to scene
      */
@@ -160,6 +177,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             binding.tvDescription.text = exerciseList!![exerciseIndex].getDescription()
 
     }
+
 
     /**
      * Next two fun responsible for Text to speech
@@ -177,8 +195,30 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             Log.e("TTS", "Initialization Failed")
         }
     }
-
     private fun speakOut(text: String){
         textToSpeech!!.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+
+
+    /**
+     * Next fun load RecyclerView and add content in it
+     */
+    private fun setupExerciseRecyclerView(){
+        //create rv of type Linear Horizontal
+        binding.rvExerciseStatus.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        //pass list
+        exerciseAdapter = ExerciseStatusAdapter(exerciseList!!, this)
+        //set adapter to rv
+        binding.rvExerciseStatus.adapter = exerciseAdapter
+    }
+
+    /**
+     * Next fun complete current activity and start FinishActivity
+     */
+    private fun showFinishActivity(){
+        val intent = Intent(this, FinishActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

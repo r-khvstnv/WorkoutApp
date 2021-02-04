@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_nameTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/btn_start_ripple"
+        android:background="@drawable/circle_ripple"
         android:orientation="vertical"
         android:gravity="center"
         android:elevation="5dp"

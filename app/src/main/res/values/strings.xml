@@ -5,5 +5,15 @@
     <string name="st_bmi">BMI</string>
     <string name="st_calculator">Calculator</string>
     <string name="st_history">History</string>
-
+    <string name="st_end">End</string>
+    <string name="st_last_phrase">На сегодня, упражнения окончены</string>
+    <string name="st_finish">Закончить</string>
+    <string name="st_calculate">Calculate</string>
+    <string name="st_height_m">Рост (см) </string>
+    <string name="st_height_us">Рост (US) </string>
+    <string name="st_weight_m">Вес (кг) </string>
+    <string name="st_weight_us">Вес (US) </string>
+    <string name="st_result">Ваш результат</string>
+    <string name="st_bmi_index">BMI Index:</string>
+    <string name="st_status">Статус:</string>
 </resources>
