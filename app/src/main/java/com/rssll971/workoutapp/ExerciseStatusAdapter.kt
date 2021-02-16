@@ -20,8 +20,8 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModel>, val context
         var flItem: FrameLayout? = null
         var tvItem: TextView? = null
         init {
-            flItem = itemView.findViewById<FrameLayout>(R.id.fl_item)
-            tvItem = itemView.findViewById<TextView>(R.id.tv_item)
+            flItem = itemView.findViewById(R.id.fl_item)
+            tvItem = itemView.findViewById(R.id.tv_item)
         }
     }
 
@@ -44,7 +44,7 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModel>, val context
         holder.tvItem!!.text = layoutModel.getId().toString()
         //drawable for background in depending of exercise status
         if (layoutModel.getIsFinished()){
-            holder.flItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_blue)
+            holder.flItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
             holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))
         }
 

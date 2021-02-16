@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNoActionBar">
         <activity android:name=".HistoryActivity"></activity>
-        <activity android:name=".BmiCalculatorActivity" />
+        <activity android:name=".BmiActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".ExerciseActivity" />
         <activity android:name=".MainActivity">

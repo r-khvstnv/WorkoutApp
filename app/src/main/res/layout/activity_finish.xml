@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/myPink"
+    android:background="@color/myBlue"
     android:orientation="vertical"
     tools:context=".FinishActivity"
     >
@@ -40,7 +40,7 @@
             android:layout_height="100dp"
             android:layout_marginTop="70dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_tick"
+
             android:scaleType="fitCenter"
             android:elevation="15dp"
             />
@@ -50,7 +50,7 @@
             android:layout_marginTop="30dp"
             android:text="@string/st_finish"
             android:textSize="14sp"
-            android:textColor="@color/myBlue"
+            android:textColor="@color/myGreenBlue"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textAlignment="center"

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myWhite"
+    android:orientation="vertical"
+    tools:context=".BmiActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ToggleButton
+            android:id="@+id/tb_measurementSystem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/tb_effect"
+            android:checked="true"
+            android:textOff=" "
+            android:textOn=" " />
+
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/myGreenBlue"
+            android:hint="@string/st_height_m"
+            android:inputType="numberSigned"
+            android:textAlignment="textEnd"
+            android:textColor="@color/myGreenBlue"
+            android:textColorHint="@color/myGreenBlue"
+            android:textCursorDrawable="@color/myGreenBlue"
+            android:textSize="24sp"
+            />
+
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/myGreenBlue"
+            android:hint="@string/st_weight_m"
+            android:inputType="numberSigned"
+            android:textAlignment="textEnd"
+            android:textColor="@color/myGreenBlue"
+            android:textColorHint="@color/myGreenBlue"
+            android:textCursorDrawable="@color/myGreenBlue"
+            android:textSize="24sp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_result"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/background_rectangle_white"
+            android:elevation="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="20dp"
+            android:visibility="visible"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/st_result"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="28sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="01/01/2001"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_bmi_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="20sp"
+                tools:text="BMI Index: 25" />
+
+            <TextView
+                android:id="@+id/tv_bmi_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="20sp"
+                tools:text="Status: Норма" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_calculate"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/btn_rectangle_ol_ripple"
+            android:elevation="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="20dp"
+            android:visibility="visible"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/st_calculate"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/myWhite"
+                android:textSize="28sp" />
+        </LinearLayout>
+
+
+        <!-- Bmi history-->
+        <LinearLayout
+            android:id="@+id/ll_show_history"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="History"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="28sp"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="32dp"
+                android:layout_marginEnd="10dp"
+                android:paddingHorizontal="20dp"
+                android:src="@drawable/ic_expand"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
+
+        <!-- Rv history-->
+        <LinearLayout
+            android:id="@+id/ll_bmi_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/myWhite"
+                android:layout_marginHorizontal="5dp"
+                android:paddingVertical="12dp"
+                android:elevation="5dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_weight="2"
+                    android:src="@drawable/ic_calendar"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Weight"
+                   android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/myGreenBlue"
+                    android:textSize="@dimen/dim_item_bmi_date_text_size"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Height"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/myGreenBlue"
+                    android:textSize="@dimen/dim_item_bmi_date_text_size"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="BMI"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/myGreenBlue"
+                    android:textSize="@dimen/dim_item_bmi_date_text_size"
+                    />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_bmi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

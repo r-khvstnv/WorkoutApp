@@ -4,25 +4,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.rssll971.workoutapp.databinding.ActivityBmiCalculatorBinding
+import com.rssll971.workoutapp.databinding.ActivityBmiBinding
 import kotlin.math.pow
 
-class BmiCalculatorActivity : AppCompatActivity() {
+class BmiActivity : AppCompatActivity() {
     //binding
-    private lateinit var binding: ActivityBmiCalculatorBinding
+    private lateinit var binding: ActivityBmiBinding
     //metric system
     private var isMetricSystem: Boolean = true
     //check for estimation
     private var isCalculated: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBmiCalculatorBinding.inflate(layoutInflater)
+        binding = ActivityBmiBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        //hide result layout
-        binding.llEditableData.visibility = View.VISIBLE
-        binding.llResult.visibility = View.GONE
+
 
         //measurement system
         binding.tbMeasurementSystem.setOnClickListener {
@@ -31,6 +29,7 @@ class BmiCalculatorActivity : AppCompatActivity() {
         }
 
         //calculate or exit
+        /*
         binding.btnActions.setOnClickListener {
             if (!isCalculated){
                 estimateBmi()
@@ -39,6 +38,8 @@ class BmiCalculatorActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+         */
     }
 
 
@@ -87,12 +88,10 @@ class BmiCalculatorActivity : AppCompatActivity() {
     private fun showBmiResult(bmi: Float, bmiStatus: String){
         isCalculated = true
 
-        //hide editable data layout
-        binding.llEditableData.visibility = View.GONE
-        binding.llResult.visibility = View.VISIBLE
+
 
         binding.tvBmiIndex.text = bmi.toInt().toString()
         binding.tvBmiStatus.text = bmiStatus
-        binding.btnActions.text = getString(R.string.st_finish)
+        //binding.btnActions.text = getString(R.string.st_finish)
     }
 }

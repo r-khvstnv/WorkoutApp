@@ -22,17 +22,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         //bmi calculator
-        binding.llCalculator.setOnClickListener {
-            val intent = Intent(this, BmiCalculatorActivity::class.java)
+        binding.llBmi.setOnClickListener {
+            val intent = Intent(this, BmiActivity::class.java)
             startActivity(intent)
         }
 
         //history
-        binding.llHistory.setOnClickListener {
-            val intent = Intent(this, HistoryActivity::class.java)
-            startActivity(intent)
+        binding.llActivities.setOnClickListener {
+            Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show()
         }
+
+        //history
+        binding.llSettings.setOnClickListener {
+            Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 }

@@ -6,27 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@color/myPink"
+    android:background="@color/myWhite"
     >
-    <TextView
-        android:id="@+id/tv_nameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/name_title"
-        android:textColor="@color/myWhite"
-        android:textSize="48sp"
-        android:elevation="24dp"
-        />
+
     <LinearLayout
         android:id="@+id/ll_start"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="110dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_nameTitle"
+        android:layout_marginTop="150dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/circle_ripple"
@@ -38,73 +26,102 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/st_start"
-            android:textColor="@color/myPink"
+            android:textColor="@color/myWhite"
             android:textSize="36sp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
             />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/ll_calculator"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintRight_toRightOf="@id/tv_calculator"
-        app:layout_constraintLeft_toLeftOf="@id/tv_calculator"
-        app:layout_constraintBottom_toTopOf="@id/tv_calculator"
-        android:background="@drawable/btn_rectangle"
+        android:id="@+id/ll_bmi"
+        android:layout_width="@dimen/dim_btn_rectangle_width"
+        android:layout_height="@dimen/dim_btn_rectangle_height"
+        android:layout_marginBottom="@dimen/dim_main_btn_margin_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ll_activities"
+        android:background="@drawable/btn_rectangle_ripple"
         android:orientation="vertical"
         android:gravity="center"
         android:elevation="5dp"
         >
+        <ImageView
+            android:layout_width="@dimen/dim_iv_main_square_size"
+            android:layout_height="@dimen/dim_iv_main_square_size"
+            android:layout_marginTop="@dimen/dim_main_iv_margin_top"
+            android:src="@drawable/ic_calendar"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/st_bmi"
             android:textStyle="bold"
-            android:textColor="@color/myPink"
-            android:textSize="18sp"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="@dimen/dim_main_text_btn"
             />
     </LinearLayout>
-    <TextView
-        android:id="@+id/tv_calculator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginStart="50dp"
+
+    <LinearLayout
+        android:id="@+id/ll_activities"
+        android:layout_width="@dimen/dim_btn_rectangle_width"
+        android:layout_height="@dimen/dim_btn_rectangle_height"
+        android:layout_marginBottom="@dimen/dim_main_btn_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/st_calculator"
-        android:textSize="18sp"
-        android:textColor="@color/myWhite"
-        android:textStyle="bold"
-        />
-    <ImageButton
-        android:id="@+id/ll_history"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintRight_toRightOf="@id/tv_history"
-        app:layout_constraintLeft_toLeftOf="@id/tv_history"
-        app:layout_constraintBottom_toTopOf="@id/tv_history"
-        android:background="@drawable/btn_rectangle"
-        android:contentDescription="@string/st_history"
-        android:src="@drawable/ic_calendar"
-        android:scaleType="fitCenter"
-        android:padding="10dp"
+        app:layout_constraintLeft_toRightOf="@id/ll_bmi"
+        app:layout_constraintRight_toLeftOf="@id/ll_settings"
+        android:background="@drawable/btn_rectangle_ripple"
+        android:orientation="vertical"
+        android:gravity="center"
         android:elevation="5dp"
-        />
-    <TextView
-        android:id="@+id/tv_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginEnd="50dp"
+        >
+        <ImageView
+            android:layout_width="@dimen/dim_iv_main_square_size"
+            android:layout_height="@dimen/dim_iv_main_square_size"
+            android:layout_marginTop="@dimen/dim_main_iv_margin_top"
+            android:src="@drawable/ic_activity"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Activities"
+            android:textStyle="bold"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="@dimen/dim_main_text_btn"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_settings"
+        android:layout_width="@dimen/dim_btn_rectangle_width"
+        android:layout_height="@dimen/dim_btn_rectangle_height"
+        android:layout_marginBottom="@dimen/dim_main_btn_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ll_activities"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/st_history"
-        android:textSize="18sp"
-        android:textColor="@color/myWhite"
-        android:textStyle="bold"
-        />
+        android:background="@drawable/btn_rectangle_ripple"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:elevation="5dp"
+        >
+        <ImageView
+            android:layout_width="@dimen/dim_iv_main_square_size"
+            android:layout_height="@dimen/dim_iv_main_square_size"
+            android:layout_marginTop="@dimen/dim_main_iv_margin_top"
+            android:src="@drawable/ic_settings"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Settings"
+            android:textStyle="bold"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="@dimen/dim_main_text_btn"
+            />
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

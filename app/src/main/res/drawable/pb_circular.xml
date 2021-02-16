@@ -6,7 +6,7 @@
             android:thicknessRatio="15.0"
             android:useLevel="true"
             >
-            <solid android:color="@color/myBlue"/>
+            <solid android:color="@color/myGreenBlue"/>
 
         </shape>
     </item>
