@@ -21,7 +21,7 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModel>, val context
         var tvItem: TextView? = null
         init {
             flItem = itemView.findViewById(R.id.fl_item)
-            tvItem = itemView.findViewById(R.id.tv_item)
+            tvItem = itemView.findViewById(R.id.tv_item_exercise_number)
         }
     }
 
@@ -30,7 +30,7 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModel>, val context
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_exercise, parent, false))
+            LayoutInflater.from(context).inflate(R.layout.item_exercise_number, parent, false))
     }
 
     /**

@@ -10,4 +10,8 @@
 
     <dimen name="dim_item_bmi_date_text_size">22sp</dimen>
 
+    <dimen name="dim_select_exercise_objects_height">30dp</dimen>
+
+
+
 </resources>

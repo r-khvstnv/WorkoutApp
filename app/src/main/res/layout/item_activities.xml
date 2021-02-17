@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="5dp"
+    android:gravity="center"
+    android:background="@drawable/ll_activities_ripple_db">
+    <TextView
+        android:id="@+id/tv_item_activity_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        tools:text="Activity"
+        android:textSize="24sp"
+        android:textColor="@color/myWhite"
+        android:textStyle="bold"
+        />
+
+</LinearLayout>

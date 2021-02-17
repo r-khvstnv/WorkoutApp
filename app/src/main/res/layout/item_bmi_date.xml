@@ -11,6 +11,7 @@
     android:paddingVertical="10dp"
     android:elevation="5dp">
     <TextView
+        android:id="@+id/tv_item_bmi_date"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
         android:textSize="@dimen/dim_item_bmi_date_text_size"
         />
     <TextView
+        android:id="@+id/tv_item_bmi_weight"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -29,6 +31,7 @@
         android:textSize="@dimen/dim_item_bmi_date_text_size"
         />
     <TextView
+        android:id="@+id/tv_item_bmi_height"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -38,6 +41,7 @@
         android:textSize="@dimen/dim_item_bmi_date_text_size"
         />
     <TextView
+        android:id="@+id/tv_item_bmi_bmiIndex"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"

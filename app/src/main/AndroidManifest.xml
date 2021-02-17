@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNoActionBar">
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".EditActivitiesActivity"></activity>
+        <activity android:name=".ActivitiesCatalogActivity" />
+        <activity android:name=".HistoryActivity" />
         <activity android:name=".BmiActivity" />
         <activity android:name=".FinishActivity" />
         <activity android:name=".ExerciseActivity" />
