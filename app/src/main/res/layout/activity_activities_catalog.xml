@@ -1,55 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/myWhite"
-    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".ActivitiesCatalogActivity">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:id="@+id/ll_add_activities"
+        android:layout_width="340dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:background="@drawable/ll_activities_ripple_white"
+        android:elevation="5dp"
         >
-        <LinearLayout
-            android:id="@+id/ll_add_activities"
-            android:layout_width="340dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:background="@drawable/ll_activities_background_white"
-            android:elevation="5dp"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_add_round"
-                android:scaleType="fitCenter"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Add exercise"
-                android:textSize="24sp"
-                android:textColor="@color/myGreenBlue"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_activities"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_add_round"
+            android:scaleType="fitCenter"
             />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Add exercise"
+            android:textSize="24sp"
+            android:textColor="@color/myGreenBlue"
+            android:textStyle="bold"
+            />
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_activities"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        />
 
-</ScrollView>
+
+</LinearLayout>

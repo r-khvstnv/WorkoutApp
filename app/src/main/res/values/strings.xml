@@ -14,6 +14,7 @@
     <string name="st_weight_m">Вес (кг) </string>
     <string name="st_weight_us">Вес (US) </string>
     <string name="st_result">Ваш результат</string>
-    <string name="st_bmi_index">BMI Index:</string>
+    <string name="st_bmi_index">BMI Index</string>
+    <string name="st_description">Description</string>
     <string name="st_status">Статус:</string>
 </resources>

@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/myWhite"
     android:orientation="vertical"
+    android:id="@+id/sv_bmi"
     tools:context=".BmiActivity">
 
     <LinearLayout
@@ -77,10 +78,11 @@
                 android:textSize="28sp" />
 
             <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="01/01/2001"
+                tools:text="01/01/2001"
                 android:textAlignment="center"
                 android:textColor="@color/myGreenBlue"
                 android:textSize="14sp" />
@@ -131,42 +133,48 @@
 
 
         <!-- Bmi history-->
-        <LinearLayout
-            android:id="@+id/ll_show_history"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_show_history"
             android:layout_width="340dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_rectangle_ripple"
+            android:elevation="5dp"
             android:visibility="visible"
             >
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="History"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/myGreenBlue"
                 android:textSize="28sp"
                 />
             <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="32dp"
-                android:layout_marginEnd="10dp"
-                android:paddingHorizontal="20dp"
+                android:id="@+id/iv_expand"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_expand"
                 android:scaleType="fitCenter"
                 />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Rv history-->
         <LinearLayout
             android:id="@+id/ll_bmi_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             >
@@ -220,10 +228,45 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_bmi"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="400dp"
                 android:orientation="vertical"
 
                 />
+
+            <LinearLayout
+                android:id="@+id/ll_delete_history"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="20dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintTop_toTopOf="@id/ll_save"
+                app:layout_constraintBottom_toBottomOf="@id/ll_save"
+                app:layout_constraintRight_toLeftOf="@id/ll_save"
+                android:background="@drawable/btn_rectangle_ripple"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+                android:elevation="5dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Delete All"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/myDarkBlue"
+                    android:textSize="18sp" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_trash_bin"
+                    android:scaleType="fitCenter"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
 

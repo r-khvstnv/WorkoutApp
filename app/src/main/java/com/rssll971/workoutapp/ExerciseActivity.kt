@@ -7,8 +7,6 @@ import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.workoutapp.databinding.ActivityExerciseBinding
 import java.util.*
@@ -21,13 +19,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     //text to speech
     private var textToSpeech: TextToSpeech? = null
     //rest timer
-    private var restTimer: CountDownTimer? = null
-    private var restTimerProgress: Int = 3
+    private var relaxationTimer: CountDownTimer? = null
+    private var relaxationTimerProgress: Int = 1
     //exercise timer
     private var exerciseTimer: CountDownTimer? = null
-    private var exerciseTimerProgress: Int = 10
+    private var exerciseTimerProgress: Int = 1
     //exercise list
-    private var exerciseList: ArrayList<ExerciseModel>? = null
+    private lateinit var exerciseList: ArrayList<ExerciseModelClass>
     private var currentExerciseIndex = 0
     //adapter for RecyclerView
     private lateinit var exerciseAdapter: ExerciseStatusAdapter
@@ -41,7 +39,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setContentView(view)
 
         /** Get list of exercises */
-        exerciseList = ExerciseModel.defaultExerciseList()
+        exerciseList = prepareExerciseList()
+        relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
+        exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
 
         /** Text to Speech*/
         textToSpeech = TextToSpeech(this, this)
@@ -56,8 +56,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     /** On finish activity**/
     override fun onDestroy() {
         //stop timers
-        if (restTimer != null){
-            restTimer!!.cancel()
+        if (relaxationTimer != null){
+            relaxationTimer!!.cancel()
         }
 
         if (exerciseTimer != null){
@@ -80,8 +80,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
      * Next fun responsible for timer before starting exercise
      */
     private fun setRestProgress(){
-        var timeInMillis: Int = restTimerProgress
-        restTimer = object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
+        var timeInMillis: Int = relaxationTimerProgress
+        binding.pbTimerProgressRest.max = relaxationTimerProgress
+
+        relaxationTimer = object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
             override fun onTick(millisUntilFinished: Long) {
                 timeInMillis--
 
@@ -103,8 +105,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding.llExerciseScene.visibility = View.GONE
         binding.llRestScene.visibility = View.VISIBLE
 
-        if (restTimer != null){
-            restTimer!!.cancel()
+        if (relaxationTimer != null){
+            relaxationTimer!!.cancel()
 
         }
 
@@ -118,6 +120,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
      */
     private fun setExerciseTimer(){
         var timeInMillis: Int = exerciseTimerProgress
+        binding.pbTimerProgressExercise.max = exerciseTimerProgress
 
         //speak title of exercise
         speakOut(binding.tvName.text.toString())
@@ -220,5 +223,30 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val intent = Intent(this, FinishActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    //prepare exercise list
+    private fun prepareExerciseList(): ArrayList<ExerciseModelClass>{
+        /**
+         * Next lines responsible for extracting users exercises and default in rv
+         */
+        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        val emcList = dataBaseHandler.viewUsersExercises()
+        val defaultEmcList: ArrayList<ExerciseModelClass> = ExerciseModelClass.defaultExerciseList()
+        for (i in 0 until defaultEmcList.size){
+            emcList.add(defaultEmcList[i])
+        }
+
+        var formedExerciseList = ArrayList<ExerciseModelClass>()
+        val userSelectedExercises = intent.getStringArrayListExtra("FormedList")
+        for (i in 0 until userSelectedExercises!!.size){
+            for (j in 0 until emcList.size){
+                if (userSelectedExercises[i] == emcList[j].getName()){
+                    formedExerciseList.add(emcList[j])
+                }
+            }
+        }
+
+        return formedExerciseList
     }
 }

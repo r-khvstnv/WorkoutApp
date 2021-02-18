@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Class responsible for whole recycle adapter.
  * Implement members of ExerciseList and current Context
  */
-class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModel>, val context: Context) : RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
+class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModelClass>, val context: Context) : RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
 
     /** Class with custom item*/
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -37,11 +37,11 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModel>, val context
      * Assign every item with right content
      */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val layoutModel: ExerciseModel = itemsList[position]
+        val layoutModel: ExerciseModelClass = itemsList[position]
 
         //assign data
         //text
-        holder.tvItem!!.text = layoutModel.getId().toString()
+        holder.tvItem!!.text = (position + 1).toString()
         //drawable for background in depending of exercise status
         if (layoutModel.getIsFinished()){
             holder.flItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
