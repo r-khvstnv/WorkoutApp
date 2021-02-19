@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Add exercise"
+            android:text="@string/st_add_exercise"
             android:textSize="24sp"
             android:textColor="@color/myGreenBlue"
             android:textStyle="bold"
@@ -37,11 +37,43 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_activities"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
         />
+
+    <LinearLayout
+        android:id="@+id/ll_delete_exercises"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/btn_rectangle_ripple"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:elevation="5dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/st_delete_all"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/myDarkBlue"
+            android:textSize="18sp" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_trash_bin"
+            android:scaleType="fitCenter"
+            />
+    </LinearLayout>
 
 
 </LinearLayout>

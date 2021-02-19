@@ -18,6 +18,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var binding: ActivityExerciseBinding
     //text to speech
     private var textToSpeech: TextToSpeech? = null
+    //voice assistant
+    private var isVoiceAssistantActivated: Boolean = false
     //rest timer
     private var relaxationTimer: CountDownTimer? = null
     private var relaxationTimerProgress: Int = 1
@@ -42,6 +44,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseList = prepareExerciseList()
         relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
         exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
+        isVoiceAssistantActivated = intent!!.getBooleanExtra("VoiceAssistant", false)
+        //todo implement speech
+
 
         /** Text to Speech*/
         textToSpeech = TextToSpeech(this, this)
@@ -123,7 +128,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding.pbTimerProgressExercise.max = exerciseTimerProgress
 
         //speak title of exercise
-        speakOut(binding.tvName.text.toString())
+        if (isVoiceAssistantActivated){
+            speakOut(binding.tvName.text.toString())
+        }
+
 
         exerciseTimer = object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
             override fun onTick(millisUntilFinished: Long) {
@@ -141,7 +149,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 currentExerciseIndex++
 
                 //speak that current exercise is finished
-                speakOut(exerciseFinishedPhrase)
+                if (isVoiceAssistantActivated){
+                    speakOut(exerciseFinishedPhrase)
+                }
+
                 //notify RV about changes
                 exerciseAdapter.notifyDataSetChanged()
 

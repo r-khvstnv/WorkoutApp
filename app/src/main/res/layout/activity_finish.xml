@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/st_end"
+        android:text="TODO"
         android:textSize="48sp"
         android:textColor="@color/myWhite"
         android:textAlignment="center"
@@ -35,12 +35,14 @@
         android:gravity="center_horizontal"
         android:elevation="5dp"
         >
+        <!--
+            todo add image
+            -->
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="70dp"
             android:layout_gravity="center"
-
             android:scaleType="fitCenter"
             android:elevation="15dp"
             />
@@ -48,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="@string/st_finish"
+            android:text="TODO"
             android:textSize="14sp"
             android:textColor="@color/myGreenBlue"
             android:textAllCaps="true"
@@ -65,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_tick"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/st_last_phrase"
+        android:text="TODO"
         android:textSize="24sp"
         android:textColor="@color/myWhite"
         android:textAlignment="center"

@@ -75,12 +75,13 @@ class BmiActivity : AppCompatActivity() {
     //change text in editText hints
     private fun showRightHints(){
         if (isMetricSystem){
-            binding.etHeight.hint = getString(R.string.st_height_m)
-            binding.etWeight.hint = getString(R.string.st_weight_m)
+            binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_sm)
+            binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_kg)
         }
         else{
-            binding.etHeight.hint = getString(R.string.st_height_us)
-            binding.etWeight.hint = getString(R.string.st_weight_us)
+            //todo change
+            binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_sm)
+            binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_kg)
         }
     }
 
@@ -123,7 +124,7 @@ class BmiActivity : AppCompatActivity() {
 
         binding.tvDate.text = currentDate
         binding.tvBmiIndex.text = "${resources.getString(R.string.st_bmi_index)}: $bmiIndex"
-        binding.tvBmiStatus.text = "${resources.getString(R.string.st_description)}: $bmiStatus"
+        binding.tvBmiStatus.text = "${resources.getString(R.string.st_status)}: $bmiStatus"
         //show result and history
         binding.llResult.visibility = View.VISIBLE
         addBmiRecord()

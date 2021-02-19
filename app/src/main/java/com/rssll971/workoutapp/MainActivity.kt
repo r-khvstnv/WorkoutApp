@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
         //all buttons
         var rbVoiceOn = dialog.findViewById<RadioButton>(R.id.rb_voice_on)
-        var rbVoiceOff = dialog.findViewById<RadioButton>(R.id.rb_voice_off)
 
         val ivMinusRelaxationTime = dialog.findViewById<ImageView>(R.id.iv_minus_relaxation_time)
         val ivPlusRelaxationTime = dialog.findViewById<ImageView>(R.id.iv_plus_relaxation_time)
@@ -127,6 +126,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("FormedList", formedExerciseList)
             intent.putExtra("RelaxationTime", relaxationTime)
             intent.putExtra("ExerciseTime", exerciseTime)
+            intent.putExtra("VoiceAssistant", rbVoiceOn.isChecked)
             startActivity(intent)
         }
     }

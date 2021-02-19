@@ -18,13 +18,13 @@
         app:layout_constraintRight_toRightOf="parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="150dp"
-            android:text="Chill"
+            android:text="@string/t_relax"
             android:textSize="18sp"
             android:textColor="@color/myGreenBlue"
             android:textStyle="bold"
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Upcoming Exercise:"
+            android:text="@string/st_upcoming_exercise"
             android:textSize="18sp"
             android:textColor="@color/myGreenBlue"
             android:textAlignment="center"
@@ -110,7 +110,7 @@
         app:layout_constraintBottom_toTopOf="@id/rv_exerciseStatus"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         >
         <TextView
             android:id="@+id/tv_name"
@@ -119,7 +119,7 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:elevation="5dp"
-            android:text="Упражнение"
+            tools:text="Exercise"
             android:textColor="@color/myOrangeLight"
             android:textSize="36sp"
             android:textAlignment="center"

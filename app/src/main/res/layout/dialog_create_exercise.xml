@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Optional"
+                android:text="@string/st_optional"
                 android:textSize="14sp"
                 android:textColor="@color/myDarkBlue"
                 android:textStyle="bold"
@@ -69,8 +69,8 @@
         </LinearLayout>
         <ImageView
             android:id="@+id/iv_edit_exercise_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             />
@@ -125,7 +125,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="@string/st_save"
             android:textStyle="bold"
             android:textAllCaps="true"
             android:textColor="@color/myDarkBlue"

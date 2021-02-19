@@ -1,20 +1,48 @@
 <resources>
     <string name="app_name">Workout App</string>
     <string name="name_title"><u>Workout App</u></string>
+
+    <!--
+    General
+    -->
+    <string name="st_bmi">bmi</string>
+    <string name="st_height">Height</string>
+    <string name="st_weight">Weight</string>
+    <string name="st_delete_all">Delete All</string>
     <string name="st_start">Start</string>
-    <string name="st_bmi">BMI</string>
+    <!--
+    MainActivity
+    -->
+    <string name="st_activities">Activities</string>
+    <string name="st_settings">Settings</string>
     <string name="st_calculator">Calculator</string>
-    <string name="st_history">History</string>
-    <string name="st_end">End</string>
-    <string name="st_last_phrase">На сегодня, упражнения окончены</string>
-    <string name="st_finish">Закончить</string>
-    <string name="st_calculate">Calculate</string>
-    <string name="st_height_m">Рост (см) </string>
-    <string name="st_height_us">Рост (US) </string>
-    <string name="st_weight_m">Вес (кг) </string>
-    <string name="st_weight_us">Вес (US) </string>
-    <string name="st_result">Ваш результат</string>
+    <!--
+    BmiActivity
+    -->
+    <string name="st_sm">(sm)</string>
+    <string name="st_kg">(kg)</string>
+    <string name="st_result">Result</string>
     <string name="st_bmi_index">BMI Index</string>
-    <string name="st_description">Description</string>
-    <string name="st_status">Статус:</string>
+    <string name="st_calculate">Calculate</string>
+    <string name="st_history">History</string>
+    <string name="st_status">Status</string>
+    <!--
+    SelectExerciseDialog
+    -->
+    <string name="st_voice_assistant">Voice Assistant:</string>
+    <string name="st_on">On</string>
+    <string name="st_off">Off</string>
+    <string name="st_relaxation_time">Relaxation time:</string>
+    <string name="st_exercise_time">Exercise time:</string>
+    <!--
+    ActivitiesCatalogActivity
+    -->
+    <string name="st_add_exercise">Add exercise</string>
+    <string name="st_optional">Optional</string>
+    <string name="st_save">Save</string>
+    <!--
+    ExerciseActivity
+    -->
+    <string name="t_relax">Relax</string>
+    <string name="st_upcoming_exercise">Upcoming Exercise:</string>
 </resources>
