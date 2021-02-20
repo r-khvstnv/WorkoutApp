@@ -46,7 +46,7 @@ class UserExercisesAdapter(val context: Context,
                     context.prepareExerciseList(position, true)
                     holder.llUserExercise.isSelected = true
                 }
-                Toast.makeText(context, "Ok", Toast.LENGTH_LONG).show()
+
             }
         }
     }

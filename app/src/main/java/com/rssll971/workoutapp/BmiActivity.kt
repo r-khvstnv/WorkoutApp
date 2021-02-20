@@ -9,6 +9,10 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.rssll971.workoutapp.databinding.ActivityBmiBinding
 import java.time.LocalDate
 import java.util.*
@@ -26,12 +30,34 @@ class BmiActivity : AppCompatActivity() {
     private lateinit var bmiIndex: String
     //adapter
     private lateinit var bmiStatusAdapter: BmiResultStatusAdapter
+    //ads
+    private lateinit var adViewBannerTop: AdView
+    private lateinit var adViewBannerBottom: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBmiBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        /** Ads*/
+        MobileAds.initialize(this)
+        adViewBannerTop = findViewById(R.id.adView_banner_bmi_top)
+        adViewBannerBottom = findViewById(R.id.adView_banner_bmi_bottom)
+        adViewBannerTop.loadAd(AdRequest.Builder().build())
+        adViewBannerBottom.loadAd(AdRequest.Builder().build())
+
+        adViewBannerTop.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerTop.loadAd(AdRequest.Builder().build())
+            }
+        }
+        adViewBannerBottom.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerBottom.loadAd(AdRequest.Builder().build())
+            }
+        }
+
 
         //hide result and history
         binding.llResult.visibility = View.INVISIBLE
@@ -149,7 +175,7 @@ class BmiActivity : AppCompatActivity() {
     private fun showBmiHistory(){
         binding.llBmiHistory.visibility = View.VISIBLE
         binding.ivExpand.animate().rotation(-180F)
-        binding.svBmi.requestChildFocus(binding.llDeleteHistory, binding.llDeleteHistory)
+        binding.svBmi.requestChildFocus(binding.adViewBannerBmiBottom, binding.adViewBannerBmiBottom)
     }
     //hide history
     private fun hideBmiHistory(){

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="10dp"
+    android:layout_marginVertical="5dp"
     android:layout_marginHorizontal="5dp"
     android:gravity="center"
     android:background="@drawable/ll_activities_selectable"

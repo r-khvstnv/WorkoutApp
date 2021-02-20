@@ -13,19 +13,28 @@
         android:id="@+id/ll_restScene"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         >
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView_banner_relaxation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="MEDIUM_RECTANGLE"
+            ads:adUnitId="@string/st_banner_relaxation_id"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:text="@string/t_relax"
-            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:text="@string/st_relax"
+            android:textSize="28sp"
             android:textColor="@color/myGreenBlue"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -40,6 +49,7 @@
                 android:id="@+id/pb_timerProgressRest"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginVertical="10dp"
                 android:layout_gravity="center"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:indeterminate="false"
@@ -68,8 +78,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="10"
-                android:textSize="48sp"
+                tools:text="999"
+                android:textSize="40sp"
                 android:textColor="@color/myWhite"
                 android:elevation="15dp"
                 android:textAlignment="center"
@@ -79,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/st_upcoming_exercise"
             android:textSize="18sp"
             android:textColor="@color/myGreenBlue"
@@ -99,6 +109,9 @@
             />
     </LinearLayout>
 
+
+
+
     <!-- Exercise stage -->
     <LinearLayout
         android:id="@+id/ll_exerciseScene"
@@ -107,11 +120,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rv_exerciseStatus"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         >
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView_banner_current_exercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/st_banner_current_exercise_id"
+            />
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="320dp"
@@ -126,24 +146,25 @@
             android:textStyle="bold"
             />
         <LinearLayout
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/background_rectangle_white"
             android:orientation="vertical"
-            android:elevation="5dp"
             >
             <ImageView
-                android:layout_width="match_parent"
+                android:id="@+id/iv_user_exercise_image"
+                android:layout_marginTop="5dp"
+                android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:background="@color/myOrangeLight"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/myWhite"
                 android:scaleType="fitCenter"
                 />
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_margin="10dp"
                 tools:text="Шагните правой ногой вперёд и присядьте, согнув её в колене так,
             чтобы образовался угол в 90 градусов. При этом колено левой ноги не должно коснуться пола.
             Не забывайте напрягать ягодицы! Затем встаньте, шагните правой ногой назад и снова присядьте,
@@ -157,14 +178,16 @@
 
         <!-- Exercise Timer-->
         <FrameLayout
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             >
         <ProgressBar
             android:id="@+id/pb_timerProgressExercise"
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
             style="?android:attr/progressBarStyleHorizontal"
             android:indeterminate="false"
@@ -193,8 +216,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            tools:text="30"
-            android:textSize="24sp"
+            tools:text="330"
+            android:textSize="22sp"
             android:textColor="@color/myWhite"
             android:elevation="15dp"
             android:textAlignment="center"
@@ -207,7 +230,7 @@
         android:id="@+id/rv_exerciseStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

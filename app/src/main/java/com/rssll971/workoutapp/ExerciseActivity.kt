@@ -1,6 +1,8 @@
 package com.rssll971.workoutapp
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,7 +10,13 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.rssll971.workoutapp.databinding.ActivityExerciseBinding
+import com.squareup.picasso.Picasso
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,6 +41,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private lateinit var exerciseAdapter: ExerciseStatusAdapter
     //finish exercise phrase
     private var exerciseFinishedPhrase: String = "Закончили упражнение"
+    //ads
+    private lateinit var adViewBannerRelaxation: AdView
+    private lateinit var adViewBannerCurrentExercise: AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /** Create view using Binding**/
@@ -45,7 +57,24 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
         exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
         isVoiceAssistantActivated = intent!!.getBooleanExtra("VoiceAssistant", false)
-        //todo implement speech
+
+        /** Ads*/
+        MobileAds.initialize(this)
+        adViewBannerRelaxation = findViewById(R.id.adView_banner_relaxation)
+        adViewBannerCurrentExercise = findViewById(R.id.adView_banner_current_exercise)
+        adViewBannerRelaxation.loadAd(AdRequest.Builder().build())
+        adViewBannerCurrentExercise.loadAd(AdRequest.Builder().build())
+
+        adViewBannerRelaxation.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerRelaxation.loadAd(AdRequest.Builder().build())
+            }
+        }
+        adViewBannerCurrentExercise.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerCurrentExercise.loadAd(AdRequest.Builder().build())
+            }
+        }
 
 
         /** Text to Speech*/
@@ -187,8 +216,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
      * Next fun load exercise to scene
      */
     private fun loadExercise(exerciseIndex: Int){
-            binding.tvName.text = exerciseList!![exerciseIndex].getName()
-            binding.tvDescription.text = exerciseList!![exerciseIndex].getDescription()
+        binding.tvName.text = exerciseList!![exerciseIndex].getName()
+        binding.tvDescription.text = exerciseList!![exerciseIndex].getDescription()
+
+        //load image
+        if (exerciseList[exerciseIndex].getImagePath() == getString(R.string.st_empty_path)){
+            binding.ivUserExerciseImage.visibility = View.GONE
+        }
+        else{
+            binding.ivUserExerciseImage.visibility = View.VISIBLE
+            val imageFile = File(exerciseList[exerciseIndex].getImagePath())
+            //targetSize1920
+            Picasso.get().load(Uri.fromFile(imageFile)).resize(1920, 1920).centerInside().into(binding.ivUserExerciseImage)
+        }
+
 
     }
 
@@ -222,7 +263,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding.rvExerciseStatus.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         //pass list
-        exerciseAdapter = ExerciseStatusAdapter(exerciseList!!, this)
+        exerciseAdapter = ExerciseStatusAdapter(exerciseList, this)
         //set adapter to rv
         binding.rvExerciseStatus.adapter = exerciseAdapter
     }

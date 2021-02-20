@@ -6,15 +6,20 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.rssll971.workoutapp.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    //main ad banner
+    private lateinit var adViewBannerMain: AdView
 
     //relaxation time
     private var relaxationTime: Int = 30
@@ -32,6 +37,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        /** Ads*/
+        MobileAds.initialize(this)
+        adViewBannerMain = findViewById(R.id.adView_banner_main)
+        adViewBannerMain.loadAd(AdRequest.Builder().build())
+
+        adViewBannerMain.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerMain.loadAd(AdRequest.Builder().build())
+            }
+        }
+
+
 
         //start exercises
         binding.llStart.setOnClickListener {
@@ -67,16 +85,16 @@ class MainActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         //all buttons
-        var rbVoiceOn = dialog.findViewById<RadioButton>(R.id.rb_voice_on)
+        val rbVoiceOn = dialog.findViewById<RadioButton>(R.id.rb_voice_on)
 
         val ivMinusRelaxationTime = dialog.findViewById<ImageView>(R.id.iv_minus_relaxation_time)
         val ivPlusRelaxationTime = dialog.findViewById<ImageView>(R.id.iv_plus_relaxation_time)
-        var tvRelaxationTime = dialog.findViewById<TextView>(R.id.tv_relaxation_time)
+        val tvRelaxationTime = dialog.findViewById<TextView>(R.id.tv_relaxation_time)
         tvRelaxationTime.text = relaxationTime.toString()
 
         val ivMinusExerciseTime = dialog.findViewById<ImageView>(R.id.iv_minus_exercise_time)
         val ivPlusExerciseTime = dialog.findViewById<ImageView>(R.id.iv_plus_exercise_time)
-        var tvExerciseTime = dialog.findViewById<TextView>(R.id.tv_exercise_time)
+        val tvExerciseTime = dialog.findViewById<TextView>(R.id.tv_exercise_time)
         tvExerciseTime.text = exerciseTime.toString()
 
         /**
@@ -128,6 +146,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("ExerciseTime", exerciseTime)
             intent.putExtra("VoiceAssistant", rbVoiceOn.isChecked)
             startActivity(intent)
+            dialog.dismiss()
         }
     }
 

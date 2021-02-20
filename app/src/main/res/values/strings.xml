@@ -2,6 +2,20 @@
     <string name="app_name">Workout App</string>
     <string name="name_title"><u>Workout App</u></string>
 
+    <!-- todo test ids-->
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="st_banner_main_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="st_banner_bmi_top_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="st_banner_bmi_bottom_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="st_banner_activities_catalog_bottom_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="st_banner_relaxation_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="st_banner_current_exercise_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="st_banner_finish_bottom_id">ca-app-pub-3940256099942544/6300978111</string>
+    <!--
+    General values
+    -->
+    <string name="st_empty_path">none</string>
+
     <!--
     General
     -->
@@ -43,6 +57,12 @@
     <!--
     ExerciseActivity
     -->
-    <string name="t_relax">Relax</string>
+    <string name="st_relax">Relax</string>
     <string name="st_upcoming_exercise">Upcoming Exercise:</string>
+    <!--
+    ExerciseActivity
+    -->
+    <string name="st_end">The End</string>
+    <string name="st_exit">Exit</string>
+    <string name="st_finished_today">Finished Today</string>
 </resources>

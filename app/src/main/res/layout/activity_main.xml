@@ -6,8 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@color/myWhite"
-    >
+    android:background="@color/myWhite">
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView_banner_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        ads:adSize="LARGE_BANNER"
+        ads:adUnitId="@string/st_banner_main_id"
+        />
 
     <LinearLayout
         android:id="@+id/ll_start"
@@ -56,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/st_bmi"
+            android:textAllCaps="true"
             android:textStyle="bold"
             android:textColor="@color/myGreenBlue"
             android:textSize="@dimen/dim_main_text_btn"
