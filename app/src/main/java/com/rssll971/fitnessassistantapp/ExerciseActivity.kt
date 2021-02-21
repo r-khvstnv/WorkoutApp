@@ -1,6 +1,5 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -10,12 +9,12 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.rssll971.workoutapp.databinding.ActivityExerciseBinding
-import com.squareup.picasso.Picasso
+import com.rssll971.fitnessassistantapp.databinding.ActivityExerciseBinding
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -226,8 +225,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         else{
             binding.ivUserExerciseImage.visibility = View.VISIBLE
             val imageFile = File(exerciseList[exerciseIndex].getImagePath())
-            //targetSize1920
-            Picasso.get().load(Uri.fromFile(imageFile)).resize(1920, 1920).centerInside().into(binding.ivUserExerciseImage)
+            //targetSize
+            Glide.with(this).load(Uri.fromFile(imageFile)).fitCenter().into(binding.ivUserExerciseImage)
         }
 
 

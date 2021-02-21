@@ -23,7 +23,7 @@
             android:id="@+id/et_edit_exercise_name"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            tools:text="Activity name"
+            android:hint="@string/st_exercise_name"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textColor="@color/myWhite"
@@ -35,7 +35,7 @@
 
     <FrameLayout
         android:id="@+id/fl_image"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/ll_name"
@@ -52,8 +52,8 @@
             android:orientation="vertical"
             >
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/ic_gallery"
                 android:scaleType="fitCenter"
                 />
@@ -62,14 +62,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/st_optional"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/myDarkBlue"
                 android:textStyle="bold"
                 />
         </LinearLayout>
         <ImageView
             android:id="@+id/iv_edit_exercise_image"
-            android:layout_width="150dp"
+            android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
@@ -99,7 +99,7 @@
             Не забывайте напрягать ягодицы! Затем встаньте, шагните правой ногой назад и снова присядьте,
             только теперь с опорой на левую ногу. Встаньте и вернитесь в исходное положение.
             Повторите те же движения, начиная с другой ноги."
-            android:hint="Description"
+            android:hint="@string/st_description"
             android:textColor="@color/myDarkBlue"
             android:textColorHint="@color/myDarkBlue"
             android:textCursorDrawable="@color/myDarkBlue"

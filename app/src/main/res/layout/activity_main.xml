@@ -81,7 +81,7 @@
         android:layout_marginBottom="@dimen/dim_main_btn_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/ll_bmi"
-        app:layout_constraintRight_toLeftOf="@id/ll_settings"
+        app:layout_constraintRight_toLeftOf="@id/ll_info"
         android:background="@drawable/btn_rectangle_ripple"
         android:orientation="vertical"
         android:gravity="center"
@@ -105,7 +105,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_settings"
+        android:id="@+id/ll_info"
         android:layout_width="@dimen/dim_btn_rectangle_width"
         android:layout_height="@dimen/dim_btn_rectangle_height"
         android:layout_marginBottom="@dimen/dim_main_btn_margin_bottom"
@@ -121,13 +121,13 @@
             android:layout_width="@dimen/dim_iv_main_square_size"
             android:layout_height="@dimen/dim_iv_main_square_size"
             android:layout_marginTop="@dimen/dim_main_iv_margin_top"
-            android:src="@drawable/ic_settings"
+            android:src="@drawable/ic_info"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/st_settings"
+            android:text="@string/st_info"
             android:textStyle="bold"
             android:textColor="@color/myGreenBlue"
             android:textSize="@dimen/dim_main_text_btn"

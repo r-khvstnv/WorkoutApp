@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.rssll971.workoutapp">
+    package="com.rssll971.fitnessassistantapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -14,11 +14,11 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MyNoActionBar">
-        <activity android:name=".ActivitiesCatalogActivity"/>
-        <activity android:name=".BmiActivity" />
-        <activity android:name=".FinishActivity" />
-        <activity android:name=".ExerciseActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.rssll971.fitnessassistantapp.ActivitiesCatalogActivity"/>
+        <activity android:name="com.rssll971.fitnessassistantapp.BmiActivity" />
+        <activity android:name="com.rssll971.fitnessassistantapp.FinishActivity" />
+        <activity android:name="com.rssll971.fitnessassistantapp.ExerciseActivity" />
+        <activity android:name="com.rssll971.fitnessassistantapp.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,7 @@
                grantUriPermissions -> Temporarily permission to session
        -->
         <provider
-            android:authorities="com.rssll971.workoutapp.FILE_PROVIDER_PATHS"
+            android:authorities="com.rssll971.fitnessassistantapp.FILE_PROVIDER_PATHS"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

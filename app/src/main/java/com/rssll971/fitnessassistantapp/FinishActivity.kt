@@ -1,14 +1,13 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.rssll971.workoutapp.databinding.ActivityFinishBinding
+import com.rssll971.fitnessassistantapp.databinding.ActivityFinishBinding
 
 class FinishActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFinishBinding

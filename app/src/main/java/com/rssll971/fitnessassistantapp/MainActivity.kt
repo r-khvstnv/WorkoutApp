@@ -1,4 +1,4 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
 import android.app.Dialog
 import android.content.Intent
@@ -13,7 +13,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.rssll971.workoutapp.databinding.ActivityMainBinding
+import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         //settings
-        binding.llSettings.setOnClickListener {
-            Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show()
+        binding.llInfo.setOnClickListener {
+            showInfoDialog()
         }
 
 
@@ -80,21 +80,21 @@ class MainActivity : AppCompatActivity() {
 
     //show dialog with parameters
     private fun showExerciseSelectionDialog(){
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_select_exercise)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val dialogExerciseSelection = Dialog(this)
+        dialogExerciseSelection.setContentView(R.layout.dialog_select_exercise)
+        dialogExerciseSelection.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         //all buttons
-        val rbVoiceOn = dialog.findViewById<RadioButton>(R.id.rb_voice_on)
+        val rbVoiceOn = dialogExerciseSelection.findViewById<RadioButton>(R.id.rb_voice_on)
 
-        val ivMinusRelaxationTime = dialog.findViewById<ImageView>(R.id.iv_minus_relaxation_time)
-        val ivPlusRelaxationTime = dialog.findViewById<ImageView>(R.id.iv_plus_relaxation_time)
-        val tvRelaxationTime = dialog.findViewById<TextView>(R.id.tv_relaxation_time)
+        val ivMinusRelaxationTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_minus_relaxation_time)
+        val ivPlusRelaxationTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_plus_relaxation_time)
+        val tvRelaxationTime = dialogExerciseSelection.findViewById<TextView>(R.id.tv_relaxation_time)
         tvRelaxationTime.text = relaxationTime.toString()
 
-        val ivMinusExerciseTime = dialog.findViewById<ImageView>(R.id.iv_minus_exercise_time)
-        val ivPlusExerciseTime = dialog.findViewById<ImageView>(R.id.iv_plus_exercise_time)
-        val tvExerciseTime = dialog.findViewById<TextView>(R.id.tv_exercise_time)
+        val ivMinusExerciseTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_minus_exercise_time)
+        val ivPlusExerciseTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_plus_exercise_time)
+        val tvExerciseTime = dialogExerciseSelection.findViewById<TextView>(R.id.tv_exercise_time)
         tvExerciseTime.text = exerciseTime.toString()
 
         /**
@@ -107,15 +107,15 @@ class MainActivity : AppCompatActivity() {
             emcList.add(defaultEmcList[i])
         }
         //equalize size of user array
-        val rvSelectExercises = dialog.findViewById<RecyclerView>(R.id.rv_select_activities)
+        val rvSelectExercises = dialogExerciseSelection.findViewById<RecyclerView>(R.id.rv_select_activities)
         rvSelectExercises.layoutManager = LinearLayoutManager(this)
         val userExercisesAdapter = UserExercisesAdapter(this, emcList)
         rvSelectExercises.adapter = userExercisesAdapter
 
 
-        val llStart = dialog.findViewById<LinearLayout>(R.id.ll_start_session)
+        val llStart = dialogExerciseSelection.findViewById<LinearLayout>(R.id.ll_start_session)
 
-        dialog.show()
+        dialogExerciseSelection.show()
 
         //show result on time changes
         ivMinusRelaxationTime.setOnClickListener {
@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("ExerciseTime", exerciseTime)
             intent.putExtra("VoiceAssistant", rbVoiceOn.isChecked)
             startActivity(intent)
-            dialog.dismiss()
+            dialogExerciseSelection.dismiss()
         }
     }
 
@@ -162,6 +162,21 @@ class MainActivity : AppCompatActivity() {
                     break
                 }
             }
+        }
+    }
+
+
+    private fun showInfoDialog(){
+        val dialogInfo = Dialog(this)
+        dialogInfo.setContentView(R.layout.dialog_info)
+        dialogInfo.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val btnBack = dialogInfo.findViewById<Button>(R.id.btn_back)
+
+        dialogInfo.show()
+
+        btnBack.setOnClickListener {
+            dialogInfo.dismiss()
         }
     }
 

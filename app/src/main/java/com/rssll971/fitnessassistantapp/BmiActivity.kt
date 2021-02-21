@@ -1,20 +1,15 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.DatePicker
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.rssll971.workoutapp.databinding.ActivityBmiBinding
-import java.time.LocalDate
+import com.rssll971.fitnessassistantapp.databinding.ActivityBmiBinding
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.pow

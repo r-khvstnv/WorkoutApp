@@ -1,4 +1,4 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
 import android.content.ContentValues
 import android.content.Context

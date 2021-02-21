@@ -1,4 +1,4 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
 import android.Manifest
 import android.app.Activity
@@ -16,22 +16,25 @@ import android.provider.MediaStore
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rssll971.workoutapp.databinding.ActivityActivitiesCatalogBinding
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import com.rssll971.fitnessassistantapp.databinding.ActivityActivitiesCatalogBinding
 import java.io.*
-import java.nio.channels.FileChannel
 
 class ActivitiesCatalogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityActivitiesCatalogBinding
     private lateinit var userExercisesAdapter: UserExercisesAdapter
     private lateinit var ivExerciseImageView: ImageView
     private lateinit var imagePath: String
-
+    //ads
+    private lateinit var adViewBannerBottom: AdView
     //permissions
     companion object{
-        private val PERMISSIONS_REQUIERD = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+        private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE)
         private const val GALLERY_CODE = 101
     }
@@ -45,9 +48,20 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         //show list of users exercises
         setupRecyclerView()
 
+        /** Ads*/
+        MobileAds.initialize(this)
+        adViewBannerBottom = findViewById(R.id.adView_banner_activities_catalog_bottom)
+        adViewBannerBottom.loadAd(AdRequest.Builder().build())
+
+        adViewBannerBottom.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerBottom.loadAd(AdRequest.Builder().build())
+            }
+        }
+
         binding.llAddActivities.setOnClickListener {
             showUserExerciseDialog(true,
-                    ExerciseModelClass(0, "", "none", "", false)
+                    ExerciseModelClass(0, "", getString(R.string.st_empty_path), "", false)
             )
         }
 
@@ -122,7 +136,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         val llDelete = dialog.findViewById<LinearLayout>(R.id.ll_delete)
 
         //set image path by default like none
-        imagePath = "none"
+        imagePath = getString(R.string.st_empty_path)
 
         //fill data when user edit existed exercise
         if (!isNewExercise){
@@ -130,17 +144,18 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             etDescription.setText(exerciseModel.getDescription())
 
             //image
-            if (exerciseModel.getImagePath() != "none"){
+            if (exerciseModel.getImagePath() != getString(R.string.st_empty_path)){
                 imagePath = exerciseModel.getImagePath()
                 val imageFile = File(imagePath)
-                Picasso.get().load(Uri.fromFile(imageFile)).resize(150, 150).centerInside().into(ivExerciseImageView)
+                //targetSize
+                Glide.with(this).load(Uri.fromFile(imageFile)).fitCenter().into(ivExerciseImageView)
             }
         }
         etExerciseName.setText(exerciseModel.getName())
         etDescription.setText(exerciseModel.getDescription())
         dialog.show()
 
-        //todo add image picker
+
 
         ivExerciseImageView.setOnClickListener {
             if (isPermissionsAreAllowed()){
@@ -154,19 +169,25 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         }
 
         llSave.setOnClickListener {
-            val name = etExerciseName.text.toString()
-            //todo change
-            val description = etDescription.text.toString()
-            if (isNewExercise){
-                addUserExerciseRecord(
-                    ExerciseModelClass(0, name, imagePath, description, false))
-                dialog.dismiss()
+            if (etExerciseName.text.isEmpty() && etDescription.text.isEmpty()){
+                //todo make string
+                Toast.makeText(this, "Add data",
+                    Toast.LENGTH_LONG).show()
             }
             else{
-                editUserExerciseRecord(
-                    ExerciseModelClass(exerciseModel.getId(), name, imagePath, description, false))
+                val name = etExerciseName.text.toString()
+                val description = etDescription.text.toString()
+                if (isNewExercise){
+                    addUserExerciseRecord(
+                        ExerciseModelClass(0, name, imagePath, description, false))
+                }
+                else{
+                    editUserExerciseRecord(
+                        ExerciseModelClass(exerciseModel.getId(), name, imagePath, description, false))
+                }
                 dialog.dismiss()
             }
+
         }
         llDelete.setOnClickListener {
             if (!isNewExercise){
@@ -180,12 +201,12 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
     //request permission
     private fun requestStoragePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                PERMISSIONS_REQUIERD.toString())){
+                PERMISSIONS_REQUIRED.toString())){
             //nothing to do, due to user reject them or granted
         }
         else{
             //request permissions
-            ActivityCompat.requestPermissions(this, PERMISSIONS_REQUIERD, GALLERY_CODE)
+            ActivityCompat.requestPermissions(this, PERMISSIONS_REQUIRED, GALLERY_CODE)
         }
     }
 
@@ -245,12 +266,13 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                         //get uri
                         val imageUri = data.data
                         //convert uri to stream
-                        val imageStream: InputStream? = applicationContext.contentResolver.openInputStream(imageUri!!)
+                        val imageStream: InputStream = applicationContext.contentResolver.openInputStream(imageUri!!)!!
                         //convert stream to bitmap
                         val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
+                        imageStream.close()
                         val result = saveImage(selectedImage)
-
-                        Picasso.get().load(imageUri).resize(150, 150).centerInside().into(ivExerciseImageView)
+                        //targetSize
+                        Glide.with(this).load(File(result)).fitCenter().into(ivExerciseImageView)
                         //save path for db
                         imagePath = result
                         //todo delete
@@ -303,5 +325,4 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
 
         return result
     }
-
 }

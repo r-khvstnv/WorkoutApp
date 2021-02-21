@@ -1,4 +1,4 @@
-package com.rssll971.workoutapp
+package com.rssll971.fitnessassistantapp
 
 class BmiHistoryModelClass(private var _id: Int,
                            private var _date: String,

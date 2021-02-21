@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fitness Assistant</string>
+    <string name="st_height">Рост</string>
+    <string name="st_weight">Вес</string>
+    <string name="st_delete_all">Очистить все</string>
+    <string name="st_start">Начать</string>
+    <string name="st_activities">Упражнения</string>
+    <string name="st_info">Информация</string>
+    <string name="st_sm">(см)</string>
+    <string name="st_kg">(кг)</string>
+    <string name="st_result">Результат</string>
+    <string name="st_bmi_index">BMI Индекс</string>
+    <string name="st_calculate">Рассчитать</string>
+    <string name="st_history">История</string>
+    <string name="st_status">Статус</string>
+    <string name="st_voice_assistant">Голосовой Ассистент</string>
+    <string name="st_relaxation_time">Время отдыха</string>
+    <string name="st_exercise_time">Длительность упражнения</string>
+    <string name="st_add_exercise">Добавить уражнение</string>
+    <string name="st_exercise_name">Название упражнения</string>
+    <string name="st_optional">Оционально</string>
+    <string name="st_description">Описание</string>
+    <string name="st_save">Сохранить</string>
+    <string name="st_relax">Отдохните</string>
+    <string name="st_upcoming_exercise">Следующее уражнение</string>
+    <string name="st_end">Конец</string>
+    <string name="st_exit">Выйти</string>
+    <string name="st_finished_today">Закончили на сегодня</string>
+    <string name="st_back">Назад</string>
+</resources>
