@@ -21,10 +21,6 @@ class MainActivity : AppCompatActivity() {
     //main ad banner
     private lateinit var adViewBannerMain: AdView
 
-    //relaxation time
-    private var relaxationTime: Int = 30
-    //exercise time
-    private var exerciseTime: Int = 30
     //default exercise list
     private lateinit var emcList: ArrayList<ExerciseModelClass>
     //exercise list
@@ -83,6 +79,10 @@ class MainActivity : AppCompatActivity() {
         val dialogExerciseSelection = Dialog(this)
         dialogExerciseSelection.setContentView(R.layout.dialog_select_exercise)
         dialogExerciseSelection.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        //relaxation time
+        var relaxationTime: Int = 30
+        //exercise time
+        var exerciseTime: Int = 30
 
         //all buttons
         val rbVoiceOn = dialogExerciseSelection.findViewById<RadioButton>(R.id.rb_voice_on)
@@ -140,13 +140,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         llStart.setOnClickListener {
-            val intent = Intent(this, ExerciseActivity::class.java)
-            intent.putExtra("FormedList", formedExerciseList)
-            intent.putExtra("RelaxationTime", relaxationTime)
-            intent.putExtra("ExerciseTime", exerciseTime)
-            intent.putExtra("VoiceAssistant", rbVoiceOn.isChecked)
-            startActivity(intent)
-            dialogExerciseSelection.dismiss()
+            if (formedExerciseList.isEmpty()){
+                //todo string
+                Toast.makeText(this, "Add data", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val intent = Intent(this, ExerciseActivity::class.java)
+                intent.putExtra("FormedList", formedExerciseList)
+                intent.putExtra("RelaxationTime", relaxationTime)
+                intent.putExtra("ExerciseTime", exerciseTime)
+                intent.putExtra("VoiceAssistant", rbVoiceOn.isChecked)
+                startActivity(intent)
+                dialogExerciseSelection.dismiss()
+                formedExerciseList.clear()
+            }
         }
     }
 

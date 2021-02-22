@@ -82,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/st_result"
                 android:textAlignment="center"
+                android:textStyle="bold"
                 android:textColor="@color/myGreenBlue"
                 android:textSize="28sp" />
 
@@ -92,8 +93,9 @@
                 android:layout_marginTop="5dp"
                 tools:text="01/01/2001"
                 android:textAlignment="center"
+                android:textStyle="bold"
                 android:textColor="@color/myGreenBlue"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tv_bmi_index"
@@ -102,7 +104,7 @@
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/myGreenBlue"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:text="@string/st_bmi_index" />
 
             <TextView
@@ -112,7 +114,7 @@
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
                 android:textColor="@color/myGreenBlue"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 tools:text="@string/st_status" />
         </LinearLayout>
 

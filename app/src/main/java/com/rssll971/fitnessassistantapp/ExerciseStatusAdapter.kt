@@ -37,19 +37,15 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModelClass>, val co
      * Assign every item with right content
      */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        //
         val layoutModel: ExerciseModelClass = itemsList[position]
-
-        //assign data
-        //text
         holder.tvItem!!.text = (position + 1).toString()
         //drawable for background in depending of exercise status
         if (layoutModel.getIsFinished()){
             holder.flItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
             holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))
         }
-
     }
-
     /**
      * Return amount of items we have overall
      */

@@ -53,6 +53,8 @@ class BmiActivity : AppCompatActivity() {
             }
         }
 
+        isMetricSystem = binding.tbMeasurementSystem.isChecked
+        showRightHints()
 
         //hide result and history
         binding.llResult.visibility = View.INVISIBLE
@@ -101,8 +103,8 @@ class BmiActivity : AppCompatActivity() {
         }
         else{
             //todo change
-            binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_sm)
-            binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_kg)
+            binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_in)
+            binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_lbs)
         }
     }
 

@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * Next class show all information of users bmi data rom history
+ */
 class BmiResultStatusAdapter(val context: Context,
                              private val bmiHistoryList: ArrayList<BmiHistoryModelClass>) :
     RecyclerView.Adapter<BmiResultStatusAdapter.MyViewHolder>() {
@@ -18,7 +21,6 @@ class BmiResultStatusAdapter(val context: Context,
         var tvItemWeight: TextView? = null
         var tvItemHeight: TextView? = null
         var tvItemIndex: TextView? = null
-
         init {
             tvItemDate = itemView.findViewById(R.id.tv_item_bmi_date)
             tvItemWeight = itemView.findViewById(R.id.tv_item_bmi_weight)
@@ -34,6 +36,7 @@ class BmiResultStatusAdapter(val context: Context,
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        //assign right data
         val item: BmiHistoryModelClass = bmiHistoryList[position]
         holder.tvItemDate!!.text = item.getDate()
         holder.tvItemWeight!!.text = item.getWeight().toString()

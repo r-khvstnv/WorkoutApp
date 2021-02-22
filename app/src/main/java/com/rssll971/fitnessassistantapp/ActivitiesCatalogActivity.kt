@@ -8,11 +8,14 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.drawable.ColorDrawable
+import android.media.ExifInterface
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -263,23 +266,28 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                         //ONLY set image into view
 
                         //new method
+                        val options = BitmapFactory.Options()
+                        options.inJustDecodeBounds = false
                         //get uri
                         val imageUri = data.data
+                        //get real image path
+                        val realPath = getRealPathFromUri(imageUri!!)
                         //convert uri to stream
-                        val imageStream: InputStream = applicationContext.contentResolver.openInputStream(imageUri!!)!!
+                        val imageStream: InputStream = applicationContext.contentResolver.openInputStream(imageUri)!!
                         //convert stream to bitmap
-                        val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
+                        val selectedImage: Bitmap? = BitmapFactory.decodeStream(imageStream, null, options)
                         imageStream.close()
-                        val result = saveImage(selectedImage)
+                        //rotate image
+                        val rotatedImage = rotateImageIfRequired(selectedImage!!, realPath)
+                        //save image
+                        val result = saveImage(rotatedImage)
+
                         //targetSize
-                        Glide.with(this).load(File(result)).fitCenter().into(ivExerciseImageView)
+                        Glide.with(this).load(result).fitCenter().into(ivExerciseImageView)
                         //save path for db
                         imagePath = result
                         //todo delete
                         Toast.makeText(this, result, Toast.LENGTH_LONG).show()
-
-
-
                     }
                     //if something goes wrong
                     else{
@@ -293,6 +301,43 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun getRealPathFromUri(uri: Uri): String{
+        val result: String
+        var cursor = contentResolver.query(uri, null, null, null, null)
+        if (cursor == null){
+            result = uri.path!!
+        }
+        else{
+            cursor.moveToFirst()
+            val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        return result
+    }
+
+
+    //rotate
+    private fun rotateImageIfRequired(bitmap: Bitmap, imagePath: String): Bitmap {
+        val ei = ExifInterface(File(imagePath).absolutePath)
+        val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+
+        when(orientation){
+            ExifInterface.ORIENTATION_ROTATE_90 -> return rotateImage(bitmap, 90)
+            ExifInterface.ORIENTATION_ROTATE_180 -> return rotateImage(bitmap, 180)
+            ExifInterface.ORIENTATION_ROTATE_270 -> return rotateImage(bitmap, 270)
+            else -> return bitmap
+        }
+    }
+
+    private fun rotateImage(bitmap: Bitmap, degree: Int): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degree.toFloat())
+        val rotatedImage = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+        bitmap.recycle()
+        return rotatedImage
     }
 
     //copy image in app directory

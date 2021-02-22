@@ -34,6 +34,8 @@
     -->
     <string name="st_sm">(sm)</string>
     <string name="st_kg">(kg)</string>
+    <string name="st_in" translatable="false">(in)</string>
+    <string name="st_lbs" translatable="false">(lbs)</string>
     <string name="st_result">Result</string>
     <string name="st_bmi_index">BMI Index</string>
     <string name="st_calculate">Calculate</string>
