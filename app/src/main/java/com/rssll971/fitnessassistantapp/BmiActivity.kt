@@ -19,11 +19,11 @@ class BmiActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBmiBinding
     //metric system
     private var isMetricSystem: Boolean = true
-    //current dat
+    //current date
     private lateinit var currentDate: String
-    //index
+    //bmi index
     private lateinit var bmiIndex: String
-    //adapter
+    //adapter for bmi history
     private lateinit var bmiStatusAdapter: BmiResultStatusAdapter
     //ads
     private lateinit var adViewBannerTop: AdView
@@ -53,33 +53,30 @@ class BmiActivity : AppCompatActivity() {
             }
         }
 
+        /** Show hints*/
         isMetricSystem = binding.tbMeasurementSystem.isChecked
         showRightHints()
 
-        //hide result and history
+        /** Hide result and history */
         binding.llResult.visibility = View.INVISIBLE
         binding.llBmiHistory.visibility = View.GONE
-        setupRecyclerView()
 
         //measurement system
         binding.tbMeasurementSystem.setOnClickListener {
             isMetricSystem = binding.tbMeasurementSystem.isChecked
             showRightHints()
         }
-
-        //вычисляем bmi
+        //bmi estimation
         binding.llCalculate.setOnClickListener {
             if (binding.etHeight.text.isEmpty() && binding.etWeight.text.isEmpty()){
-                //todo make as string
-                Toast.makeText(this, "Add data", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.st_add_data), Toast.LENGTH_LONG).show()
             }
             else{
-                //todo make as string
-                Toast.makeText(this, "Added to History", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.st_added_to_history), Toast.LENGTH_LONG).show()
                 estimateBmi()
             }
         }
-
+        //show history
         binding.clShowHistory.setOnClickListener {
             if (binding.ivExpand.rotation == 0F){
                 showBmiHistory()
@@ -88,6 +85,7 @@ class BmiActivity : AppCompatActivity() {
                 hideBmiHistory()
             }
         }
+        //delete history
         binding.llDeleteHistory.setOnClickListener {
             deleteAllHistory()
             setupRecyclerView()
@@ -95,52 +93,55 @@ class BmiActivity : AppCompatActivity() {
     }
 
 
-    //change text in editText hints
+    /**
+     * Show right hints depending on measurement system
+     */
     private fun showRightHints(){
         if (isMetricSystem){
             binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_sm)
             binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_kg)
         }
         else{
-            //todo change
             binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_in)
             binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_lbs)
         }
     }
 
-    //estimate BMI
+    /**
+     * Next method estimate BMI index
+     */
     private fun estimateBmi(){
         var height: Float = binding.etHeight.text.toString().toFloat()
         val weight: Float = binding.etWeight.text.toString().toFloat()
-        var bmi = 0.0f
+        var bmi: Float
         var bmiStatus: String = ""
 
         if (isMetricSystem){
             height /= 100.0f
-
             bmi = weight / (height.pow(2))
         }
         else{
             bmi = (weight / (height.pow(2))) * 703
         }
 
-        //todo change to string
-        //estimate bmi status
-        bmiStatus = when(bmi){
-            in 0.0f..18.5f -> "Недостаточно веса"
-            in 18.6f..24.9f -> "В норме"
-            in 25.0f..29.9f -> "Лишний вес"
-            in 30.0f..34.9f -> "Ожирение"
-            in 30.0f..34.9f -> "Сильное ожирение"
-            else -> "Экстримально Сильное ожирение"
-        }
 
+        /** Get right status for bmi index */
+        bmiStatus = when(bmi){
+            in 0.0f..18.5f -> getString(R.string.st_underweight)
+            in 18.6f..24.9f -> getString(R.string.st_normal)
+            in 25.0f..29.9f -> getString(R.string.st_overweight)
+            in 30.0f..34.9f -> getString(R.string.st_obese)
+            in 30.0f..34.9f -> getString(R.string.st_ex_obese)
+            else -> getString(R.string.st_ex_obese)
+        }
         //show result
         showBmiResult(bmi, bmiStatus)
     }
 
 
-    //show BMI
+    /**
+     * Next method show bmi result in prepared card
+     */
     private fun showBmiResult(bmi: Float, bmiStatus: String){
         currentDate = java.text.SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
         bmiIndex = String.format("%.2f", bmi)
@@ -150,10 +151,40 @@ class BmiActivity : AppCompatActivity() {
         binding.tvBmiStatus.text = "${resources.getString(R.string.st_status)}: $bmiStatus"
         //show result and history
         binding.llResult.visibility = View.VISIBLE
+        //add in db
         addBmiRecord()
     }
 
-    //add current bmi to database
+
+    /**
+     * Next methods show or hide bmi history and smooth scroll layout
+     */
+    private fun showBmiHistory(){
+        binding.llBmiHistory.visibility = View.VISIBLE
+        binding.ivExpand.animate().rotation(-180F)
+        binding.svBmi.requestChildFocus(binding.adViewBannerBmiBottom, binding.adViewBannerBmiBottom)
+    }
+    //hide history
+    private fun hideBmiHistory(){
+        binding.llBmiHistory.visibility = View.GONE
+        binding.ivExpand.animate().rotation(0F)
+        binding.svBmi.smoothScrollTo(binding.clShowHistory.bottom, binding.clShowHistory.bottom)
+    }
+
+
+    /**
+     * Next method run RecyclerView with bmi history
+     */
+    private fun setupRecyclerView(){
+        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this)
+        bmiStatusAdapter = BmiResultStatusAdapter(this, getItemBmiHistoryList())
+        binding.recyclerViewBmi.adapter = bmiStatusAdapter
+    }
+
+
+    /**
+     * Next method add current bmi estimation in database
+     */
     private fun addBmiRecord(){
         val weight = binding.etWeight.text.toString().toFloat()
         val height = binding.etHeight.text.toString().toFloat()
@@ -167,36 +198,17 @@ class BmiActivity : AppCompatActivity() {
             setupRecyclerView()
         }
     }
-
-    //show history
-    private fun showBmiHistory(){
-        binding.llBmiHistory.visibility = View.VISIBLE
-        binding.ivExpand.animate().rotation(-180F)
-        binding.svBmi.requestChildFocus(binding.adViewBannerBmiBottom, binding.adViewBannerBmiBottom)
-    }
-    //hide history
-    private fun hideBmiHistory(){
-        binding.llBmiHistory.visibility = View.GONE
-        binding.ivExpand.animate().rotation(0F)
-        binding.svBmi.smoothScrollTo(binding.clShowHistory.bottom, binding.clShowHistory.bottom)
-    }
-
-    //rv with history
-    private fun setupRecyclerView(){
-            binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this)
-            bmiStatusAdapter = BmiResultStatusAdapter(this, getItemBmiHistoryList())
-            binding.recyclerViewBmi.adapter = bmiStatusAdapter
-    }
-
     /**
-     * Next method get item data for database
+     * Next method get all bmi history from database
      */
     private fun getItemBmiHistoryList() : ArrayList<BmiHistoryModelClass>{
         val dataBaseHandler = BmiDataBaseHandler(this)
         val bhmList: ArrayList<BmiHistoryModelClass> = dataBaseHandler.viewBmiResult()
         return bhmList
     }
-
+    /**
+     * Next method delete all bmi history from database
+     */
     private fun deleteAllHistory(){
         val dataBaseHandler = BmiDataBaseHandler(this)
         dataBaseHandler.eraseAll()

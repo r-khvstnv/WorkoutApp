@@ -24,7 +24,6 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModelClass>, val co
             tvItem = itemView.findViewById(R.id.tv_item_exercise_number)
         }
     }
-
     /**
      * Add item with needed content in RecyclerView
      */
@@ -32,15 +31,16 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModelClass>, val co
         return MyViewHolder(
             LayoutInflater.from(context).inflate(R.layout.item_exercise_number, parent, false))
     }
-
     /**
      * Assign every item with right content
      */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        //
+        //assign data
         val layoutModel: ExerciseModelClass = itemsList[position]
         holder.tvItem!!.text = (position + 1).toString()
-        //drawable for background in depending of exercise status
+        /**
+         * Change background and text colors, when exercise was ended
+         */
         if (layoutModel.getIsFinished()){
             holder.flItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
             holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))

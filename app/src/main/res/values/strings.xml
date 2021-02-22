@@ -2,7 +2,7 @@
     <string name="app_name">Fitness Assistant</string>
     <string name="app_version" translatable="false">1.0</string>
 
-    <!-- todo test ids-->
+
     <string name="app_id" translatable="false">ca-app-pub-4362142146545991~9298977150</string>
     <string name="st_banner_main_id" translatable="false">ca-app-pub-4362142146545991/9745985124</string>
     <string name="st_banner_bmi_top_id" translatable="false">ca-app-pub-4362142146545991/8241331767</string>
@@ -15,6 +15,10 @@
     General values
     -->
     <string name="st_empty_path" translatable="false">none</string>
+    <string name="st_add_data">Add missing data</string>
+    <string name="st_access">Access to the storage is not available.  Please grant permission</string>
+    <string name="st_wrong_data">Wrong data type</string>
+    <string name="st_added_to_history">Added to History</string>
 
     <!--
     General
@@ -41,6 +45,12 @@
     <string name="st_calculate">Calculate</string>
     <string name="st_history">History</string>
     <string name="st_status">Status</string>
+
+    <string name="st_underweight">Underweight</string>
+    <string name="st_normal">Normal</string>
+    <string name="st_overweight">Overweight</string>
+    <string name="st_obese">Obese</string>
+    <string name="st_ex_obese">Extremely Obese</string>
     <!--
     SelectExerciseDialog
     -->

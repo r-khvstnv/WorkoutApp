@@ -46,12 +46,11 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
+        /** All clickable items*/
         //start exercises
         binding.llStart.setOnClickListener {
             showExerciseSelectionDialog()
         }
-
 
         //bmi calculator
         binding.llBmi.setOnClickListener {
@@ -74,7 +73,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //show dialog with parameters
+    /**
+     * Next method show dialog for exercise selection and other parameters
+     */
     private fun showExerciseSelectionDialog(){
         val dialogExerciseSelection = Dialog(this)
         dialogExerciseSelection.setContentView(R.layout.dialog_select_exercise)
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         tvExerciseTime.text = exerciseTime.toString()
 
         /**
-         * Next lines responsible for extracting users exercises and default in rv
+         * Next lines responsible for extracting users and default exercises in RecyclerView
          */
         val dataBaseHandler = ExerciseDataBaseHandler(this)
         emcList = dataBaseHandler.viewUsersExercises()
@@ -106,7 +107,8 @@ class MainActivity : AppCompatActivity() {
         for (i in 0 until defaultEmcList.size){
             emcList.add(defaultEmcList[i])
         }
-        //equalize size of user array
+
+        /** Setup RecyclerView*/
         val rvSelectExercises = dialogExerciseSelection.findViewById<RecyclerView>(R.id.rv_select_activities)
         rvSelectExercises.layoutManager = LinearLayoutManager(this)
         val userExercisesAdapter = UserExercisesAdapter(this, emcList)
@@ -139,12 +141,15 @@ class MainActivity : AppCompatActivity() {
             tvExerciseTime.text = exerciseTime.toString()
         }
 
+        //start new activity
         llStart.setOnClickListener {
             if (formedExerciseList.isEmpty()){
-                //todo string
-                Toast.makeText(this, "Add data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.st_add_data), Toast.LENGTH_SHORT).show()
             }
             else {
+                /**
+                 * Start new activity with all parameters and chosen exercises
+                 */
                 val intent = Intent(this, ExerciseActivity::class.java)
                 intent.putExtra("FormedList", formedExerciseList)
                 intent.putExtra("RelaxationTime", relaxationTime)
@@ -157,10 +162,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Next method prepare exercise list
+     *
+     * Called from UserExerciseAdapter
+     *
+     * Method based on saving chosen exercise names, due to don't send all list in new activity
+     */
     fun prepareExerciseList(position: Int, isNeededAdd: Boolean){
         if (isNeededAdd){
             formedExerciseList.add(emcList[position].getName())
-
         }
         else{
             for (i in 0 until  formedExerciseList.size){
@@ -172,7 +183,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    /**
+     * Next method show info dialog
+     */
     private fun showInfoDialog(){
         val dialogInfo = Dialog(this)
         dialogInfo.setContentView(R.layout.dialog_info)

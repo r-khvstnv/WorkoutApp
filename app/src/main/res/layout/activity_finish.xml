@@ -35,9 +35,6 @@
         android:gravity="center"
         android:elevation="5dp"
         >
-        <!--
-            todo add image
-            -->
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"

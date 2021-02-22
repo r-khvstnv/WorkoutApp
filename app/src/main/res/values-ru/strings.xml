@@ -28,4 +28,13 @@
     <string name="st_exit">Выйти</string>
     <string name="st_finished_today">Закончили на сегодня</string>
     <string name="st_back">Назад</string>
+    <string name="st_add_data">Добавьте недостающие данные</string>
+    <string name="st_wrong_data">Неправильный тип данных</string>
+    <string name="st_access">Доступ к хранилищу отсутствует. Пожалуйста, предоставьте разрешение</string>
+    <string name="st_added_to_history">Добавленр в историю</string>
+    <string name="st_underweight">Недостаточно веса</string>
+    <string name="st_normal">В норме</string>
+    <string name="st_overweight">Лишний вес</string>
+    <string name="st_obese">Ожирение</string>
+    <string name="st_ex_obese">Сильное ожирение</string>
 </resources>

@@ -30,12 +30,18 @@ import java.io.*
 
 class ActivitiesCatalogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityActivitiesCatalogBinding
+    //adapter for user exercises
     private lateinit var userExercisesAdapter: UserExercisesAdapter
+    //image view with for user image, need for glide
     private lateinit var ivExerciseImageView: ImageView
+    //path for user image, need for editing
     private lateinit var imagePath: String
     //ads
     private lateinit var adViewBannerBottom: AdView
-    //permissions
+
+    /**
+     * Permissions
+     */
     companion object{
         private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -48,26 +54,25 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //show list of users exercises
+        /** show list of users exercises*/
         setupRecyclerView()
 
         /** Ads*/
         MobileAds.initialize(this)
         adViewBannerBottom = findViewById(R.id.adView_banner_activities_catalog_bottom)
         adViewBannerBottom.loadAd(AdRequest.Builder().build())
-
         adViewBannerBottom.adListener = object : AdListener(){
             override fun onAdClosed() {
                 adViewBannerBottom.loadAd(AdRequest.Builder().build())
             }
         }
-
+        /** All clickable*/
+        //add exercise
         binding.llAddActivities.setOnClickListener {
             showUserExerciseDialog(true,
                     ExerciseModelClass(0, "", getString(R.string.st_empty_path), "", false)
             )
         }
-
         //delete all
         binding.llDeleteExercises.setOnClickListener {
             deleteAllExercises()
@@ -75,7 +80,9 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
 
     }
 
-
+    /**
+     * Next method add new user exercise in database
+     */
     private fun addUserExerciseRecord(exerciseModel: ExerciseModelClass){
         //get database handler
         val dataBaseHandler = ExerciseDataBaseHandler(this)
@@ -87,37 +94,42 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             setupRecyclerView()
         }
     }
-
+    /**
+     * Next method edit user exercise in database
+     */
     private fun editUserExerciseRecord(exerciseModel: ExerciseModelClass){
         val dataBaseHandler = ExerciseDataBaseHandler(this)
         dataBaseHandler.updateUserExercise(exerciseModel)
         setupRecyclerView()
     }
-
-
-    //delete all exercises
+    /**
+     * Next method delete all user exercise in database
+     */
     private fun deleteAllExercises(){
         val dataBaseHandler = ExerciseDataBaseHandler(this)
         dataBaseHandler.deleteAllUserExercises()
         setupRecyclerView()
     }
-    //delete record
+    /**
+     * Next method delete chosen user exercise in database
+     */
     private fun deleteUserExercises(exerciseModel: ExerciseModelClass){
         val dataBaseHandler = ExerciseDataBaseHandler(this)
         dataBaseHandler.deleteUsersExercise(exerciseModel)
         setupRecyclerView()
     }
 
-    //rv with history
+    /**
+     * Next method run RecyclerView with all user exercises
+     */
     private fun setupRecyclerView(){
         binding.rvActivities.layoutManager = LinearLayoutManager(this)
         userExercisesAdapter = UserExercisesAdapter(this, getItemsUserExerciseList())
         binding.rvActivities.adapter = userExercisesAdapter
-
     }
 
     /**
-     * Next method get item data for database
+     * Next method get all user exercises from database
      */
     private fun getItemsUserExerciseList() : ArrayList<ExerciseModelClass>{
         val dataBaseHandler = ExerciseDataBaseHandler(this)
@@ -126,7 +138,11 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
     }
 
 
-    //show dialog
+    /**
+     * Next method show dialog for editing exercise
+     *
+     * Called from UserExerciseAdapter
+     */
     fun showUserExerciseDialog(isNewExercise: Boolean, exerciseModel: ExerciseModelClass){
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_create_exercise)
@@ -138,14 +154,13 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         val llSave = dialog.findViewById<LinearLayout>(R.id.ll_save)
         val llDelete = dialog.findViewById<LinearLayout>(R.id.ll_delete)
 
-        //set image path by default like none
+        /** set image path by default like none */
         imagePath = getString(R.string.st_empty_path)
 
-        //fill data when user edit existed exercise
+        /** fill data when user edit existed exercise*/
         if (!isNewExercise){
             etExerciseName.setText(exerciseModel.getName())
             etDescription.setText(exerciseModel.getDescription())
-
             //image
             if (exerciseModel.getImagePath() != getString(R.string.st_empty_path)){
                 imagePath = exerciseModel.getImagePath()
@@ -158,8 +173,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         etDescription.setText(exerciseModel.getDescription())
         dialog.show()
 
-
-
+        //add image for exercise
         ivExerciseImageView.setOnClickListener {
             if (isPermissionsAreAllowed()){
                 val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -168,13 +182,12 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             else{
                 requestStoragePermission()
             }
-
         }
 
+        //save exercise and close dialog
         llSave.setOnClickListener {
             if (etExerciseName.text.isEmpty() && etDescription.text.isEmpty()){
-                //todo make string
-                Toast.makeText(this, "Add data",
+                Toast.makeText(this, getString(R.string.st_add_data),
                     Toast.LENGTH_LONG).show()
             }
             else{
@@ -190,8 +203,9 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                 }
                 dialog.dismiss()
             }
-
         }
+
+        //delete current exercise
         llDelete.setOnClickListener {
             if (!isNewExercise){
                 deleteUserExercises(exerciseModel)
@@ -201,7 +215,9 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
     }
 
 
-    //request permission
+    /**
+     * Next method request permissions for get images
+     */
     private fun requestStoragePermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 PERMISSIONS_REQUIRED.toString())){
@@ -229,16 +245,16 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             }
 
             if (!allGranted){
-                //todo string
                 Toast.makeText(this,
-                    "Access to the storage is not available.\n\nPlease grant permission",
+                    getString(R.string.st_access),
                     Toast.LENGTH_LONG).show()
             }
         }
     }
+
     /**
-     * Next fun check permissions availability for app
-     * */
+     * Next method check permissions availability for app
+     */
     private fun isPermissionsAreAllowed(): Boolean{
         var result: Boolean = false
         if (
@@ -253,19 +269,21 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         return result
     }
     /**
-     * Next fun extracts user image from gallery and substitutes data in image view
+     * Next method extracts user image from gallery and substitutes data in image view
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
             if (requestCode == GALLERY_CODE){
-                //get user image as background, using exception
+                /**
+                 * First try to get image. After that copy it to app folder and send new path
+                 */
                 try {
                     //check for available data
                     if (data!!.data != null){
-                        //ONLY set image into view
 
-                        //new method
+
+                        /** Next lines get all needed info to prevent portrait image from rotation */
                         val options = BitmapFactory.Options()
                         options.inJustDecodeBounds = false
                         //get uri
@@ -279,20 +297,19 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                         imageStream.close()
                         //rotate image
                         val rotatedImage = rotateImageIfRequired(selectedImage!!, realPath)
-                        //save image
+
+
+                        /** Save image in app folder and return new path*/
                         val result = saveImage(rotatedImage)
 
                         //targetSize
                         Glide.with(this).load(result).fitCenter().into(ivExerciseImageView)
-                        //save path for db
+                        //save path for next sending in database
                         imagePath = result
-                        //todo delete
-                        Toast.makeText(this, result, Toast.LENGTH_LONG).show()
                     }
                     //if something goes wrong
                     else{
-                        //todo make string
-                        Toast.makeText(this, "Wrong data type",
+                        Toast.makeText(this, getString(R.string.st_wrong_data),
                             Toast.LENGTH_LONG).show()
                     }
                 }
@@ -303,9 +320,12 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Next method get real path of image. Without it app can't to rotate image and appear ENOENT error
+     */
     private fun getRealPathFromUri(uri: Uri): String{
         val result: String
-        var cursor = contentResolver.query(uri, null, null, null, null)
+        val cursor = contentResolver.query(uri, null, null, null, null)
         if (cursor == null){
             result = uri.path!!
         }
@@ -319,7 +339,9 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
     }
 
 
-    //rotate
+    /**
+     * Next method prepare image for rotation
+     */
     private fun rotateImageIfRequired(bitmap: Bitmap, imagePath: String): Bitmap {
         val ei = ExifInterface(File(imagePath).absolutePath)
         val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
@@ -331,7 +353,9 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             else -> return bitmap
         }
     }
-
+    /**
+     * Next method rotate image
+     */
     private fun rotateImage(bitmap: Bitmap, degree: Int): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(degree.toFloat())
@@ -340,14 +364,14 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         return rotatedImage
     }
 
-    //copy image in app directory
+    /**
+     * Next method save image in app directory and return new path
+     */
     private fun saveImage(bitmap: Bitmap): String{
         var result = ""
         try {
-            //variable where we will save our output data
             val bytes = ByteArrayOutputStream()
-            //compress our bitmap to PNG using stream of val bytes
-            //todo change quality
+            //compress our bitmap to JPEG using stream of val bytes
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
             //make it as single file
             //external directory -> as absolute file -> separate ->
@@ -366,7 +390,6 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             result = ""
             e.printStackTrace()
         }
-
 
         return result
     }
