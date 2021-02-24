@@ -19,6 +19,7 @@ import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdListener
@@ -26,6 +27,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.ActivityActivitiesCatalogBinding
+import org.w3c.dom.Text
 import java.io.*
 
 class ActivitiesCatalogActivity : AppCompatActivity() {
@@ -123,7 +125,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method run RecyclerView with all user exercises
      */
     private fun setupRecyclerView(){
-        binding.rvActivities.layoutManager = LinearLayoutManager(this)
+        binding.rvActivities.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         userExercisesAdapter = UserExercisesAdapter(this, getItemsUserExerciseList())
         binding.rvActivities.adapter = userExercisesAdapter
     }
@@ -153,8 +155,12 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         val etDescription = dialog.findViewById<EditText>(R.id.et_edit_description)
         val llSave = dialog.findViewById<LinearLayout>(R.id.ll_save)
         val llDelete = dialog.findViewById<LinearLayout>(R.id.ll_delete)
+        val tvDescriptionSize = dialog.findViewById<TextView>(R.id.tv_description_size)
 
-        /** set image path by default like none */
+        /** Set image path by default like none.
+         * As so its global var and if we don't erase previous path,
+         * for new exercise will be used the last one
+         */
         imagePath = getString(R.string.st_empty_path)
 
         /** fill data when user edit existed exercise*/
@@ -163,10 +169,8 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             etDescription.setText(exerciseModel.getDescription())
             //image
             if (exerciseModel.getImagePath() != getString(R.string.st_empty_path)){
-                imagePath = exerciseModel.getImagePath()
-                val imageFile = File(imagePath)
                 //targetSize
-                Glide.with(this).load(Uri.fromFile(imageFile)).fitCenter().into(ivExerciseImageView)
+                Glide.with(this).load(exerciseModel.getImagePath()).fitCenter().into(ivExerciseImageView)
             }
         }
         etExerciseName.setText(exerciseModel.getName())
@@ -184,9 +188,14 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             }
         }
 
+        //show max characters for description
+        etDescription.doOnTextChanged { text, start, before, count ->
+            tvDescriptionSize.text = "$count /400"
+        }
+
         //save exercise and close dialog
         llSave.setOnClickListener {
-            if (etExerciseName.text.isEmpty() && etDescription.text.isEmpty()){
+            if (etExerciseName.text.isEmpty() or etDescription.text.isEmpty()){
                 Toast.makeText(this, getString(R.string.st_add_data),
                     Toast.LENGTH_LONG).show()
             }

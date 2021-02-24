@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fl_item"
+    android:id="@+id/ll_item"
     android:layout_width="30dp"
     android:layout_height="30dp"
-    android:layout_marginHorizontal="8dp"
+    android:gravity="center"
+    android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="10dp"
     android:background="@drawable/circle_white"
     android:elevation="5dp"
@@ -19,4 +20,4 @@
         android:textSize="14sp"
         android:textStyle="bold"
         />
-</FrameLayout>
+</LinearLayout>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dim_btn_rectangle_height">70dp</dimen>
-    <dimen name="dim_btn_rectangle_width">80dp</dimen>
+    <dimen name="dim_btn_rectangle_width">90dp</dimen>
     <dimen name="dim_iv_main_square_size">36dp</dimen>
     <dimen name="dim_main_text_btn">12sp</dimen>
-    <dimen name="dim_main_iv_margin_top">8dp</dimen>
+    <dimen name="dim_main_iv_margin_top">4dp</dimen>
     <dimen name="dim_main_btn_margin_bottom">20dp</dimen>
 
 

@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.core.os.ConfigurationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdListener
@@ -14,6 +15,8 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -101,18 +104,27 @@ class MainActivity : AppCompatActivity() {
         /**
          * Next lines responsible for extracting users and default exercises in RecyclerView
          */
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
-        emcList = dataBaseHandler.viewUsersExercises()
-        val defaultEmcList: ArrayList<ExerciseModelClass> = ExerciseModelClass.defaultExerciseList()
-        for (i in 0 until defaultEmcList.size){
-            emcList.add(defaultEmcList[i])
+        //Below lines written exactly in that order,
+        // so that in the future default list will be at the bottom
+        emcList = if (ConfigurationCompat.getLocales(resources.configuration)[0] == Locale("ru")){
+            //set RU lang list
+            ExerciseModelClass.defaultRuExerciseList()
+        } else{
+            ExerciseModelClass.defaultEngExerciseList()
         }
+        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        emcList.addAll(dataBaseHandler.viewUsersExercises())
+
+
 
         /** Setup RecyclerView*/
         val rvSelectExercises = dialogExerciseSelection.findViewById<RecyclerView>(R.id.rv_select_activities)
-        rvSelectExercises.layoutManager = LinearLayoutManager(this)
+        rvSelectExercises.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         val userExercisesAdapter = UserExercisesAdapter(this, emcList)
         rvSelectExercises.adapter = userExercisesAdapter
+        //smooth scroll to top
+        rvSelectExercises.smoothScrollToPosition(userExercisesAdapter.itemCount - 1)
+
 
 
         val llStart = dialogExerciseSelection.findViewById<LinearLayout>(R.id.ll_start_session)
@@ -127,8 +139,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         ivPlusRelaxationTime.setOnClickListener {
-            relaxationTime += 30
-            tvRelaxationTime.text = relaxationTime.toString()
+            if (relaxationTime <= 600) {
+                relaxationTime += 30
+                tvRelaxationTime.text = relaxationTime.toString()
+            }
         }
         ivMinusExerciseTime.setOnClickListener {
             if(exerciseTime > 30){
@@ -137,14 +151,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         ivPlusExerciseTime.setOnClickListener {
-            exerciseTime += 30
-            tvExerciseTime.text = exerciseTime.toString()
+            if (exerciseTime < 600) {
+                exerciseTime += 30
+                tvExerciseTime.text = exerciseTime.toString()
+            }
         }
 
         //start new activity
         llStart.setOnClickListener {
             if (formedExerciseList.isEmpty()){
-                Toast.makeText(this, getString(R.string.st_add_data), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.st_choose_exercise), Toast.LENGTH_SHORT).show()
             }
             else {
                 /**

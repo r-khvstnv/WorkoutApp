@@ -89,6 +89,19 @@
         android:orientation="vertical"
         android:elevation="5dp"
         >
+        <TextView
+            android:id="@+id/tv_description_size"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            tools:text="0/400"
+            android:textSize="14sp"
+            android:textAlignment="textEnd"
+            android:textStyle="bold"
+            android:textColor="@color/myDarkBlue"
+            />
         <EditText
             android:id="@+id/et_edit_description"
             android:layout_width="match_parent"
@@ -104,6 +117,7 @@
             android:textColorHint="@color/myDarkBlue"
             android:textCursorDrawable="@color/myDarkBlue"
             android:backgroundTint="@color/myDarkBlue"
+            android:maxLength="400"
             android:textSize="14sp"
             android:textAlignment="center"
             />
@@ -111,7 +125,7 @@
 
     <LinearLayout
         android:id="@+id/ll_save"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="14dp"
@@ -125,6 +139,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
             android:text="@string/st_save"
             android:textStyle="bold"
             android:textAllCaps="true"

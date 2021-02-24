@@ -66,6 +66,7 @@ class UserExercisesAdapter(val context: Context,
                     holder.llUserExercise.isSelected = true
                 }
             }
+
         }
     }
 

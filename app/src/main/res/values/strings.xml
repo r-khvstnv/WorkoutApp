@@ -19,7 +19,6 @@
     <string name="st_access">Access to the storage is not available.  Please grant permission</string>
     <string name="st_wrong_data">Wrong data type</string>
     <string name="st_added_to_history">Added to History</string>
-
     <!--
     General
     -->
@@ -59,6 +58,7 @@
     <string name="st_off" translatable="false">Off</string>
     <string name="st_relaxation_time">Relaxation time:</string>
     <string name="st_exercise_time">Exercise time:</string>
+    <string name="st_choose_exercise">Choose exercises</string>
     <!--
     ActivitiesCatalogActivity
     -->
@@ -72,6 +72,7 @@
     -->
     <string name="st_relax">Relax</string>
     <string name="st_upcoming_exercise">Upcoming Exercise:</string>
+    <string name="st_exercise_completed_phrase">Exercise completed</string>
     <!--
     ExerciseActivity
     -->

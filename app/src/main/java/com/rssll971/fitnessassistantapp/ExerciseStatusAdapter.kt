@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -13,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
  * Class responsible for whole recycle adapter.
  * Implement members of ExerciseList and current Context
  */
-class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModelClass>, val context: Context) : RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
+class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModelClass>, val context: Context) : RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
 
     /** Class with custom item*/
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var flItem: FrameLayout? = null
+        var llItem: LinearLayout? = null
         var tvItem: TextView? = null
         init {
-            flItem = itemView.findViewById(R.id.fl_item)
+            llItem = itemView.findViewById(R.id.ll_item)
             tvItem = itemView.findViewById(R.id.tv_item_exercise_number)
         }
     }
@@ -42,7 +43,7 @@ class ExerciseStatusAdapter(val itemsList: ArrayList<ExerciseModelClass>, val co
          * Change background and text colors, when exercise was ended
          */
         if (layoutModel.getIsFinished()){
-            holder.flItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
+            holder.llItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
             holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))
         }
     }

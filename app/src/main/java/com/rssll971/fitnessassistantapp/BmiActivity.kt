@@ -21,8 +21,6 @@ class BmiActivity : AppCompatActivity() {
     private var isMetricSystem: Boolean = true
     //current date
     private lateinit var currentDate: String
-    //bmi index
-    private lateinit var bmiIndex: String
     //adapter for bmi history
     private lateinit var bmiStatusAdapter: BmiResultStatusAdapter
     //ads
@@ -60,6 +58,7 @@ class BmiActivity : AppCompatActivity() {
         /** Hide result and history */
         binding.llResult.visibility = View.INVISIBLE
         binding.llBmiHistory.visibility = View.GONE
+        setupRecyclerView()
 
         //measurement system
         binding.tbMeasurementSystem.setOnClickListener {
@@ -72,7 +71,6 @@ class BmiActivity : AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.st_add_data), Toast.LENGTH_LONG).show()
             }
             else{
-                Toast.makeText(this, getString(R.string.st_added_to_history), Toast.LENGTH_LONG).show()
                 estimateBmi()
             }
         }
@@ -88,7 +86,7 @@ class BmiActivity : AppCompatActivity() {
         //delete history
         binding.llDeleteHistory.setOnClickListener {
             deleteAllHistory()
-            setupRecyclerView()
+           setupRecyclerView()
         }
     }
 
@@ -144,7 +142,7 @@ class BmiActivity : AppCompatActivity() {
      */
     private fun showBmiResult(bmi: Float, bmiStatus: String){
         currentDate = java.text.SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        bmiIndex = String.format("%.2f", bmi)
+        val bmiIndex = String.format("%.2f", bmi)
 
         binding.tvDate.text = currentDate
         binding.tvBmiIndex.text = "${resources.getString(R.string.st_bmi_index)}: $bmiIndex"
@@ -152,7 +150,7 @@ class BmiActivity : AppCompatActivity() {
         //show result and history
         binding.llResult.visibility = View.VISIBLE
         //add in db
-        addBmiRecord()
+        addBmiRecord(bmi)
     }
 
 
@@ -176,7 +174,7 @@ class BmiActivity : AppCompatActivity() {
      * Next method run RecyclerView with bmi history
      */
     private fun setupRecyclerView(){
-        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
         bmiStatusAdapter = BmiResultStatusAdapter(this, getItemBmiHistoryList())
         binding.recyclerViewBmi.adapter = bmiStatusAdapter
     }
@@ -185,7 +183,7 @@ class BmiActivity : AppCompatActivity() {
     /**
      * Next method add current bmi estimation in database
      */
-    private fun addBmiRecord(){
+    private fun addBmiRecord(bmi: Float){
         val weight = binding.etWeight.text.toString().toFloat()
         val height = binding.etHeight.text.toString().toFloat()
 
@@ -193,9 +191,10 @@ class BmiActivity : AppCompatActivity() {
         val dataBaseHandler = BmiDataBaseHandler(this)
         //note: system automatically change id
         val status = dataBaseHandler.addCurrentBmiResult(
-            BmiHistoryModelClass(0, currentDate, weight, height, bmiIndex.toFloat()))
+            BmiHistoryModelClass(0, currentDate, weight, height, bmi))
         if (status > -1){
             setupRecyclerView()
+            Toast.makeText(this, getString(R.string.st_added_to_history), Toast.LENGTH_LONG).show()
         }
     }
     /**
