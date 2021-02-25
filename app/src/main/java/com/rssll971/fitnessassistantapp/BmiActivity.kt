@@ -1,5 +1,7 @@
 package com.rssll971.fitnessassistantapp
 
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -33,6 +35,12 @@ class BmiActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        } else {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        }
+
         /** Ads*/
         MobileAds.initialize(this)
         adViewBannerTop = findViewById(R.id.adView_banner_bmi_top)
@@ -60,6 +68,12 @@ class BmiActivity : AppCompatActivity() {
         binding.llBmiHistory.visibility = View.GONE
         setupRecyclerView()
 
+        //home
+        binding.llHome.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         //measurement system
         binding.tbMeasurementSystem.setOnClickListener {
             isMetricSystem = binding.tbMeasurementSystem.isChecked
