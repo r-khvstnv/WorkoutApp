@@ -15,15 +15,15 @@
     <string name="st_history">История</string>
     <string name="st_status">Статус</string>
     <string name="st_voice_assistant">Голосовой Ассистент</string>
-    <string name="st_relaxation_time">Время отдыха</string>
-    <string name="st_exercise_time">Длительность упражнения</string>
+    <string name="st_relaxation_time">Время отдыха:</string>
+    <string name="st_exercise_time">Длительность упражнения:</string>
     <string name="st_add_exercise">Добавить уражнение</string>
     <string name="st_exercise_name">Название упражнения</string>
     <string name="st_optional">Оционально</string>
     <string name="st_description">Описание</string>
     <string name="st_save">Сохранить</string>
     <string name="st_relax">Отдохните</string>
-    <string name="st_upcoming_exercise">Следующее уражнение</string>
+    <string name="st_upcoming_exercise">Следующее уражнение:</string>
     <string name="st_end">Конец</string>
     <string name="st_exit">Выйти</string>
     <string name="st_finished_today">Закончили на сегодня</string>
@@ -31,7 +31,7 @@
     <string name="st_add_data">Добавьте недостающие данные</string>
     <string name="st_wrong_data">Неправильный тип данных</string>
     <string name="st_access">Доступ к хранилищу отсутствует. Пожалуйста, предоставьте разрешение</string>
-    <string name="st_added_to_history">Добавлено в историю</string>
+    <string name="st_added_to_history">Добавлено в Историю</string>
     <string name="st_underweight">Недостаточно веса</string>
     <string name="st_normal">В норме</string>
     <string name="st_overweight">Лишний вес</string>

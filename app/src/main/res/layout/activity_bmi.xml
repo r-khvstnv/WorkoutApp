@@ -14,6 +14,27 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/ll_home"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/btn_rectangle_ripple"
+            android:orientation="vertical"
+            android:layout_gravity="start"
+            android:gravity="center"
+            android:elevation="5dp"
+            >
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
+
         <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView_banner_bmi_top"

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 class UserExercisesAdapter(val context: Context,
                            private val userExerciseList: ArrayList<ExerciseModelClass>) :
     RecyclerView.Adapter<UserExercisesAdapter.MyViewHolder>() {
+    private var selectedItemPositionList = ArrayList<Int>()
     /**
      * Class with item components
      */
@@ -33,6 +34,7 @@ class UserExercisesAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item: ExerciseModelClass = userExerciseList[position]
+        val rowIndex = position
         //show exercise name
         holder.tvUserExerciseName.text = item.getName()
         /**
@@ -57,20 +59,40 @@ class UserExercisesAdapter(val context: Context,
                 context.showUserExerciseDialog(false, item)
             }
             else if (context is MainActivity){
+                /**
+                 * As so responsibility for creating future exercise list was annotated in another class and
+                 *  also implemented align with another color for selected exercise in rV, all position for selected exercise
+                 *  adding to selectedItemPositionList
+                 *
+                 * Firstly work function under clickListener. It correspond for correct background.
+                 *  If element was chosen before it marks them like selected and vise versa.
+                 *  After that next if/else statement determine selected state and run corresponding method
+                 */
+                //delete item from list for preparation
                 if (holder.llUserExercise.isSelected){
                     context.prepareExerciseList(position, false)
                     holder.llUserExercise.isSelected = false
+                    //find index of corresponding item in local list
+                    val index = selectedItemPositionList.indexOf(position)
+                    //remove it from list
+                    selectedItemPositionList.removeAt(index)
                 }
+                //add item in list for preparation
                 else{
                     context.prepareExerciseList(position, true)
                     holder.llUserExercise.isSelected = true
+                    //add item in local list
+                    selectedItemPositionList.add(position)
                 }
             }
-
         }
+        //doesn't matter exactly context
+        holder.llUserExercise.isSelected = selectedItemPositionList.contains(position)
     }
 
     override fun getItemCount(): Int {
         return userExerciseList.size
     }
+
+
 }

@@ -6,10 +6,15 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -23,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     //main ad banner
     private lateinit var adViewBannerMain: AdView
-
     //default exercise list
     private lateinit var emcList: ArrayList<ExerciseModelClass>
     //exercise list
@@ -49,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        setupLineChart()
+
+
         /** All clickable items*/
         //start exercises
         binding.llStart.setOnClickListener {
@@ -59,12 +66,14 @@ class MainActivity : AppCompatActivity() {
         binding.llBmi.setOnClickListener {
             val intent = Intent(this, BmiActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         //activities
         binding.llActivities.setOnClickListener {
             val intent = Intent(this, ActivitiesCatalogActivity::class.java)
             startActivity(intent)
+
         }
 
         //settings
@@ -73,6 +82,67 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    /**
+     * Next method show Line Chart
+     */
+    private fun setupLineChart(){
+        val entriesWeight = ArrayList<Entry>()
+        val bmiDataBaseHandler = BmiDataBaseHandler(this)
+        val bmiList = bmiDataBaseHandler.viewBmiResult()
+        var counter = bmiList.size
+        for (i in 0 until bmiList.size){
+            if (counter <= 10){
+                entriesWeight.add(Entry(i.toFloat(), bmiList[i].getWeight()))
+            }
+            counter--
+        }
+
+        //customize data set
+        val lineDataSetWeight = LineDataSet(entriesWeight, getString(R.string.st_bmi_index))
+        lineDataSetWeight.mode = LineDataSet.Mode.CUBIC_BEZIER
+        //values on peaks
+        lineDataSetWeight.setDrawValues(true)
+        lineDataSetWeight.valueTextColor = ContextCompat.getColor(this, R.color.myOrange)
+        lineDataSetWeight.valueTextSize = 14f
+
+
+        lineDataSetWeight.setDrawCircles(true)
+        lineDataSetWeight.setCircleColor(ContextCompat.getColor(this, R.color.myOrange))
+        //line color and width
+        lineDataSetWeight.color = ContextCompat.getColor(this, R.color.myOrange)
+        lineDataSetWeight.lineWidth = 3f
+        //color under line
+        lineDataSetWeight.setDrawFilled(true)
+        lineDataSetWeight.fillColor = ContextCompat.getColor(this, R.color.myOrange)
+
+        //add data to chart
+        binding.lineChart.data = LineData(lineDataSetWeight)
+
+        //make untouchable
+        binding.lineChart.setTouchEnabled(false)
+        binding.lineChart.isDragEnabled = true
+
+        //binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM // show dates at the bottom
+        //hide all axis labels and grid background
+        binding.lineChart.xAxis.isEnabled = false
+        binding.lineChart.axisRight.isEnabled = false
+        binding.lineChart.axisLeft.isEnabled = false
+        binding.lineChart.xAxis.setDrawGridLines(false);
+        binding.lineChart.axisLeft.setDrawGridLines(false);
+        binding.lineChart.axisRight.setDrawGridLines(false);
+
+
+        binding.lineChart.description.text = getString(R.string.st_bmi_index)
+        //binding.lineChart.description.textColor = ContextCompat.getColor(this, R.color.myOrange)
+        binding.lineChart.legend.textColor = ContextCompat.getColor(this, R.color.myOrange)
+        //binding.lineChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.myOrange)
+        //binding.lineChart.xAxis.textColor = ContextCompat.getColor(this, R.color.myOrange)
+        binding.lineChart.setNoDataText("No data yet!")
+        //make visible
+        binding.lineChart.visibility = View.VISIBLE
     }
 
 
