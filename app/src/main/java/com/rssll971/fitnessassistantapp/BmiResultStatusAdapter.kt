@@ -39,9 +39,9 @@ class BmiResultStatusAdapter(val context: Context,
         //assign right data
         val item: BmiHistoryModelClass = bmiHistoryList[position]
         holder.tvItemDate!!.text = item.getDate()
-        holder.tvItemWeight!!.text = item.getWeight().toString()
-        holder.tvItemHeight!!.text = item.getHeight().toString()
-        holder.tvItemIndex!!.text = item.getBmiIndex().toString()
+        holder.tvItemWeight!!.text = String.format("%.2f", item.getWeight())
+        holder.tvItemHeight!!.text = String.format("%.2f", item.getHeight())
+        holder.tvItemIndex!!.text = String.format("%.2f", item.getBmiIndex())
     }
 
     override fun getItemCount(): Int {

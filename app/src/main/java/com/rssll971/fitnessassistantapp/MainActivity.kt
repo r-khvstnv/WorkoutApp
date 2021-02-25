@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -30,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adViewBannerMain: AdView
     //default exercise list
     private lateinit var emcList: ArrayList<ExerciseModelClass>
+    //bmi history
+    private lateinit var bmiDataBaseHandler: BmiDataBaseHandler
+    private lateinit var bmiList: ArrayList<BmiHistoryModelClass>
     //exercise list
     private var formedExerciseList = ArrayList<String>()
 
@@ -53,7 +57,20 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        setupLineChart()
+        bmiDataBaseHandler = BmiDataBaseHandler(this)
+        bmiList = bmiDataBaseHandler.viewBmiResult()
+        if (bmiList.size > 0){
+            binding.tvPDataMessage.visibility = View.INVISIBLE
+            binding.tvWeightLabel.visibility = View.VISIBLE
+            binding.lineChart.visibility = View.VISIBLE
+            setupLineChart()
+        }
+        else{
+            binding.tvPDataMessage.visibility = View.VISIBLE
+            binding.tvWeightLabel.visibility = View.INVISIBLE
+            binding.lineChart.visibility = View.INVISIBLE
+        }
+
 
 
         /** All clickable items*/
@@ -91,8 +108,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setupLineChart(){
         val entriesWeight = ArrayList<Entry>()
-        val bmiDataBaseHandler = BmiDataBaseHandler(this)
-        val bmiList = bmiDataBaseHandler.viewBmiResult()
         var counter = bmiList.size
         for (i in 0 until bmiList.size){
             if (counter <= 10){
@@ -102,11 +117,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         //customize data set
-        val lineDataSetWeight = LineDataSet(entriesWeight, getString(R.string.st_bmi_index))
+        val lineDataSetWeight = LineDataSet(entriesWeight, getString(R.string.st_weight))
         lineDataSetWeight.mode = LineDataSet.Mode.CUBIC_BEZIER
         //values on peaks
         lineDataSetWeight.setDrawValues(true)
-        lineDataSetWeight.valueTextColor = ContextCompat.getColor(this, R.color.myOrange)
+        lineDataSetWeight.valueTextColor = ContextCompat.getColor(this, R.color.myDarkBlue)
         lineDataSetWeight.valueTextSize = 14f
 
 
@@ -117,7 +132,7 @@ class MainActivity : AppCompatActivity() {
         lineDataSetWeight.lineWidth = 3f
         //color under line
         lineDataSetWeight.setDrawFilled(true)
-        lineDataSetWeight.fillColor = ContextCompat.getColor(this, R.color.myOrange)
+        lineDataSetWeight.fillColor = ContextCompat.getColor(this, R.color.myGreenBlue)
 
         //add data to chart
         binding.lineChart.data = LineData(lineDataSetWeight)
@@ -136,14 +151,14 @@ class MainActivity : AppCompatActivity() {
         binding.lineChart.axisRight.setDrawGridLines(false);
 
 
-        binding.lineChart.description.text = getString(R.string.st_bmi_index)
+        binding.lineChart.description.text = ""
+        binding.lineChart.legend.isEnabled = false
         //binding.lineChart.description.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        binding.lineChart.legend.textColor = ContextCompat.getColor(this, R.color.myOrange)
+        //binding.lineChart.legend.textColor = ContextCompat.getColor(this, R.color.myOrange)
         //binding.lineChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.myOrange)
         //binding.lineChart.xAxis.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        binding.lineChart.setNoDataText("No data yet!")
-        //make visible
-        binding.lineChart.visibility = View.VISIBLE
+        binding.lineChart.setNoDataText("")
+
     }
 
 

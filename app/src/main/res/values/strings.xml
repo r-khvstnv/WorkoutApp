@@ -32,6 +32,7 @@
     -->
     <string name="st_activities">Activities</string>
     <string name="st_info">Info</string>
+    <string name="st_add_personal_data">Add your data on the Bmi tab, to see statistics</string>
     <!--
     BmiActivity
     -->

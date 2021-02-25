@@ -39,4 +39,5 @@
     <string name="st_ex_obese">Сильное ожирение</string>
     <string name="st_choose_exercise">Выберите уражнения</string>
     <string name="st_exercise_completed_phrase">Закончили упражнение</string>
+    <string name="st_add_personal_data">Добавьте свои данные на вкладке BMI, чтобы увидеть статистику</string>
 </resources>
