@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         binding.llActivities.setOnClickListener {
             val intent = Intent(this, ActivitiesCatalogActivity::class.java)
             startActivity(intent)
-            finish()
 
         }
 

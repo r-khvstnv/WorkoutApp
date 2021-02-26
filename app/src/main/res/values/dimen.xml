@@ -6,11 +6,11 @@
     <dimen name="dim_main_text_btn">12sp</dimen>
     <dimen name="dim_main_iv_margin_top">4dp</dimen>
     <dimen name="dim_main_btn_margin_bottom">20dp</dimen>
-
-
     <dimen name="dim_item_bmi_date_text_size">18sp</dimen>
-
     <dimen name="dim_select_exercise_objects_height">30dp</dimen>
+    <dimen name="dim_finish_rectangles_widths">200dp</dimen>
+    <dimen name="dim_finish_rectangles_heights">100dp</dimen>
+    <dimen name="dim_finish_circles_image_sizes">50dp</dimen>
 
 
 </resources>

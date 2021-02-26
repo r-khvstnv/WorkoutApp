@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_exerciseStatus"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone"

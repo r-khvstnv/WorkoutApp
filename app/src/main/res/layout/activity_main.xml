@@ -59,15 +59,14 @@
         >
         <TextView
             android:id="@+id/tv_pData_message"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:text="@string/st_add_personal_data"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/myDarkBlue"
-            android:textStyle="bold"
             />
         <TextView
             android:id="@+id/tv_weight_label"

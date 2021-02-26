@@ -198,13 +198,10 @@ class BmiActivity : AppCompatActivity() {
      * Next method run RecyclerView with bmi history
      */
     private fun setupRecyclerView(){
-        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-        bmiStatusAdapter = BmiResultStatusAdapter(this, getItemBmiHistoryList())
+        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this)
+        val bmiHistoryList = getItemBmiHistoryList()
+        bmiStatusAdapter = BmiResultStatusAdapter(this, bmiHistoryList)
         binding.recyclerViewBmi.adapter = bmiStatusAdapter
-
-        if (getItemBmiHistoryList().size <= 6){
-            binding.recyclerViewBmi.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        }
     }
 
 

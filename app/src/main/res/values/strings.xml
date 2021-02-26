@@ -32,7 +32,7 @@
     -->
     <string name="st_activities">Activities</string>
     <string name="st_info">Info</string>
-    <string name="st_add_personal_data">Add your data on the Bmi tab, to see statistics</string>
+    <string name="st_add_personal_data">Add your data on the Bmi tab, to see Statistics</string>
     <!--
     BmiActivity
     -->
@@ -75,14 +75,16 @@
     <string name="st_upcoming_exercise">Upcoming Exercise:</string>
     <string name="st_exercise_completed_phrase">Exercise completed</string>
     <!--
-    ExerciseActivity
+    FinishActivity
     -->
     <string name="st_end">The End</string>
     <string name="st_exit">Exit</string>
     <string name="st_finished_today">Finished Today</string>
+    <string name="st_update_bmi_data">Add new BMI data</string>
     <!--
     InfoDialog
     -->
+    <string name="st_version">Version: </string>
     <string name="st_back">Back</string>
     <string name="st_license" translatable="false">"License for everything not in third_party and not otherwise marked:
 
