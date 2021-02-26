@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity() {
          */
         //Below lines written exactly in that order,
         // so that in the future default list will be at the bottom
-        emcList = if (ConfigurationCompat.getLocales(resources.configuration)[0] == Locale("ru")){
+        emcList = if (Locale.getDefault().language == "ru"){
             //set RU lang list
             ExerciseModelClass.defaultRuExerciseList()
         } else{

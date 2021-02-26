@@ -55,8 +55,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         /** Get list of exercises */
         exerciseList = prepareExerciseList()
-        //relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
-        //exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
+        relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
+        exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
         isVoiceAssistantActivated = intent!!.getBooleanExtra("VoiceAssistant", false)
 
         /** Ads*/
@@ -250,9 +250,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         //check status
         if (status == TextToSpeech.SUCCESS){
             //set locale for voice assistant
-            val resultSpeech = if (ConfigurationCompat.getLocales(resources.configuration)[0] == Locale("ru")){
+            val resultSpeech = if (Locale.getDefault().language == "ru"){
                 //set RU lang
-                textToSpeech!!.setLanguage(Locale("ru"))
+                textToSpeech!!.setLanguage(Locale("ru", "RU"))
             } else{
                 textToSpeech!!.setLanguage(Locale(Locale.ENGLISH.language))
             }
@@ -299,7 +299,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
          */
         val dataBaseHandler = ExerciseDataBaseHandler(this)
         val emcList = dataBaseHandler.viewUsersExercises()
-        if (ConfigurationCompat.getLocales(resources.configuration)[0] == Locale("ru")){
+        if (Locale.getDefault().language == "ru"){
             //set RU lang list
             emcList.addAll(ExerciseModelClass.defaultRuExerciseList())
         } else{
