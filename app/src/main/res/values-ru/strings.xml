@@ -42,4 +42,5 @@
     <string name="st_add_personal_data">Добавьте свои данные на вкладке BMI, чтобы увидеть Статистику</string>
     <string name="st_version">Версия:</string>
     <string name="st_update_bmi_data">Добавить новые данные BMI</string>
+    <string name="st_or">или</string>
 </resources>

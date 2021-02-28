@@ -81,6 +81,7 @@
     <string name="st_exit">Exit</string>
     <string name="st_finished_today">Finished Today</string>
     <string name="st_update_bmi_data">Add new BMI data</string>
+    <string name="st_or">or</string>
     <!--
     InfoDialog
     -->

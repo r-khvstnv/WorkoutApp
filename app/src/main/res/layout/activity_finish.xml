@@ -31,6 +31,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_finish"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll_update_bmi"
         android:background="@drawable/btn_rectangle_ripple"
         android:orientation="horizontal"
         android:gravity="center"
@@ -64,8 +65,8 @@
         app:layout_constraintBottom_toTopOf="@id/ll_update_bmi"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="or"
-        android:textSize="24sp"
+        android:text="@string/st_or"
+        android:textSize="20sp"
         android:textColor="@color/myGreenBlue"
         android:textStyle="bold"
         android:textAlignment="center"
@@ -81,6 +82,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_exit"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_bottom_title"
         android:background="@drawable/btn_rectangle_ripple"
         android:orientation="horizontal"
         android:gravity="center"
@@ -107,6 +109,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_bottom_title"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ll_update_bmi"

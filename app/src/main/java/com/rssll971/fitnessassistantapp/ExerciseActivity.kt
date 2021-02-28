@@ -229,12 +229,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (exerciseList[exerciseIndex].getImagePath() == getString(R.string.st_empty_path)){
             binding.ivUserExerciseImage.visibility = View.GONE
             binding.tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            binding.tvDescription.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            //binding.tvDescription.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         }
         else{
             binding.ivUserExerciseImage.visibility = View.VISIBLE
             binding.tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
-            binding.tvDescription.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150f, resources.displayMetrics).toInt()
+            //binding.tvDescription.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150f, resources.displayMetrics).toInt()
             //targetSize
             Glide.with(this).load(exerciseList[exerciseIndex].getImagePath()).fitCenter().into(binding.ivUserExerciseImage)
         }

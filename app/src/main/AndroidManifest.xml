@@ -20,6 +20,7 @@
             android:screenOrientation="locked"
             />
         <activity android:name="com.rssll971.fitnessassistantapp.BmiActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="locked"
             />
         <activity android:name="com.rssll971.fitnessassistantapp.FinishActivity"
