@@ -15,8 +15,8 @@
     <string name="st_history">История</string>
     <string name="st_status">Статус</string>
     <string name="st_voice_assistant">Голосовой Ассистент</string>
-    <string name="st_relaxation_time">Время отдыха:</string>
-    <string name="st_exercise_time">Длительность упражнения:</string>
+    <string name="st_relaxation_time">Длительность отдыха</string>
+    <string name="st_exercise_time">Длительность упражнения</string>
     <string name="st_add_exercise">Добавить уражнение</string>
     <string name="st_exercise_name">Название упражнения</string>
     <string name="st_optional">Оционально</string>

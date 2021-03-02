@@ -173,8 +173,8 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                 Glide.with(this).load(exerciseModel.getImagePath()).fitCenter().into(ivExerciseImageView)
             }
         }
-        etExerciseName.setText(exerciseModel.getName())
-        etDescription.setText(exerciseModel.getDescription())
+
+
         dialog.show()
 
         //add image for exercise
@@ -202,11 +202,17 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             else{
                 val name = etExerciseName.text.toString()
                 val description = etDescription.text.toString()
+                //for new exercise just put all in method
                 if (isNewExercise){
                     addUserExerciseRecord(
                         ExerciseModelClass(0, name, imagePath, description, false))
                 }
-                else{
+                else{//for edit exercise, firstly check is new image available. Otherwise, put previous
+                    if(imagePath == getString(R.string.st_empty_path)){
+                        imagePath = exerciseModel.getImagePath()
+                    }
+
+
                     editUserExerciseRecord(
                         ExerciseModelClass(exerciseModel.getId(), name, imagePath, description, false))
                 }

@@ -54,11 +54,11 @@
     <!--
     SelectExerciseDialog
     -->
-    <string name="st_voice_assistant">Voice Assistant:</string>
+    <string name="st_voice_assistant">Voice Assistant</string>
     <string name="st_on" translatable="false">On</string>
     <string name="st_off" translatable="false">Off</string>
-    <string name="st_relaxation_time">Relaxation time:</string>
-    <string name="st_exercise_time">Exercise time:</string>
+    <string name="st_relaxation_time">Rest duration</string>
+    <string name="st_exercise_time">Exercise duration</string>
     <string name="st_choose_exercise">Choose exercises</string>
     <!--
     ActivitiesCatalogActivity
