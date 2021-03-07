@@ -22,7 +22,7 @@
     <!--
     General
     -->
-    <string name="st_bmi" translatable="false">bmi</string>
+    <string name="st_bmi" translatable="false">BMI</string>
     <string name="st_height">Height</string>
     <string name="st_weight">Weight</string>
     <string name="st_delete_all">Delete All</string>

@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -30,17 +33,31 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        /** Ads*/
+        MobileAds.initialize(this)
+        adViewBannerMain = findViewById(R.id.adView_banner_main)
+        adViewBannerMain.loadAd(AdRequest.Builder().build())
+
+        adViewBannerMain.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerMain.loadAd(AdRequest.Builder().build())
+            }
+        }
+
+
         /**
          * Fragments
          */
         val infoFragment = InfoFragment()
         val exerciseCatalogFragment = ExerciseCatalogFragment()
         val bmiFragment = BmiFragment()
+        val startWorkout = StartWorkoutFragment()
         binding.bnvMenu.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.m_info -> makeAsCurrentFragment(infoFragment)
                 R.id.m_activities -> makeAsCurrentFragment(exerciseCatalogFragment)
                 R.id.m_bmi -> makeAsCurrentFragment(bmiFragment)
+                R.id.m_start -> makeAsCurrentFragment(startWorkout)
             }
             true
         }

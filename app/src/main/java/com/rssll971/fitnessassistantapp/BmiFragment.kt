@@ -3,8 +3,9 @@ package com.rssll971.fitnessassistantapp
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -15,62 +16,41 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.rssll971.fitnessassistantapp.databinding.ActivityBmiBinding
+import com.rssll971.fitnessassistantapp.databinding.FragmentBmiBinding
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.pow
 
-class BmiActivity : AppCompatActivity() {
-    //binding
-    private lateinit var binding: ActivityBmiBinding
+
+class BmiFragment : Fragment() {
+    private var _binding: FragmentBmiBinding? = null
+    private val binding get() = _binding!!
+
     //metric system
     private var isMetricSystem: Boolean = true
     //current date
     private lateinit var currentDate: String
     //adapter for bmi history
     private lateinit var bmiStatusAdapter: BmiResultStatusAdapter
-    //ads
-    private lateinit var adViewBannerTop: AdView
-    private lateinit var adViewBannerBottom: AdView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityBmiBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-        } else {
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    // Set the content to appear under the system bars so that the
-                    // content doesn't resize when the system bars hide and show.
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    // Hide the nav bar and status bar
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN
-                    )
-        }
 
-        /** Ads*/
-        MobileAds.initialize(this)
-        adViewBannerTop = findViewById(R.id.adView_banner_bmi_top)
-        adViewBannerBottom = findViewById(R.id.adView_banner_bmi_bottom)
-        adViewBannerTop.loadAd(AdRequest.Builder().build())
-        adViewBannerBottom.loadAd(AdRequest.Builder().build())
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentBmiBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        adViewBannerTop.adListener = object : AdListener(){
-            override fun onAdClosed() {
-                adViewBannerTop.loadAd(AdRequest.Builder().build())
-            }
-        }
-        adViewBannerBottom.adListener = object : AdListener(){
-            override fun onAdClosed() {
-                adViewBannerBottom.loadAd(AdRequest.Builder().build())
-            }
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         /** Show hints*/
         isMetricSystem = binding.tbMeasurementSystem.isChecked
@@ -81,12 +61,7 @@ class BmiActivity : AppCompatActivity() {
         binding.llBmiHistory.visibility = View.GONE
         setupRecyclerView()
 
-        //home
-        binding.llHome.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+
         //measurement system
         binding.tbMeasurementSystem.setOnClickListener {
             isMetricSystem = binding.tbMeasurementSystem.isChecked
@@ -95,7 +70,7 @@ class BmiActivity : AppCompatActivity() {
         //bmi estimation
         binding.llCalculate.setOnClickListener {
             if (binding.etHeight.text.isEmpty() && binding.etWeight.text.isEmpty()){
-                Toast.makeText(this, getString(R.string.st_add_data), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.st_add_data), Toast.LENGTH_LONG).show()
             }
             else{
                 estimateBmi()
@@ -113,9 +88,10 @@ class BmiActivity : AppCompatActivity() {
         //delete history
         binding.llDeleteHistory.setOnClickListener {
             deleteAllHistory()
-           setupRecyclerView()
+            setupRecyclerView()
         }
     }
+
 
 
     /**
@@ -132,6 +108,7 @@ class BmiActivity : AppCompatActivity() {
         }
     }
 
+    /* todo move to main
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null){
             val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -139,6 +116,8 @@ class BmiActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+
+     */
 
     /**
      * Next method estimate BMI index
@@ -195,7 +174,7 @@ class BmiActivity : AppCompatActivity() {
     private fun showBmiHistory(){
         binding.llBmiHistory.visibility = View.VISIBLE
         binding.ivExpand.animate().rotation(-180F)
-        binding.svBmi.requestChildFocus(binding.adViewBannerBmiBottom, binding.adViewBannerBmiBottom)
+        binding.svBmi.requestChildFocus(binding.llDeleteHistory, binding.llDeleteHistory)
     }
     //hide history
     private fun hideBmiHistory(){
@@ -209,9 +188,9 @@ class BmiActivity : AppCompatActivity() {
      * Next method run RecyclerView with bmi history
      */
     private fun setupRecyclerView(){
-        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewBmi.layoutManager = LinearLayoutManager(requireContext())
         val bmiHistoryList = getItemBmiHistoryList()
-        bmiStatusAdapter = BmiResultStatusAdapter(this, bmiHistoryList)
+        bmiStatusAdapter = BmiResultStatusAdapter(requireContext(), bmiHistoryList)
         binding.recyclerViewBmi.adapter = bmiStatusAdapter
     }
 
@@ -224,20 +203,20 @@ class BmiActivity : AppCompatActivity() {
         val height = binding.etHeight.text.toString().toFloat()
 
         //get database
-        val dataBaseHandler = BmiDataBaseHandler(this)
+        val dataBaseHandler = BmiDataBaseHandler(requireContext())
         //note: system automatically change id
         val status = dataBaseHandler.addCurrentBmiResult(
             BmiHistoryModelClass(0, currentDate, weight, height, bmi))
         if (status > -1){
             setupRecyclerView()
-            Toast.makeText(this, getString(R.string.st_added_to_history), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getString(R.string.st_added_to_history), Toast.LENGTH_LONG).show()
         }
     }
     /**
      * Next method get all bmi history from database
      */
     private fun getItemBmiHistoryList() : ArrayList<BmiHistoryModelClass>{
-        val dataBaseHandler = BmiDataBaseHandler(this)
+        val dataBaseHandler = BmiDataBaseHandler(requireContext())
         val bhmList: ArrayList<BmiHistoryModelClass> = dataBaseHandler.viewBmiResult()
         return bhmList
     }
@@ -245,8 +224,9 @@ class BmiActivity : AppCompatActivity() {
      * Next method delete all bmi history from database
      */
     private fun deleteAllHistory(){
-        val dataBaseHandler = BmiDataBaseHandler(this)
+        val dataBaseHandler = BmiDataBaseHandler(requireContext())
         dataBaseHandler.eraseAll()
     }
+
 
 }

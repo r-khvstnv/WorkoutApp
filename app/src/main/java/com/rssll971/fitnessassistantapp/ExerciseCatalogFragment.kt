@@ -46,8 +46,7 @@ class ExerciseCatalogFragment : Fragment() {
     private lateinit var ivExerciseImageView: ImageView
     //path for user image, need for editing
     private lateinit var imagePath: String
-    //ads
-    private lateinit var adViewBannerBottom: AdView
+
 
     /**
      * Permissions
@@ -82,16 +81,7 @@ class ExerciseCatalogFragment : Fragment() {
         /** show list of users exercises*/
         setupRecyclerView()
 
-        /** Ads*/
-        MobileAds.initialize(requireContext())
-        //adViewBannerBottom = findViewById(R.id.adView_banner_activities_catalog_bottom)
-        adViewBannerBottom = binding.adViewBannerActivitiesCatalogBottom
-        adViewBannerBottom.loadAd(AdRequest.Builder().build())
-        adViewBannerBottom.adListener = object : AdListener(){
-            override fun onAdClosed() {
-                adViewBannerBottom.loadAd(AdRequest.Builder().build())
-            }
-        }
+
         /** All clickable*/
         //add exercise
         binding.llAddActivities.setOnClickListener {
@@ -149,7 +139,7 @@ class ExerciseCatalogFragment : Fragment() {
      */
     private fun setupRecyclerView(){
         binding.rvActivities.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
-        userExercisesAdapter = UserExercisesAdapter(requireContext(), getItemsUserExerciseList())
+        userExercisesAdapter = UserExercisesAdapter(requireContext(), getItemsUserExerciseList(), this)
         binding.rvActivities.adapter = userExercisesAdapter
     }
 

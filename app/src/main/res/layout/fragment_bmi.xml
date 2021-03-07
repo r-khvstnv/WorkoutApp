@@ -14,16 +14,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView_banner_bmi_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/st_banner_bmi_top_id"
-        />
-
     <ToggleButton
         android:id="@+id/tb_measurementSystem"
         android:layout_width="wrap_content"
@@ -169,8 +159,8 @@
             />
         <ImageView
             android:id="@+id/iv_expand"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -250,7 +240,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="30dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/btn_rectangle_ripple"
             android:orientation="horizontal"
@@ -275,15 +265,6 @@
                 android:scaleType="fitCenter"
                 />
         </LinearLayout>
-
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView_banner_bmi_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            ads:adSize="MEDIUM_RECTANGLE"
-            ads:adUnitId="@string/st_banner_bmi_bottom_id"
-            />
     </LinearLayout>
 
 

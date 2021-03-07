@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Next class show all users exercises
  */
 class UserExercisesAdapter(val context: Context,
-                           private val userExerciseList: ArrayList<ExerciseModelClass>) :
+                           private val userExerciseList: ArrayList<ExerciseModelClass>, currentFragment: Fragment) :
     RecyclerView.Adapter<UserExercisesAdapter.MyViewHolder>() {
     private var selectedItemPositionList = ArrayList<Int>()
+    val fragment: Fragment = currentFragment
     /**
      * Class with item components
      */
@@ -41,12 +43,12 @@ class UserExercisesAdapter(val context: Context,
          * Next statement responsible for correct text size and show edit icon,
          * when user want to change own exercise
          */
-        if (ExerciseCatalogFragment().isInLayout){
+        if (fragment is ExerciseCatalogFragment){
             holder.ivEditExercise.visibility = View.VISIBLE
             holder.tvUserExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
         }
         //todo change everywhereBMI
-        else if (context is BmiActivity){
+        else if (fragment is StartWorkoutFragment){
             holder.ivEditExercise.visibility = View.GONE
             holder.tvUserExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         }
@@ -56,13 +58,10 @@ class UserExercisesAdapter(val context: Context,
          * go to another dialog while user want change exercise
          */
         holder.llUserExercise.setOnClickListener {
-            if (ExerciseCatalogFragment().isInLayout){
-                //ExerciseCatalogFragment.showUserExerciseDialog(false, item)
-                ExerciseCatalogFragment().showUserExerciseDialog(false, item)
+            if (fragment is ExerciseCatalogFragment){
+                fragment.showUserExerciseDialog(false, item)
             }
-            //todo
-            /*
-            else if (context is MainActivity){
+            else if (fragment is StartWorkoutFragment){
                 /**
                  * As so responsibility for creating future exercise list was annotated in another class and
                  *  also implemented align with another color for selected exercise in rV, all position for selected exercise
@@ -75,7 +74,7 @@ class UserExercisesAdapter(val context: Context,
                 //delete item from list for preparation
 
                 if (holder.llUserExercise.isSelected){
-                    context.prepareExerciseList(position, false)
+                    fragment.prepareExerciseList(position, false)
                     holder.llUserExercise.isSelected = false
                     //find index of corresponding item in local list
                     val index = selectedItemPositionList.indexOf(position)
@@ -84,18 +83,17 @@ class UserExercisesAdapter(val context: Context,
                 }
                 //add item in list for preparation
                 else{
-                    context.prepareExerciseList(position, true)
+                    fragment.prepareExerciseList(position, true)
                     holder.llUserExercise.isSelected = true
                     //add item in local list
                     selectedItemPositionList.add(position)
                 }
             }
 
-             */
+
         }
         //doesn't matter exactly context
-        //todo
-        //holder.llUserExercise.isSelected = selectedItemPositionList.contains(position)
+        holder.llUserExercise.isSelected = selectedItemPositionList.contains(position)
     }
 
     override fun getItemCount(): Int {

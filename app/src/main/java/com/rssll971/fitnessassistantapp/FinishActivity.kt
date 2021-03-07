@@ -54,9 +54,9 @@ class FinishActivity : AppCompatActivity() {
         }
 
         binding.llUpdateBmi.setOnClickListener {
-            val intent = Intent(this, BmiActivity::class.java)
-            startActivity(intent)
-            finish()
+            //val intent = Intent(this, BmiActivity::class.java)
+            //startActivity(intent)
+            //finish()
         }
     }
 }
