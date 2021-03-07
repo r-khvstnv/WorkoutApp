@@ -14,13 +14,15 @@ import com.rssll971.fitnessassistantapp.databinding.ActivityFinishBinding
 class FinishActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFinishBinding
     private lateinit var adViewBannerFinish: AdView
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        /** Create view using Binding**/
-        binding = ActivityFinishBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
 
+    /**
+     * Fullscreen Mode
+     */
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemUI()
+    }
+    private fun hideSystemUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
         } else {
@@ -35,6 +37,16 @@ class FinishActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_FULLSCREEN
                     )
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        /** Create view using Binding**/
+        binding = ActivityFinishBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+
 
         /** Ads*/
         MobileAds.initialize(this)

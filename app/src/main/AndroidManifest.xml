@@ -15,14 +15,6 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MyNoActionBar">
-        <activity android:name="com.rssll971.fitnessassistantapp.ActivitiesCatalogActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="locked"
-            />
-        <activity android:name="com.rssll971.fitnessassistantapp.BmiActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="locked"
-            />
         <activity android:name="com.rssll971.fitnessassistantapp.FinishActivity"
             android:screenOrientation="locked"
             />

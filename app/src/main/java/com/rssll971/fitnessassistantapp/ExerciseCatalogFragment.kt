@@ -2,7 +2,10 @@ package com.rssll971.fitnessassistantapp
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -14,6 +17,7 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +32,11 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.rssll971.fitnessassistantapp.databinding.FragmentExerciseCatalogBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -46,7 +55,6 @@ class ExerciseCatalogFragment : Fragment() {
     private lateinit var ivExerciseImageView: ImageView
     //path for user image, need for editing
     private lateinit var imagePath: String
-
 
     /**
      * Permissions
@@ -192,13 +200,7 @@ class ExerciseCatalogFragment : Fragment() {
 
         //add image for exercise
         ivExerciseImageView.setOnClickListener {
-            if (isPermissionsAreAllowed()){
-                val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                startActivityForResult(pickImageIntent, GALLERY_CODE)
-            }
-            else{
-                requestStoragePermission()
-            }
+            getImageFromGallery()
         }
 
         //show max characters for description
@@ -244,61 +246,56 @@ class ExerciseCatalogFragment : Fragment() {
 
 
     /**
+     * Next dialog will be shown, if previously user reject all permissions
+     * required to gallery & share features
+     */
+    private fun showRationalPermissionDialog(){
+        val permissionAlertDialog = AlertDialog.Builder(requireContext()).setMessage(R.string.st_permission_needed_to_be_granted)
+        //positive button
+        permissionAlertDialog.setPositiveButton(getString(R.string.st_go_to_settings)){ _: DialogInterface, _: Int ->
+            try {
+                //move to app settings
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", activity?.packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }catch (e: ActivityNotFoundException){
+                e.printStackTrace()
+            }
+        }
+        //negative button
+        permissionAlertDialog.setNegativeButton(R.string.st_cancel){ dialogInterface: DialogInterface, _: Int ->
+            dialogInterface.dismiss()
+        }
+        //show
+        permissionAlertDialog.show()
+    }
+    /**
      * Next method request permissions for get images
      */
-    private fun requestStoragePermission(){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
-               PERMISSIONS_REQUIRED.toString())){
-            //nothing to do, due to user reject them or granted
-        }
-        else{
-            //request permissions
-            ActivityCompat.requestPermissions(requireActivity(),
-                PERMISSIONS_REQUIRED,
-                GALLERY_CODE
-            )
-        }
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        if (requestCode == GALLERY_CODE){
-            var allGranted = false
-            //check for granted permission
-            for (i in grantResults.indices){
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    allGranted = true
+    private fun getImageFromGallery(){
+        Dexter.withContext(requireContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE).withListener(object : MultiplePermissionsListener{
+            override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                if (report!!.areAllPermissionsGranted()){
+                    val pickImageIntent = Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(pickImageIntent, GALLERY_CODE)
                 }
             }
 
-            if (!allGranted){
-                Toast.makeText(requireContext(),
-                    getString(R.string.st_access),
-                    Toast.LENGTH_LONG).show()
+            override fun onPermissionRationaleShouldBeShown(
+                permissionsList: MutableList<PermissionRequest>?,
+                permissionToken: PermissionToken?
+            ) {
+                showRationalPermissionDialog()
             }
-        }
+
+        }).onSameThread().check()
     }
 
-    /**
-     * Next method check permissions availability for app
-     */
-    private fun isPermissionsAreAllowed(): Boolean{
-        var result: Boolean = false
-        if (
-            ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-            &&
-            ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        ){result = true}
 
-
-        return result
-    }
     /**
      * Next method extracts user image from gallery and substitutes data in image view
      */
@@ -312,7 +309,6 @@ class ExerciseCatalogFragment : Fragment() {
                 try {
                     //check for available data
                     if (data!!.data != null){
-
 
                         /** Next lines get all needed info to prevent portrait image from rotation */
                         val options = BitmapFactory.Options()

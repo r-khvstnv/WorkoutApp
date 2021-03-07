@@ -84,6 +84,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:text=" - Dexter"
+            android:textSize="18sp"
+            android:textColor="@color/myDarkBlue"
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="5dp"
+            android:text="Licensed under the Apache License, Version 2.0
+            \nCopyright 2015 Karumi"
+            android:textSize="14sp"
+            android:textColor="@color/myDarkBlue"
+            android:textAlignment="textStart"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:text=" - MPAndroidChart"
             android:textSize="18sp"
             android:textColor="@color/myDarkBlue"
@@ -96,7 +118,7 @@
             android:layout_marginHorizontal="40dp"
             android:layout_marginTop="5dp"
             android:text="Licensed under the Apache License, Version 2.0
-            \n\nCopyright 2020 Philipp Jahoda"
+            \nCopyright 2020 Philipp Jahoda"
             android:textSize="14sp"
             android:textColor="@color/myDarkBlue"
             android:textAlignment="textStart"

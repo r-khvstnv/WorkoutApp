@@ -47,7 +47,6 @@ class UserExercisesAdapter(val context: Context,
             holder.ivEditExercise.visibility = View.VISIBLE
             holder.tvUserExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
         }
-        //todo change everywhereBMI
         else if (fragment is StartWorkoutFragment){
             holder.ivEditExercise.visibility = View.GONE
             holder.tvUserExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)

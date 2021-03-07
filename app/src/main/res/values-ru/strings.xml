@@ -44,4 +44,6 @@
     <string name="st_update_bmi_data">Добавить новые данные BMI</string>
     <string name="st_or">или</string>
     <string name="st_statistics">Статитстика</string>
+    <string name="st_go_to_settings">Настройки</string>
+    <string name="st_cancel">Отмена</string>
 </resources>

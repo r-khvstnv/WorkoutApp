@@ -1,9 +1,15 @@
 package com.rssll971.fitnessassistantapp
 
+import android.content.Context
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -17,13 +23,35 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     //main ad banner
     private lateinit var adViewBannerMain: AdView
-    //default exercise list
-    private lateinit var emcList: ArrayList<ExerciseModelClass>
     //bmi history
     private lateinit var bmiDataBaseHandler: BmiDataBaseHandler
     private lateinit var bmiList: ArrayList<BmiHistoryModelClass>
     //exercise list
     private var formedExerciseList = ArrayList<String>()
+
+    /**
+     * Fullscreen Mode
+     */
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemUI()
+    }
+    private fun hideSystemUI() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        } else {
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    // Set the content to appear under the system bars so that the
+                    // content doesn't resize when the system bars hide and show.
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    // Hide the nav bar and status bar
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    )
+        }
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +60,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        /** Next line hides redundant space under nav menu, which was created by itself*/
+        binding.bnvMenu.setOnApplyWindowInsetsListener(null)
+
+
 
         /** Ads*/
         MobileAds.initialize(this)
@@ -122,6 +155,15 @@ class MainActivity : AppCompatActivity() {
 
 
          */
+    }
+
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (currentFocus != null){
+            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun makeAsCurrentFragment(fragment: Fragment) =
