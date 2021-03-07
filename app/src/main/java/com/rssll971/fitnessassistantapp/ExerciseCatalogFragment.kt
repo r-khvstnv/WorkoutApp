@@ -12,10 +12,12 @@ import android.graphics.Matrix
 import android.graphics.drawable.ColorDrawable
 import android.media.ExifInterface
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,12 +28,18 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.rssll971.fitnessassistantapp.databinding.ActivityActivitiesCatalogBinding
-import org.w3c.dom.Text
-import java.io.*
+import com.rssll971.fitnessassistantapp.databinding.FragmentExerciseCatalogBinding
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 
-class ActivitiesCatalogActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityActivitiesCatalogBinding
+
+class ExerciseCatalogFragment : Fragment() {
+    private var _binding: FragmentExerciseCatalogBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
     //adapter for user exercises
     private lateinit var userExercisesAdapter: UserExercisesAdapter
     //image view with for user image, need for glide
@@ -45,23 +53,39 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Permissions
      */
     companion object{
-        private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE,
+        private val PERMISSIONS_REQUIRED = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        private const val GALLERY_CODE = 101
+         const val GALLERY_CODE = 101
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityActivitiesCatalogBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentExerciseCatalogBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
         /** show list of users exercises*/
         setupRecyclerView()
 
         /** Ads*/
-        MobileAds.initialize(this)
-        adViewBannerBottom = findViewById(R.id.adView_banner_activities_catalog_bottom)
+        MobileAds.initialize(requireContext())
+        //adViewBannerBottom = findViewById(R.id.adView_banner_activities_catalog_bottom)
+        adViewBannerBottom = binding.adViewBannerActivitiesCatalogBottom
         adViewBannerBottom.loadAd(AdRequest.Builder().build())
         adViewBannerBottom.adListener = object : AdListener(){
             override fun onAdClosed() {
@@ -72,14 +96,13 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         //add exercise
         binding.llAddActivities.setOnClickListener {
             showUserExerciseDialog(true,
-                    ExerciseModelClass(0, "", getString(R.string.st_empty_path), "", false)
+                ExerciseModelClass(0, "", getString(R.string.st_empty_path), "", false)
             )
         }
         //delete all
         binding.llDeleteExercises.setOnClickListener {
             deleteAllExercises()
         }
-
     }
 
     /**
@@ -87,7 +110,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      */
     private fun addUserExerciseRecord(exerciseModel: ExerciseModelClass){
         //get database handler
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         //note: system automatically change id
         val status = dataBaseHandler.addUsersExercise(ExerciseModelClass(0, exerciseModel.getName(),
             exerciseModel.getImagePath(), exerciseModel.getDescription(), false))
@@ -100,7 +123,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method edit user exercise in database
      */
     private fun editUserExerciseRecord(exerciseModel: ExerciseModelClass){
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         dataBaseHandler.updateUserExercise(exerciseModel)
         setupRecyclerView()
     }
@@ -108,7 +131,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method delete all user exercise in database
      */
     private fun deleteAllExercises(){
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         dataBaseHandler.deleteAllUserExercises()
         setupRecyclerView()
     }
@@ -116,7 +139,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method delete chosen user exercise in database
      */
     private fun deleteUserExercises(exerciseModel: ExerciseModelClass){
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         dataBaseHandler.deleteUsersExercise(exerciseModel)
         setupRecyclerView()
     }
@@ -125,8 +148,8 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method run RecyclerView with all user exercises
      */
     private fun setupRecyclerView(){
-        binding.rvActivities.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-        userExercisesAdapter = UserExercisesAdapter(this, getItemsUserExerciseList())
+        binding.rvActivities.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
+        userExercisesAdapter = UserExercisesAdapter(requireContext(), getItemsUserExerciseList())
         binding.rvActivities.adapter = userExercisesAdapter
     }
 
@@ -134,7 +157,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method get all user exercises from database
      */
     private fun getItemsUserExerciseList() : ArrayList<ExerciseModelClass>{
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
+        val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         val emcList: ArrayList<ExerciseModelClass> = dataBaseHandler.viewUsersExercises()
         return emcList
     }
@@ -146,7 +169,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Called from UserExerciseAdapter
      */
     fun showUserExerciseDialog(isNewExercise: Boolean, exerciseModel: ExerciseModelClass){
-        val dialog = Dialog(this)
+        val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_create_exercise)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -196,7 +219,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
         //save exercise and close dialog
         llSave.setOnClickListener {
             if (etExerciseName.text.isEmpty() or etDescription.text.isEmpty()){
-                Toast.makeText(this, getString(R.string.st_add_data),
+                Toast.makeText(requireContext(), getString(R.string.st_add_data),
                     Toast.LENGTH_LONG).show()
             }
             else{
@@ -234,13 +257,16 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      * Next method request permissions for get images
      */
     private fun requestStoragePermission(){
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                PERMISSIONS_REQUIRED.toString())){
+        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+               PERMISSIONS_REQUIRED.toString())){
             //nothing to do, due to user reject them or granted
         }
         else{
             //request permissions
-            ActivityCompat.requestPermissions(this, PERMISSIONS_REQUIRED, GALLERY_CODE)
+            ActivityCompat.requestPermissions(requireActivity(),
+                PERMISSIONS_REQUIRED,
+                GALLERY_CODE
+            )
         }
     }
 
@@ -260,7 +286,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             }
 
             if (!allGranted){
-                Toast.makeText(this,
+                Toast.makeText(requireContext(),
                     getString(R.string.st_access),
                     Toast.LENGTH_LONG).show()
             }
@@ -273,10 +299,10 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
     private fun isPermissionsAreAllowed(): Boolean{
         var result: Boolean = false
         if (
-            ContextCompat.checkSelfPermission(this,
+            ContextCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
             &&
-            ContextCompat.checkSelfPermission(this,
+            ContextCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         ){result = true}
 
@@ -306,7 +332,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                         //get real image path
                         val realPath = getRealPathFromUri(imageUri!!)
                         //convert uri to stream
-                        val imageStream: InputStream = applicationContext.contentResolver.openInputStream(imageUri)!!
+                        val imageStream: InputStream = activity!!.applicationContext.contentResolver.openInputStream(imageUri)!!
                         //convert stream to bitmap
                         val selectedImage: Bitmap? = BitmapFactory.decodeStream(imageStream, null, options)
                         imageStream.close()
@@ -324,7 +350,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
                     }
                     //if something goes wrong
                     else{
-                        Toast.makeText(this, getString(R.string.st_wrong_data),
+                        Toast.makeText(requireContext(), getString(R.string.st_wrong_data),
                             Toast.LENGTH_LONG).show()
                     }
                 }
@@ -340,7 +366,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
      */
     private fun getRealPathFromUri(uri: Uri): String{
         val result: String
-        val cursor = contentResolver.query(uri, null, null, null, null)
+        val cursor = activity!!.contentResolver.query(uri, null, null, null, null)
         if (cursor == null){
             result = uri.path!!
         }
@@ -390,7 +416,7 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
             //make it as single file
             //external directory -> as absolute file -> separate ->
-            val myFile = File(externalCacheDir!!.absoluteFile.toString()
+            val myFile = File(activity!!.externalCacheDir!!.absoluteFile.toString()
                     + File.separator + "UsersImage" + System.currentTimeMillis()/1000 + ".jpeg")
             //stream of our file
             val myFileOS = FileOutputStream(myFile)
@@ -408,4 +434,6 @@ class ActivitiesCatalogActivity : AppCompatActivity() {
 
         return result
     }
+
+
 }

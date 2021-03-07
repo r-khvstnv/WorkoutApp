@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/myWhite"
+    android:orientation="vertical"
+    android:id="@+id/sv_bmi"
+    tools:context=".BmiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView_banner_bmi_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/st_banner_bmi_top_id"
+        />
+
+    <ToggleButton
+        android:id="@+id/tb_measurementSystem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/tb_effect"
+        android:checked="true"
+        android:textOff=""
+        android:textOn="" />
+
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/myGreenBlue"
+        android:hint="@string/st_height"
+        android:inputType="numberSigned"
+        android:textAlignment="textEnd"
+        android:textColor="@color/myGreenBlue"
+        android:textColorHint="@color/myGreenBlue"
+        android:textCursorDrawable="@color/myGreenBlue"
+        android:textSize="24sp"
+        />
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/myGreenBlue"
+        android:hint="@string/st_weight"
+        android:inputType="numberSigned"
+        android:textAlignment="textEnd"
+        android:textColor="@color/myGreenBlue"
+        android:textColorHint="@color/myGreenBlue"
+        android:textCursorDrawable="@color/myGreenBlue"
+        android:textSize="24sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_result"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_rectangle_white"
+        android:elevation="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="20dp"
+        android:visibility="visible"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/st_result"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tools:text="01/01/2001"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_bmi_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="22sp"
+            android:text="@string/st_bmi_index" />
+
+        <TextView
+            android:id="@+id/tv_bmi_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="22sp"
+            tools:text="@string/st_status" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_calculate"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_rectangle_ol_ripple"
+        android:elevation="5dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="10dp"
+        android:visibility="visible"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/st_calculate"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/myWhite"
+            android:textSize="28sp" />
+    </LinearLayout>
+
+
+    <!-- Bmi history-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_show_history"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_rectangle_ripple"
+        android:elevation="5dp"
+        android:visibility="visible"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/st_history"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/myGreenBlue"
+            android:textSize="28sp"
+            />
+        <ImageView
+            android:id="@+id/iv_expand"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_expand"
+            android:scaleType="fitCenter"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Rv history-->
+    <LinearLayout
+        android:id="@+id/ll_bmi_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/myWhite"
+            android:layout_marginHorizontal="5dp"
+            android:paddingVertical="12dp"
+            android:elevation="5dp">
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:layout_weight="2"
+                android:src="@drawable/ic_calendar"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/st_weight"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="@dimen/dim_item_bmi_date_text_size"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/st_height"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="@dimen/dim_item_bmi_date_text_size"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/st_bmi"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textAlignment="center"
+                android:textColor="@color/myGreenBlue"
+                android:textSize="@dimen/dim_item_bmi_date_text_size"
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_bmi"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:orientation="vertical"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_delete_history"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/btn_rectangle_ripple"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:elevation="5dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/st_delete_all"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/myDarkBlue"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_trash_bin"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView_banner_bmi_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="MEDIUM_RECTANGLE"
+            ads:adUnitId="@string/st_banner_bmi_bottom_id"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</ScrollView>

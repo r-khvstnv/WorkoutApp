@@ -35,10 +35,12 @@ class MainActivity : AppCompatActivity() {
          */
         val infoFragment = InfoFragment()
         val exerciseCatalogFragment = ExerciseCatalogFragment()
+        val bmiFragment = BmiFragment()
         binding.bnvMenu.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.m_info -> makeAsCurrentFragment(infoFragment)
                 R.id.m_activities -> makeAsCurrentFragment(exerciseCatalogFragment)
+                R.id.m_bmi -> makeAsCurrentFragment(bmiFragment)
             }
             true
         }
