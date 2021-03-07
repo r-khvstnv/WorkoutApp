@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myWhite"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ExerciseCatalogFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:id="@+id/ll_add_activities"
+            android:layout_width="340dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:background="@drawable/ll_activities_ripple_white"
+            android:elevation="5dp"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_add_round"
+                android:scaleType="fitCenter"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/st_add_exercise"
+                android:textSize="24sp"
+                android:textColor="@color/myGreenBlue"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_activities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            />
+        <LinearLayout
+            android:id="@+id/ll_delete_exercises"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="20dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/btn_rectangle_ripple"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:elevation="5dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/st_delete_all"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textColor="@color/myDarkBlue"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_trash_bin"
+                android:scaleType="fitCenter"
+                />
+        </LinearLayout>
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView_banner_activities_catalog_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            ads:adSize="LARGE_BANNER"
+            ads:adUnitId="@string/st_banner_activities_catalog_bottom_id"
+            />
+
+    </LinearLayout>
+</ScrollView>

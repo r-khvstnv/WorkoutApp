@@ -92,7 +92,7 @@
             android:layout_width="@dimen/dim_finish_circles_image_sizes"
             android:layout_height="@dimen/dim_finish_circles_image_sizes"
             android:layout_gravity="center"
-            android:src="@drawable/ic_calendar_dark"
+            android:src="@drawable/ic_calendar"
             android:scaleType="fitCenter"
             />
         <TextView

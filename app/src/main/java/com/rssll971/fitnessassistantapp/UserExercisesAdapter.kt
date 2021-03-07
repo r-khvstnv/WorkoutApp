@@ -41,11 +41,12 @@ class UserExercisesAdapter(val context: Context,
          * Next statement responsible for correct text size and show edit icon,
          * when user want to change own exercise
          */
-        if (context is ActivitiesCatalogActivity){
+        if (ExerciseCatalogFragment().isInLayout){
             holder.ivEditExercise.visibility = View.VISIBLE
             holder.tvUserExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F)
         }
-        else if (context is MainActivity){
+        //todo change everywhereBMI
+        else if (context is BmiActivity){
             holder.ivEditExercise.visibility = View.GONE
             holder.tvUserExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         }
@@ -55,9 +56,12 @@ class UserExercisesAdapter(val context: Context,
          * go to another dialog while user want change exercise
          */
         holder.llUserExercise.setOnClickListener {
-            if (context is ActivitiesCatalogActivity){
-                context.showUserExerciseDialog(false, item)
+            if (ExerciseCatalogFragment().isInLayout){
+                //ExerciseCatalogFragment.showUserExerciseDialog(false, item)
+                ExerciseCatalogFragment().showUserExerciseDialog(false, item)
             }
+            //todo
+            /*
             else if (context is MainActivity){
                 /**
                  * As so responsibility for creating future exercise list was annotated in another class and
@@ -69,6 +73,7 @@ class UserExercisesAdapter(val context: Context,
                  *  After that next if/else statement determine selected state and run corresponding method
                  */
                 //delete item from list for preparation
+
                 if (holder.llUserExercise.isSelected){
                     context.prepareExerciseList(position, false)
                     holder.llUserExercise.isSelected = false
@@ -85,9 +90,12 @@ class UserExercisesAdapter(val context: Context,
                     selectedItemPositionList.add(position)
                 }
             }
+
+             */
         }
         //doesn't matter exactly context
-        holder.llUserExercise.isSelected = selectedItemPositionList.contains(position)
+        //todo
+        //holder.llUserExercise.isSelected = selectedItemPositionList.contains(position)
     }
 
     override fun getItemCount(): Int {

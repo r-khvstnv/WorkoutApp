@@ -17,6 +17,5 @@
     <style name="Theme.MyNoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:navigationBarColor">@color/myWhite</item>
         <item name="android:statusBarColor">@color/myWhite</item>
-
     </style>
 </resources>

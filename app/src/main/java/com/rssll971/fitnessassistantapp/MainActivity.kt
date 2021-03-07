@@ -1,25 +1,10 @@
 package com.rssll971.fitnessassistantapp
 
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.*
-import androidx.core.content.ContextCompat
-import androidx.core.os.ConfigurationCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
+import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -44,6 +29,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        /**
+         * Fragments
+         */
+        val infoFragment = InfoFragment()
+        val exerciseCatalogFragment = ExerciseCatalogFragment()
+        binding.bnvMenu.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.m_info -> makeAsCurrentFragment(infoFragment)
+                R.id.m_activities -> makeAsCurrentFragment(exerciseCatalogFragment)
+            }
+            true
+        }
+
+
+
+        /*
 
         /** Ads*/
         MobileAds.initialize(this)
@@ -99,8 +101,17 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+         */
     }
 
+    private fun makeAsCurrentFragment(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fl_container, fragment)
+            commit()
+    }
+
+    /*
 
     /**
      * Next method show Line Chart
@@ -301,5 +312,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+     */
 
 }

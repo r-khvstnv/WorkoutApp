@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+    <path
+        android:fillColor="@color/myBlue"
+        android:fillType="evenOdd"
+        android:pathData="M3 18C3 9.72 9.72 3 18 3c8.28 0 15 6.72 15 15c0 8.28-6.72 15-15 15c-8.28 0-15-6.72-15-15zm16.5-1.5v9h-3v-9h3zM18 30c-6.62 0-12-5.39-12-12c0-6.62 5.38-12 12-12c6.61 0 12 5.38 12 12c0 6.61-5.39 12-12 12zm1.5-19.5v3h-3v-3h3z"/>
+</vector>

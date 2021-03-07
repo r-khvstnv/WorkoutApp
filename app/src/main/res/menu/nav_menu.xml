@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/m_statistics"
+        android:icon="@drawable/ic_statistics"
+        android:title="@string/st_statistics"
+        />
+    <item
+        android:id="@+id/m_bmi"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/st_bmi"
+        />
+    <item
+        android:id="@+id/m_start"
+        android:icon="@drawable/ic_start"
+        android:title="@string/st_start"
+        />
+    <item
+        android:id="@+id/m_activities"
+        android:icon="@drawable/ic_activity"
+        android:title="@string/st_activities"
+        />
+    <item
+        android:id="@+id/m_info"
+        android:icon="@drawable/ic_info"
+        android:title="@string/st_info"
+        />
+
+
+</menu>

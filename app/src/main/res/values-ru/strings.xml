@@ -43,4 +43,5 @@
     <string name="st_version">Версия:</string>
     <string name="st_update_bmi_data">Добавить новые данные BMI</string>
     <string name="st_or">или</string>
+    <string name="st_statistics">Статитстика</string>
 </resources>
