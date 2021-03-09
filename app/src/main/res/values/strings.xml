@@ -4,14 +4,10 @@
 
     <string name="app_id" translatable="false">ca-app-pub-4362142146545991~9298977150</string>
     <string name="st_banner_main_id" translatable="false">ca-app-pub-4362142146545991/9745985124</string>
-    <string name="st_banner_bmi_top_id" translatable="false">ca-app-pub-4362142146545991/8241331767</string>
-    <string name="st_banner_bmi_bottom_id" translatable="false">ca-app-pub-4362142146545991/4728628015</string>
-    <string name="st_banner_activities_catalog_bottom_id" translatable="false">ca-app-pub-4362142146545991/3607666779</string>
     <string name="st_banner_relaxation_id" translatable="false">ca-app-pub-4362142146545991/8668421763</string>
     <string name="st_banner_current_exercise_id" translatable="false">ca-app-pub-4362142146545991/5040453351</string>
     <string name="st_banner_finish_bottom_id" translatable="false">ca-app-pub-4362142146545991/4729176758</string>
-    <!-- todo change -->
-    <string name="st_interstitial_ad_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="st_interstitial_ad_id" translatable="false">ca-app-pub-4362142146545991/5534840006</string>
     <!--
     General values
     -->

@@ -7,7 +7,6 @@ import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -23,15 +22,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -60,9 +53,6 @@ class ExerciseCatalogFragment : Fragment() {
      * Permissions
      */
     companion object{
-        private val PERMISSIONS_REQUIRED = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
          const val GALLERY_CODE = 101
     }
 
@@ -156,8 +146,7 @@ class ExerciseCatalogFragment : Fragment() {
      */
     private fun getItemsUserExerciseList() : ArrayList<ExerciseModelClass>{
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
-        val emcList: ArrayList<ExerciseModelClass> = dataBaseHandler.viewUsersExercises()
-        return emcList
+        return dataBaseHandler.viewUsersExercises()
     }
 
 
@@ -172,7 +161,7 @@ class ExerciseCatalogFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val etExerciseName = dialog.findViewById<EditText>(R.id.et_edit_exercise_name)
-        ivExerciseImageView = dialog.findViewById<ImageView>(R.id.iv_edit_exercise_image)
+        ivExerciseImageView = dialog.findViewById(R.id.iv_edit_exercise_image)
         val etDescription = dialog.findViewById<EditText>(R.id.et_edit_description)
         val llSave = dialog.findViewById<LinearLayout>(R.id.ll_save)
         val llDelete = dialog.findViewById<LinearLayout>(R.id.ll_delete)
@@ -204,7 +193,7 @@ class ExerciseCatalogFragment : Fragment() {
         }
 
         //show max characters for description
-        etDescription.doOnTextChanged { text, start, before, count ->
+        etDescription.doOnTextChanged { _, _, _, count ->
             tvDescriptionSize.text = "$count /400"
         }
 
@@ -414,7 +403,6 @@ class ExerciseCatalogFragment : Fragment() {
             result = myFile.absolutePath
         }
         catch (e: Exception){
-            result = ""
             e.printStackTrace()
         }
 

@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -76,8 +75,6 @@ class FinishActivity : AppCompatActivity() {
     }
 
     private fun prepareCharts(){
-
-
         //average duration line chart
         val workoutStatisticDataBaseHandler = WorkoutStatisticDataBaseHandler(this)
         val statisticList = workoutStatisticDataBaseHandler.viewStatisticData()
@@ -98,7 +95,8 @@ class FinishActivity : AppCompatActivity() {
         var counter = statisticList.size
         for (i in 0 until statisticList.size){
             if (counter <= 10){
-                val totalDuration = statisticList[i].getExerciseDuration() + statisticList[i].getRestDuration()
+                val totalDuration = (statisticList[i].getExerciseDuration() +
+                        statisticList[i].getRestDuration()) * statisticList[i].getExerciseAmount()
                 entriesDuration.add(Entry(i.toFloat(), totalDuration.toFloat()))
             }
             counter--
@@ -135,15 +133,13 @@ class FinishActivity : AppCompatActivity() {
         binding.lineChartWorkoutDuration.xAxis.isEnabled = false
         binding.lineChartWorkoutDuration.axisRight.isEnabled = false
         binding.lineChartWorkoutDuration.axisLeft.isEnabled = false
-        binding.lineChartWorkoutDuration.xAxis.setDrawGridLines(false);
-        binding.lineChartWorkoutDuration.axisLeft.setDrawGridLines(false);
-        binding.lineChartWorkoutDuration.axisRight.setDrawGridLines(false);
+        binding.lineChartWorkoutDuration.xAxis.setDrawGridLines(false)
+        binding.lineChartWorkoutDuration.axisLeft.setDrawGridLines(false)
+        binding.lineChartWorkoutDuration.axisRight.setDrawGridLines(false)
 
 
         binding.lineChartWorkoutDuration.description.text = ""
-        binding.lineChartWorkoutDuration.legend.isEnabled = true
-        binding.lineChartWorkoutDuration.legend.textColor = ContextCompat.getColor(this, R.color.myDarkBlue)
-        binding.lineChartWorkoutDuration.legend.textSize = 18f
+        binding.lineChartWorkoutDuration.legend.isEnabled = false
         binding.lineChartWorkoutDuration.setNoDataText("")
     }
 }

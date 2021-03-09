@@ -1,7 +1,5 @@
 package com.rssll971.fitnessassistantapp
 
-import java.time.Duration
-
 class WorkoutStatisticModelClass(private val _id: Int,
                                  private val _date: String,
                                  private val _restDuration: Int,

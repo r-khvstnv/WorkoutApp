@@ -18,7 +18,7 @@ class UserExercisesAdapter(val context: Context,
                            private val userExerciseList: ArrayList<ExerciseModelClass>, currentFragment: Fragment) :
     RecyclerView.Adapter<UserExercisesAdapter.MyViewHolder>() {
     private var selectedItemPositionList = ArrayList<Int>()
-    val fragment: Fragment = currentFragment
+    private val fragment: Fragment = currentFragment
     /**
      * Class with item components
      */
@@ -36,7 +36,7 @@ class UserExercisesAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item: ExerciseModelClass = userExerciseList[position]
-        val rowIndex = position
+        //val rowIndex = position
         //show exercise name
         holder.tvUserExerciseName.text = item.getName()
         /**

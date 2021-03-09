@@ -1,7 +1,6 @@
 package com.rssll971.fitnessassistantapp
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +8,15 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.*
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
-import kotlin.collections.ArrayList
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adViewBannerMain: AdView
     //interstitial ad
     private var mInterstitialAd: InterstitialAd? = null
-    private val TAG = "MainActivity"
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
     /**
@@ -62,12 +64,13 @@ class MainActivity : AppCompatActivity() {
         /** Next line hides redundant space under nav menu, which was created by itself*/
         binding.bnvMenu.setOnApplyWindowInsetsListener(null)
 
+        /** Firebase */
+        firebaseAnalytics = Firebase.analytics
+
 
 
         /** Ads*/
         prepareAds()
-
-
 
         /**
          * Fragments
@@ -82,12 +85,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.m_info -> {
                     showInterstitialAd()
                     makeAsCurrentFragment(infoFragment)
-                    loadInterstitialAd()
                 }
                 R.id.m_activities -> {
                     showInterstitialAd()
                     makeAsCurrentFragment(exerciseCatalogFragment)
-                    loadInterstitialAd()
                 }
                 R.id.m_start -> makeAsCurrentFragment(startWorkout)
                 R.id.m_bmi -> makeAsCurrentFragment(bmiFragment)
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun prepareAds(){
         //interstitial
-        loadInterstitialAd()
+        requestInterstitialAd()
         //banner
         MobileAds.initialize(this)
         adViewBannerMain = findViewById(R.id.adView_banner_main)
@@ -118,16 +119,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun loadInterstitialAd(){
+    private fun requestInterstitialAd(){
         val adRequest = AdRequest.Builder().build()
+        loadInterstitialAd(adRequest)
+    }
+    private fun loadInterstitialAd(adRequest: AdRequest){
         InterstitialAd.load(this, getString(R.string.st_interstitial_ad_id), adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(TAG, adError.message)
+                Log.d("AdMob", adError.message)
                 mInterstitialAd = null
             }
-
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 mInterstitialAd = interstitialAd
+
+                mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                    override fun onAdDismissedFullScreenContent() {
+                        requestInterstitialAd()
+                    }
+
+                    override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                        requestInterstitialAd()
+                    }
+
+                    override fun onAdShowedFullScreenContent() {
+                        mInterstitialAd = null
+                    }
+                }
             }
         })
     }

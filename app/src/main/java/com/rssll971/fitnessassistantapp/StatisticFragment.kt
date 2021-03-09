@@ -102,9 +102,9 @@ class StatisticFragment : Fragment() {
         binding.lineChartWeight.xAxis.isEnabled = false
         binding.lineChartWeight.axisRight.isEnabled = false
         binding.lineChartWeight.axisLeft.isEnabled = false
-        binding.lineChartWeight.xAxis.setDrawGridLines(false);
-        binding.lineChartWeight.axisLeft.setDrawGridLines(false);
-        binding.lineChartWeight.axisRight.setDrawGridLines(false);
+        binding.lineChartWeight.xAxis.setDrawGridLines(false)
+        binding.lineChartWeight.axisLeft.setDrawGridLines(false)
+        binding.lineChartWeight.axisRight.setDrawGridLines(false)
 
         binding.lineChartWeight.description.text = ""
         binding.lineChartWeight.legend.isEnabled = false
@@ -124,7 +124,8 @@ class StatisticFragment : Fragment() {
         var counter = statisticList.size
         for (i in 0 until statisticList.size){
             if (counter <= 10){
-                val totalDuration = (statisticList[i].getExerciseDuration() + statisticList[i].getRestDuration())
+                val totalDuration = (statisticList[i].getExerciseDuration() +
+                        statisticList[i].getRestDuration()) * statisticList[i].getExerciseAmount()
                 entriesDuration.add(Entry(i.toFloat(), totalDuration.toFloat()))
             }
             counter--
@@ -139,9 +140,9 @@ class StatisticFragment : Fragment() {
         ldsDuration.valueFormatter = MyValueFormatterToTime()
 
         ldsDuration.setDrawCircles(true)
-        ldsDuration.setCircleColor(ContextCompat.getColor(requireContext(), R.color.myOrange))
+        ldsDuration.setCircleColor(ContextCompat.getColor(requireContext(), R.color.myOrangeLight))
         //line color and width
-        ldsDuration.color = ContextCompat.getColor(requireContext(), R.color.myOrange)
+        ldsDuration.color = ContextCompat.getColor(requireContext(), R.color.myOrangeLight)
         ldsDuration.lineWidth = 3f
         //color under line
         ldsDuration.setDrawFilled(true)
@@ -158,9 +159,9 @@ class StatisticFragment : Fragment() {
         binding.lineChartWorkoutDuration.xAxis.isEnabled = false
         binding.lineChartWorkoutDuration.axisRight.isEnabled = false
         binding.lineChartWorkoutDuration.axisLeft.isEnabled = false
-        binding.lineChartWorkoutDuration.xAxis.setDrawGridLines(false);
-        binding.lineChartWorkoutDuration.axisLeft.setDrawGridLines(false);
-        binding.lineChartWorkoutDuration.axisRight.setDrawGridLines(false);
+        binding.lineChartWorkoutDuration.xAxis.setDrawGridLines(false)
+        binding.lineChartWorkoutDuration.axisLeft.setDrawGridLines(false)
+        binding.lineChartWorkoutDuration.axisRight.setDrawGridLines(false)
 
         binding.lineChartWorkoutDuration.description.text = ""
         binding.lineChartWorkoutDuration.legend.isEnabled = false

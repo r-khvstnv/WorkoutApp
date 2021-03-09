@@ -1,21 +1,12 @@
 package com.rssll971.fitnessassistantapp
 
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.FragmentBmiBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -115,8 +106,7 @@ class BmiFragment : Fragment() {
     private fun estimateBmi(){
         var height: Float = binding.etHeight.text.toString().toFloat()
         val weight: Float = binding.etWeight.text.toString().toFloat()
-        var bmi: Float
-        var bmiStatus: String = ""
+        val bmi: Float
 
         if (isMetricSystem){
             height /= 100.0f
@@ -128,7 +118,7 @@ class BmiFragment : Fragment() {
 
 
         /** Get right status for bmi index */
-        bmiStatus = when(bmi){
+        val bmiStatus: String = when(bmi){
             in 0.0f..18.5f -> getString(R.string.st_underweight)
             in 18.6f..24.9f -> getString(R.string.st_normal)
             in 25.0f..29.9f -> getString(R.string.st_overweight)
@@ -207,8 +197,7 @@ class BmiFragment : Fragment() {
      */
     private fun getItemBmiHistoryList() : ArrayList<BmiHistoryModelClass>{
         val dataBaseHandler = BmiDataBaseHandler(requireContext())
-        val bhmList: ArrayList<BmiHistoryModelClass> = dataBaseHandler.viewBmiResult()
-        return bhmList
+        return dataBaseHandler.viewBmiResult()
     }
     /**
      * Next method delete all bmi history from database
