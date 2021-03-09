@@ -11,6 +11,8 @@
     <dimen name="dim_finish_rectangles_widths">200dp</dimen>
     <dimen name="dim_finish_rectangles_heights">100dp</dimen>
     <dimen name="dim_finish_circles_image_sizes">50dp</dimen>
+    <dimen name="dim_charts_margin_vertical">10dp</dimen>
+    <dimen name="dim_charts_margin_horizontal">5dp</dimen>
 
 
 </resources>

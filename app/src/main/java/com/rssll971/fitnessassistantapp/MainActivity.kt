@@ -1,33 +1,31 @@
 package com.rssll971.fitnessassistantapp
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.*
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
-import java.util.*
 import kotlin.collections.ArrayList
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     //main ad banner
     private lateinit var adViewBannerMain: AdView
-    //bmi history
-    private lateinit var bmiDataBaseHandler: BmiDataBaseHandler
-    private lateinit var bmiList: ArrayList<BmiHistoryModelClass>
-    //exercise list
-    private var formedExerciseList = ArrayList<String>()
+    //interstitial ad
+    private var mInterstitialAd: InterstitialAd? = null
+    private val TAG = "MainActivity"
+
 
     /**
      * Fullscreen Mode
@@ -67,15 +65,8 @@ class MainActivity : AppCompatActivity() {
 
 
         /** Ads*/
-        MobileAds.initialize(this)
-        adViewBannerMain = findViewById(R.id.adView_banner_main)
-        adViewBannerMain.loadAd(AdRequest.Builder().build())
+        prepareAds()
 
-        adViewBannerMain.adListener = object : AdListener(){
-            override fun onAdClosed() {
-                adViewBannerMain.loadAd(AdRequest.Builder().build())
-            }
-        }
 
 
         /**
@@ -85,31 +76,34 @@ class MainActivity : AppCompatActivity() {
         val exerciseCatalogFragment = ExerciseCatalogFragment()
         val bmiFragment = BmiFragment()
         val startWorkout = StartWorkoutFragment()
+        val statisticFragment = StatisticFragment()
         binding.bnvMenu.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.m_info -> makeAsCurrentFragment(infoFragment)
-                R.id.m_activities -> makeAsCurrentFragment(exerciseCatalogFragment)
-                R.id.m_bmi -> makeAsCurrentFragment(bmiFragment)
+                R.id.m_info -> {
+                    showInterstitialAd()
+                    makeAsCurrentFragment(infoFragment)
+                    loadInterstitialAd()
+                }
+                R.id.m_activities -> {
+                    showInterstitialAd()
+                    makeAsCurrentFragment(exerciseCatalogFragment)
+                    loadInterstitialAd()
+                }
                 R.id.m_start -> makeAsCurrentFragment(startWorkout)
+                R.id.m_bmi -> makeAsCurrentFragment(bmiFragment)
+                R.id.m_statistics -> makeAsCurrentFragment(statisticFragment)
             }
             true
+        }
+        /** Show default fragment*/
+        if (savedInstanceState == null){
+            binding.bnvMenu.selectedItemId = R.id.m_start
         }
 
 
 
         /*
-
-        /** Ads*/
-        MobileAds.initialize(this)
-        adViewBannerMain = findViewById(R.id.adView_banner_main)
-        adViewBannerMain.loadAd(AdRequest.Builder().build())
-
-        adViewBannerMain.adListener = object : AdListener(){
-            override fun onAdClosed() {
-                adViewBannerMain.loadAd(AdRequest.Builder().build())
-            }
-        }
-
+        for line chart
 
         bmiDataBaseHandler = BmiDataBaseHandler(this)
         bmiList = bmiDataBaseHandler.viewBmiResult()
@@ -125,39 +119,49 @@ class MainActivity : AppCompatActivity() {
             binding.lineChart.visibility = View.INVISIBLE
         }
 
-
-
-        /** All clickable items*/
-        //start exercises
-        binding.llStart.setOnClickListener {
-            showExerciseSelectionDialog()
-        }
-
-        //bmi calculator
-        binding.llBmi.setOnClickListener {
-            val intent = Intent(this, BmiActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        //activities
-        binding.llActivities.setOnClickListener {
-            val intent = Intent(this, ActivitiesCatalogActivity::class.java)
-            startActivity(intent)
-
-        }
-
-        //settings
-        binding.llInfo.setOnClickListener {
-            showInfoDialog()
-        }
-
-
-
          */
     }
 
+    /**
+     * Next three methods provide operations relative for all Ads in MainActivity
+     */
+    private fun prepareAds(){
+        //interstitial
+        loadInterstitialAd()
+        //banner
+        MobileAds.initialize(this)
+        adViewBannerMain = findViewById(R.id.adView_banner_main)
+        adViewBannerMain.loadAd(AdRequest.Builder().build())
 
+        adViewBannerMain.adListener = object : AdListener(){
+            override fun onAdClosed() {
+                adViewBannerMain.loadAd(AdRequest.Builder().build())
+            }
+        }
+    }
+    private fun loadInterstitialAd(){
+        val adRequest = AdRequest.Builder().build()
+        InterstitialAd.load(this, getString(R.string.st_interstitial_ad_id), adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(TAG, adError.message)
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                mInterstitialAd = interstitialAd
+            }
+        })
+    }
+    private fun showInterstitialAd(){
+        if (mInterstitialAd != null) {
+            mInterstitialAd?.show(this)
+        }
+    }
+
+
+    /**
+     * Next method hide keyboard on outside touch
+     */
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null){
             val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -166,6 +170,9 @@ class MainActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
+    /**
+     * Next method load corresponding fragment required for selected item in menu
+     */
     private fun makeAsCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_container, fragment)
@@ -231,149 +238,6 @@ class MainActivity : AppCompatActivity() {
         binding.lineChart.setNoDataText("")
 
     }
-
-
-    /**
-     * Next method show dialog for exercise selection and other parameters
-     */
-    private fun showExerciseSelectionDialog(){
-        val dialogExerciseSelection = Dialog(this)
-        dialogExerciseSelection.setContentView(R.layout.dialog_select_exercise)
-        dialogExerciseSelection.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        //relaxation time
-        var relaxationTime: Int = 30
-        //exercise time
-        var exerciseTime: Int = 30
-
-        //all buttons
-        val rbVoiceOn = dialogExerciseSelection.findViewById<RadioButton>(R.id.rb_voice_on)
-
-        val ivMinusRelaxationTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_minus_relaxation_time)
-        val ivPlusRelaxationTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_plus_relaxation_time)
-        val tvRelaxationTime = dialogExerciseSelection.findViewById<TextView>(R.id.tv_relaxation_time)
-        tvRelaxationTime.text = relaxationTime.toString()
-
-        val ivMinusExerciseTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_minus_exercise_time)
-        val ivPlusExerciseTime = dialogExerciseSelection.findViewById<ImageView>(R.id.iv_plus_exercise_time)
-        val tvExerciseTime = dialogExerciseSelection.findViewById<TextView>(R.id.tv_exercise_time)
-        tvExerciseTime.text = exerciseTime.toString()
-
-        /**
-         * Next lines responsible for extracting users and default exercises in RecyclerView
-         */
-        //Below lines written exactly in that order,
-        // so that in the future default list will be at the bottom
-        emcList = if (Locale.getDefault().language == "ru"){
-            //set RU lang list
-            ExerciseModelClass.defaultRuExerciseList()
-        } else{
-            ExerciseModelClass.defaultEngExerciseList()
-        }
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
-        emcList.addAll(dataBaseHandler.viewUsersExercises())
-
-
-
-        /** Setup RecyclerView*/
-        val rvSelectExercises = dialogExerciseSelection.findViewById<RecyclerView>(R.id.rv_select_activities)
-        rvSelectExercises.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
-        val userExercisesAdapter = UserExercisesAdapter(this, emcList)
-        rvSelectExercises.adapter = userExercisesAdapter
-        //smooth scroll to top
-        rvSelectExercises.smoothScrollToPosition(userExercisesAdapter.itemCount - 1)
-
-
-
-        val llStart = dialogExerciseSelection.findViewById<LinearLayout>(R.id.ll_start_session)
-
-        dialogExerciseSelection.show()
-
-        //show result on time changes
-        ivMinusRelaxationTime.setOnClickListener {
-            if (relaxationTime > 30){
-                relaxationTime -= 30
-                tvRelaxationTime.text = relaxationTime.toString()
-            }
-        }
-        ivPlusRelaxationTime.setOnClickListener {
-            if (relaxationTime <= 600) {
-                relaxationTime += 30
-                tvRelaxationTime.text = relaxationTime.toString()
-            }
-        }
-        ivMinusExerciseTime.setOnClickListener {
-            if(exerciseTime > 30){
-                exerciseTime -= 30
-                tvExerciseTime.text = exerciseTime.toString()
-            }
-        }
-        ivPlusExerciseTime.setOnClickListener {
-            if (exerciseTime < 600) {
-                exerciseTime += 30
-                tvExerciseTime.text = exerciseTime.toString()
-            }
-        }
-
-        //start new activity
-        llStart.setOnClickListener {
-            if (formedExerciseList.isEmpty()){
-                Toast.makeText(this, getString(R.string.st_choose_exercise), Toast.LENGTH_SHORT).show()
-            }
-            else {
-                /**
-                 * Start new activity with all parameters and chosen exercises
-                 */
-                val intent = Intent(this, ExerciseActivity::class.java)
-                intent.putExtra("FormedList", formedExerciseList)
-                intent.putExtra("RelaxationTime", relaxationTime)
-                intent.putExtra("ExerciseTime", exerciseTime)
-                intent.putExtra("VoiceAssistant", rbVoiceOn.isChecked)
-                startActivity(intent)
-                dialogExerciseSelection.dismiss()
-                formedExerciseList.clear()
-            }
-        }
-    }
-
-    /**
-     * Next method prepare exercise list
-     *
-     * Called from UserExerciseAdapter
-     *
-     * Method based on saving chosen exercise names, due to don't send all list in new activity
-     */
-    fun prepareExerciseList(position: Int, isNeededAdd: Boolean){
-        if (isNeededAdd){
-            formedExerciseList.add(emcList[position].getName())
-        }
-        else{
-            for (i in 0 until  formedExerciseList.size){
-                if (formedExerciseList[i] == emcList[position].getName()){
-                    formedExerciseList.removeAt(i)
-                    break
-                }
-            }
-        }
-    }
-
-    /**
-     * Next method show info dialog
-     */
-    private fun showInfoDialog(){
-        val dialogInfo = Dialog(this)
-        dialogInfo.setContentView(R.layout.dialog_info)
-        dialogInfo.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        val btnBack = dialogInfo.findViewById<Button>(R.id.btn_back)
-
-        dialogInfo.show()
-
-        btnBack.setOnClickListener {
-            dialogInfo.dismiss()
-        }
-    }
-
-
      */
 
 }

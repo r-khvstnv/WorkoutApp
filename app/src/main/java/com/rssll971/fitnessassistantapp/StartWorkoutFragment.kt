@@ -1,6 +1,11 @@
 package com.rssll971.fitnessassistantapp
 
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,9 +24,6 @@ class StartWorkoutFragment : Fragment() {
 
     //default exercise list
     private lateinit var emcList: ArrayList<ExerciseModelClass>
-    //bmi history
-    private lateinit var bmiDataBaseHandler: BmiDataBaseHandler
-    private lateinit var bmiList: ArrayList<BmiHistoryModelClass>
     //exercise list
     private var formedExerciseList = ArrayList<String>()
     //relaxation and exercise time
@@ -60,6 +62,11 @@ class StartWorkoutFragment : Fragment() {
 
         binding.tvRelaxationTime.text = relaxationTime.toString()
         binding.tvExerciseTime.text = exerciseTime.toString()
+
+        //check availability of text to speech
+        binding.rbVoiceOn.setOnClickListener {
+            checkTextToSpeechAvailability()
+        }
 
         //start new activity
         binding.llStartSession.setOnClickListener {
@@ -150,6 +157,52 @@ class StartWorkoutFragment : Fragment() {
                 }
             }
         }
+    }
+
+
+    /**
+     * Next method check availability of Text to Speech on device
+     */
+    private fun checkTextToSpeechAvailability(){
+        val packageName = "com.google.android.tts"
+        val mPackageManager = activity!!.packageManager
+        var isInstalled = false
+        try {
+            mPackageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            isInstalled = true
+        }catch (e: PackageManager.NameNotFoundException){
+            e.printStackTrace()
+        }
+        // offer to install needed app
+        if (!isInstalled){
+            showInstallationOfferDialog(packageName)
+        }
+
+    }
+
+    /**
+     * Next method show alert dialog which offer to install needed app
+     */
+    private fun showInstallationOfferDialog(packageName: String){
+        val alertDialog = AlertDialog.Builder(requireContext()).setMessage(R.string.st_required_app_need_to_install)
+
+        alertDialog.setPositiveButton(R.string.st_play_market){ _: DialogInterface, _: Int ->
+            try {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.tts")
+                    setPackage(packageName)
+                }
+                startActivity(intent)
+            }catch (e: ActivityNotFoundException){
+                e.printStackTrace()
+            }
+        }
+
+        alertDialog.setNegativeButton(R.string.st_cancel){ dialogInterface: DialogInterface, _: Int ->
+            dialogInterface.dismiss()
+        }
+
+        alertDialog.show()
     }
 
 }

@@ -17,6 +17,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.FragmentBmiBinding
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.pow
@@ -108,17 +109,6 @@ class BmiFragment : Fragment() {
         }
     }
 
-    /* todo move to main
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        if (currentFocus != null){
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
-        }
-        return super.dispatchTouchEvent(ev)
-    }
-
-     */
-
     /**
      * Next method estimate BMI index
      */
@@ -155,7 +145,7 @@ class BmiFragment : Fragment() {
      * Next method show bmi result in prepared card
      */
     private fun showBmiResult(bmi: Float, bmiStatus: String){
-        currentDate = java.text.SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
         val bmiIndex = String.format("%.2f", bmi)
 
         binding.tvDate.text = currentDate

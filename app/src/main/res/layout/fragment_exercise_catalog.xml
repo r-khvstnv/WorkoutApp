@@ -11,9 +11,10 @@
     
     <LinearLayout
         android:id="@+id/ll_add_activities"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/ll_activities_ripple_white"
         android:elevation="5dp"
         android:gravity="center"
