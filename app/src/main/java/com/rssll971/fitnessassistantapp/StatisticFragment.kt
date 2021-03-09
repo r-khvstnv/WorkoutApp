@@ -9,7 +9,9 @@ import androidx.core.content.ContextCompat
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.rssll971.fitnessassistantapp.databinding.FragmentStatisticBinding
+import kotlin.collections.ArrayList
 
 class StatisticFragment : Fragment() {
     private var _binding: FragmentStatisticBinding? = null
@@ -30,10 +32,7 @@ class StatisticFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        /**
-         * Line Chart
-         */
+        /** Line Chart */
         prepareCharts()
     }
 
@@ -50,7 +49,6 @@ class StatisticFragment : Fragment() {
         else{
             binding.lineChartWeight.visibility = View.INVISIBLE
         }
-
         //average duration line chart
         val workoutStatisticDataBaseHandler = WorkoutStatisticDataBaseHandler(requireContext())
         val statisticList = workoutStatisticDataBaseHandler.viewStatisticData()
@@ -61,7 +59,6 @@ class StatisticFragment : Fragment() {
         else{
             binding.lineChartWorkoutDuration.visibility = View.INVISIBLE
         }
-
     }
 
     /**
@@ -76,7 +73,6 @@ class StatisticFragment : Fragment() {
             }
             counter--
         }
-
         //customize data set
         val lineDataSetWeight = LineDataSet(entriesWeight, getString(R.string.st_weight))
         lineDataSetWeight.mode = LineDataSet.Mode.CUBIC_BEZIER
@@ -84,7 +80,6 @@ class StatisticFragment : Fragment() {
         lineDataSetWeight.setDrawValues(true)
         lineDataSetWeight.valueTextColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
         lineDataSetWeight.valueTextSize = 14f
-
 
         lineDataSetWeight.setDrawCircles(true)
         lineDataSetWeight.setCircleColor(ContextCompat.getColor(requireContext(), R.color.myOrange))
@@ -111,57 +106,53 @@ class StatisticFragment : Fragment() {
         binding.lineChartWeight.axisLeft.setDrawGridLines(false);
         binding.lineChartWeight.axisRight.setDrawGridLines(false);
 
-
         binding.lineChartWeight.description.text = ""
-        binding.lineChartWeight.legend.isEnabled = true
+        binding.lineChartWeight.legend.isEnabled = false
         //binding.lineChart.description.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        binding.lineChartWeight.legend.textColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
-        binding.lineChartWeight.legend.textSize = 18f
+        //binding.lineChartWeight.legend.textColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
+        //binding.lineChartWeight.legend.textSize = 18f
         //binding.lineChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.myOrange)
         //binding.lineChart.xAxis.textColor = ContextCompat.getColor(this, R.color.myOrange)
         binding.lineChartWeight.setNoDataText("")
     }
 
     /**
-     * Next method show weight Line Chart
+     * Next method show duration Line Chart
      */
-
     private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModelClass>){
         val entriesDuration = ArrayList<Entry>()
         var counter = statisticList.size
         for (i in 0 until statisticList.size){
             if (counter <= 10){
-                val totalDuration = statisticList[i].getExerciseDuration() + statisticList[i].getRestDuration()
+                val totalDuration = (statisticList[i].getExerciseDuration() + statisticList[i].getRestDuration())
                 entriesDuration.add(Entry(i.toFloat(), totalDuration.toFloat()))
             }
             counter--
         }
-
         //customize data set
-        val lineDataSetWeight = LineDataSet(entriesDuration, getString(R.string.st_workout_duration))
-        lineDataSetWeight.mode = LineDataSet.Mode.CUBIC_BEZIER
+        val ldsDuration = LineDataSet(entriesDuration, getString(R.string.st_workout_duration))
+        ldsDuration.mode = LineDataSet.Mode.CUBIC_BEZIER
         //values on peaks
-        lineDataSetWeight.setDrawValues(true)
-        lineDataSetWeight.valueTextColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
-        lineDataSetWeight.valueTextSize = 14f
+        ldsDuration.setDrawValues(true)
+        ldsDuration.valueTextColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
+        ldsDuration.valueTextSize = 14f
+        ldsDuration.valueFormatter = MyValueFormatterToTime()
 
-
-        lineDataSetWeight.setDrawCircles(true)
-        lineDataSetWeight.setCircleColor(ContextCompat.getColor(requireContext(), R.color.myOrange))
+        ldsDuration.setDrawCircles(true)
+        ldsDuration.setCircleColor(ContextCompat.getColor(requireContext(), R.color.myOrange))
         //line color and width
-        lineDataSetWeight.color = ContextCompat.getColor(requireContext(), R.color.myOrange)
-        lineDataSetWeight.lineWidth = 3f
+        ldsDuration.color = ContextCompat.getColor(requireContext(), R.color.myOrange)
+        ldsDuration.lineWidth = 3f
         //color under line
-        lineDataSetWeight.setDrawFilled(true)
-        lineDataSetWeight.fillColor = ContextCompat.getColor(requireContext(), R.color.myGreenBlue)
+        ldsDuration.setDrawFilled(true)
+        ldsDuration.fillColor = ContextCompat.getColor(requireContext(), R.color.myGreenBlue)
 
         //add data to chart
-        binding.lineChartWorkoutDuration.data = LineData(lineDataSetWeight)
+        binding.lineChartWorkoutDuration.data = LineData(ldsDuration)
 
         //make untouchable
         binding.lineChartWorkoutDuration.setTouchEnabled(false)
         binding.lineChartWorkoutDuration.isDragEnabled = true
-
 
         //hide all axis labels and grid background
         binding.lineChartWorkoutDuration.xAxis.isEnabled = false
@@ -171,13 +162,19 @@ class StatisticFragment : Fragment() {
         binding.lineChartWorkoutDuration.axisLeft.setDrawGridLines(false);
         binding.lineChartWorkoutDuration.axisRight.setDrawGridLines(false);
 
-
         binding.lineChartWorkoutDuration.description.text = ""
-        binding.lineChartWorkoutDuration.legend.isEnabled = true
-        binding.lineChartWorkoutDuration.legend.textColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
-        binding.lineChartWorkoutDuration.legend.textSize = 18f
+        binding.lineChartWorkoutDuration.legend.isEnabled = false
+        //binding.lineChartWorkoutDuration.legend.textColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
+        //binding.lineChartWorkoutDuration.legend.textSize = 18f
         binding.lineChartWorkoutDuration.setNoDataText("")
     }
+}
 
-
+class MyValueFormatterToTime : ValueFormatter(){
+    override fun getPointLabel(entry: Entry?): String {
+        val duration = entry!!.y.toInt()
+        val minutes = duration / 60
+        val seconds = duration.rem(60)
+        return String.format("%02d:%02d", minutes, seconds)
+    }
 }

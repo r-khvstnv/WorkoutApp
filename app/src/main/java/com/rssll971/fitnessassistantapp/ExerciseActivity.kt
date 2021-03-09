@@ -9,9 +9,6 @@ import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.os.ConfigurationCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdListener
@@ -19,7 +16,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.databinding.ActivityExerciseBinding
-import java.io.File
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -107,7 +104,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         textToSpeech = TextToSpeech(this, this)
 
         //start rest Timer
-        setupRelaxationProgress()
+        setupRelaxationTimer()
 
         //setup rv
         setupExerciseRecyclerView()
@@ -139,7 +136,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     /**
      * Next fun responsible for timer before starting exercise
      */
-    private fun setRelaxationProgress(){
+    private fun setRelaxationTimer(){
         var timeInMillis: Int = relaxationTimerProgress
         binding.pbTimerProgressRest.max = relaxationTimerProgress
 
@@ -161,7 +158,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     /**
      * Next fun reset timer (RestProgress) and calls it
      */
-    private fun setupRelaxationProgress(){
+    private fun setupRelaxationTimer(){
         binding.llExerciseScene.visibility = View.GONE
         binding.llRestScene.visibility = View.VISIBLE
 
@@ -177,7 +174,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             binding.rvExerciseStatus.smoothScrollToPosition(currentExerciseIndex)
         }
 
-        setRelaxationProgress()
+        setRelaxationTimer()
     }
 
     /**
@@ -217,9 +214,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 exerciseAdapter.notifyDataSetChanged()
 
                 if (currentExerciseIndex < exerciseList.size){
-                setupRelaxationProgress()
+                setupRelaxationTimer()
                 }else{
+                    addStatisticData()
                     showFinishActivity()
+                    finish()
                 }
 
             }
@@ -331,7 +330,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             emcList.addAll(ExerciseModelClass.defaultEngExerciseList())
         }
 
-        var formedExerciseList = ArrayList<ExerciseModelClass>()
+        val formedExerciseList = ArrayList<ExerciseModelClass>()
         val userSelectedExercises = intent.getStringArrayListExtra("FormedList")
         for (i in 0 until userSelectedExercises!!.size){
             for (j in 0 until emcList.size){
@@ -343,4 +342,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         return formedExerciseList
     }
+
+    /**
+     * Next method add statistic data in database
+     */
+    private fun addStatisticData(){
+        val dataBaseHandler = WorkoutStatisticDataBaseHandler(this)
+        val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        val statisticModel = WorkoutStatisticModelClass(0, currentDate, relaxationTimerProgress,
+            exerciseTimerProgress, exerciseList.size)
+        dataBaseHandler.addStatisticData(statisticModel)
+    }
+
 }

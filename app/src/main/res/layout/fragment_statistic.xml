@@ -1,58 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/myWhite"
     android:orientation="vertical"
     tools:context=".StatisticFragment">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
+        android:id="@+id/ll_weight"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="@dimen/dim_charts_margin_horizontal"
+        android:layout_marginVertical="@dimen/dim_charts_margin_vertical"
+        android:background="@drawable/background_rectangle_white"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ll_average_duration"
         >
-        <LinearLayout
-            android:id="@+id/ll_weight"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:text="@string/st_weight"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            android:textColor="@color/myDarkBlue"
+            />
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginHorizontal="@dimen/dim_charts_margin_horizontal"
-            android:layout_marginVertical="@dimen/dim_charts_margin_vertical"
-            android:background="@drawable/background_rectangle_white"
-            android:elevation="5dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/st_no_data"
+                android:textSize="24sp"
+                android:textColor="@color/myDarkBlue"
+                />
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/lineChart_weight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                />
-        </LinearLayout>
+                android:background="@color/myWhite"
+                android:visibility="invisible"
+                android:layout_margin="5dp" />
+        </FrameLayout>
+    </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_average_duration"
+    <LinearLayout
+        android:id="@+id/ll_average_duration"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginHorizontal="@dimen/dim_charts_margin_horizontal"
+        android:layout_marginVertical="@dimen/dim_charts_margin_vertical"
+        android:background="@drawable/background_rectangle_white"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_weight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:text="@string/st_workout_duration"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            android:textColor="@color/myDarkBlue"
+            />
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginHorizontal="@dimen/dim_charts_margin_horizontal"
-            android:layout_marginVertical="@dimen/dim_charts_margin_vertical"
-            android:background="@drawable/background_rectangle_white"
-            android:elevation="5dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_weight"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/st_no_data"
+                android:textSize="24sp"
+                android:textColor="@color/myDarkBlue"
+                />
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/lineChart_workout_duration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+                android:background="@color/myWhite"
+                android:visibility="invisible"
+                android:layout_margin="5dp" />
+        </FrameLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

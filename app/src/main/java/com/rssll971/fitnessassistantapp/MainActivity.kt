@@ -99,27 +99,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null){
             binding.bnvMenu.selectedItemId = R.id.m_start
         }
-
-
-
-        /*
-        for line chart
-
-        bmiDataBaseHandler = BmiDataBaseHandler(this)
-        bmiList = bmiDataBaseHandler.viewBmiResult()
-        if (bmiList.size > 0){
-            binding.tvPDataMessage.visibility = View.INVISIBLE
-            binding.tvWeightLabel.visibility = View.VISIBLE
-            binding.lineChart.visibility = View.VISIBLE
-            setupLineChart()
-        }
-        else{
-            binding.tvPDataMessage.visibility = View.VISIBLE
-            binding.tvWeightLabel.visibility = View.INVISIBLE
-            binding.lineChart.visibility = View.INVISIBLE
-        }
-
-         */
     }
 
     /**
@@ -178,66 +157,4 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fl_container, fragment)
             commit()
     }
-
-    /*
-
-    /**
-     * Next method show Line Chart
-     */
-    private fun setupLineChart(){
-        val entriesWeight = ArrayList<Entry>()
-        var counter = bmiList.size
-        for (i in 0 until bmiList.size){
-            if (counter <= 10){
-                entriesWeight.add(Entry(i.toFloat(), bmiList[i].getWeight()))
-            }
-            counter--
-        }
-
-        //customize data set
-        val lineDataSetWeight = LineDataSet(entriesWeight, getString(R.string.st_weight))
-        lineDataSetWeight.mode = LineDataSet.Mode.CUBIC_BEZIER
-        //values on peaks
-        lineDataSetWeight.setDrawValues(true)
-        lineDataSetWeight.valueTextColor = ContextCompat.getColor(this, R.color.myDarkBlue)
-        lineDataSetWeight.valueTextSize = 14f
-
-
-        lineDataSetWeight.setDrawCircles(true)
-        lineDataSetWeight.setCircleColor(ContextCompat.getColor(this, R.color.myOrange))
-        //line color and width
-        lineDataSetWeight.color = ContextCompat.getColor(this, R.color.myOrange)
-        lineDataSetWeight.lineWidth = 3f
-        //color under line
-        lineDataSetWeight.setDrawFilled(true)
-        lineDataSetWeight.fillColor = ContextCompat.getColor(this, R.color.myGreenBlue)
-
-        //add data to chart
-        binding.lineChart.data = LineData(lineDataSetWeight)
-
-        //make untouchable
-        binding.lineChart.setTouchEnabled(false)
-        binding.lineChart.isDragEnabled = true
-
-        //binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM // show dates at the bottom
-        //hide all axis labels and grid background
-        binding.lineChart.xAxis.isEnabled = false
-        binding.lineChart.axisRight.isEnabled = false
-        binding.lineChart.axisLeft.isEnabled = false
-        binding.lineChart.xAxis.setDrawGridLines(false);
-        binding.lineChart.axisLeft.setDrawGridLines(false);
-        binding.lineChart.axisRight.setDrawGridLines(false);
-
-
-        binding.lineChart.description.text = ""
-        binding.lineChart.legend.isEnabled = false
-        //binding.lineChart.description.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        //binding.lineChart.legend.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        //binding.lineChart.axisLeft.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        //binding.lineChart.xAxis.textColor = ContextCompat.getColor(this, R.color.myOrange)
-        binding.lineChart.setNoDataText("")
-
-    }
-     */
-
 }

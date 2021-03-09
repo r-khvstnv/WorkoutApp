@@ -30,7 +30,6 @@
     <string name="st_back">Назад</string>
     <string name="st_add_data">Добавьте недостающие данные</string>
     <string name="st_wrong_data">Неправильный тип данных</string>
-    <string name="st_access">Доступ к хранилищу отсутствует. Пожалуйста, предоставьте разрешение</string>
     <string name="st_added_to_history">Добавлено в Историю</string>
     <string name="st_underweight">Недостаточно веса</string>
     <string name="st_normal">В норме</string>
@@ -48,4 +47,6 @@
     <string name="st_cancel">Отмена</string>
     <string name="st_play_market">Play Market</string>
     <string name="st_workout_duration">Длительность тренировки</string>
+    <string name="st_permission_needed_to_be_granted">Доступ к хранилищу отсутствует. Пожалуйста, предоставьте разрешение</string>
+    <string name="st_required_app_need_to_install">Приложение необходимое для данной функции отсутствует. Пожалуйста установите приложение</string>
 </resources>
