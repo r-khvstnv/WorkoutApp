@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.activities
 
 import android.content.Context
 import android.os.Build
@@ -8,15 +8,13 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.*
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
+import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +24,8 @@ class MainActivity : AppCompatActivity() {
     //interstitial ad
     private var mInterstitialAd: InterstitialAd? = null
 
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    //todo
+    //private lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
     /**
@@ -64,8 +63,8 @@ class MainActivity : AppCompatActivity() {
         /** Next line hides redundant space under nav menu, which was created by itself*/
         binding.bnvMenu.setOnApplyWindowInsetsListener(null)
 
-        /** Firebase */
-        firebaseAnalytics = Firebase.analytics
+        /** Firebase todo*/
+        //firebaseAnalytics = Firebase.analytics
 
 
 

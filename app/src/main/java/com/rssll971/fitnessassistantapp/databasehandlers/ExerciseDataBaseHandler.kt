@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.databasehandlers
 
 import android.content.ContentValues
 import android.content.Context
@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
 
 class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
@@ -65,7 +66,8 @@ class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATA
         contentValues.put(KEY_IMAGE_PATH, exerciseModel.getImagePath())
         contentValues.put(KEY_DESCRIPTION, exerciseModel.getDescription())
 
-        val result = db.update(TABLE_EXERCISES, contentValues,
+        val result = db.update(
+            TABLE_EXERCISES, contentValues,
             "$KEY_ID = ${exerciseModel.getId()}", null)
         db.close()
         return result

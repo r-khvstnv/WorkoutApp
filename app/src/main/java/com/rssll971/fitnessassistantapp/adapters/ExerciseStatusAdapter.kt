@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.R
 
 /**
  * Class responsible for whole recycle adapter.
@@ -43,7 +45,9 @@ class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModelClass>
          * Change background and text colors, when exercise was ended
          */
         if (layoutModel.getIsFinished()){
-            holder.llItem!!.background = ContextCompat.getDrawable(context, R.drawable.circle_green_blue_color)
+            holder.llItem!!.background = ContextCompat.getDrawable(context,
+                R.drawable.circle_green_blue_color
+            )
             holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))
         }
     }

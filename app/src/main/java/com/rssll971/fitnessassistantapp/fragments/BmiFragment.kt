@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rssll971.fitnessassistantapp.databasehandlers.BmiDataBaseHandler
+import com.rssll971.fitnessassistantapp.modelclasses.BmiHistoryModelClass
+import com.rssll971.fitnessassistantapp.adapters.BmiResultStatusAdapter
+import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.databinding.FragmentBmiBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -186,7 +190,8 @@ class BmiFragment : Fragment() {
         val dataBaseHandler = BmiDataBaseHandler(requireContext())
         //note: system automatically change id
         val status = dataBaseHandler.addCurrentBmiResult(
-            BmiHistoryModelClass(0, currentDate, weight, height, bmi))
+            BmiHistoryModelClass(0, currentDate, weight, height, bmi)
+        )
         if (status > -1){
             setupRecyclerView()
             Toast.makeText(requireContext(), getString(R.string.st_added_to_history), Toast.LENGTH_LONG).show()

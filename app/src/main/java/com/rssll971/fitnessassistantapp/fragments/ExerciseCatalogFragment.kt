@@ -1,12 +1,10 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.fragments
 
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
-import android.content.Intent
+import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -17,6 +15,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,11 +29,15 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
+import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.adapters.UserExercisesAdapter
+import com.rssll971.fitnessassistantapp.activities.MainActivity
 import com.rssll971.fitnessassistantapp.databinding.FragmentExerciseCatalogBinding
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
+import java.io.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ExerciseCatalogFragment : Fragment() {
@@ -54,6 +57,7 @@ class ExerciseCatalogFragment : Fragment() {
      */
     companion object{
          const val GALLERY_CODE = 101
+        private const val IMAGE_DIRECTORY = "FAImages"
     }
 
 
@@ -100,8 +104,10 @@ class ExerciseCatalogFragment : Fragment() {
         //get database handler
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         //note: system automatically change id
-        val status = dataBaseHandler.addUsersExercise(ExerciseModelClass(0, exerciseModel.getName(),
-            exerciseModel.getImagePath(), exerciseModel.getDescription(), false))
+        val status = dataBaseHandler.addUsersExercise(
+            ExerciseModelClass(0, exerciseModel.getName(),
+            exerciseModel.getImagePath(), exerciseModel.getDescription(), false)
+        )
 
         if (status > -1){
             setupRecyclerView()
@@ -209,7 +215,8 @@ class ExerciseCatalogFragment : Fragment() {
                 //for new exercise just put all in method
                 if (isNewExercise){
                     addUserExerciseRecord(
-                        ExerciseModelClass(0, name, imagePath, description, false))
+                        ExerciseModelClass(0, name, imagePath, description, false)
+                    )
                 }
                 else{//for edit exercise, firstly check is new image available. Otherwise, put previous
                     if(imagePath == getString(R.string.st_empty_path)){
@@ -218,7 +225,8 @@ class ExerciseCatalogFragment : Fragment() {
 
 
                     editUserExerciseRecord(
-                        ExerciseModelClass(exerciseModel.getId(), name, imagePath, description, false))
+                        ExerciseModelClass(exerciseModel.getId(), name, imagePath, description, false)
+                    )
                 }
                 dialog.dismiss()
             }
@@ -366,7 +374,7 @@ class ExerciseCatalogFragment : Fragment() {
             ExifInterface.ORIENTATION_ROTATE_90 -> return rotateImage(bitmap, 90)
             ExifInterface.ORIENTATION_ROTATE_180 -> return rotateImage(bitmap, 180)
             ExifInterface.ORIENTATION_ROTATE_270 -> return rotateImage(bitmap, 270)
-            else -> return bitmap
+            else -> return rotateImage(bitmap, 0)
         }
     }
     /**
@@ -374,7 +382,20 @@ class ExerciseCatalogFragment : Fragment() {
      */
     private fun rotateImage(bitmap: Bitmap, degree: Int): Bitmap {
         val matrix = Matrix()
+        val scaleFactor: Float
+        val requiredSize = 1280f
+        /** Make image smaller, due to Cursor in SQLite has only 2MB capability
+         *  and Improve performance
+         * */
+        scaleFactor = if (bitmap.width > bitmap.height){
+            (requiredSize / bitmap.width)
+        } else{
+            (requiredSize / bitmap.height)
+        }
+
         matrix.postRotate(degree.toFloat())
+        matrix.postScale(scaleFactor, scaleFactor)
+
         val rotatedImage = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
         bitmap.recycle()
         return rotatedImage
@@ -385,27 +406,23 @@ class ExerciseCatalogFragment : Fragment() {
      */
     private fun saveImage(bitmap: Bitmap): String{
         var result = ""
+
+        val wrapper = ContextWrapper(activity!!.applicationContext)
+        //set image location in internal storage
+        var file = wrapper.getDir(IMAGE_DIRECTORY, Context.MODE_PRIVATE)
+        //todo change name of file
+        //store in jpeg format
+        file = File(file, "${UUID.randomUUID()}.jpeg")
+        result = file.absolutePath
+        Log.i("Size", "${file.length() / 1024}")
         try {
-            val bytes = ByteArrayOutputStream()
-            //compress our bitmap to JPEG using stream of val bytes
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-            //make it as single file
-            //external directory -> as absolute file -> separate ->
-            val myFile = File(activity!!.externalCacheDir!!.absoluteFile.toString()
-                    + File.separator + "UsersImage" + System.currentTimeMillis()/1000 + ".jpeg")
-            //stream of our file
-            val myFileOS = FileOutputStream(myFile)
-            //start writing
-            myFileOS.write(bytes.toByteArray())
-            //close os write operation
-            myFileOS.close()
-            //store the result to path
-            result = myFile.absolutePath
-        }
-        catch (e: Exception){
+            val stream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            stream.flush()
+            stream.close()
+        }catch (e: IOException){
             e.printStackTrace()
         }
-
         return result
     }
 

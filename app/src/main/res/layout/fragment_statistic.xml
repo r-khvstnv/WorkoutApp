@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/myWhite"
     android:orientation="vertical"
-    tools:context=".StatisticFragment">
+    tools:context=".fragments.StatisticFragment">
 
     <LinearLayout
         android:id="@+id/ll_weight"

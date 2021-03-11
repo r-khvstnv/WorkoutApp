@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.rssll971.fitnessassistantapp.modelclasses.BmiHistoryModelClass
+import com.rssll971.fitnessassistantapp.R
 
 /**
  * Next class show all information of users bmi data rom history

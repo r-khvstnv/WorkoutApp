@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/myWhite"
-    tools:context=".InfoFragment">
+    tools:context=".fragments.InfoFragment">
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_width="80dp"

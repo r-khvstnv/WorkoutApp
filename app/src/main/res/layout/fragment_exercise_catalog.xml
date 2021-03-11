@@ -7,7 +7,7 @@
     android:background="@color/myWhite"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ExerciseCatalogFragment">
+    tools:context=".fragments.ExerciseCatalogFragment">
     
     <LinearLayout
         android:id="@+id/ll_add_activities"

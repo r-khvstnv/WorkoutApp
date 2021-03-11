@@ -7,7 +7,7 @@
     android:background="@color/myWhite"
     android:orientation="vertical"
     android:id="@+id/sv_bmi"
-    tools:context=".BmiFragment">
+    tools:context=".fragments.BmiFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

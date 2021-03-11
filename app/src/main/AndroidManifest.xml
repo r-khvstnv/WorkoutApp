@@ -15,13 +15,13 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.MyNoActionBar">
-        <activity android:name="com.rssll971.fitnessassistantapp.FinishActivity"
+        <activity android:name="com.rssll971.fitnessassistantapp.activities.FinishActivity"
             android:screenOrientation="locked"
             />
-        <activity android:name="com.rssll971.fitnessassistantapp.ExerciseActivity"
+        <activity android:name="com.rssll971.fitnessassistantapp.activities.ExerciseActivity"
             android:screenOrientation="locked"
             />
-        <activity android:name="com.rssll971.fitnessassistantapp.MainActivity"
+        <activity android:name="com.rssll971.fitnessassistantapp.activities.MainActivity"
             android:screenOrientation="locked"
             >
             <intent-filter>

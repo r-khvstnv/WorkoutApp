@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.adapters
 
 import android.content.Context
 import android.util.TypedValue
@@ -10,6 +10,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.fragments.ExerciseCatalogFragment
+import com.rssll971.fitnessassistantapp.fragments.StartWorkoutFragment
 
 /**
  * Next class show all users exercises

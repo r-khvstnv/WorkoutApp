@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.modelclasses
 
 class WorkoutStatisticModelClass(private val _id: Int,
                                  private val _date: String,

@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.fragments
 
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
@@ -13,6 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
+import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.adapters.UserExercisesAdapter
+import com.rssll971.fitnessassistantapp.activities.ExerciseActivity
 import com.rssll971.fitnessassistantapp.databinding.FragmentStartWorkoutBinding
 import java.util.*
 import kotlin.collections.ArrayList

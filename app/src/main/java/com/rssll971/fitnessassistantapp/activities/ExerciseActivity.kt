@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.activities
 
 import android.content.Intent
 import android.os.Build
@@ -15,7 +15,13 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.rssll971.fitnessassistantapp.*
+import com.rssll971.fitnessassistantapp.adapters.ExerciseStatusAdapter
+import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
+import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
 import com.rssll971.fitnessassistantapp.databinding.ActivityExerciseBinding
+import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

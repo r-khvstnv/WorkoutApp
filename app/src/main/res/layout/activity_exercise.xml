@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/myWhite"
     android:orientation="vertical"
-    tools:context=".ExerciseActivity">
+    tools:context=".activities.ExerciseActivity">
 
     <!-- Rest activity -->
     <LinearLayout

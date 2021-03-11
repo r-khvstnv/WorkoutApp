@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,12 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.rssll971.fitnessassistantapp.*
+import com.rssll971.fitnessassistantapp.databasehandlers.BmiDataBaseHandler
+import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
 import com.rssll971.fitnessassistantapp.databinding.FragmentStatisticBinding
+import com.rssll971.fitnessassistantapp.modelclasses.BmiHistoryModelClass
+import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
 import kotlin.collections.ArrayList
 
 class StatisticFragment : Fragment() {
@@ -78,7 +83,9 @@ class StatisticFragment : Fragment() {
         lineDataSetWeight.mode = LineDataSet.Mode.CUBIC_BEZIER
         //values on peaks
         lineDataSetWeight.setDrawValues(true)
-        lineDataSetWeight.valueTextColor = ContextCompat.getColor(requireContext(), R.color.myDarkBlue)
+        lineDataSetWeight.valueTextColor = ContextCompat.getColor(requireContext(),
+            R.color.myDarkBlue
+        )
         lineDataSetWeight.valueTextSize = 14f
 
         lineDataSetWeight.setDrawCircles(true)

@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.activities
 
 import android.content.Intent
 import android.os.Build
@@ -13,6 +13,10 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.rssll971.fitnessassistantapp.fragments.MyValueFormatterToTime
+import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
+import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
 import com.rssll971.fitnessassistantapp.databinding.ActivityFinishBinding
 
 class FinishActivity : AppCompatActivity() {
