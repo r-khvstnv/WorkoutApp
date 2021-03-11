@@ -20,4 +20,5 @@ class WorkoutStatisticModelClass(private val _id: Int,
     fun getExerciseAmount(): Int{
         return _exerciseAmount
     }
+
 }

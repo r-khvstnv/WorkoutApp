@@ -23,6 +23,7 @@ class FinishActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFinishBinding
     private lateinit var adViewBannerFinish: AdView
 
+
     /**
      * Fullscreen Mode
      */

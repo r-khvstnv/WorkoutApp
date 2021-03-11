@@ -15,6 +15,7 @@ import com.rssll971.fitnessassistantapp.R
 class BmiResultStatusAdapter(val context: Context,
                              private val bmiHistoryList: ArrayList<BmiHistoryModelClass>) :
     RecyclerView.Adapter<BmiResultStatusAdapter.MyViewHolder>() {
+
     /**
      * Class with item components
      */

@@ -22,6 +22,7 @@ class BmiFragment : Fragment() {
     private var _binding: FragmentBmiBinding? = null
     private val binding get() = _binding!!
 
+
     //metric system
     private var isMetricSystem: Boolean = true
     //current date

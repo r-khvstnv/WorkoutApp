@@ -27,6 +27,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+
     //VARIABLES
     //binding
     private lateinit var binding: ActivityExerciseBinding

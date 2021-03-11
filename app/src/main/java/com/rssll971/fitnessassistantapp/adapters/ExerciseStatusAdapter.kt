@@ -18,6 +18,7 @@ import com.rssll971.fitnessassistantapp.R
 class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModelClass>, val context: Context) :
     RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
 
+
     /** Class with custom item*/
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var llItem: LinearLayout? = null

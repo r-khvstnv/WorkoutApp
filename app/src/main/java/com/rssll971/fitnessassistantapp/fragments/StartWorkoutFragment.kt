@@ -23,6 +23,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
+
 class StartWorkoutFragment : Fragment() {
     private var _binding: FragmentStartWorkoutBinding? = null
     private val binding get() = _binding!!

@@ -97,6 +97,7 @@ class ExerciseCatalogFragment : Fragment() {
         }
     }
 
+
     /**
      * Next method add new user exercise in database
      */

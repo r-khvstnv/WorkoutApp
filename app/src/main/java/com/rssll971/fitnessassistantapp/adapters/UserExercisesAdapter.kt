@@ -23,6 +23,7 @@ class UserExercisesAdapter(val context: Context,
     RecyclerView.Adapter<UserExercisesAdapter.MyViewHolder>() {
     private var selectedItemPositionList = ArrayList<Int>()
     private val fragment: Fragment = currentFragment
+
     /**
      * Class with item components
      */

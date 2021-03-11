@@ -14,6 +14,7 @@ class ExerciseModelClass (private var _id: Int,
         return _id
     }
 
+
     /** Name */
     fun setName(name: String){
         _name = name

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
 
 class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
     companion object{
         private const val DATABASE_NAME = "UserExercises"
         private const val DATABASE_VERSION = 1

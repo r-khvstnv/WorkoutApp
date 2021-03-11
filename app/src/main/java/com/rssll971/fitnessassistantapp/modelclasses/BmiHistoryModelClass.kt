@@ -17,4 +17,5 @@ class BmiHistoryModelClass(private var _id: Int,
     fun getBmiIndex(): Float{
         return _bmiIndex
     }
+
 }
