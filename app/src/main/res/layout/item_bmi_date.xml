@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:background="@color/myWhite"
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="10dp"
-    android:paddingVertical="10dp"
-    android:elevation="5dp">
+    android:background="@color/myWhite"
+    android:elevation="5dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp">
+
     <TextView
         android:id="@+id/tv_item_bmi_date"
         android:layout_width="0dp"
-        android:layout_weight="2"
         android:layout_height="wrap_content"
-        tools:text="01/01/1234"
+        android:layout_weight="2"
         android:textAlignment="center"
         android:textColor="@color/myGreenBlue"
         android:textSize="@dimen/dim_item_bmi_date_text_size"
-        />
+        tools:text="01/01/1234" />
+
     <TextView
         android:id="@+id/tv_item_bmi_weight"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        tools:text="105"
+        android:layout_weight="1"
         android:textAlignment="center"
         android:textColor="@color/myGreenBlue"
         android:textSize="@dimen/dim_item_bmi_date_text_size"
-        />
+        tools:text="105" />
+
     <TextView
         android:id="@+id/tv_item_bmi_height"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        tools:text="205"
+        android:layout_weight="1"
         android:textAlignment="center"
         android:textColor="@color/myGreenBlue"
         android:textSize="@dimen/dim_item_bmi_date_text_size"
-        />
+        tools:text="205" />
+
     <TextView
         android:id="@+id/tv_item_bmi_bmiIndex"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
-        tools:text="25"
+        android:layout_weight="1"
         android:textAlignment="center"
         android:textColor="@color/myGreenBlue"
         android:textSize="@dimen/dim_item_bmi_date_text_size"
-        />
+        tools:text="25" />
 </LinearLayout>

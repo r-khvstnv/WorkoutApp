@@ -47,7 +47,7 @@ class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModelClass>
          */
         if (layoutModel.getIsFinished()){
             holder.llItem!!.background = ContextCompat.getDrawable(context,
-                R.drawable.circle_green_blue_color
+                R.drawable.circle_green_blue
             )
             holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))
         }
