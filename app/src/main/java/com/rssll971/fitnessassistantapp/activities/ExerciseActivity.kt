@@ -62,6 +62,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
         } else {
+            @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     // Set the content to appear under the system bars so that the
                     // content doesn't resize when the system bars hide and show.
@@ -175,7 +176,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         //show next exercise title
-        binding.tvUpcomingExercise.text = exerciseList[currentExerciseIndex].getName()
+        binding.tvUpcomingExercise.text = exerciseList[currentExerciseIndex].name
         //smooth scroll to next exercise status
         if (currentExerciseIndex < exerciseList.size){
             binding.rvExerciseStatus.smoothScrollToPosition(currentExerciseIndex)
@@ -207,7 +208,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
             override fun onFinish() {
                 //mark as finished
-                exerciseList[currentExerciseIndex].setIsFinished(true)
+                exerciseList[currentExerciseIndex].isFinished = true
 
                 //increment current exercise position
                 currentExerciseIndex++
@@ -253,11 +254,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
      * Next fun load exercise to scene
      */
     private fun loadExercise(exerciseIndex: Int){
-        binding.tvName.text = exerciseList[exerciseIndex].getName()
-        binding.tvDescription.text = exerciseList[exerciseIndex].getDescription()
+        binding.tvName.text = exerciseList[exerciseIndex].name
+        binding.tvDescription.text = exerciseList[exerciseIndex].description
 
         //load image
-        if (exerciseList[exerciseIndex].getImagePath() == getString(R.string.st_empty_path)){
+        if (exerciseList[exerciseIndex].imagePath == getString(R.string.st_empty_path)){
             binding.ivUserExerciseImage.visibility = View.GONE
             binding.tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
             //binding.tvDescription.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -267,7 +268,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             binding.tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
             //binding.tvDescription.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150f, resources.displayMetrics).toInt()
             //targetSize
-            Glide.with(this).load(exerciseList[exerciseIndex].getImagePath()).fitCenter().into(binding.ivUserExerciseImage)
+            Glide.with(this).load(exerciseList[exerciseIndex].imagePath).fitCenter().into(binding.ivUserExerciseImage)
         }
 
 
@@ -341,7 +342,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val userSelectedExercises = intent.getStringArrayListExtra("FormedList")
         for (i in 0 until userSelectedExercises!!.size){
             for (j in 0 until emcList.size){
-                if (userSelectedExercises[i] == emcList[j].getName()){
+                if (userSelectedExercises[i] == emcList[j].name){
                     formedExerciseList.add(emcList[j])
                 }
             }

@@ -1,6 +1,7 @@
 package com.rssll971.fitnessassistantapp.fragments
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -39,7 +40,7 @@ import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+@SuppressLint("UseRequireInsteadOfGet")
 class ExerciseCatalogFragment : Fragment() {
     private var _binding: FragmentExerciseCatalogBinding? = null
     // This property is only valid between onCreateView and
@@ -65,7 +66,7 @@ class ExerciseCatalogFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentExerciseCatalogBinding.inflate(inflater, container, false)
         return binding.root
@@ -106,8 +107,8 @@ class ExerciseCatalogFragment : Fragment() {
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         //note: system automatically change id
         val status = dataBaseHandler.addUsersExercise(
-            ExerciseModel(0, exerciseModel.getName(),
-            exerciseModel.getImagePath(), exerciseModel.getDescription(), false)
+            ExerciseModel(0, exerciseModel.name,
+            exerciseModel.imagePath, exerciseModel.description, false)
         )
 
         if (status > -1){
@@ -182,12 +183,12 @@ class ExerciseCatalogFragment : Fragment() {
 
         /** fill data when user edit existed exercise*/
         if (!isNewExercise){
-            etExerciseName.setText(exerciseModel.getName())
-            etDescription.setText(exerciseModel.getDescription())
+            etExerciseName.setText(exerciseModel.name)
+            etDescription.setText(exerciseModel.description)
             //image
-            if (exerciseModel.getImagePath() != getString(R.string.st_empty_path)){
+            if (exerciseModel.imagePath != getString(R.string.st_empty_path)){
                 //targetSize
-                Glide.with(this).load(exerciseModel.getImagePath()).fitCenter().into(ivExerciseImageView)
+                Glide.with(this).load(exerciseModel.imagePath).fitCenter().into(ivExerciseImageView)
             }
         }
 
@@ -221,12 +222,12 @@ class ExerciseCatalogFragment : Fragment() {
                 }
                 else{//for edit exercise, firstly check is new image available. Otherwise, put previous
                     if(imagePath == getString(R.string.st_empty_path)){
-                        imagePath = exerciseModel.getImagePath()
+                        imagePath = exerciseModel.imagePath
                     }
 
 
                     editUserExerciseRecord(
-                        ExerciseModel(exerciseModel.getId(), name, imagePath, description, false)
+                        ExerciseModel(exerciseModel.id, name, imagePath, description, false)
                     )
                 }
                 dialog.dismiss()
@@ -411,7 +412,6 @@ class ExerciseCatalogFragment : Fragment() {
         val wrapper = ContextWrapper(activity!!.applicationContext)
         //set image location in internal storage
         var file = wrapper.getDir(IMAGE_DIRECTORY, Context.MODE_PRIVATE)
-        //todo change name of file
         //store in jpeg format
         file = File(file, "${UUID.randomUUID()}.jpeg")
         result = file.absolutePath

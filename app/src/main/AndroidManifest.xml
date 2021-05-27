@@ -35,6 +35,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_id"/>
 
+
         <!-- For having successful access to storage
                exported -> Deny access to other applications
                grantUriPermissions -> Temporarily permission to session

@@ -1,5 +1,6 @@
 package com.rssll971.fitnessassistantapp.fragments
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
@@ -153,11 +154,11 @@ class StartWorkoutFragment : Fragment() {
      */
     fun prepareExerciseList(position: Int, isNeededAdd: Boolean){
         if (isNeededAdd){
-            formedExerciseList.add(emcList[position].getName())
+            formedExerciseList.add(emcList[position].name)
         }
         else{
             for (i in 0 until  formedExerciseList.size){
-                if (formedExerciseList[i] == emcList[position].getName()){
+                if (formedExerciseList[i] == emcList[position].name){
                     formedExerciseList.removeAt(i)
                     break
                 }
@@ -169,6 +170,7 @@ class StartWorkoutFragment : Fragment() {
     /**
      * Next method check availability of Text to Speech on device
      */
+    @SuppressLint("UseRequireInsteadOfGet")
     private fun checkTextToSpeechAvailability(){
         val packageName = "com.google.android.tts"
         val mPackageManager = activity!!.packageManager

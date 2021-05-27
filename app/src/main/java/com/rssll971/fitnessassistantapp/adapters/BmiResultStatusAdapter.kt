@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rssll971.fitnessassistantapp.models.BmiHistoryModel
 import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.databinding.ItemBmiDateBinding
 
 /**
  * Next class show all information of users bmi data rom history
@@ -20,16 +20,7 @@ class BmiResultStatusAdapter(val context: Context,
      * Class with item components
      */
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var tvItemDate: TextView? = null
-        var tvItemWeight: TextView? = null
-        var tvItemHeight: TextView? = null
-        var tvItemIndex: TextView? = null
-        init {
-            tvItemDate = itemView.findViewById(R.id.tv_item_bmi_date)
-            tvItemWeight = itemView.findViewById(R.id.tv_item_bmi_weight)
-            tvItemHeight = itemView.findViewById(R.id.tv_item_bmi_height)
-            tvItemIndex = itemView.findViewById(R.id.tv_item_bmi_bmiIndex)
-        }
+        val binding = ItemBmiDateBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -41,10 +32,13 @@ class BmiResultStatusAdapter(val context: Context,
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         //assign right data
         val item: BmiHistoryModel = bmiHistoryList[position]
-        holder.tvItemDate!!.text = item.getDate()
-        holder.tvItemWeight!!.text = String.format("%.2f", item.getWeight())
-        holder.tvItemHeight!!.text = String.format("%.2f", item.getHeight())
-        holder.tvItemIndex!!.text = String.format("%.2f", item.getBmiIndex())
+
+        with(holder){
+            binding.tvItemDate.text = item.date
+            binding.tvItemWeight.text = String.format("%.2f", item.weight)
+            binding.tvItemHeight.text = String.format("%.2f", item.height)
+            binding.tvItemBmiIndex.text = String.format("%.2f", item.bmiIndex)
+        }
     }
 
     override fun getItemCount(): Int {

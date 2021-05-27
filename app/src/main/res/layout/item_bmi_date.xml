@@ -12,7 +12,7 @@
     android:paddingVertical="10dp">
 
     <TextView
-        android:id="@+id/tv_item_bmi_date"
+        android:id="@+id/tv_item_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -22,7 +22,7 @@
         tools:text="01/01/1234" />
 
     <TextView
-        android:id="@+id/tv_item_bmi_weight"
+        android:id="@+id/tv_item_weight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -32,7 +32,7 @@
         tools:text="105" />
 
     <TextView
-        android:id="@+id/tv_item_bmi_height"
+        android:id="@+id/tv_item_height"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -42,7 +42,7 @@
         tools:text="205" />
 
     <TextView
-        android:id="@+id/tv_item_bmi_bmiIndex"
+        android:id="@+id/tv_item_bmi_index"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

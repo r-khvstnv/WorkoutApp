@@ -4,52 +4,51 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.databinding.ItemExerciseNumberBinding
 
 /**
  * Class responsible for whole recycle adapter.
  * Implement members of ExerciseList and current Context
  */
-class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModel>, val context: Context) :
-    RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
+class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModel>,
+                            private val context: Context)
+    : RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
 
 
     /** Class with custom item*/
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        var llItem: LinearLayout? = null
-        var tvItem: TextView? = null
-        init {
-            llItem = itemView.findViewById(R.id.ll_item)
-            tvItem = itemView.findViewById(R.id.tv_item_exercise_number)
-        }
+        val binding = ItemExerciseNumberBinding.bind(itemView)
     }
     /**
      * Add item with needed content in RecyclerView
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_exercise_number, parent, false))
+            LayoutInflater.from(context)
+                .inflate(R.layout.item_exercise_number, parent, false))
     }
     /**
      * Assign every item with right content
      */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         //assign data
-        val layoutModel: ExerciseModel = itemsList[position]
-        holder.tvItem!!.text = (position + 1).toString()
-        /**
-         * Change background and text colors, when exercise was ended
-         */
-        if (layoutModel.getIsFinished()){
-            holder.llItem!!.background = ContextCompat.getDrawable(context,
-                R.drawable.circle_green_blue
-            )
-            holder.tvItem!!.setTextColor(ContextCompat.getColor(context, R.color.myWhite))
+        val model: ExerciseModel = itemsList[position]
+        with(holder){
+            binding.tvItemExerciseNumber.text = (position + 1).toString()
+            /**
+             * Change background and text colors, when exercise was ended
+             */
+            if (model.isFinished){
+                itemView.background =
+                    ContextCompat.getDrawable(context, R.drawable.circle_green_blue)
+
+                binding.tvItemExerciseNumber
+                    .setTextColor(ContextCompat.getColor(context, R.color.myWhite))
+            }
         }
     }
     /**
@@ -58,5 +57,4 @@ class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModel>, val
     override fun getItemCount(): Int {
         return itemsList.size
     }
-
 }

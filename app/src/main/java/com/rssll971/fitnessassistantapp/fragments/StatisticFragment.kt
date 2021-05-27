@@ -75,7 +75,7 @@ class StatisticFragment : Fragment() {
         var counter = bmiList.size
         for (i in 0 until bmiList.size){
             if (counter <= 10){
-                entriesWeight.add(Entry(i.toFloat(), bmiList[i].getWeight()))
+                entriesWeight.add(Entry(i.toFloat(), bmiList[i].weight))
             }
             counter--
         }
@@ -132,8 +132,8 @@ class StatisticFragment : Fragment() {
         var counter = statisticList.size
         for (i in 0 until statisticList.size){
             if (counter <= 10){
-                val totalDuration = (statisticList[i].getExerciseDuration() +
-                        statisticList[i].getRestDuration()) * statisticList[i].getExerciseAmount()
+                val totalDuration = (statisticList[i].exerciseDuration +
+                        statisticList[i].restDuration) * statisticList[i].exerciseAmount
                 entriesDuration.add(Entry(i.toFloat(), totalDuration.toFloat()))
             }
             counter--

@@ -1,5 +1,6 @@
 package com.rssll971.fitnessassistantapp.models
 
+//todo add parcelable
 data class ExerciseModel (val id: Int,
                           val name: String,
                           val imagePath: String,

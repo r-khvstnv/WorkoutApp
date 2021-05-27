@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_item_activity_selectable"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="5dp"
@@ -11,7 +10,7 @@
     android:gravity="center">
 
     <TextView
-        android:id="@+id/tv_item_activity_selectable_name"
+        android:id="@+id/tv_item_exercise_name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -24,7 +23,7 @@
         tools:text="Activity" />
 
     <ImageView
-        android:id="@+id/iv_item_activities_edit"
+        android:id="@+id/iv_item_edit"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:scaleType="fitCenter"

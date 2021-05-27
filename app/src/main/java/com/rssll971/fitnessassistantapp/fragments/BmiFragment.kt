@@ -36,7 +36,7 @@ class BmiFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentBmiBinding.inflate(inflater, container, false)
         return binding.root
     }
