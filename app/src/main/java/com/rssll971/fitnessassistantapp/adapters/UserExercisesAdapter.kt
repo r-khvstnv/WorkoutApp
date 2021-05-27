@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.fragments.ExerciseCatalogFragment
 import com.rssll971.fitnessassistantapp.fragments.StartWorkoutFragment
@@ -19,7 +19,7 @@ import com.rssll971.fitnessassistantapp.fragments.StartWorkoutFragment
  * Next class show all users exercises
  */
 class UserExercisesAdapter(val context: Context,
-                           private val userExerciseList: ArrayList<ExerciseModelClass>, currentFragment: Fragment) :
+                           private val userExerciseList: ArrayList<ExerciseModel>, currentFragment: Fragment) :
     RecyclerView.Adapter<UserExercisesAdapter.MyViewHolder>() {
     private var selectedItemPositionList = ArrayList<Int>()
     private val fragment: Fragment = currentFragment
@@ -40,10 +40,10 @@ class UserExercisesAdapter(val context: Context,
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item: ExerciseModelClass = userExerciseList[position]
+        val item: ExerciseModel = userExerciseList[position]
         //val rowIndex = position
         //show exercise name
-        holder.tvUserExerciseName.text = item.getName()
+        holder.tvUserExerciseName.text = item.name
         /**
          * Next statement responsible for correct text size and show edit icon,
          * when user want to change own exercise

@@ -8,14 +8,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
 
 /**
  * Class responsible for whole recycle adapter.
  * Implement members of ExerciseList and current Context
  */
-class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModelClass>, val context: Context) :
+class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModel>, val context: Context) :
     RecyclerView.Adapter<ExerciseStatusAdapter.MyViewHolder>(){
 
 
@@ -40,7 +40,7 @@ class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModelClass>
      */
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         //assign data
-        val layoutModel: ExerciseModelClass = itemsList[position]
+        val layoutModel: ExerciseModel = itemsList[position]
         holder.tvItem!!.text = (position + 1).toString()
         /**
          * Change background and text colors, when exercise was ended

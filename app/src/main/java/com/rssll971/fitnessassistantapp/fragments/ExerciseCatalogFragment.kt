@@ -30,7 +30,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
-import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.adapters.UserExercisesAdapter
 import com.rssll971.fitnessassistantapp.activities.MainActivity
@@ -88,7 +88,7 @@ class ExerciseCatalogFragment : Fragment() {
         //add exercise
         binding.llAddActivities.setOnClickListener {
             showUserExerciseDialog(true,
-                ExerciseModelClass(0, "", getString(R.string.st_empty_path), "", false)
+                ExerciseModel(0, "", getString(R.string.st_empty_path), "", false)
             )
         }
         //delete all
@@ -101,12 +101,12 @@ class ExerciseCatalogFragment : Fragment() {
     /**
      * Next method add new user exercise in database
      */
-    private fun addUserExerciseRecord(exerciseModel: ExerciseModelClass){
+    private fun addUserExerciseRecord(exerciseModel: ExerciseModel){
         //get database handler
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         //note: system automatically change id
         val status = dataBaseHandler.addUsersExercise(
-            ExerciseModelClass(0, exerciseModel.getName(),
+            ExerciseModel(0, exerciseModel.getName(),
             exerciseModel.getImagePath(), exerciseModel.getDescription(), false)
         )
 
@@ -117,7 +117,7 @@ class ExerciseCatalogFragment : Fragment() {
     /**
      * Next method edit user exercise in database
      */
-    private fun editUserExerciseRecord(exerciseModel: ExerciseModelClass){
+    private fun editUserExerciseRecord(exerciseModel: ExerciseModel){
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         dataBaseHandler.updateUserExercise(exerciseModel)
         setupRecyclerView()
@@ -133,7 +133,7 @@ class ExerciseCatalogFragment : Fragment() {
     /**
      * Next method delete chosen user exercise in database
      */
-    private fun deleteUserExercises(exerciseModel: ExerciseModelClass){
+    private fun deleteUserExercises(exerciseModel: ExerciseModel){
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         dataBaseHandler.deleteUsersExercise(exerciseModel)
         setupRecyclerView()
@@ -151,7 +151,7 @@ class ExerciseCatalogFragment : Fragment() {
     /**
      * Next method get all user exercises from database
      */
-    private fun getItemsUserExerciseList() : ArrayList<ExerciseModelClass>{
+    private fun getItemsUserExerciseList() : ArrayList<ExerciseModel>{
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         return dataBaseHandler.viewUsersExercises()
     }
@@ -162,7 +162,7 @@ class ExerciseCatalogFragment : Fragment() {
      *
      * Called from UserExerciseAdapter
      */
-    fun showUserExerciseDialog(isNewExercise: Boolean, exerciseModel: ExerciseModelClass){
+    fun showUserExerciseDialog(isNewExercise: Boolean, exerciseModel: ExerciseModel){
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_create_exercise)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -216,7 +216,7 @@ class ExerciseCatalogFragment : Fragment() {
                 //for new exercise just put all in method
                 if (isNewExercise){
                     addUserExerciseRecord(
-                        ExerciseModelClass(0, name, imagePath, description, false)
+                        ExerciseModel(0, name, imagePath, description, false)
                     )
                 }
                 else{//for edit exercise, firstly check is new image available. Otherwise, put previous
@@ -226,7 +226,7 @@ class ExerciseCatalogFragment : Fragment() {
 
 
                     editUserExerciseRecord(
-                        ExerciseModelClass(exerciseModel.getId(), name, imagePath, description, false)
+                        ExerciseModel(exerciseModel.getId(), name, imagePath, description, false)
                     )
                 }
                 dialog.dismiss()

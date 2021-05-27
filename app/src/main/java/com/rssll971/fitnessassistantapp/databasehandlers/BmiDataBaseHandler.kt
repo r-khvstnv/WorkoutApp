@@ -6,9 +6,10 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.rssll971.fitnessassistantapp.modelclasses.BmiHistoryModelClass
+import com.rssll971.fitnessassistantapp.models.BmiHistoryModel
 
-class BmiDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class BmiDataBaseHandler(context: Context)
+    : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object{
         private const val DATABASE_NAME = "BmiHistory"
@@ -23,10 +24,11 @@ class BmiDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_
     }
 
     /**
-     * Next method create new database with our fields
+     * Next method create new database with corresponding fields
      */
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_BMI_DATES_TABLE = ("CREATE TABLE $TABLE_BMI_DATES($KEY_ID INTEGER PRIMARY KEY, " +
+        val CREATE_BMI_DATES_TABLE =
+            ("CREATE TABLE $TABLE_BMI_DATES($KEY_ID INTEGER PRIMARY KEY, " +
                 "$KEY_DATE TEXT, $KEY_WEIGHT REAL, $KEY_HEIGHT REAL, $KEY_BMI_INDEX REAL)")
         db?.execSQL(CREATE_BMI_DATES_TABLE)
     }
@@ -41,16 +43,16 @@ class BmiDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_
     /**
      * Next method add new object of bmi history in database
      */
-    fun addCurrentBmiResult(bmiHistoryModel: BmiHistoryModelClass): Long{
+    fun addCurrentBmiResult(bmiHistoryModel: BmiHistoryModel): Long{
         //get database for write data
         val db = this.writableDatabase
         //get constructor for database values
         val contentValues = ContentValues()
         //add data in constructor
-        contentValues.put(KEY_DATE, bmiHistoryModel.getDate())
-        contentValues.put(KEY_WEIGHT, bmiHistoryModel.getWeight())
-        contentValues.put(KEY_HEIGHT, bmiHistoryModel.getHeight())
-        contentValues.put(KEY_BMI_INDEX, bmiHistoryModel.getBmiIndex())
+        contentValues.put(KEY_DATE, bmiHistoryModel.date)
+        contentValues.put(KEY_WEIGHT, bmiHistoryModel.weight)
+        contentValues.put(KEY_HEIGHT, bmiHistoryModel.height)
+        contentValues.put(KEY_BMI_INDEX, bmiHistoryModel.bmiIndex)
         //add data in database
         val result = db.insert(TABLE_BMI_DATES, null, contentValues)
         //close db
@@ -61,8 +63,8 @@ class BmiDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_
     /**
      * Next method get all existing data in db
      */
-    fun viewBmiResult(): ArrayList<BmiHistoryModelClass>{
-        val bhmList: ArrayList<BmiHistoryModelClass> = ArrayList()
+    fun viewBmiResult(): ArrayList<BmiHistoryModel>{
+        val bhmList: ArrayList<BmiHistoryModel> = ArrayList()
         //select element from db
         val selectQuery = "SELECT * FROM $TABLE_BMI_DATES"
         //get db for reading
@@ -93,14 +95,15 @@ class BmiDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_
                 bmiIndex = cursor.getFloat(cursor.getColumnIndex(KEY_BMI_INDEX))
 
                 //save data in list
-                val bmiHistoryModel = BmiHistoryModelClass(
-                    _id = id, _date = date, _weight = weight,
-                    _height = height, _bmiIndex = bmiIndex
+                val bmiHistoryModel = BmiHistoryModel(
+                    id = id, date = date, weight = weight,
+                    height = height, bmiIndex = bmiIndex
                 )
                 bhmList.add(bmiHistoryModel)
             }while (cursor.moveToNext())
         }
 
+        cursor.close()
         return bhmList
     }
 
@@ -112,6 +115,4 @@ class BmiDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_
         db!!.execSQL("DELETE FROM $TABLE_BMI_DATES")
         db.close()
     }
-
-
 }

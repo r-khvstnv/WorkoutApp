@@ -6,10 +6,10 @@ import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
+import com.rssll971.fitnessassistantapp.models.WorkoutStatisticModel
 
-class WorkoutStatisticDataBaseHandler(context: Context) :
-    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class WorkoutStatisticDataBaseHandler(context: Context)
+    : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object{
         private const val DATABASE_NAME = "WorkoutStatistic"
@@ -27,8 +27,11 @@ class WorkoutStatisticDataBaseHandler(context: Context) :
      * Next method create new database with our fields
      */
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_EXERCISE_TABLE = ("CREATE TABLE $TABLE_STATISTIC($KEY_ID INTEGER PRIMARY KEY, $KEY_DATE TEXT, " +
-                "$KEY_REST_DURATION INTEGER, $KEY_EXERCISE_DURATION INTEGER, $KEY_EXERCISE_AMOUNT INTEGER)")
+        val CREATE_EXERCISE_TABLE =
+            ("CREATE TABLE $TABLE_STATISTIC" +
+                    "($KEY_ID INTEGER PRIMARY KEY, $KEY_DATE TEXT, " +
+                    "$KEY_REST_DURATION INTEGER, $KEY_EXERCISE_DURATION INTEGER, " +
+                    "$KEY_EXERCISE_AMOUNT INTEGER)")
         db?.execSQL(CREATE_EXERCISE_TABLE)
     }
 
@@ -42,16 +45,16 @@ class WorkoutStatisticDataBaseHandler(context: Context) :
     /**
      * Next method add new object of exercise history in database
      */
-    fun addStatisticData(statisticData: WorkoutStatisticModelClass): Long{
+    fun addStatisticData(statisticData: WorkoutStatisticModel): Long{
         //get database for write data
         val db = this.writableDatabase
         //get constructor for database values
         val contentValues = ContentValues()
         //add data in constructor
-        contentValues.put(KEY_DATE, statisticData.getDate())
-        contentValues.put(KEY_REST_DURATION, statisticData.getRestDuration())
-        contentValues.put(KEY_EXERCISE_DURATION, statisticData.getExerciseDuration())
-        contentValues.put(KEY_EXERCISE_AMOUNT, statisticData.getExerciseAmount())
+        contentValues.put(KEY_DATE, statisticData.date)
+        contentValues.put(KEY_REST_DURATION, statisticData.restDuration)
+        contentValues.put(KEY_EXERCISE_DURATION, statisticData.exerciseDuration)
+        contentValues.put(KEY_EXERCISE_AMOUNT, statisticData.exerciseAmount)
         //add data in database
         val result = db.insert(TABLE_STATISTIC, null, contentValues)
         //close db
@@ -62,8 +65,8 @@ class WorkoutStatisticDataBaseHandler(context: Context) :
     /**
      * Next method get all existing data in db
      */
-    fun viewStatisticData(): ArrayList<WorkoutStatisticModelClass>{
-        val statisticList: ArrayList<WorkoutStatisticModelClass> = ArrayList()
+    fun viewStatisticData(): ArrayList<WorkoutStatisticModel>{
+        val statisticList: ArrayList<WorkoutStatisticModel> = ArrayList()
         //select elements from db
         val selectQuery = "SELECT * FROM $TABLE_STATISTIC"
         //get db for reading
@@ -94,13 +97,14 @@ class WorkoutStatisticDataBaseHandler(context: Context) :
                 exerciseAmount = cursor.getInt(cursor.getColumnIndex(KEY_EXERCISE_AMOUNT))
 
                 //save data in the list
-                val workoutStatisticModel = WorkoutStatisticModelClass(_id = id, _date = date,
-                    _restDuration = restDuration, _exerciseDuration = exerciseDuration,
-                    _exerciseAmount = exerciseAmount)
+                val workoutStatisticModel = WorkoutStatisticModel(id = id, date = date,
+                    restDuration = restDuration, exerciseDuration = exerciseDuration,
+                    exerciseAmount = exerciseAmount)
                 statisticList.add(workoutStatisticModel)
             }while (cursor.moveToNext())
         }
 
+        cursor.close()
         return statisticList
     }
 }

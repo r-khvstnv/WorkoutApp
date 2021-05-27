@@ -14,8 +14,8 @@ import com.rssll971.fitnessassistantapp.*
 import com.rssll971.fitnessassistantapp.databasehandlers.BmiDataBaseHandler
 import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
 import com.rssll971.fitnessassistantapp.databinding.FragmentStatisticBinding
-import com.rssll971.fitnessassistantapp.modelclasses.BmiHistoryModelClass
-import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
+import com.rssll971.fitnessassistantapp.models.BmiHistoryModel
+import com.rssll971.fitnessassistantapp.models.WorkoutStatisticModel
 import kotlin.collections.ArrayList
 
 class StatisticFragment : Fragment() {
@@ -70,7 +70,7 @@ class StatisticFragment : Fragment() {
     /**
      * Next method show weight Line Chart
      */
-    private fun setupWeightLineChart(bmiList: ArrayList<BmiHistoryModelClass>){
+    private fun setupWeightLineChart(bmiList: ArrayList<BmiHistoryModel>){
         val entriesWeight = ArrayList<Entry>()
         var counter = bmiList.size
         for (i in 0 until bmiList.size){
@@ -127,7 +127,7 @@ class StatisticFragment : Fragment() {
     /**
      * Next method show duration Line Chart
      */
-    private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModelClass>){
+    private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModel>){
         val entriesDuration = ArrayList<Entry>()
         var counter = statisticList.size
         for (i in 0 until statisticList.size){

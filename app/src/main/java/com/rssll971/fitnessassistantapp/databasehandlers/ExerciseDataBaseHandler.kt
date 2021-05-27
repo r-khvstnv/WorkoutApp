@@ -6,9 +6,10 @@ import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.models.ExerciseModel
 
-class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class ExerciseDataBaseHandler(context: Context)
+    : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object{
         private const val DATABASE_NAME = "UserExercises"
@@ -25,7 +26,8 @@ class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATA
      * Next method create new database with our fields
      */
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_EXERCISE_TABLE = ("CREATE TABLE $TABLE_EXERCISES($KEY_ID INTEGER PRIMARY KEY, " +
+        val CREATE_EXERCISE_TABLE =
+            ("CREATE TABLE $TABLE_EXERCISES($KEY_ID INTEGER PRIMARY KEY, " +
                 "$KEY_NAME TEXT, $KEY_IMAGE_PATH TEXT, $KEY_DESCRIPTION TEXT)")
         db?.execSQL(CREATE_EXERCISE_TABLE)
     }
@@ -40,15 +42,15 @@ class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATA
     /**
      * Next method add new object of exercise history in database
      */
-    fun addUsersExercise(exerciseModel: ExerciseModelClass): Long{
+    fun addUsersExercise(exerciseModel: ExerciseModel): Long{
         //get database for write data
         val db = this.writableDatabase
         //get constructor for database values
         val contentValues = ContentValues()
         //add data in constructor
-        contentValues.put(KEY_NAME, exerciseModel.getName())
-        contentValues.put(KEY_IMAGE_PATH, exerciseModel.getImagePath())
-        contentValues.put(KEY_DESCRIPTION, exerciseModel.getDescription())
+        contentValues.put(KEY_NAME, exerciseModel.name)
+        contentValues.put(KEY_IMAGE_PATH, exerciseModel.imagePath)
+        contentValues.put(KEY_DESCRIPTION, exerciseModel.description)
         //add data in database
         val result = db.insert(TABLE_EXERCISES, null, contentValues)
         //close db
@@ -59,17 +61,17 @@ class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATA
     /**
      * Next method update object of exercise history in database
      */
-    fun updateUserExercise(exerciseModel: ExerciseModelClass): Int{
+    fun updateUserExercise(exerciseModel: ExerciseModel): Int{
         val db = this.writableDatabase
         val contentValues = ContentValues()
         //add data in constructor
-        contentValues.put(KEY_NAME, exerciseModel.getName())
-        contentValues.put(KEY_IMAGE_PATH, exerciseModel.getImagePath())
-        contentValues.put(KEY_DESCRIPTION, exerciseModel.getDescription())
+        contentValues.put(KEY_NAME, exerciseModel.name)
+        contentValues.put(KEY_IMAGE_PATH, exerciseModel.imagePath)
+        contentValues.put(KEY_DESCRIPTION, exerciseModel.description)
 
         val result = db.update(
             TABLE_EXERCISES, contentValues,
-            "$KEY_ID = ${exerciseModel.getId()}", null)
+            "$KEY_ID = ${exerciseModel.id}", null)
         db.close()
         return result
     }
@@ -77,8 +79,8 @@ class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATA
     /**
      * Next method get all existing data in db
      */
-    fun viewUsersExercises(): ArrayList<ExerciseModelClass>{
-        val emcList: ArrayList<ExerciseModelClass> = ArrayList()
+    fun viewUsersExercises(): ArrayList<ExerciseModel>{
+        val emcList: ArrayList<ExerciseModel> = ArrayList()
         //select element from db
         val selectQuery = "SELECT * FROM $TABLE_EXERCISES"
         //get db for reading
@@ -107,26 +109,27 @@ class ExerciseDataBaseHandler(context: Context) : SQLiteOpenHelper(context, DATA
                 description = cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION))
 
                 //save data in list
-                val exerciseModel = ExerciseModelClass(_id = id, _name = name,
-                    _imagePath = imagePath, _description = description, _isFinished = false)
+                val exerciseModel = ExerciseModel(id = id, name = name,
+                    imagePath = imagePath, description = description, isFinished = false)
                 emcList.add(exerciseModel)
             }while (cursor.moveToNext())
         }
 
+        cursor.close()
         return  emcList
     }
 
     /**
      * Next method delete any user row
      */
-    fun deleteUsersExercise(exerciseModel: ExerciseModelClass): Int{
+    fun deleteUsersExercise(exerciseModel: ExerciseModel): Int{
         //get db
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_ID, exerciseModel.getId())
+        contentValues.put(KEY_ID, exerciseModel.id)
 
         //delete row
-        val result = db.delete(TABLE_EXERCISES, "$KEY_ID = ${exerciseModel.getId()}", null)
+        val result = db.delete(TABLE_EXERCISES, "$KEY_ID = ${exerciseModel.id}", null)
         db.close()
         return result
     }

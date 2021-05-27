@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.rssll971.fitnessassistantapp.modelclasses.BmiHistoryModelClass
+import com.rssll971.fitnessassistantapp.models.BmiHistoryModel
 import com.rssll971.fitnessassistantapp.R
 
 /**
  * Next class show all information of users bmi data rom history
  */
 class BmiResultStatusAdapter(val context: Context,
-                             private val bmiHistoryList: ArrayList<BmiHistoryModelClass>) :
+                             private val bmiHistoryList: ArrayList<BmiHistoryModel>) :
     RecyclerView.Adapter<BmiResultStatusAdapter.MyViewHolder>() {
 
     /**
@@ -40,7 +40,7 @@ class BmiResultStatusAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         //assign right data
-        val item: BmiHistoryModelClass = bmiHistoryList[position]
+        val item: BmiHistoryModel = bmiHistoryList[position]
         holder.tvItemDate!!.text = item.getDate()
         holder.tvItemWeight!!.text = String.format("%.2f", item.getWeight())
         holder.tvItemHeight!!.text = String.format("%.2f", item.getHeight())

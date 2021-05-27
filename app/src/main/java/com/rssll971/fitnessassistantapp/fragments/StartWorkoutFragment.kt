@@ -14,7 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
-import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
+import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.adapters.UserExercisesAdapter
 import com.rssll971.fitnessassistantapp.activities.ExerciseActivity
@@ -29,7 +29,7 @@ class StartWorkoutFragment : Fragment() {
     private val binding get() = _binding!!
 
     //default exercise list
-    private lateinit var emcList: ArrayList<ExerciseModelClass>
+    private lateinit var emcList: ArrayList<ExerciseModel>
     //exercise list
     private var formedExerciseList = ArrayList<String>()
     //relaxation and exercise time
@@ -98,9 +98,9 @@ class StartWorkoutFragment : Fragment() {
     private fun prepareDefaultList(){
         emcList = if (Locale.getDefault().language == "ru"){
             //set RU lang list
-            ExerciseModelClass.defaultRuExerciseList()
+            ExerciseModel.defaultRuExerciseList()
         } else{
-            ExerciseModelClass.defaultEngExerciseList()
+            ExerciseModel.defaultEngExerciseList()
         }
         val dataBaseHandler = ExerciseDataBaseHandler(requireContext())
         emcList.addAll(dataBaseHandler.viewUsersExercises())

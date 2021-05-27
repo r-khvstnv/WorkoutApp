@@ -16,7 +16,7 @@ import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.fragments.MyValueFormatterToTime
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
-import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
+import com.rssll971.fitnessassistantapp.models.WorkoutStatisticModel
 import com.rssll971.fitnessassistantapp.databinding.ActivityFinishBinding
 
 class FinishActivity : AppCompatActivity() {
@@ -95,7 +95,7 @@ class FinishActivity : AppCompatActivity() {
     /**
      * Next method show duration Line Chart
      */
-    private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModelClass>){
+    private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModel>){
         val entriesDuration = ArrayList<Entry>()
         var counter = statisticList.size
         for (i in 0 until statisticList.size){

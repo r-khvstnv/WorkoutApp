@@ -20,8 +20,8 @@ import com.rssll971.fitnessassistantapp.adapters.ExerciseStatusAdapter
 import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
 import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
 import com.rssll971.fitnessassistantapp.databinding.ActivityExerciseBinding
-import com.rssll971.fitnessassistantapp.modelclasses.ExerciseModelClass
-import com.rssll971.fitnessassistantapp.modelclasses.WorkoutStatisticModelClass
+import com.rssll971.fitnessassistantapp.models.ExerciseModel
+import com.rssll971.fitnessassistantapp.models.WorkoutStatisticModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -42,7 +42,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseTimerProgress: Int = 5
     //exercise list
-    private lateinit var exerciseList: ArrayList<ExerciseModelClass>
+    private lateinit var exerciseList: ArrayList<ExerciseModel>
     private var currentExerciseIndex = 0
     //adapter for RecyclerView
     private lateinit var exerciseAdapter: ExerciseStatusAdapter
@@ -324,7 +324,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     //prepare exercise list
-    private fun prepareExerciseList(): ArrayList<ExerciseModelClass>{
+    private fun prepareExerciseList(): ArrayList<ExerciseModel>{
         /**
          * Next lines responsible for extracting users exercises and default in rv
          */
@@ -332,12 +332,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val emcList = dataBaseHandler.viewUsersExercises()
         if (Locale.getDefault().language == "ru"){
             //set RU lang list
-            emcList.addAll(ExerciseModelClass.defaultRuExerciseList())
+            emcList.addAll(ExerciseModel.defaultRuExerciseList())
         } else{
-            emcList.addAll(ExerciseModelClass.defaultEngExerciseList())
+            emcList.addAll(ExerciseModel.defaultEngExerciseList())
         }
 
-        val formedExerciseList = ArrayList<ExerciseModelClass>()
+        val formedExerciseList = ArrayList<ExerciseModel>()
         val userSelectedExercises = intent.getStringArrayListExtra("FormedList")
         for (i in 0 until userSelectedExercises!!.size){
             for (j in 0 until emcList.size){
@@ -356,7 +356,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private fun addStatisticData(){
         val dataBaseHandler = WorkoutStatisticDataBaseHandler(this)
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        val statisticModel = WorkoutStatisticModelClass(0, currentDate, relaxationTimerProgress,
+        val statisticModel = WorkoutStatisticModel(0, currentDate, relaxationTimerProgress,
             exerciseTimerProgress, exerciseList.size)
         dataBaseHandler.addStatisticData(statisticModel)
     }
