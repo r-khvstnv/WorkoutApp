@@ -30,6 +30,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.rssll971.fitnessassistantapp.ExerciseAdapterCallback
 import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
 import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
@@ -88,7 +89,7 @@ class ExerciseCatalogFragment : Fragment() {
         /** All clickable*/
         //add exercise
         binding.llAddActivities.setOnClickListener {
-            showUserExerciseDialog(true,
+            showUserExerciseDialog(false,
                 ExerciseModel(0, "", getString(R.string.st_empty_path), "", false)
             )
         }
@@ -144,8 +145,21 @@ class ExerciseCatalogFragment : Fragment() {
      * Next method run RecyclerView with all user exercises
      */
     private fun setupRecyclerView(){
-        binding.rvActivities.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
-        userExercisesAdapter = UserExercisesAdapter(requireContext(), getItemsUserExerciseList(), this)
+        binding.rvActivities.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
+        userExercisesAdapter =
+            UserExercisesAdapter(
+                requireContext(),
+                getItemsUserExerciseList(),
+                this,
+                object : ExerciseAdapterCallback{
+                override fun onItemSelected(position: Int, isNeededAdd: Boolean) {}
+
+                override fun onItemEditing(exerciseModel: ExerciseModel, isExisted: Boolean) {
+                    showUserExerciseDialog(isExisted, exerciseModel)
+                }
+
+            })
         binding.rvActivities.adapter = userExercisesAdapter
     }
 
@@ -163,7 +177,7 @@ class ExerciseCatalogFragment : Fragment() {
      *
      * Called from UserExerciseAdapter
      */
-    fun showUserExerciseDialog(isNewExercise: Boolean, exerciseModel: ExerciseModel){
+    private fun showUserExerciseDialog(isExisted: Boolean, exerciseModel: ExerciseModel){
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_create_exercise)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -182,7 +196,7 @@ class ExerciseCatalogFragment : Fragment() {
         imagePath = getString(R.string.st_empty_path)
 
         /** fill data when user edit existed exercise*/
-        if (!isNewExercise){
+        if (isExisted){
             etExerciseName.setText(exerciseModel.name)
             etDescription.setText(exerciseModel.description)
             //image
@@ -215,7 +229,7 @@ class ExerciseCatalogFragment : Fragment() {
                 val name = etExerciseName.text.toString()
                 val description = etDescription.text.toString()
                 //for new exercise just put all in method
-                if (isNewExercise){
+                if (!isExisted){
                     addUserExerciseRecord(
                         ExerciseModel(0, name, imagePath, description, false)
                     )
@@ -236,7 +250,7 @@ class ExerciseCatalogFragment : Fragment() {
 
         //delete current exercise
         llDelete.setOnClickListener {
-            if (!isNewExercise){
+            if (isExisted){
                 deleteUserExercises(exerciseModel)
                 dialog.dismiss()
             }

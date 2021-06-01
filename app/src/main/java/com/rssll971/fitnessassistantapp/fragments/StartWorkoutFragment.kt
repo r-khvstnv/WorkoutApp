@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.rssll971.fitnessassistantapp.ExerciseAdapterCallback
 import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
 import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
@@ -32,7 +33,7 @@ class StartWorkoutFragment : Fragment() {
     //default exercise list
     private lateinit var emcList: ArrayList<ExerciseModel>
     //exercise list
-    private var formedExerciseList = ArrayList<String>()
+    private var formedExerciseList = ArrayList<ExerciseModel>()
     //relaxation and exercise time
     private var relaxationTime = 30
     private var exerciseTime = 30
@@ -49,6 +50,7 @@ class StartWorkoutFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        formedExerciseList.clear()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +93,7 @@ class StartWorkoutFragment : Fragment() {
                 intent.putExtra("VoiceAssistant", binding.rbVoiceOn.isChecked)
                 startActivity(intent)
                 formedExerciseList.clear()
+                activity?.finish()
             }
         }
     }
@@ -109,8 +112,25 @@ class StartWorkoutFragment : Fragment() {
 
     /** Setup RecyclerView*/
     private fun setupRecyclerView(){
-        binding.rvSelectActivities.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
-        val userExercisesAdapter = UserExercisesAdapter(requireContext(), emcList, this)
+        binding.rvSelectActivities.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, true)
+        val userExercisesAdapter =
+            UserExercisesAdapter(
+                requireContext(),
+                emcList,
+                this,
+                object : ExerciseAdapterCallback{
+                    override fun onItemSelected(position: Int, isNeededAdd: Boolean) {
+                        if (isNeededAdd){
+                            formedExerciseList.add(emcList[position])
+                        } else{
+                            if (formedExerciseList.contains(emcList[position]))
+                                formedExerciseList.remove(emcList[position])
+                        }
+                    }
+
+                    override fun onItemEditing(exerciseModel: ExerciseModel, isExisted: Boolean) {}
+                })
         binding.rvSelectActivities.adapter = userExercisesAdapter
         //smooth scroll to top
         binding.rvSelectActivities.smoothScrollToPosition(userExercisesAdapter.itemCount - 1)
@@ -144,28 +164,6 @@ class StartWorkoutFragment : Fragment() {
             }
         }
     }
-
-    /**
-     * Next method prepare exercise list
-     *
-     * Called from UserExerciseAdapter
-     *
-     * Method based on saving chosen exercise names, due to don't send all list in new activity
-     */
-    fun prepareExerciseList(position: Int, isNeededAdd: Boolean){
-        if (isNeededAdd){
-            formedExerciseList.add(emcList[position].name)
-        }
-        else{
-            for (i in 0 until  formedExerciseList.size){
-                if (formedExerciseList[i] == emcList[position].name){
-                    formedExerciseList.removeAt(i)
-                    break
-                }
-            }
-        }
-    }
-
 
     /**
      * Next method check availability of Text to Speech on device

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.rssll971.fitnessassistantapp.ExerciseAdapterCallback
 import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.databinding.ItemActivitiesSelectableBinding
@@ -16,11 +17,12 @@ import com.rssll971.fitnessassistantapp.fragments.StartWorkoutFragment
 /**
  * Next class show all users exercises
  */
-class UserExercisesAdapter(val context: Context,
+class UserExercisesAdapter(private val context: Context,
                            private val userExerciseList: ArrayList<ExerciseModel>,
-                           private val fragment: Fragment) :
+                           private val fragment: Fragment,
+                           private val callback: ExerciseAdapterCallback) :
     RecyclerView.Adapter<UserExercisesAdapter.MyViewHolder>() {
-    private var selectedItemPositionList = ArrayList<Int>()
+    private val idList = ArrayList<Int>()
 
     /**
      * Class with item components
@@ -52,6 +54,9 @@ class UserExercisesAdapter(val context: Context,
             else if (fragment is StartWorkoutFragment){
                 binding.ivItemEdit.visibility = View.GONE
                 binding.tvItemExerciseName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+                /**Show visually is exercise was selected for workout or not */
+                itemView.isSelected = idList.contains(item.id)
+
             }
             /**
              * Next listener change exercise background when user choose exercise for doing
@@ -60,41 +65,20 @@ class UserExercisesAdapter(val context: Context,
              */
             itemView.setOnClickListener {
                 if (fragment is ExerciseCatalogFragment){
-                    fragment.showUserExerciseDialog(false, item)
+                    callback.onItemEditing(item, true)
                 }
                 else if (fragment is StartWorkoutFragment){
-                    /**
-                     * As so responsibility for creating future exercise list was annotated in another class and
-                     *  also implemented align with another color for selected exercise in rV, all position for selected exercise
-                     *  adding to selectedItemPositionList
-                     *
-                     * Firstly work function under clickListener. It correspond for correct background.
-                     *  If element was chosen before it marks them like selected and vise versa.
-                     *  After that next if/else statement determine selected state and run corresponding method
-                     */
-                    //delete item from list for preparation
-
                     if (itemView.isSelected){
-                        fragment.prepareExerciseList(position, false)
                         itemView.isSelected = false
-                        //find index of corresponding item in local list
-                        val index = selectedItemPositionList.indexOf(position)
-                        //remove it from list
-                        selectedItemPositionList.removeAt(index)
-                    }
-                    //add item in list for preparation
-                    else{
-                        fragment.prepareExerciseList(position, true)
+                        callback.onItemSelected(position, false)
+                        idList.remove(item.id)
+                    } else{ //add item in list for preparation
                         itemView.isSelected = true
-                        //add item in local list
-                        selectedItemPositionList.add(position)
+                        callback.onItemSelected(position, true)
+                        idList.add(item.id)
                     }
                 }
-
-
             }
-            //doesn't matter exactly context
-            itemView.isSelected = selectedItemPositionList.contains(position)
         }
     }
 

@@ -11,8 +11,8 @@ import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.databinding.ItemExerciseNumberBinding
 
 /**
- * Class responsible for whole recycle adapter.
- * Implement members of ExerciseList and current Context
+ * Adapter show user how many exercises were added in current workout
+ * and which of them is finished
  */
 class ExerciseStatusAdapter(private val itemsList: ArrayList<ExerciseModel>,
                             private val context: Context)

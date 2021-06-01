@@ -13,6 +13,9 @@ import com.google.android.gms.ads.*
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.fragments.*
 
@@ -23,9 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adViewBannerMain: AdView
     //interstitial ad
     private var mInterstitialAd: InterstitialAd? = null
-
-    //todo
-    //private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
     /**
@@ -65,8 +66,8 @@ class MainActivity : AppCompatActivity() {
         /** Next line hides redundant space under nav menu, which was created by itself*/
         binding.bnvMenu.setOnApplyWindowInsetsListener(null)
 
-        /** Firebase todo*/
-        //firebaseAnalytics = Firebase.analytics
+        /** Firebase*/
+        firebaseAnalytics = Firebase.analytics
 
 
 
@@ -125,7 +126,8 @@ class MainActivity : AppCompatActivity() {
         loadInterstitialAd(adRequest)
     }
     private fun loadInterstitialAd(adRequest: AdRequest){
-        InterstitialAd.load(this, getString(R.string.st_interstitial_ad_id), adRequest, object : InterstitialAdLoadCallback() {
+        InterstitialAd.load(this, getString(R.string.st_interstitial_ad_id),
+            adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d("AdMob", adError.message)
                 mInterstitialAd = null

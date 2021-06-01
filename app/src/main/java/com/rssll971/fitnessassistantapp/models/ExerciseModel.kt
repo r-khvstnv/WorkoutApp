@@ -1,13 +1,44 @@
 package com.rssll971.fitnessassistantapp.models
 
-//todo add parcelable
+import android.os.Parcel
+import android.os.Parcelable
+
+
 data class ExerciseModel (val id: Int,
                           val name: String,
-                          val imagePath: String,
+                          val imagePath: String = "none",
                           val description: String,
-                          var isFinished: Boolean){
+                          var isFinished: Boolean = false) :Parcelable{
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readByte() != 0.toByte()
+    )
 
-    companion object{
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(name)
+        parcel.writeString(imagePath)
+        parcel.writeString(description)
+        parcel.writeByte(if (isFinished) 1 else 0)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<ExerciseModel> {
+        override fun createFromParcel(parcel: Parcel): ExerciseModel {
+            return ExerciseModel(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ExerciseModel?> {
+            return arrayOfNulls(size)
+        }
+
+
         /** default exercises on RU lang */
         fun defaultRuExerciseList() : ArrayList<ExerciseModel>{
             //List with exercises
@@ -111,4 +142,5 @@ data class ExerciseModel (val id: Int,
             return exerciseList
         }
     }
+
 }

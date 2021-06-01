@@ -84,7 +84,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setContentView(view)
 
         /** Get list of exercises */
-        exerciseList = prepareExerciseList()
+        exerciseList = intent!!.getParcelableArrayListExtra("FormedList")!!
         relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
         exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
         isVoiceAssistantActivated = intent!!.getBooleanExtra("VoiceAssistant", false)
@@ -324,32 +324,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         finish()
     }
 
-    //prepare exercise list
-    private fun prepareExerciseList(): ArrayList<ExerciseModel>{
-        /**
-         * Next lines responsible for extracting users exercises and default in rv
-         */
-        val dataBaseHandler = ExerciseDataBaseHandler(this)
-        val emcList = dataBaseHandler.viewUsersExercises()
-        if (Locale.getDefault().language == "ru"){
-            //set RU lang list
-            emcList.addAll(ExerciseModel.defaultRuExerciseList())
-        } else{
-            emcList.addAll(ExerciseModel.defaultEngExerciseList())
-        }
 
-        val formedExerciseList = ArrayList<ExerciseModel>()
-        val userSelectedExercises = intent.getStringArrayListExtra("FormedList")
-        for (i in 0 until userSelectedExercises!!.size){
-            for (j in 0 until emcList.size){
-                if (userSelectedExercises[i] == emcList[j].name){
-                    formedExerciseList.add(emcList[j])
-                }
-            }
-        }
-
-        return formedExerciseList
-    }
 
     /**
      * Next method add statistic data in database
