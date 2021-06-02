@@ -22,11 +22,7 @@ import com.rssll971.fitnessassistantapp.databinding.ActivityFinishBinding
 class FinishActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFinishBinding
     private lateinit var adViewBannerFinish: AdView
-
-
-    /**
-     * Fullscreen Mode
-     */
+    /** Fullscreen Mode*/
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) hideSystemUI()
@@ -44,19 +40,15 @@ class FinishActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     // Hide the nav bar and status bar
                     or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN
-                    )
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /** Create view using Binding**/
         binding = ActivityFinishBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-
 
         /** Ads*/
         MobileAds.initialize(this)
@@ -76,10 +68,9 @@ class FinishActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-
     }
 
+    /**Next method prepares layout and data for workout statistic chart*/
     private fun prepareCharts(){
         //average duration line chart
         val workoutStatisticDataBaseHandler = WorkoutStatisticDataBaseHandler(this)
@@ -87,15 +78,12 @@ class FinishActivity : AppCompatActivity() {
         if (statisticList.size > 0){
             binding.lineChartWorkoutDuration.visibility = View.VISIBLE
             setupWorkoutDurationLineChart(statisticList)
-        }
-        else{
+        } else{
             binding.lineChartWorkoutDuration.visibility = View.INVISIBLE
         }
-
     }
-    /**
-     * Next method show duration Line Chart
-     */
+
+    /** Next method shows workout statistic Line Chart*/
     private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModel>){
         val entriesDuration = ArrayList<Entry>()
         var counter = statisticList.size
@@ -134,7 +122,6 @@ class FinishActivity : AppCompatActivity() {
         binding.lineChartWorkoutDuration.setTouchEnabled(false)
         binding.lineChartWorkoutDuration.isDragEnabled = true
 
-
         //hide all axis labels and grid background
         binding.lineChartWorkoutDuration.xAxis.isEnabled = false
         binding.lineChartWorkoutDuration.axisRight.isEnabled = false
@@ -142,7 +129,6 @@ class FinishActivity : AppCompatActivity() {
         binding.lineChartWorkoutDuration.xAxis.setDrawGridLines(false)
         binding.lineChartWorkoutDuration.axisLeft.setDrawGridLines(false)
         binding.lineChartWorkoutDuration.axisRight.setDrawGridLines(false)
-
 
         binding.lineChartWorkoutDuration.description.text = ""
         binding.lineChartWorkoutDuration.legend.isEnabled = false

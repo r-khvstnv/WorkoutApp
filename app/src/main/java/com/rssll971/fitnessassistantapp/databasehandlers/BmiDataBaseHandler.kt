@@ -24,7 +24,7 @@ class BmiDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method create new database with corresponding fields
+     * Next method creates new database with corresponding fields
      */
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_BMI_DATES_TABLE =
@@ -33,15 +33,13 @@ class BmiDataBaseHandler(context: Context)
         db?.execSQL(CREATE_BMI_DATES_TABLE)
     }
 
-    /**
-     * Next method upgrade data in data base, while new data has appeared
-     */
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_BMI_DATES")
     }
 
     /**
-     * Next method add new object of bmi history in database
+     * Next method adds new object of bmi history in database
      */
     fun addCurrentBmiResult(bmiHistoryModel: BmiHistoryModel): Long{
         //get database for write data
@@ -61,7 +59,7 @@ class BmiDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method get all existing data in db
+     * Next method gets all existing data in db
      */
     fun viewBmiResult(): ArrayList<BmiHistoryModel>{
         val bhmList: ArrayList<BmiHistoryModel> = ArrayList()
@@ -108,7 +106,7 @@ class BmiDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method delete all columns in db
+     * Next method deletes all columns in db
      */
     fun eraseAll(){
         val db = this.writableDatabase

@@ -28,10 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
-
-    /**
-     * Fullscreen Mode
-     */
+    /** Fullscreen Mode*/
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) hideSystemUI()
@@ -49,34 +46,27 @@ class MainActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     // Hide the nav bar and status bar
                     or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN
-                    )
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
         }
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /** Create view using Binding**/
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        /** Next line hides redundant space under nav menu, which was created by itself*/
+        /** Next line hides redundant space under nav menu,
+         * which was created by itself*/
         binding.bnvMenu.setOnApplyWindowInsetsListener(null)
 
         /** Firebase*/
         firebaseAnalytics = Firebase.analytics
 
-
-
         /** Ads*/
         prepareAds()
 
-        /**
-         * Fragments
-         */
+        /** Fragments */
         val infoFragment = InfoFragment()
         val exerciseCatalogFragment = ExerciseCatalogFragment()
         val bmiFragment = BmiFragment()
@@ -86,22 +76,21 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.m_info -> {
                     showInterstitialAd()
-                    makeAsCurrentFragment(infoFragment)
+                    replaceToFragment(infoFragment)
                 }
                 R.id.m_activities -> {
                     showInterstitialAd()
-                    makeAsCurrentFragment(exerciseCatalogFragment)
+                    replaceToFragment(exerciseCatalogFragment)
                 }
-                R.id.m_start -> makeAsCurrentFragment(startWorkout)
-                R.id.m_bmi -> makeAsCurrentFragment(bmiFragment)
-                R.id.m_statistics -> makeAsCurrentFragment(statisticFragment)
+                R.id.m_start -> replaceToFragment(startWorkout)
+                R.id.m_bmi -> replaceToFragment(bmiFragment)
+                R.id.m_statistics -> replaceToFragment(statisticFragment)
             }
             true
         }
         /** Show default fragment*/
-        if (savedInstanceState == null){
+        if (savedInstanceState == null)
             binding.bnvMenu.selectedItemId = R.id.m_start
-        }
     }
 
     /**
@@ -135,15 +124,14 @@ class MainActivity : AppCompatActivity() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
                 mInterstitialAd = interstitialAd
 
-                mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                mInterstitialAd?.fullScreenContentCallback =
+                    object: FullScreenContentCallback() {
                     override fun onAdDismissedFullScreenContent() {
                         requestInterstitialAd()
                     }
-
                     override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
                         requestInterstitialAd()
                     }
-
                     override fun onAdShowedFullScreenContent() {
                         mInterstitialAd = null
                     }
@@ -157,22 +145,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     /**
-     * Next method hide keyboard on outside touch
+     * Next method hides keyboard on outside touch
      */
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (currentFocus != null){
-            val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm: InputMethodManager =
+                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
     }
 
     /**
-     * Next method load corresponding fragment required for selected item in menu
+     * Next method loads corresponding fragment required for selected item in menu
      */
-    private fun makeAsCurrentFragment(fragment: Fragment) =
+    private fun replaceToFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_container, fragment)
             commit()

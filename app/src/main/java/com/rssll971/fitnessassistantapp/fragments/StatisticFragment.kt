@@ -22,12 +22,14 @@ class StatisticFragment : Fragment() {
     private var _binding: FragmentStatisticBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentStatisticBinding.inflate(inflater, container, false)
+
+        prepareCharts()
+
         return binding.root
     }
 
@@ -35,13 +37,6 @@ class StatisticFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        /** Line Chart */
-        prepareCharts()
-    }
-
 
 
     private fun prepareCharts(){
@@ -51,8 +46,7 @@ class StatisticFragment : Fragment() {
         if (bmiList.size > 0){
             binding.lineChartWeight.visibility = View.VISIBLE
             setupWeightLineChart(bmiList)
-        }
-        else{
+        } else{
             binding.lineChartWeight.visibility = View.INVISIBLE
         }
         //average duration line chart
@@ -61,14 +55,13 @@ class StatisticFragment : Fragment() {
         if (statisticList.size > 0){
             binding.lineChartWorkoutDuration.visibility = View.VISIBLE
             setupWorkoutDurationLineChart(statisticList)
-        }
-        else{
+        } else{
             binding.lineChartWorkoutDuration.visibility = View.INVISIBLE
         }
     }
 
     /**
-     * Next method show weight Line Chart
+     * Next method shows weight Line Chart
      */
     private fun setupWeightLineChart(bmiList: ArrayList<BmiHistoryModel>){
         val entriesWeight = ArrayList<Entry>()
@@ -125,7 +118,7 @@ class StatisticFragment : Fragment() {
     }
 
     /**
-     * Next method show duration Line Chart
+     * Next method shows workout durations Line Chart
      */
     private fun setupWorkoutDurationLineChart(statisticList: ArrayList<WorkoutStatisticModel>){
         val entriesDuration = ArrayList<Entry>()
@@ -179,6 +172,7 @@ class StatisticFragment : Fragment() {
     }
 }
 
+/**Value formatter for LineCharts*/
 class MyValueFormatterToTime : ValueFormatter(){
     override fun getPointLabel(entry: Entry?): String {
         val duration = entry!!.y.toInt()

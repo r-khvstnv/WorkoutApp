@@ -1,5 +1,6 @@
 package com.rssll971.fitnessassistantapp.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,8 +22,6 @@ import kotlin.math.pow
 class BmiFragment : Fragment() {
     private var _binding: FragmentBmiBinding? = null
     private val binding get() = _binding!!
-
-
     //metric system
     private var isMetricSystem: Boolean = true
     //current date
@@ -30,14 +29,45 @@ class BmiFragment : Fragment() {
     //adapter for bmi history
     private lateinit var bmiStatusAdapter: BmiResultStatusAdapter
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBmiBinding.inflate(inflater, container, false)
+
+        /** Show right hints*/
+        isMetricSystem = binding.tbMeasurementSystem.isChecked
+        showRightHints()
+
+        setupRecyclerView()
+
+
+        /**Change measurement system onClick*/
+        binding.tbMeasurementSystem.setOnClickListener {
+            isMetricSystem = binding.tbMeasurementSystem.isChecked
+            showRightHints()
+        }
+        /**Estimate bi onClick*/
+        binding.llCalculate.setOnClickListener {
+            if (binding.etHeight.text.isEmpty() && binding.etWeight.text.isEmpty())
+                Toast.makeText(requireContext(), getString(R.string.st_add_data), Toast.LENGTH_LONG).show()
+            else
+                estimateBmi()
+        }
+        /**Show history onClick*/
+        binding.clShowHistory.setOnClickListener {
+            if (binding.ivExpand.rotation == 0F)
+                showBmiHistory()
+            else
+                hideBmiHistory()
+        }
+        /**Delete history onClick*/
+        binding.llDeleteHistory.setOnClickListener {
+            deleteAllHistory()
+            setupRecyclerView()
+        }
+
         return binding.root
     }
 
@@ -46,51 +76,6 @@ class BmiFragment : Fragment() {
         _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        /** Show hints*/
-        isMetricSystem = binding.tbMeasurementSystem.isChecked
-        showRightHints()
-
-        /** Hide result and history */
-        binding.llResult.visibility = View.INVISIBLE
-        binding.llBmiHistory.visibility = View.GONE
-        setupRecyclerView()
-
-
-        //measurement system
-        binding.tbMeasurementSystem.setOnClickListener {
-            isMetricSystem = binding.tbMeasurementSystem.isChecked
-            showRightHints()
-        }
-        //bmi estimation
-        binding.llCalculate.setOnClickListener {
-            if (binding.etHeight.text.isEmpty() && binding.etWeight.text.isEmpty()){
-                Toast.makeText(requireContext(), getString(R.string.st_add_data), Toast.LENGTH_LONG).show()
-            }
-            else{
-                estimateBmi()
-            }
-        }
-        //show history
-        binding.clShowHistory.setOnClickListener {
-            if (binding.ivExpand.rotation == 0F){
-                showBmiHistory()
-            }
-            else{
-                hideBmiHistory()
-            }
-        }
-        //delete history
-        binding.llDeleteHistory.setOnClickListener {
-            deleteAllHistory()
-            setupRecyclerView()
-        }
-    }
-
-
-
     /**
      * Show right hints depending on measurement system
      */
@@ -98,15 +83,14 @@ class BmiFragment : Fragment() {
         if (isMetricSystem){
             binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_sm)
             binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_kg)
-        }
-        else{
+        } else{
             binding.etHeight.hint = getString(R.string.st_height) + getString(R.string.st_in)
             binding.etWeight.hint = getString(R.string.st_weight) + getString(R.string.st_lbs)
         }
     }
 
     /**
-     * Next method estimate BMI index
+     * Next method estimates BMI index
      */
     private fun estimateBmi(){
         var height: Float = binding.etHeight.text.toString().toFloat()
@@ -116,11 +100,8 @@ class BmiFragment : Fragment() {
         if (isMetricSystem){
             height /= 100.0f
             bmi = weight / (height.pow(2))
-        }
-        else{
+        } else
             bmi = (weight / (height.pow(2))) * 703
-        }
-
 
         /** Get right status for bmi index */
         val bmiStatus: String = when(bmi){
@@ -135,12 +116,13 @@ class BmiFragment : Fragment() {
         showBmiResult(bmi, bmiStatus)
     }
 
-
     /**
-     * Next method show bmi result in prepared card
+     * Next method shows bmi result in prepared card
      */
+    @SuppressLint("SetTextI18n")
     private fun showBmiResult(bmi: Float, bmiStatus: String){
-        currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        currentDate =
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
         val bmiIndex = String.format("%.2f", bmi)
 
         binding.tvDate.text = currentDate
@@ -151,7 +133,6 @@ class BmiFragment : Fragment() {
         //add in db
         addBmiRecord(bmi)
     }
-
 
     /**
      * Next methods show or hide bmi history and smooth scroll layout
@@ -168,9 +149,8 @@ class BmiFragment : Fragment() {
         binding.svBmi.smoothScrollTo(binding.clShowHistory.bottom, binding.clShowHistory.bottom)
     }
 
-
     /**
-     * Next method run RecyclerView with bmi history
+     * Next method shows RecyclerView with bmi history
      */
     private fun setupRecyclerView(){
         binding.recyclerViewBmi.layoutManager = LinearLayoutManager(requireContext())
@@ -179,9 +159,8 @@ class BmiFragment : Fragment() {
         binding.recyclerViewBmi.adapter = bmiStatusAdapter
     }
 
-
     /**
-     * Next method add current bmi estimation in database
+     * Next method adds current bmi estimation in database
      */
     private fun addBmiRecord(bmi: Float){
         val weight = binding.etWeight.text.toString().toFloat()
@@ -199,19 +178,17 @@ class BmiFragment : Fragment() {
         }
     }
     /**
-     * Next method get all bmi history from database
+     * Next method gets all bmi history from database
      */
     private fun getItemBmiHistoryList() : ArrayList<BmiHistoryModel>{
         val dataBaseHandler = BmiDataBaseHandler(requireContext())
         return dataBaseHandler.viewBmiResult()
     }
     /**
-     * Next method delete all bmi history from database
+     * Next method deletes all bmi history from database
      */
     private fun deleteAllHistory(){
         val dataBaseHandler = BmiDataBaseHandler(requireContext())
         dataBaseHandler.eraseAll()
     }
-
-
 }

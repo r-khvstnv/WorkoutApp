@@ -36,6 +36,7 @@ import com.rssll971.fitnessassistantapp.models.ExerciseModel
 import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.adapters.UserExercisesAdapter
 import com.rssll971.fitnessassistantapp.activities.MainActivity
+import com.rssll971.fitnessassistantapp.databinding.DialogCreateExerciseBinding
 import com.rssll971.fitnessassistantapp.databinding.FragmentExerciseCatalogBinding
 import java.io.*
 import java.util.*
@@ -44,8 +45,6 @@ import kotlin.collections.ArrayList
 @SuppressLint("UseRequireInsteadOfGet")
 class ExerciseCatalogFragment : Fragment() {
     private var _binding: FragmentExerciseCatalogBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     //adapter for user exercises
     private lateinit var userExercisesAdapter: UserExercisesAdapter
@@ -55,13 +54,12 @@ class ExerciseCatalogFragment : Fragment() {
     private lateinit var imagePath: String
 
     /**
-     * Permissions
+     * Codes
      */
     companion object{
-         const val GALLERY_CODE = 101
+        const val GALLERY_CODE = 101
         private const val IMAGE_DIRECTORY = "FAImages"
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +68,18 @@ class ExerciseCatalogFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentExerciseCatalogBinding.inflate(inflater, container, false)
+
+        /** show list of users exercises*/
+        setupRecyclerView()
+
+
+        binding.llAddActivities.setOnClickListener {
+            showUserExerciseDialog(false, ExerciseModel())
+        }
+        binding.llDeleteExercises.setOnClickListener {
+            deleteAllExercises()
+        }
+
         return binding.root
     }
 
@@ -78,30 +88,8 @@ class ExerciseCatalogFragment : Fragment() {
         _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        /** show list of users exercises*/
-        setupRecyclerView()
-
-
-        /** All clickable*/
-        //add exercise
-        binding.llAddActivities.setOnClickListener {
-            showUserExerciseDialog(false,
-                ExerciseModel(0, "", getString(R.string.st_empty_path), "", false)
-            )
-        }
-        //delete all
-        binding.llDeleteExercises.setOnClickListener {
-            deleteAllExercises()
-        }
-    }
-
-
     /**
-     * Next method add new user exercise in database
+     * Next method adds new user exercise in database
      */
     private fun addUserExerciseRecord(exerciseModel: ExerciseModel){
         //get database handler
@@ -117,7 +105,7 @@ class ExerciseCatalogFragment : Fragment() {
         }
     }
     /**
-     * Next method edit user exercise in database
+     * Next method edits user exercise in database
      */
     private fun editUserExerciseRecord(exerciseModel: ExerciseModel){
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
@@ -125,7 +113,7 @@ class ExerciseCatalogFragment : Fragment() {
         setupRecyclerView()
     }
     /**
-     * Next method delete all user exercise in database
+     * Next method deletes all user exercise in database
      */
     private fun deleteAllExercises(){
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
@@ -133,16 +121,15 @@ class ExerciseCatalogFragment : Fragment() {
         setupRecyclerView()
     }
     /**
-     * Next method delete chosen user exercise in database
+     * Next method deletes chosen user exercise in database
      */
     private fun deleteUserExercises(exerciseModel: ExerciseModel){
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
         dataBaseHandler.deleteUsersExercise(exerciseModel)
         setupRecyclerView()
     }
-
     /**
-     * Next method run RecyclerView with all user exercises
+     * Next method shows RecyclerView with all user exercises
      */
     private fun setupRecyclerView(){
         binding.rvActivities.layoutManager =
@@ -164,7 +151,7 @@ class ExerciseCatalogFragment : Fragment() {
     }
 
     /**
-     * Next method get all user exercises from database
+     * Next method gets all user exercises from database
      */
     private fun getItemsUserExerciseList() : ArrayList<ExerciseModel>{
         val dataBaseHandler by lazy { ExerciseDataBaseHandler(context!! as MainActivity) }
@@ -173,21 +160,16 @@ class ExerciseCatalogFragment : Fragment() {
 
 
     /**
-     * Next method show dialog for editing exercise
-     *
-     * Called from UserExerciseAdapter
+     * Next method shows dialog for editing/creating new exercise
      */
+    @SuppressLint("SetTextI18n")
     private fun showUserExerciseDialog(isExisted: Boolean, exerciseModel: ExerciseModel){
         val dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.dialog_create_exercise)
+        val dialogBinding = DialogCreateExerciseBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val etExerciseName = dialog.findViewById<EditText>(R.id.et_edit_exercise_name)
         ivExerciseImageView = dialog.findViewById(R.id.iv_edit_exercise_image)
-        val etDescription = dialog.findViewById<EditText>(R.id.et_edit_description)
-        val llSave = dialog.findViewById<LinearLayout>(R.id.ll_save)
-        val llDelete = dialog.findViewById<LinearLayout>(R.id.ll_delete)
-        val tvDescriptionSize = dialog.findViewById<TextView>(R.id.tv_description_size)
 
         /** Set image path by default like none.
          * As so its global var and if we don't erase previous path,
@@ -197,51 +179,59 @@ class ExerciseCatalogFragment : Fragment() {
 
         /** fill data when user edit existed exercise*/
         if (isExisted){
-            etExerciseName.setText(exerciseModel.name)
-            etDescription.setText(exerciseModel.description)
+            dialogBinding.etEditExerciseName.setText(exerciseModel.name)
+            dialogBinding.etEditDescription.setText(exerciseModel.description)
             //image
             if (exerciseModel.imagePath != getString(R.string.st_empty_path)){
                 //targetSize
-                Glide.with(this).load(exerciseModel.imagePath).fitCenter().into(ivExerciseImageView)
+                Glide.with(this)
+                    .load(exerciseModel.imagePath)
+                    .fitCenter().into(ivExerciseImageView)
             }
         }
 
-
         dialog.show()
-
         //add image for exercise
         ivExerciseImageView.setOnClickListener {
             getImageFromGallery()
         }
-
         //show max characters for description
-        etDescription.doOnTextChanged { _, _, _, count ->
-            tvDescriptionSize.text = "$count /400"
+        dialogBinding.etEditDescription.doOnTextChanged { _, _, _, count ->
+            dialogBinding.tvDescriptionSize.text = "$count /400"
         }
-
         //save exercise and close dialog
-        llSave.setOnClickListener {
-            if (etExerciseName.text.isEmpty() or etDescription.text.isEmpty()){
+        dialogBinding.llSave.setOnClickListener {
+            if (dialogBinding.etEditExerciseName.text.isEmpty()
+                || dialogBinding.etEditDescription.text.isEmpty()){
+
                 Toast.makeText(requireContext(), getString(R.string.st_add_data),
                     Toast.LENGTH_LONG).show()
-            }
-            else{
-                val name = etExerciseName.text.toString()
-                val description = etDescription.text.toString()
+            } else{
+                val name = dialogBinding.etEditExerciseName.text.toString()
+                val description = dialogBinding.etEditDescription.text.toString()
                 //for new exercise just put all in method
                 if (!isExisted){
                     addUserExerciseRecord(
-                        ExerciseModel(0, name, imagePath, description, false)
+                        ExerciseModel(
+                            0,
+                            name,
+                            imagePath,
+                            description,
+                            false)
                     )
-                }
-                else{//for edit exercise, firstly check is new image available. Otherwise, put previous
-                    if(imagePath == getString(R.string.st_empty_path)){
+                } else{
+                    //for edit exercise, firstly check is new image available.
+                        // Otherwise, put previous
+                    if(imagePath == getString(R.string.st_empty_path))
                         imagePath = exerciseModel.imagePath
-                    }
-
 
                     editUserExerciseRecord(
-                        ExerciseModel(exerciseModel.id, name, imagePath, description, false)
+                        ExerciseModel(
+                            exerciseModel.id,
+                            name,
+                            imagePath,
+                            description,
+                            false)
                     )
                 }
                 dialog.dismiss()
@@ -249,7 +239,7 @@ class ExerciseCatalogFragment : Fragment() {
         }
 
         //delete current exercise
-        llDelete.setOnClickListener {
+        dialogBinding.llDelete.setOnClickListener {
             if (isExisted){
                 deleteUserExercises(exerciseModel)
                 dialog.dismiss()
@@ -263,7 +253,8 @@ class ExerciseCatalogFragment : Fragment() {
      * required to gallery & share features
      */
     private fun showRationalPermissionDialog(){
-        val permissionAlertDialog = AlertDialog.Builder(requireContext()).setMessage(R.string.st_permission_needed_to_be_granted)
+        val permissionAlertDialog =
+            AlertDialog.Builder(requireContext()).setMessage(R.string.st_permission_needed_to_be_granted)
         //positive button
         permissionAlertDialog.setPositiveButton(getString(R.string.st_go_to_settings)){ _: DialogInterface, _: Int ->
             try {
@@ -272,24 +263,27 @@ class ExerciseCatalogFragment : Fragment() {
                 val uri = Uri.fromParts("package", activity?.packageName, null)
                 intent.data = uri
                 startActivity(intent)
-            }catch (e: ActivityNotFoundException){
+            } catch (e: ActivityNotFoundException){
                 e.printStackTrace()
             }
         }
         //negative button
-        permissionAlertDialog.setNegativeButton(R.string.st_cancel){ dialogInterface: DialogInterface, _: Int ->
+        permissionAlertDialog.setNegativeButton(R.string.st_cancel){
+                dialogInterface: DialogInterface, _: Int ->
             dialogInterface.dismiss()
         }
         //show
         permissionAlertDialog.show()
     }
-    /**
-     * Next method request permissions for get images
-     */
 
+    /**
+     * Next method requests permissions for get images
+     */
     private fun getImageFromGallery(){
-        Dexter.withContext(requireContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE).withListener(object : MultiplePermissionsListener{
+        Dexter.withContext(requireContext())
+            .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
+            .withListener(object : MultiplePermissionsListener{
             override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                 if (report!!.areAllPermissionsGranted()){
                     val pickImageIntent = Intent(Intent.ACTION_PICK,
@@ -317,13 +311,14 @@ class ExerciseCatalogFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK){
             if (requestCode == GALLERY_CODE){
                 /**
-                 * First try to get image. After that copy it to app folder and send new path
+                 * First try to get image.
+                 * After that copy it to app folder and return new path
                  */
                 try {
                     //check for available data
                     if (data!!.data != null){
 
-                        /** Next lines get all needed info to prevent portrait image from rotation */
+                        /** Next lines get all needed actions to prevent image from rotation */
                         val options = BitmapFactory.Options()
                         options.inJustDecodeBounds = false
                         //get uri
@@ -365,11 +360,12 @@ class ExerciseCatalogFragment : Fragment() {
      */
     private fun getRealPathFromUri(uri: Uri): String{
         val result: String
-        val cursor = activity!!.contentResolver.query(uri, null, null, null, null)
+        val cursor =
+            activity!!.contentResolver.query(uri,
+                null, null, null, null)
         if (cursor == null){
             result = uri.path!!
-        }
-        else{
+        } else{
             cursor.moveToFirst()
             val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
             result = cursor.getString(idx)
@@ -384,13 +380,11 @@ class ExerciseCatalogFragment : Fragment() {
      */
     private fun rotateImageIfRequired(bitmap: Bitmap, imagePath: String): Bitmap {
         val ei = ExifInterface(File(imagePath).absolutePath)
-        val orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-
-        when(orientation){
-            ExifInterface.ORIENTATION_ROTATE_90 -> return rotateImage(bitmap, 90)
-            ExifInterface.ORIENTATION_ROTATE_180 -> return rotateImage(bitmap, 180)
-            ExifInterface.ORIENTATION_ROTATE_270 -> return rotateImage(bitmap, 270)
-            else -> return rotateImage(bitmap, 0)
+        return when(ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)){
+            ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(bitmap, 90)
+            ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(bitmap, 180)
+            ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270)
+            else -> rotateImage(bitmap, 0)
         }
     }
     /**
@@ -440,6 +434,4 @@ class ExerciseCatalogFragment : Fragment() {
         }
         return result
     }
-
-
 }

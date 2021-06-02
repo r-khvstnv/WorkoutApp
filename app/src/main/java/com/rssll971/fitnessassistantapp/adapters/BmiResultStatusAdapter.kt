@@ -10,15 +10,12 @@ import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.databinding.ItemBmiDateBinding
 
 /**
- * Next class show all information of users bmi data rom history
+ * Next adapter show all information of users bmi data from history
  */
-class BmiResultStatusAdapter(val context: Context,
-                             private val bmiHistoryList: ArrayList<BmiHistoryModel>) :
-    RecyclerView.Adapter<BmiResultStatusAdapter.MyViewHolder>() {
+class BmiResultStatusAdapter(private val context: Context,
+                             private val bmiHistoryList: ArrayList<BmiHistoryModel>)
+    : RecyclerView.Adapter<BmiResultStatusAdapter.MyViewHolder>() {
 
-    /**
-     * Class with item components
-     */
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding = ItemBmiDateBinding.bind(itemView)
     }

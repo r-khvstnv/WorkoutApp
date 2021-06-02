@@ -29,7 +29,6 @@ import kotlin.collections.ArrayList
 class StartWorkoutFragment : Fragment() {
     private var _binding: FragmentStartWorkoutBinding? = null
     private val binding get() = _binding!!
-
     //default exercise list
     private lateinit var emcList: ArrayList<ExerciseModel>
     //exercise list
@@ -42,32 +41,16 @@ class StartWorkoutFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentStartWorkoutBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        formedExerciseList.clear()
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        /**
-         * Next lines responsible for extracting users and default exercises in RecyclerView
-         */
         //Below lines written exactly in that order,
         // so that in the future default list will be at the bottom
         prepareDefaultList()
-
-
         setupRecyclerView()
 
-
-        changeWorkoutDuration()
+        changeWorkoutDurationOnClick()
 
         binding.tvRelaxationTime.text = relaxationTime.toString()
         binding.tvExerciseTime.text = exerciseTime.toString()
@@ -76,13 +59,12 @@ class StartWorkoutFragment : Fragment() {
         binding.rbVoiceOn.setOnClickListener {
             checkTextToSpeechAvailability()
         }
-
-        //start new activity
+        //start new activity onClick
         binding.llStartSession.setOnClickListener {
             if (formedExerciseList.isEmpty()){
-                Toast.makeText(requireContext(), getString(R.string.st_choose_exercise), Toast.LENGTH_SHORT).show()
-            }
-            else {
+                Toast.makeText(requireContext(),
+                    getString(R.string.st_choose_exercise), Toast.LENGTH_SHORT).show()
+            } else {
                 /**
                  * Start new activity with all parameters and chosen exercises
                  */
@@ -96,6 +78,13 @@ class StartWorkoutFragment : Fragment() {
                 activity?.finish()
             }
         }
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+        formedExerciseList.clear()
     }
 
     //def list with current location
@@ -133,11 +122,12 @@ class StartWorkoutFragment : Fragment() {
                 })
         binding.rvSelectActivities.adapter = userExercisesAdapter
         //smooth scroll to top
-        binding.rvSelectActivities.smoothScrollToPosition(userExercisesAdapter.itemCount - 1)
+        binding.rvSelectActivities
+            .smoothScrollToPosition(userExercisesAdapter.itemCount - 1)
     }
 
-    //workout duration
-    private fun changeWorkoutDuration(){
+    /**Next method changes workout and rest duration on corresponding click*/
+    private fun changeWorkoutDurationOnClick(){
         //show result on time changes
         binding.ivMinusRelaxationTime.setOnClickListener {
             if (relaxationTime > 30){
@@ -166,7 +156,7 @@ class StartWorkoutFragment : Fragment() {
     }
 
     /**
-     * Next method check availability of Text to Speech on device
+     * Next method checks availability of Text to Speech on device
      */
     @SuppressLint("UseRequireInsteadOfGet")
     private fun checkTextToSpeechAvailability(){
@@ -183,11 +173,10 @@ class StartWorkoutFragment : Fragment() {
         if (!isInstalled){
             showInstallationOfferDialog(packageName)
         }
-
     }
 
     /**
-     * Next method show alert dialog which offer to install needed app
+     * Next method shows alert dialog which offer to install needed app (TextToSpeech)
      */
     private fun showInstallationOfferDialog(packageName: String){
         val alertDialog = AlertDialog.Builder(requireContext()).setMessage(R.string.st_required_app_need_to_install)
@@ -210,5 +199,4 @@ class StartWorkoutFragment : Fragment() {
 
         alertDialog.show()
     }
-
 }

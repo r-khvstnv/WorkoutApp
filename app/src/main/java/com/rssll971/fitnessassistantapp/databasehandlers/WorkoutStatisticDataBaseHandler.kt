@@ -35,15 +35,13 @@ class WorkoutStatisticDataBaseHandler(context: Context)
         db?.execSQL(CREATE_EXERCISE_TABLE)
     }
 
-    /**
-     * Next method upgrade data in data base, while new data has appeared
-     */
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_STATISTIC")
     }
 
     /**
-     * Next method add new object of exercise history in database
+     * Next method adds new object of exercise history in database
      */
     fun addStatisticData(statisticData: WorkoutStatisticModel): Long{
         //get database for write data
@@ -63,7 +61,7 @@ class WorkoutStatisticDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method get all existing data in db
+     * Next method gets all existing data in db
      */
     fun viewStatisticData(): ArrayList<WorkoutStatisticModel>{
         val statisticList: ArrayList<WorkoutStatisticModel> = ArrayList()

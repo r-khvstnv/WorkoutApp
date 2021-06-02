@@ -17,7 +17,6 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.rssll971.fitnessassistantapp.*
 import com.rssll971.fitnessassistantapp.adapters.ExerciseStatusAdapter
-import com.rssll971.fitnessassistantapp.databasehandlers.ExerciseDataBaseHandler
 import com.rssll971.fitnessassistantapp.databasehandlers.WorkoutStatisticDataBaseHandler
 import com.rssll971.fitnessassistantapp.databinding.ActivityExerciseBinding
 import com.rssll971.fitnessassistantapp.models.ExerciseModel
@@ -27,9 +26,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
-
-    //VARIABLES
-    //binding
+    /**VARIABLES*/
     private lateinit var binding: ActivityExerciseBinding
     //text to speech
     private var textToSpeech: TextToSpeech? = null
@@ -49,11 +46,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     //ads
     private lateinit var adViewBannerRelaxation: AdView
     private lateinit var adViewBannerCurrentExercise: AdView
-
-
-    /**
-     * Fullscreen Mode
-     */
+    /** Fullscreen Mode*/
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) hideSystemUI()
@@ -78,16 +71,22 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /** Create view using Binding**/
         binding = ActivityExerciseBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        /** Get list of exercises */
-        exerciseList = intent!!.getParcelableArrayListExtra("FormedList")!!
-        relaxationTimerProgress = intent!!.getIntExtra("RelaxationTime", 30)
-        exerciseTimerProgress = intent!!.getIntExtra("ExerciseTime", 60)
-        isVoiceAssistantActivated = intent!!.getBooleanExtra("VoiceAssistant", false)
+        /** Get all selected options for workout*/
+        if (intent.hasExtra("FormedList")){
+            exerciseList =
+                intent!!.getParcelableArrayListExtra("FormedList")!!
+            relaxationTimerProgress =
+                intent!!.getIntExtra("RelaxationTime", 30)
+            exerciseTimerProgress =
+                intent!!.getIntExtra("ExerciseTime", 60)
+            isVoiceAssistantActivated =
+                intent!!.getBooleanExtra("VoiceAssistant", false)
+        }
+
 
         /** Ads*/
         MobileAds.initialize(this)
@@ -110,17 +109,15 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         /** Text to Speech*/
         textToSpeech = TextToSpeech(this, this)
-
-        //start rest Timer
+        /**Start rest timer*/
         setupRelaxationTimer()
-
-        //setup rv
+        /**Setup rv with exercise numbers*/
         setupExerciseRecyclerView()
     }
 
-    /** On finish activity**/
+
     override fun onDestroy() {
-        //stop timers
+        /**Stop all timers and text to speech onDestroy*/
         if (relaxationTimer != null){
             relaxationTimer!!.cancel()
         }
@@ -129,7 +126,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             exerciseTimer!!.cancel()
         }
 
-        //stop text to speech
+
         if (textToSpeech != null){
             textToSpeech!!.stop()
             textToSpeech!!.shutdown()
@@ -139,16 +136,15 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
 
-
     /**BLOCK FUNCTIONALITY FOR TIMERS**/
     /**
-     * Next fun responsible for timer before starting exercise
-     */
+     * Next method responsible for timer before starting exercise*/
     private fun setRelaxationTimer(){
         var timeInMillis: Int = relaxationTimerProgress
         binding.pbTimerProgressRest.max = relaxationTimerProgress
 
-        relaxationTimer = object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
+        relaxationTimer =
+            object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
             override fun onTick(millisUntilFinished: Long) {
                 timeInMillis--
 
@@ -164,7 +160,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }.start()
     }
     /**
-     * Next fun reset timer (RestProgress) and calls it
+     * Next method changes layout visibility from exercise to rest
+     * and resets timer (RestProgress)
      */
     private fun setupRelaxationTimer(){
         binding.llExerciseScene.visibility = View.GONE
@@ -186,7 +183,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     /**
-     * Next two fun responsible for exercise timer
+     * Next two methods responsible for exercise timer
      */
     private fun setExerciseTimer(){
         var timeInMillis: Int = exerciseTimerProgress
@@ -198,7 +195,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
 
-        exerciseTimer = object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
+        exerciseTimer =
+            object : CountDownTimer((timeInMillis * 1000).toLong(), 1000){
             override fun onTick(millisUntilFinished: Long) {
                 timeInMillis--
                 //show changes
@@ -222,13 +220,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 exerciseAdapter.notifyDataSetChanged()
 
                 if (currentExerciseIndex < exerciseList.size){
-                setupRelaxationTimer()
-                }else{
+                    setupRelaxationTimer()
+                } else{
                     addStatisticData()
                     showFinishActivity()
                     finish()
                 }
-
             }
         }.start()
     }
@@ -251,7 +248,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
 
     /**
-     * Next fun load exercise to scene
+     * Next method loads exercise to layout
      */
     private fun loadExercise(exerciseIndex: Int){
         binding.tvName.text = exerciseList[exerciseIndex].name
@@ -261,22 +258,18 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (exerciseList[exerciseIndex].imagePath == getString(R.string.st_empty_path)){
             binding.ivUserExerciseImage.visibility = View.GONE
             binding.tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-            //binding.tvDescription.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-        }
-        else{
+        } else{
             binding.ivUserExerciseImage.visibility = View.VISIBLE
             binding.tvDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
-            //binding.tvDescription.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 150f, resources.displayMetrics).toInt()
             //targetSize
-            Glide.with(this).load(exerciseList[exerciseIndex].imagePath).fitCenter().into(binding.ivUserExerciseImage)
+            Glide.with(this)
+                .load(exerciseList[exerciseIndex].imagePath)
+                .fitCenter().into(binding.ivUserExerciseImage)
         }
-
-
     }
 
-
     /**
-     * Next two fun responsible for Text to speech
+     * Next two methods responsible for Text to speech
      */
     override fun onInit(status: Int) {
         //check status
@@ -290,12 +283,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
             //check result
-            if (resultSpeech == TextToSpeech.LANG_MISSING_DATA || resultSpeech == TextToSpeech.LANG_NOT_SUPPORTED){
-                Log.e("TTS", "Not supported")
+            if (resultSpeech == TextToSpeech.LANG_MISSING_DATA
+                || resultSpeech == TextToSpeech.LANG_NOT_SUPPORTED){
+                Log.i("TTS", "Not supported")
             }
-        }else{
+        } else
             Log.e("TTS", "Initialization Failed")
-        }
     }
     private fun speakOut(text: String){
         textToSpeech!!.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
@@ -303,7 +296,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
 
     /**
-     * Next fun load RecyclerView and add content in it
+     * Next method loads RecyclerView and add content in it
      */
     private fun setupExerciseRecyclerView(){
         //create rv of type Linear Horizontal
@@ -316,7 +309,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     /**
-     * Next fun complete current activity and start FinishActivity
+     * Next method complete current activity and start FinishActivity
      */
     private fun showFinishActivity(){
         val intent = Intent(this, FinishActivity::class.java)
@@ -324,17 +317,19 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         finish()
     }
 
-
-
     /**
      * Next method add statistic data in database
      */
     private fun addStatisticData(){
         val dataBaseHandler = WorkoutStatisticDataBaseHandler(this)
-        val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        val statisticModel = WorkoutStatisticModel(0, currentDate, relaxationTimerProgress,
-            exerciseTimerProgress, exerciseList.size)
+        val currentDate =
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        val statisticModel =
+            WorkoutStatisticModel(0,
+                currentDate,
+                relaxationTimerProgress,
+                exerciseTimerProgress,
+                exerciseList.size)
         dataBaseHandler.addStatisticData(statisticModel)
     }
-
 }

@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 
 
-data class ExerciseModel (val id: Int,
-                          val name: String,
+data class ExerciseModel (val id: Int = 0,
+                          val name: String = "",
                           val imagePath: String = "none",
-                          val description: String,
+                          val description: String = "",
                           var isFinished: Boolean = false) :Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

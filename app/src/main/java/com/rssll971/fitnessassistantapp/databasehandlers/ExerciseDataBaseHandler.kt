@@ -32,15 +32,13 @@ class ExerciseDataBaseHandler(context: Context)
         db?.execSQL(CREATE_EXERCISE_TABLE)
     }
 
-    /**
-     * Next method upgrade data in data base, while new data has appeared
-     */
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_EXERCISES")
     }
 
     /**
-     * Next method add new object of exercise history in database
+     * Next method adds new object of exercise history in database
      */
     fun addUsersExercise(exerciseModel: ExerciseModel): Long{
         //get database for write data
@@ -59,7 +57,7 @@ class ExerciseDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method update object of exercise history in database
+     * Next method updates object of exercise history in database
      */
     fun updateUserExercise(exerciseModel: ExerciseModel): Int{
         val db = this.writableDatabase
@@ -77,7 +75,7 @@ class ExerciseDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method get all existing data in db
+     * Next method gets all existing data in db
      */
     fun viewUsersExercises(): ArrayList<ExerciseModel>{
         val emcList: ArrayList<ExerciseModel> = ArrayList()
@@ -120,7 +118,7 @@ class ExerciseDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method delete any user row
+     * Next method deletes any user row
      */
     fun deleteUsersExercise(exerciseModel: ExerciseModel): Int{
         //get db
@@ -135,7 +133,7 @@ class ExerciseDataBaseHandler(context: Context)
     }
 
     /**
-     * Next method delete all user rows
+     * Next method deletes all user rows
      */
     fun deleteAllUserExercises(){
         val db = this.writableDatabase
