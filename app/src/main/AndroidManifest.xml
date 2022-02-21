@@ -22,7 +22,7 @@
             />
         <activity android:name="com.rssll971.fitnessassistantapp.activities.MainActivity"
             android:screenOrientation="locked"
-            >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
