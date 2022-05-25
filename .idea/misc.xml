@@ -6,6 +6,13 @@
         <entry key="..\:/Programming/WorkoutApp/app/src/main/res/layout/activity_exercise.xml" value="0.2359375" />
         <entry key="..\:/Programming/WorkoutApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/core-theme/src/main/res/font/roboto.xml" value="0.2760416666666667" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/core/src/main/res/drawable/ic_add.xml" value="0.2045" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/core/src/main/res/drawable/ic_delete_outline.xml" value="0.2045" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/core/src/main/res/drawable/ic_gallery.xml" value="0.2045" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_add_edit.xml" value="0.25" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_all.xml" value="0.25" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/item_exercise.xml" value="0.264" />
       </map>
     </option>
   </component>

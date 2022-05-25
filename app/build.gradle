@@ -42,6 +42,13 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":core-theme"))
 
+    implementation(project(":repo"))
+
+    implementation(project(":feature-exercise"))
+    implementation(project(":feature-info"))
+    implementation(project(":feature-workout"))
+    implementation(project(":feature-workout-options"))
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CardViewDefault" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">@dimen/m_default_card_elevation</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardCornerRadius">@dimen/m_default_card_radius</item>
+    </style>
+
+    <style name="ExtendedFab" parent="Widget.Material3.ExtendedFloatingActionButton.Icon.Secondary">
+        <item name="android:layout_margin">@dimen/m_default_fab_margin</item>
+        <item name="android:layout_gravity">bottom|end</item>
+    </style>
+</resources>

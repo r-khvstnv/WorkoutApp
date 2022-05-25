@@ -29,5 +29,8 @@
         <!--<item name="colorInversePrimary">@color/md_theme_dark_inversePrimary</item>
         <item name="colorShadow">@color/md_theme_dark_shadow</item>-->
         <item name="colorPrimaryInverse">@color/md_theme_dark_primaryInverse</item>
+
+        <item name="fontFamily">@font/roboto_family</item>
+        <item name="android:fontFamily">@font/roboto_family</item>
     </style>
 </resources>

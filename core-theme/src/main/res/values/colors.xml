@@ -1,12 +1,12 @@
 <resources>
     <color name="md_theme_light_primary">#006973</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
-    <color name="md_theme_light_primaryContainer">#81F3FF</color>
-    <color name="md_theme_light_onPrimaryContainer">#001F23</color>
-    <color name="md_theme_light_secondary">#A13D35</color>
-    <color name="md_theme_light_onSecondary">#FFFFFF</color>
-    <color name="md_theme_light_secondaryContainer">#FFDAD4</color>
-    <color name="md_theme_light_onSecondaryContainer">#410001</color>
+    <color name="md_theme_light_primaryContainer">#006973</color>
+    <color name="md_theme_light_onPrimaryContainer">#FFFFFF</color>
+    <color name="md_theme_light_secondary">#a8371d</color>
+    <color name="md_theme_light_onSecondary">#ffffff</color>
+    <color name="md_theme_light_secondaryContainer">#a8371d</color>
+    <color name="md_theme_light_onSecondaryContainer">#FFFFFF</color>
     <color name="md_theme_light_tertiary">#7D5260</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
     <color name="md_theme_light_tertiaryContainer">#FFD8E4</color>
@@ -31,10 +31,10 @@
     <color name="md_theme_dark_onPrimary">#00363C</color>
     <color name="md_theme_dark_primaryContainer">#004F57</color>
     <color name="md_theme_dark_onPrimaryContainer">#81F3FF</color>
-    <color name="md_theme_dark_secondary">#FFB4A9</color>
-    <color name="md_theme_dark_onSecondary">#620F0D</color>
-    <color name="md_theme_dark_secondaryContainer">#812620</color>
-    <color name="md_theme_dark_onSecondaryContainer">#FFDAD4</color>
+    <color name="md_theme_dark_secondary">#ffb4a1</color>
+    <color name="md_theme_dark_onSecondary">#630d00</color>
+    <color name="md_theme_dark_secondaryContainer">#872007</color>
+    <color name="md_theme_dark_onSecondaryContainer">#ffdad0</color>
     <color name="md_theme_dark_tertiary">#EFB8C8</color>
     <color name="md_theme_dark_onTertiary">#492532</color>
     <color name="md_theme_dark_tertiaryContainer">#633B48</color>
