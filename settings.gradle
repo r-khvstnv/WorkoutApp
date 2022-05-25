@@ -1,2 +1,9 @@
 include ':app'
 rootProject.name = "Workout App"
+include ':core'
+include ':core-theme'
+include ':repo'
+include ':feature-workout-options'
+include ':feature-workout'
+include ':feature-exercise'
+include ':feature-info'

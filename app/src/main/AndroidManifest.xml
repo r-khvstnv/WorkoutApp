@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rssll971.fitnessassistantapp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_whistle"
-        android:label="@string/app_name"
+        android:label="Fitness Assistant"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_whistle_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
-        android:theme="@style/Theme.MyNoActionBar">
-        <activity android:name="com.rssll971.fitnessassistantapp.activities.FinishActivity"
-            android:screenOrientation="locked"
-            />
-        <activity android:name="com.rssll971.fitnessassistantapp.activities.ExerciseActivity"
-            android:screenOrientation="locked"
-            />
-        <activity android:name="com.rssll971.fitnessassistantapp.activities.MainActivity"
-            android:screenOrientation="locked"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,25 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/app_id"/>
-
-
-        <!-- For having successful access to storage
-               exported -> Deny access to other applications
-               grantUriPermissions -> Temporarily permission to session
-       -->
-        <provider
-            android:authorities="com.rssll971.fitnessassistantapp.FILE_PROVIDER_PATHS"
-            android:name="androidx.core.content.FileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_image_paths"
-                />
-        </provider>
     </application>
+
 </manifest>

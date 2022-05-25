@@ -13,6 +13,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-theme" />
+            <option value="$PROJECT_DIR$/feature-exercise" />
+            <option value="$PROJECT_DIR$/feature-info" />
+            <option value="$PROJECT_DIR$/feature-workout" />
+            <option value="$PROJECT_DIR$/feature-workout-options" />
+            <option value="$PROJECT_DIR$/repo" />
           </set>
         </option>
       </GradleProjectSettings>
