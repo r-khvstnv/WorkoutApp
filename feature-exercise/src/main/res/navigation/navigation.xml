@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/allFragment">
+
+    <fragment
+        android:id="@+id/allFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureexercise.all.AllFragment"
+        android:label="fragment_all"
+        tools:layout="@layout/fragment_all" >
+        <action
+            android:id="@+id/action_allFragment_to_addEditFragment"
+            app:destination="@id/addEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditFragment"
+        android:label="fragment_add_edit"
+        tools:layout="@layout/fragment_add_edit">
+        <argument
+            android:name="@string/argument_exercise_id"
+            android:defaultValue="@string/argument_exercise_id_def_value"
+            app:argType="integer"
+            />
+
+    </fragment>
+</navigation>

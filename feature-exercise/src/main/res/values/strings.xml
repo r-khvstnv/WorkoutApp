@@ -2,4 +2,7 @@
 <resources>
     <string name="title">Title</string>
     <string name="title_description">Description</string>
+
+    <string name="argument_exercise_id">exerciseId</string>
+    <string name="argument_exercise_id_def_value">-5</string>
 </resources>
