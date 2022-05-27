@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/AppTheme"
+    tools:context=".OptionsSecondFragment">
+    <!--Title-->
+    <TextView
+        android:id="@+id/_title"
+        style="@style/TitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:text="@string/title_select_exercises"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!---->
+
+    <!--Exercises-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_exercises"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        android:layout_marginVertical="@dimen/sub_elements_margin_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/i_btn_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_title"
+        tools:listitem="@layout/item_exercise" />
+
+    <!--Next Fragment-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/i_btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sub_elements_margin_horizontal"
+        android:backgroundTint="?android:colorBackground"
+        android:text="@string/action_start"
+        android:textColor="?attr/colorSecondary"
+        app:icon="@drawable/ic_chevron_right"
+        app:iconGravity="end"
+        app:iconTint="?attr/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

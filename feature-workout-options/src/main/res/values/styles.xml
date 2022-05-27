@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+
+    <style name="OptionsTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/options_text_size</item>
+    </style>
+
+    <style name="VoiceOptionsRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/voice_r_btn_text_size</item>
+        <item name="android:buttonTint">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="DurationImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">?attr/colorSecondary</item>
+        <item name="android:scaleX">1.5</item>
+        <item name="android:scaleY">1.5</item>
+        <item name="android:background">@drawable/background_rounded_corners</item>
+        <item name="android:src">@drawable/ic_chevron_right</item>
+    </style>
+
+    <style name="DurationValueTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/duration_value_text_size</item>
+        <item name="android:minWidth">@dimen/duration_value_view_min_width</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

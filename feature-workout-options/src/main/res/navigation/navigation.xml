@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_feature_workout_options"
+    app:startDestination="@id/optionsFirstFragment">
+
+    <fragment
+        android:id="@+id/optionsFirstFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsFirstFragment"
+        android:label="fragment_options_first"
+        tools:layout="@layout/fragment_options_first" >
+        <action
+            android:id="@+id/action_optionsFirstFragment_to_optionsSecondFragment"
+            app:destination="@id/optionsSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionsSecondFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsSecondFragment"
+        android:label="fragment_options_second"
+        tools:layout="@layout/fragment_options_second" />
+</navigation>

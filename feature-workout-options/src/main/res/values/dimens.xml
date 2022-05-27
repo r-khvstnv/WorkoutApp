@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="custom_background_corner_radius">8dp</dimen>
+    <dimen name="voice_margin_top">120dp</dimen>
+    <dimen name="title_text_size">48sp</dimen>
+    <dimen name="options_text_size">24sp</dimen>
+    <dimen name="sub_elements_margin_horizontal">20dp</dimen>
+    <dimen name="voice_r_btn_text_size">22sp</dimen>
+    <dimen name="durations_margin_top">40dp</dimen>
+    <dimen name="duration_btn_margin_horizontal">10dp</dimen>
+    <dimen name="duration_value_text_size">28sp</dimen>
+    <dimen name="duration_value_view_min_width">60dp</dimen>
+    <dimen name="item_text_size">20sp</dimen>
+    <dimen name="item_card_corner_radius">8dp</dimen>
+</resources>

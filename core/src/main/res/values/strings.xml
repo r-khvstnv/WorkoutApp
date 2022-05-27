@@ -3,4 +3,8 @@
     <string name="action_add">Add</string>
     <string name="action_delete">Delete</string>
     <string name="action_create">Create</string>
+    <string name="action_on">On</string>
+    <string name="action_off">Off</string>
+    <string name="action_next">Next</string>
+    <string name="action_start">Start</string>
 </resources>

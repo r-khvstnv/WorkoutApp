@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/AppTheme"
+    tools:context=".OptionsFirstFragment"
+    tools:ignore="ContentDescription,UseAppTint">
+
+    <!--Title-->
+    <TextView
+        android:id="@+id/_options"
+        style="@style/TitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:text="@string/title_customize_options"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!---->
+
+
+    <!--Voice Assistant-->
+    <RadioGroup
+        android:id="@+id/_voice_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/sub_elements_margin_horizontal"
+        android:layout_marginTop="@dimen/voice_margin_top"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_options">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/r_btn_voice_on"
+            style="@style/VoiceOptionsRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_on"
+            app:buttonTint="?attr/colorOnPrimary" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/r_btn_voice_off"
+            style="@style/VoiceOptionsRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_off"
+            app:buttonTint="?attr/colorOnPrimary" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/_voice"
+        style="@style/OptionsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/sub_elements_margin_horizontal"
+        android:text="@string/title_voice_assistant"
+        app:layout_constraintBottom_toBottomOf="@id/_voice_group"
+        app:layout_constraintEnd_toStartOf="@id/_voice_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/_voice_group" />
+    <!---->
+
+
+    <!--Exercise Duration-->
+    <ImageButton
+        android:id="@+id/iv_exercise_dur_increase"
+        style="@style/DurationImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/duration_btn_margin_horizontal"
+        android:layout_marginTop="@dimen/durations_margin_top"
+        android:layout_marginEnd="@dimen/sub_elements_margin_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_voice_group" />
+
+    <TextView
+        android:id="@+id/tv_exercise_dur_value"
+        style="@style/DurationValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/duration_btn_margin_horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/iv_exercise_dur_increase"
+        app:layout_constraintEnd_toStartOf="@id/iv_exercise_dur_increase"
+        app:layout_constraintTop_toTopOf="@id/iv_exercise_dur_increase"
+        tools:text="300" />
+
+    <ImageButton
+        android:id="@+id/iv_exercise_dur_decrease"
+        style="@style/DurationImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sub_elements_margin_horizontal"
+        android:layout_marginEnd="@dimen/duration_btn_margin_horizontal"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/iv_exercise_dur_increase"
+        app:layout_constraintEnd_toStartOf="@id/tv_exercise_dur_value"
+        app:layout_constraintTop_toTopOf="@id/iv_exercise_dur_increase" />
+
+    <TextView
+        android:id="@+id/_exercise_dur"
+        style="@style/OptionsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/sub_elements_margin_horizontal"
+        android:text="@string/title_exercise_duration"
+        app:layout_constraintBottom_toBottomOf="@id/iv_exercise_dur_decrease"
+        app:layout_constraintEnd_toStartOf="@id/iv_exercise_dur_decrease"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_exercise_dur_decrease" />
+    <!---->
+
+
+    <!--Rest duration-->
+    <ImageButton
+        android:id="@+id/iv_rest_dur_increase"
+        style="@style/DurationImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/duration_btn_margin_horizontal"
+        android:layout_marginTop="@dimen/durations_margin_top"
+        android:layout_marginEnd="@dimen/sub_elements_margin_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_exercise_dur_increase" />
+
+    <TextView
+        android:id="@+id/tv_rest_dur_value"
+        style="@style/DurationValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/duration_btn_margin_horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/iv_rest_dur_increase"
+        app:layout_constraintEnd_toStartOf="@id/iv_rest_dur_increase"
+        app:layout_constraintTop_toTopOf="@id/iv_rest_dur_increase"
+        tools:text="300" />
+
+    <ImageButton
+        android:id="@+id/iv_rest_dur_decrease"
+        style="@style/DurationImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sub_elements_margin_horizontal"
+        android:layout_marginEnd="@dimen/duration_btn_margin_horizontal"
+        android:rotation="180"
+        app:layout_constraintBottom_toBottomOf="@id/iv_rest_dur_increase"
+        app:layout_constraintEnd_toStartOf="@id/tv_rest_dur_value"
+        app:layout_constraintTop_toTopOf="@id/iv_rest_dur_increase" />
+
+    <TextView
+        android:id="@+id/_rest_dur"
+        style="@style/OptionsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/sub_elements_margin_horizontal"
+        android:text="@string/title_rest_duration"
+        app:layout_constraintBottom_toBottomOf="@id/iv_rest_dur_decrease"
+        app:layout_constraintEnd_toStartOf="@id/iv_rest_dur_decrease"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_rest_dur_decrease" />
+
+
+    <!--Next Fragment-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/i_btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sub_elements_margin_horizontal"
+        android:backgroundTint="?android:colorBackground"
+        android:text="@string/action_next"
+        android:textColor="?attr/colorSecondary"
+        app:icon="@drawable/ic_chevron_right"
+        app:iconGravity="end"
+        app:iconTint="?attr/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

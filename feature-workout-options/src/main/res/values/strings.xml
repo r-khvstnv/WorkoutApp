@@ -1,0 +1,7 @@
+<resources>
+    <string name="title_customize_options">Customize Options</string>
+    <string name="title_voice_assistant">Voice Assistant</string>
+    <string name="title_exercise_duration">Exercise Duration</string>
+    <string name="title_rest_duration">Rest Duration</string>
+    <string name="title_select_exercises">Select Exercises</string>
+</resources>

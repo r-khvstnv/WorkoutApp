@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".addedit.AddEditFragment">
 
     <FrameLayout
@@ -12,20 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="?android:colorBackground"
-        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="@dimen/m_default_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:elevation="@dimen/m_default_card_elevation"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_gallery"
+            android:layout_gravity="center"
             android:scaleX="2"
             android:scaleY="2"
-            android:layout_gravity="center"
-            tools:ignore="ContentDescription"
-            android:tint="?attr/colorSecondary" />
+            android:src="@drawable/ic_gallery"
+            android:tint="?attr/colorSecondary"
+            tools:ignore="ContentDescription" />
+
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
@@ -36,52 +37,50 @@
             android:id="@+id/iv_delete_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/action_delete"
-            android:src="@drawable/ic__delete"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/m_default_layout_margin"
+            android:contentDescription="@string/action_delete"
+            android:src="@drawable/ic__delete"
             android:visibility="gone"
-            tools:visibility="visible"
-            app:tint="?attr/colorError" />
+            app:tint="?attr/colorError"
+            tools:visibility="visible" />
     </FrameLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/_til_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/_frame_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/title"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
         android:layout_marginVertical="@dimen/add_edit_titles_margin_vertical"
-        >
+        android:hint="@string/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_frame_image">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            />
+            android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/_til_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/_til_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/title_description"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
         android:layout_marginVertical="@dimen/add_edit_titles_margin_vertical"
-        >
+        android:hint="@string/title_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_til_title">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
-            android:minLines="5"
-            />
+            android:minLines="5" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -89,12 +88,11 @@
         android:id="@+id/btn_create"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/action_create"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="20sp"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
         android:layout_marginBottom="5dp"
-        />
+        android:text="@string/action_create"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
