@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme"
+    tools:context=".WorkoutFragment">
+
+    <!--Rest-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_rest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/_relax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m_default_layout_margin"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/title_relax"
+            android:textSize="@dimen/rest_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/i_rest_pr"
+            layout="@layout/layout_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/_prepare"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/_relax"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/_prepare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/title_prepare_for"
+            android:textSize="@dimen/rest_prepare_text_size"
+            app:layout_constraintBottom_toTopOf="@id/tv_next_exercise"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_next_exercise"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+            android:layout_marginBottom="@dimen/rest_next_exercise_margin_bottom"
+            android:gravity="center"
+            android:minLines="2"
+            android:textSize="@dimen/rest_next_exercise_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1"
+            tools:text="Some next exercise" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Workout-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_workout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m_default_layout_margin"
+            android:gravity="center"
+            android:minLines="2"
+            android:textSize="@dimen/exercise_title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Some Exercise Long Title" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/m_default_layout_margin"
+            android:textSize="@dimen/exercise_description_text_size"
+            app:layout_constraintBottom_toTopOf="@id/i_exercise_pr"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="@tools:sample/lorem/random" />
+
+        <include
+            android:id="@+id/i_exercise_pr"
+            layout="@layout/layout_progress_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/m_default_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

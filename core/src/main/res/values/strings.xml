@@ -7,6 +7,8 @@
     <string name="action_off">Off</string>
     <string name="action_next">Next</string>
     <string name="action_start">Start</string>
+    <string name="action_quit">Quit</string>
+    <string name="action_update">Update</string>
 
     <string name="error_no_data">No Data Added Yet</string>
 </resources>

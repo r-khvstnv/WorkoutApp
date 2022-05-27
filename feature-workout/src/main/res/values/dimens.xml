@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_layout_size">200dp</dimen>
+    <dimen name="progress_layout_inner_margin">22dp</dimen>
+    <dimen name="progress_layout_elevation_level_a">5dp</dimen>
+    <dimen name="progress_layout_elevation_level_b">10dp</dimen>
+    <dimen name="progress_value_text_size">48sp</dimen>
+    <dimen name="progress_value_margin_top">16dp</dimen>
+    <dimen name="progress_value_helper_text_size">18sp</dimen>
+
+    <dimen name="progress_layout_size_small">150dp</dimen>
+    <dimen name="progress_layout_inner_margin_small">15dp</dimen>
+    <dimen name="progress_value_text_size_small">40sp</dimen>
+    <dimen name="progress_value_margin_top_small">2dp</dimen>
+    <dimen name="progress_value_helper_text_size_small">14sp</dimen>
+
+    <dimen name="rest_next_exercise_margin_bottom">100dp</dimen>
+    <dimen name="rest_title_text_size">48sp</dimen>
+    <dimen name="rest_prepare_text_size">36sp</dimen>
+    <dimen name="rest_next_exercise_text_size">24sp</dimen>
+
+    <dimen name="exercise_title_text_size">36sp</dimen>
+    <dimen name="exercise_description_text_size">20sp</dimen>
+</resources>

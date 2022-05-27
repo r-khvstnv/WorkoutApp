@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_relax">Relax</string>
+    <string name="title_prepare_for">Prepare for</string>
+    <string name="st_sec">sec</string>
+    <string name="title_finish">Finish</string>
+</resources>
