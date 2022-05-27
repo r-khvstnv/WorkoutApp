@@ -12,4 +12,7 @@
     <dimen name="duration_value_view_min_width">60dp</dimen>
     <dimen name="item_text_size">20sp</dimen>
     <dimen name="item_card_corner_radius">8dp</dimen>
+    <dimen name="ll_start_text_size">48sp</dimen>
+    <dimen name="ll_start_size">250dp</dimen>
+    <dimen name="statistic_error_text_size">20sp</dimen>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_feature_workout_options"
-    app:startDestination="@id/optionsFirstFragment">
+    app:startDestination="@id/optionsStartFragment">
 
     <fragment
         android:id="@+id/optionsFirstFragment"
@@ -19,4 +19,13 @@
         android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsSecondFragment"
         android:label="fragment_options_second"
         tools:layout="@layout/fragment_options_second" />
+    <fragment
+        android:id="@+id/optionsStartFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsStartFragment"
+        android:label="fragment_options_start"
+        tools:layout="@layout/fragment_options_start" >
+        <action
+            android:id="@+id/action_optionsStartFragment_to_optionsFirstFragment"
+            app:destination="@id/optionsFirstFragment" />
+    </fragment>
 </navigation>
