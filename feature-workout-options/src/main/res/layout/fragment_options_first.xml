@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/colorPrimaryContainer"
     android:theme="@style/AppTheme"
     tools:context=".OptionsFirstFragment"
     tools:ignore="ContentDescription,UseAppTint">
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/action_on"
-            app:buttonTint="?attr/colorOnPrimary" />
+            app:buttonTint="?attr/colorOnPrimaryContainer" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/r_btn_voice_off"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/action_off"
-            app:buttonTint="?attr/colorOnPrimary" />
+            app:buttonTint="?attr/colorOnPrimaryContainer" />
     </RadioGroup>
 
     <TextView

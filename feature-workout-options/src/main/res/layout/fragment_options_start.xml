@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
+    android:background="?android:colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".OptionsStartFragment">
 
@@ -16,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/_statistic"
         android:background="@drawable/background_oval_shape"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="?attr/colorPrimaryContainer"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             android:text="@string/action_start"
             android:textSize="@dimen/ll_start_text_size"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorOnPrimaryContainer"
             android:fontFamily="@font/roboto_light"
             />
     </LinearLayout>
