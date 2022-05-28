@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_app"
+    app:startDestination="@id/navigation_feature_workout_options">
+    <include app:graph="@navigation/navigation_bmi" />
+    <include app:graph="@navigation/navigation_exercise" />
+    <include app:graph="@navigation/navigation_workout" />
+    <include app:graph="@navigation/navigation_workout_options" />
+    <include app:graph="@navigation/navigation_info" />
+</navigation>

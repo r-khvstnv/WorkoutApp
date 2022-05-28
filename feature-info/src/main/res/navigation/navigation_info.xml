@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_feature_info"
+    app:startDestination="@id/infoFragment">
+
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureinfo.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+</navigation>
