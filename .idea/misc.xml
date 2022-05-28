@@ -12,6 +12,8 @@
         <entry key="..\:/ProjectsFolder/WorkoutApp/core/src/main/res/drawable/ic_delete_outline.xml" value="0.2045" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/core/src/main/res/drawable/ic_gallery.xml" value="0.2045" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/core/src/main/res/drawable/ic_tick.xml" value="0.19" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/fragment_bmi.xml" value="0.25" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/fragment_calculation.xml" value="0.2359375" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_add_edit.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_all.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/item_exercise.xml" value="0.264" />

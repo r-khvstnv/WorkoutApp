@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_feature_bmi"
+    app:startDestination="@id/bmiFragment">
+
+    <fragment
+        android:id="@+id/bmiFragment"
+        android:name="com.rssll971.fitnessassistantapp.featurebmi.BmiFragment"
+        android:label="fragment_bmi"
+        tools:layout="@layout/fragment_bmi">
+        <action
+            android:id="@+id/action_bmiFragment_to_calculationFragment"
+            app:destination="@id/calculationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculationFragment"
+        android:name="com.rssll971.fitnessassistantapp.featurebmi.CalculationFragment"
+        android:label="fragment_calculation"
+        tools:layout="@layout/fragment_calculation" />
+</navigation>

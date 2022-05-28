@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/error_no_data"
-                android:textSize="@dimen/statistic_error_text_size"
+                android:textSize="@dimen/error_no_data_text_size"
                 android:layout_gravity="center"
                 />
         </FrameLayout>

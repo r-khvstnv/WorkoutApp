@@ -9,6 +9,7 @@
     <string name="action_start">Start</string>
     <string name="action_quit">Quit</string>
     <string name="action_update">Update</string>
+    <string name="action_calculate">Calculate</string>
 
     <string name="error_no_data">No Data Added Yet</string>
 </resources>

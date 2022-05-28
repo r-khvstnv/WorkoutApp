@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".CalculationFragment">
+
+    <TextView
+        android:id="@+id/_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/title_bmi_calculator"
+        style="@style/TitleTextView"
+        android:textColor="?attr/colorSecondary"
+        />
+
+    <TextView
+        android:id="@+id/_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/SubTitleTextView"
+        android:text="@string/title_height"
+        android:layout_marginTop="@dimen/subtitle_first_margin_top"
+        app:layout_constraintTop_toBottomOf="@id/_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/m_default_layout_margin"
+        />
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/_height"
+        app:layout_constraintStart_toEndOf="@id/_height"
+        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        />
+
+    <TextView
+        android:id="@+id/_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/SubTitleTextView"
+        android:text="@string/title_weight"
+        app:layout_constraintTop_toBottomOf="@id/_height"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/m_default_layout_margin"
+        android:layout_marginTop="@dimen/subtitle_second_margin_top"
+        />
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/_weight"
+        app:layout_constraintStart_toEndOf="@id/_weight"
+        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/_result_card"
+        style="@style/CardViewDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        android:layout_marginVertical="@dimen/subtitle_second_margin_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_calculate"
+        app:layout_constraintVertical_bias="0.3"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/_weight">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/m_default_layout_margin"
+            >
+            <TextView
+                android:id="@+id/_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/title_result"
+                android:textSize="@dimen/card_title_text_size"
+                android:textColor="?attr/colorSecondary"
+                />
+            <TextView
+                android:id="@+id/tv_bmi_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/_result"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/m_default_layout_margin"
+                tools:text="BMI Index: 23.43"
+                style="@style/CardSubTitleTextView"
+                />
+            <TextView
+                android:id="@+id/tv_bmi_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_bmi_index"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Status: Normal"
+                style="@style/CardSubTitleTextView"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_calculate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:text="@string/action_calculate"
+        android:textSize="@dimen/card_subtitle_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

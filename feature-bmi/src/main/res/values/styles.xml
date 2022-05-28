@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="SubTitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/subtitle_text_size</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+
+
+    <style name="CardSubTitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/card_subtitle_text_size</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+</resources>
