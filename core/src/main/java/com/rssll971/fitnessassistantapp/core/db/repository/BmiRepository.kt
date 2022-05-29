@@ -1,7 +1,7 @@
-package com.rssll971.fitnessassistantapp.repo.db.repository
+package com.rssll971.fitnessassistantapp.core.db.repository
 
-import com.rssll971.fitnessassistantapp.repo.db.dao.BmiDao
-import com.rssll971.fitnessassistantapp.repo.db.entity.BmiEntity
+import com.rssll971.fitnessassistantapp.core.db.dao.BmiDao
+import com.rssll971.fitnessassistantapp.core.db.entity.BmiEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

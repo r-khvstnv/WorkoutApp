@@ -1,9 +1,9 @@
-package com.rssll971.fitnessassistantapp.repo.db.entity
+package com.rssll971.fitnessassistantapp.core.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rssll971.fitnessassistantapp.repo.utils.Constants
+import com.rssll971.fitnessassistantapp.core.utils.Constants
 
 @Entity(tableName = Constants.EXERCISE_TABLE)
 data class ExerciseEntity(

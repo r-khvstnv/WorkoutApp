@@ -20,7 +20,6 @@
             <option value="$PROJECT_DIR$/feature-info" />
             <option value="$PROJECT_DIR$/feature-workout" />
             <option value="$PROJECT_DIR$/feature-workout-options" />
-            <option value="$PROJECT_DIR$/repo" />
           </set>
         </option>
       </GradleProjectSettings>

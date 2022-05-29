@@ -1,8 +1,8 @@
-package com.rssll971.fitnessassistantapp.repo.db.dao
+package com.rssll971.fitnessassistantapp.core.db.dao
 
 import androidx.room.*
-import com.rssll971.fitnessassistantapp.repo.db.entity.StatisticEntity
-import com.rssll971.fitnessassistantapp.repo.utils.Constants
+import com.rssll971.fitnessassistantapp.core.db.entity.StatisticEntity
+import com.rssll971.fitnessassistantapp.core.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
 @Dao

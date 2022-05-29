@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp.repo.utils
+package com.rssll971.fitnessassistantapp.core.utils
 
 internal object Constants {
     const val EXERCISE_TABLE = "exercises_table"

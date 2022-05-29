@@ -1,7 +1,7 @@
-package com.rssll971.fitnessassistantapp.repo.db.repository
+package com.rssll971.fitnessassistantapp.core.db.repository
 
-import com.rssll971.fitnessassistantapp.repo.db.dao.StatisticDao
-import com.rssll971.fitnessassistantapp.repo.db.entity.StatisticEntity
+import com.rssll971.fitnessassistantapp.core.db.dao.StatisticDao
+import com.rssll971.fitnessassistantapp.core.db.entity.StatisticEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

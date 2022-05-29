@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp.core
+package com.rssll971.fitnessassistantapp.core.models
 
 data class Exercise(
     val name: String,

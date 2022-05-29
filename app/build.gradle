@@ -42,8 +42,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":core-theme"))
 
-    implementation(project(":repo"))
-
     implementation(project(":feature-exercise"))
     implementation(project(":feature-info"))
     implementation(project(":feature-workout"))
