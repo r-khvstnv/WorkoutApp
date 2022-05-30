@@ -8,17 +8,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ExerciseDao {
     @Insert
-    suspend fun insertExercise(exerciseEntity: ExerciseEntity)
+    suspend fun insertExerciseEntity(exerciseEntity: ExerciseEntity)
 
     @Update
-    suspend fun updateExercise(exerciseEntity: ExerciseEntity)
+    suspend fun updateExerciseEntity(exerciseEntity: ExerciseEntity)
 
     @Delete
-    suspend fun deleteExercise(exerciseEntity: ExerciseEntity)
+    suspend fun deleteExerciseEntity(exerciseEntity: ExerciseEntity)
 
     @Query("SELECT * FROM ${Constants.EXERCISE_TABLE} ORDER BY ${Constants.ID}")
-    fun getAll(): Flow<List<ExerciseEntity>>
+    fun getAllExerciseEntities(): Flow<List<ExerciseEntity>>
 
     @Query("SELECT * FROM ${Constants.EXERCISE_TABLE} WHERE ${Constants.ID} = :id ")
-    fun getExercise(id: Int): Flow<ExerciseEntity>
+    fun getExerciseEntity(id: Int): Flow<ExerciseEntity>
 }

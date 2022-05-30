@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BmiDao {
     @Insert
-    suspend fun insertBmi(bmiEntity: BmiEntity)
+    suspend fun insertBmiEntity(bmiEntity: BmiEntity)
 
     @Query("DELETE FROM ${Constants.BMI_TABLE}")
-    suspend fun deleteAllRows()
+    suspend fun deleteAllEntities()
 
     @Query("SELECT * FROM ${Constants.BMI_TABLE} ORDER BY ${Constants.ID}")
-    fun getAll(): Flow<List<BmiEntity>>
+    fun getAllBmiEntities(): Flow<List<BmiEntity>>
 }

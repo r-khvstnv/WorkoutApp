@@ -8,14 +8,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface StatisticDao {
     @Insert
-    suspend fun insertStatistic(statisticEntity: StatisticEntity)
+    suspend fun insertStatisticEntity(statisticEntity: StatisticEntity)
 
     @Delete
-    suspend fun deleteStatistic(statisticEntity: StatisticEntity)
+    suspend fun deleteStatisticEntity(statisticEntity: StatisticEntity)
 
     @Query("DELETE FROM ${Constants.STATISTIC_TABLE}")
-    suspend fun deleteAllRows()
+    suspend fun deleteAllStatisticEntities()
 
     @Query("SELECT * FROM ${Constants.STATISTIC_TABLE} ORDER BY ${Constants.ID}")
-    fun getAll(): Flow<List<StatisticEntity>>
+    fun getAllStatisticEntities(): Flow<List<StatisticEntity>>
 }

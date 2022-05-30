@@ -1,9 +1,9 @@
-package com.rssll971.fitnessassistantapp.core.model
+package com.rssll971.fitnessassistantapp.coredata.models
 
 data class Exercise(
     val name: String,
     val imagePath: String = "",
     val description: String,
     var isFinished: Boolean = false,
-    val id: Int = 0
+    val id: Int
 )

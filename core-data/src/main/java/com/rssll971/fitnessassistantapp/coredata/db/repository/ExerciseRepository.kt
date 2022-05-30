@@ -1,27 +1,36 @@
 package com.rssll971.fitnessassistantapp.coredata.db.repository
 
 import com.rssll971.fitnessassistantapp.coredata.db.WorkoutDatabase
-import com.rssll971.fitnessassistantapp.coredata.db.dao.BmiDao
 import com.rssll971.fitnessassistantapp.coredata.db.dao.ExerciseDao
 import com.rssll971.fitnessassistantapp.coredata.db.entity.ExerciseEntity
+import com.rssll971.fitnessassistantapp.coredata.models.Exercise
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ExerciseRepository @Inject constructor(database: WorkoutDatabase) {
     private val dao: ExerciseDao = database.getExerciseDao()
 
-    suspend fun insertExercise(exerciseEntity: ExerciseEntity){
-        dao.insertExercise(exerciseEntity = exerciseEntity)
+    suspend fun insertExercise(exercise: Exercise){
+        dao.insertExerciseEntity(ExerciseEntity.fromExercise(exercise))
     }
 
-    suspend fun updateExercise(exerciseEntity: ExerciseEntity){
-        dao.updateExercise(exerciseEntity = exerciseEntity)
+    suspend fun updateExercise(exercise: Exercise){
+        dao.updateExerciseEntity(ExerciseEntity.fromExercise(exercise))
     }
-    suspend fun deleteExercise(exerciseEntity: ExerciseEntity){
-        dao.deleteExercise(exerciseEntity = exerciseEntity)
+    suspend fun deleteExercise(exercise: Exercise){
+        dao.deleteExerciseEntity(ExerciseEntity.fromExercise(exercise))
     }
 
-    fun getExerciseEntity(id: Int) = dao.getExercise(id = id)
+    fun getExercise(id: Int): Flow<Exercise>{
+        return dao.getExerciseEntity(id = id).map {
+            it.toExercise()
+        }
+    }
 
-    val allExerciseEntity: Flow<List<ExerciseEntity>> = dao.getAll()
+    fun getExerciseList(): Flow<List<Exercise>> {
+        return dao.getAllExerciseEntities().map { list ->
+            list.map { it.toExercise() }
+        }
+    }
 }
