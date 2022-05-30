@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core-data" />
             <option value="$PROJECT_DIR$/core-theme" />
             <option value="$PROJECT_DIR$/feature-bmi" />
             <option value="$PROJECT_DIR$/feature-exercise" />
