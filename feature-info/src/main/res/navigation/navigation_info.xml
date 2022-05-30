@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_feature_info"
-    app:startDestination="@id/infoFragment">
+    app:startDestination="@id/info_fragment">
 
     <fragment
-        android:id="@+id/infoFragment"
+        android:id="@+id/info_fragment"
         android:name="com.rssll971.fitnessassistantapp.featureinfo.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />

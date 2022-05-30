@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?android:colorBackground"
     android:theme="@style/AppTheme"
-    tools:context=".addedit.AddEditFragment">
+    tools:context=".addedit.AddEditExerciseFragment">
 
     <FrameLayout
         android:id="@+id/_frame_image"

@@ -17,7 +17,9 @@ data class StatisticEntity(
 ){
     companion object{
         fun fromStatistic(statistic: Statistic): StatisticEntity{
-            return StatisticEntity(statistic.date, statistic.restDuration, statistic.exerciseDuration, statistic.exerciseAmount)
+            return StatisticEntity(
+                statistic.date, statistic.restDuration,
+                statistic.exerciseDuration, statistic.exerciseAmount)
         }
     }
 

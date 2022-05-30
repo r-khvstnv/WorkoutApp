@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="CardViewDefault" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">@dimen/m_default_elevation</item>
         <item name="strokeWidth">0dp</item>

@@ -3,29 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_feature_workout_options"
-    app:startDestination="@id/optionsStartFragment">
+    app:startDestination="@id/options_start_fragment">
 
     <fragment
-        android:id="@+id/optionsFirstFragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsFirstFragment"
-        android:label="fragment_options_first"
-        tools:layout="@layout/fragment_options_first" >
+        android:id="@+id/options_start_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.start.OptionsStartFragment"
+        android:label="fragment_options_start"
+        tools:layout="@layout/fragment_options_start">
+
         <action
-            android:id="@+id/action_optionsFirstFragment_to_optionsSecondFragment"
-            app:destination="@id/optionsSecondFragment" />
+            android:id="@+id/action_options_start_fragment_to_options_first_fragment"
+            app:destination="@id/options_first_fragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/optionsSecondFragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsSecondFragment"
+        android:id="@+id/options_first_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionsFirstFragment"
+        android:label="fragment_options_first"
+        tools:layout="@layout/fragment_options_first">
+
+        <action
+            android:id="@+id/action_options_first_fragment_to_options_second_fragment"
+            app:destination="@id/options_second_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/options_second_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionsSecondFragment"
         android:label="fragment_options_second"
         tools:layout="@layout/fragment_options_second" />
-    <fragment
-        android:id="@+id/optionsStartFragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.OptionsStartFragment"
-        android:label="fragment_options_start"
-        tools:layout="@layout/fragment_options_start" >
-        <action
-            android:id="@+id/action_optionsStartFragment_to_optionsFirstFragment"
-            app:destination="@id/optionsFirstFragment" />
-    </fragment>
 </navigation>

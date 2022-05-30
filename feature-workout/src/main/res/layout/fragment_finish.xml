@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?android:colorBackground"
     android:theme="@style/AppTheme"
-    tools:context=".FinishFragment">
+    tools:context=".finish.FinishFragment">
 
     <TextView
         android:id="@+id/_finish"

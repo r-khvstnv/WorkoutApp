@@ -1,19 +1,20 @@
 package com.rssll971.fitnessassistantapp
 
-
 import android.app.Application
 import com.rssll971.fitnessassistantapp.di.AppComponent
 import com.rssll971.fitnessassistantapp.di.DaggerAppComponent
-import com.rssll971.fitnessassistantapp.featureexercise.all.di.FeatureExerciseDepsStore
+import com.rssll971.fitnessassistantapp.featureexercise.utils.AllExercisesDepsStore
+
 
 class WorkoutApplication: Application() {
-    lateinit var appComponent: AppComponent private set
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder().application(this).build()
+    }
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.builder().application(this).build()
-        appComponent.inject(this)
-        FeatureExerciseDepsStore.deps = appComponent
+
+        AllExercisesDepsStore.deps = appComponent
     }
 
 }

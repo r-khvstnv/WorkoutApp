@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_feature_workout"
-    app:startDestination="@id/workoutFragment">
+    app:startDestination="@id/workout_fragment">
 
     <fragment
-        android:id="@+id/workoutFragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkout.WorkoutFragment"
+        android:id="@+id/workout_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkout.workout.WorkoutFragment"
         android:label="fragment_workout"
         tools:layout="@layout/fragment_workout">
+
         <action
-            android:id="@+id/action_workoutFragment_to_finishFragment"
-            app:destination="@id/finishFragment" />
+            android:id="@+id/action_workout_fragment_to_finish_fragment"
+            app:destination="@id/finish_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/finishFragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkout.FinishFragment"
+        android:id="@+id/finish_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkout.finish.FinishFragment"
         android:label="fragment_finish"
         tools:layout="@layout/fragment_finish" />
 </navigation>

@@ -14,7 +14,8 @@ import com.rssll971.fitnessassistantapp.coredata.db.entity.StatisticEntity
     BmiEntity::class,
     ExerciseEntity::class,
     StatisticEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class WorkoutDatabase: RoomDatabase() {
     abstract fun getBmiDao(): BmiDao

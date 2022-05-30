@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?android:colorBackground"
     android:theme="@style/AppTheme"
-    tools:context=".all.AllFragment">
+    tools:context=".all.AllExercisesFragment">
 
     <TextView
         android:id="@+id/tv_no_data"

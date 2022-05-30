@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_feature_bmi"
-    app:startDestination="@id/bmiFragment">
+    app:startDestination="@id/bmi_history_fragment">
 
     <fragment
-        android:id="@+id/bmiFragment"
-        android:name="com.rssll971.fitnessassistantapp.featurebmi.BmiFragment"
+        android:id="@+id/bmi_history_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featurebmi.history.BmiHistoryFragment"
         android:label="fragment_bmi"
-        tools:layout="@layout/fragment_bmi">
+        tools:layout="@layout/fragment_bmi_history">
         <action
-            android:id="@+id/action_bmiFragment_to_calculationFragment"
-            app:destination="@id/calculationFragment" />
+            android:id="@+id/action_bmi_history_fragment_to_bmi_calculation_fragment"
+            app:destination="@id/bmi_calculation_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/calculationFragment"
-        android:name="com.rssll971.fitnessassistantapp.featurebmi.CalculationFragment"
+        android:id="@+id/bmi_calculation_fragment"
+        android:name="com.rssll971.fitnessassistantapp.featurebmi.calculation.BmiCalculationFragment"
         android:label="fragment_calculation"
-        tools:layout="@layout/fragment_calculation" />
+        tools:layout="@layout/fragment_bmi_calculation" />
 </navigation>
