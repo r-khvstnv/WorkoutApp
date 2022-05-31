@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="?android:colorBackground"
     android:theme="@style/AppTheme"
+    tools:ignore="ContentDescription,UseAppTint"
     tools:context=".addedit.AddEditExerciseFragment">
 
     <FrameLayout
@@ -18,15 +19,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:layout_gravity="center"
-            android:scaleX="2"
-            android:scaleY="2"
-            android:src="@drawable/ic_gallery"
-            android:tint="?attr/colorSecondary"
-            tools:ignore="ContentDescription" />
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:src="@drawable/ic_gallery"
+                android:tint="?attr/colorSecondary"
+                 />
+
+            <TextView
+                android:layout_marginTop="@dimen/hint_optional_margin_top"
+                android:textSize="@dimen/hint_optional_text_size"
+                android:textColor="?attr/colorSecondary"
+                android:text="@string/title_optional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_image"
@@ -34,7 +51,7 @@
             android:layout_height="match_parent"
             tools:ignore="ContentDescription" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/iv_delete_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +60,7 @@
             android:contentDescription="@string/action_delete"
             android:src="@drawable/ic__delete"
             android:visibility="gone"
-            app:tint="?attr/colorError"
+            android:tint="?attr/colorError"
             tools:visibility="visible" />
     </FrameLayout>
 
@@ -81,9 +98,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
-            android:minLines="5" />
+            android:minLines="10" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        android:layout_marginBottom="5dp"
+        android:text="@string/action_delete"
+        android:textSize="20sp"
+        android:backgroundTint="?attr/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create"
@@ -95,5 +128,5 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/btn_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>

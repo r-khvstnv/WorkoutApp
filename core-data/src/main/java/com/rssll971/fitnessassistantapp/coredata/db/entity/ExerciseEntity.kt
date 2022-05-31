@@ -16,7 +16,7 @@ data class ExerciseEntity(
 ){
     companion object{
         fun fromExercise(exercise: Exercise): ExerciseEntity{
-            return ExerciseEntity(exercise.name, exercise.imagePath, exercise.description)
+            return ExerciseEntity(exercise.name, exercise.imagePath, exercise.description, exercise.id)
         }
     }
 

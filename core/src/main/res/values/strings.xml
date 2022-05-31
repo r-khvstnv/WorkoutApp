@@ -12,4 +12,10 @@
     <string name="action_calculate">Calculate</string>
 
     <string name="error_no_data">No Data Added Yet</string>
+    <string name="error_empty_field">Empty field</string>
+    <string name="error_permission_is_not_granted">Permission required for this Feature is Not Granted</string>
+
+    <string name="result_saved">Saved</string>
+    <string name="result_updated">Updated</string>
+    <string name="result_deleted">Deleted</string>
 </resources>

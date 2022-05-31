@@ -20,7 +20,7 @@
         android:label="fragment_add_edit"
         tools:layout="@layout/fragment_add_edit_exercises">
         <argument
-            android:name="@string/argument_exercise_id"
+            android:name="exerciseId"
             android:defaultValue="-5"
             app:argType="integer" />
 

@@ -52,4 +52,7 @@ dependencies {
     implementation ("com.google.dagger:dagger-android-support:$dagger2Ver")
     kapt ("com.google.dagger:dagger-compiler:$dagger2Ver")
     kapt ("com.google.dagger:dagger-android-processor:$dagger2Ver")
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    kapt 'com.github.bumptech.glide:compiler:4.13.0'
 }

@@ -2,4 +2,7 @@
 <resources>
     <dimen name="add_edit_titles_margin_vertical">20dp</dimen>
     <dimen name="add_edit_titles_text_size">26sp</dimen>
+
+    <dimen name="hint_optional_text_size">18sp</dimen>
+    <dimen name="hint_optional_margin_top">10dp</dimen>
 </resources>
