@@ -1,19 +1,19 @@
-package com.rssll971.fitnessassistantapp.featureexercise.all.di
+package com.rssll971.fitnessassistantapp.featureexercise.addedit.di
 
 import com.rssll971.fitnessassistantapp.core.di.annotation.FeatureScope
-import com.rssll971.fitnessassistantapp.featureexercise.all.AllExercisesFragment
+import com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditExerciseFragment
 import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDeps
 import dagger.Component
 
 @[FeatureScope Component(
     dependencies = [FeatureExercisesDeps::class]
 )]
-interface AllExercisesComponent {
+interface AddEditComponent {
     @Component.Builder
     interface Builder{
         fun deps(featureExercisesDeps: FeatureExercisesDeps): Builder
-        fun build(): AllExercisesComponent
+        fun build(): AddEditComponent
     }
 
-    fun inject(fragment: AllExercisesFragment)
+    fun inject(fragment: AddEditExerciseFragment)
 }

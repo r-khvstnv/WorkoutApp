@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.get
+import androidx.navigation.fragment.findNavController
+import com.rssll971.fitnessassistantapp.featureexercise.R
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAllExercisesBinding
-import com.rssll971.fitnessassistantapp.featureexercise.utils.AllExercisesComponentViewModel
+import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExerciseComponentsViewModel
 import javax.inject.Inject
 
 class AllExercisesFragment : Fragment() {
@@ -23,7 +25,7 @@ class AllExercisesFragment : Fragment() {
     private val viewModel by viewModels<AllExercisesViewModel> { vmFactory }
 
     override fun onAttach(context: Context) {
-        ViewModelProvider(this).get<AllExercisesComponentViewModel>().allExercisesComponent.inject(this)
+        ViewModelProvider(this).get<FeatureExerciseComponentsViewModel>().allExercisesComponent.inject(this)
         super.onAttach(context)
     }
 
@@ -50,6 +52,12 @@ class AllExercisesFragment : Fragment() {
             list?.let {
                 binding.tvNoData.text = list.toString()
             }
+        }
+
+        binding.fabAdd.setOnClickListener {
+            findNavController().navigate(
+                R.id.add_edit_exercise_fragment
+            )
         }
     }
 }

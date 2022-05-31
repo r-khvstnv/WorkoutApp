@@ -25,6 +25,7 @@
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_add_edit.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_add_edit_exercises.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_all.xml" value="0.25" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_all_exercises.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/item_exercise.xml" value="0.264" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-info/src/main/res/layout/fragment_info.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-workout-options/src/main/res/drawable/background_oval_shape.xml" value="0.19" />
@@ -42,6 +43,11 @@
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-workout/src/main/res/layout/progress_layout.xml" value="0.24895833333333334" />
       </map>
     </option>
+  </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="dagger.Binds" />
+    </list>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

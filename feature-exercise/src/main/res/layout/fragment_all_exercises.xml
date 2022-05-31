@@ -22,6 +22,7 @@
         tools:listitem="@layout/item_exercise" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_add"
         style="@style/ExtendedFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
