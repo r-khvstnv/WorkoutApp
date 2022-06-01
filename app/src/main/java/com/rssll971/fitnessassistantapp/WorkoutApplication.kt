@@ -3,6 +3,7 @@ package com.rssll971.fitnessassistantapp
 import android.app.Application
 import com.rssll971.fitnessassistantapp.di.AppComponent
 import com.rssll971.fitnessassistantapp.di.DaggerAppComponent
+import com.rssll971.fitnessassistantapp.featurebmi.deps.FeatureBmiDepsStore
 import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDepsStore
 
 
@@ -15,6 +16,7 @@ class WorkoutApplication: Application() {
         super.onCreate()
 
         FeatureExercisesDepsStore.deps = appComponent
+        FeatureBmiDepsStore.deps = appComponent
     }
 
 }

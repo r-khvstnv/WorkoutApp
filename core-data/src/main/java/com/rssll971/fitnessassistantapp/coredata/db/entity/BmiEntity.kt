@@ -8,7 +8,7 @@ import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 
 @Entity(tableName = Constants.BMI_TABLE)
 data class BmiEntity(
-    @ColumnInfo val date: String,
+    @ColumnInfo val date: Long,
     @ColumnInfo val weight: Float,
     @ColumnInfo val height: Float,
     @ColumnInfo val bmiIndex: Float,
@@ -17,7 +17,7 @@ data class BmiEntity(
 ){
     companion object{
         fun fromBmi(bmi: Bmi): BmiEntity{
-            return BmiEntity(bmi.date, bmi.weight, bmi.height, bmi.bmiIndex)
+            return BmiEntity(bmi.date, bmi.weight, bmi.height, bmi.bmiIndex, bmi.id)
         }
     }
 
