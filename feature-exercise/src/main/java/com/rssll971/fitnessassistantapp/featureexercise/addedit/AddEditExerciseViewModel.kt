@@ -8,6 +8,7 @@ import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepositor
 import com.rssll971.fitnessassistantapp.coredata.models.Exercise
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -40,7 +41,7 @@ class AddEditExerciseViewModel @Inject constructor(private val repository: Exerc
      * - imagePath separately*/
     fun requestExerciseForUpdating(id: Int){
         viewModelScope.launch(Dispatchers.IO){
-            repository.getExercise(id = id).collect {
+            repository.getExercise(id = id).take(1).collect {
                 exercise ->
                 _exerciseForUpdating.postValue(exercise)
                 _isExerciseShouldBeUpdated.postValue(true)

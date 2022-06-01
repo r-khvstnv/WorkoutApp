@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Exercise Name" />
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/iv_item_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,8 @@
             android:src="@drawable/ic__delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorError" />
+            android:tint="?attr/colorError"
+            tools:ignore="UseAppTint" />
 
         <TextView
             android:id="@+id/tv_item_description"
