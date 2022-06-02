@@ -6,8 +6,7 @@
     android:layout_height="@dimen/progress_layout_size_small"
     android:background="@drawable/shape_oval"
     android:backgroundTint="?android:colorBackground"
-    android:elevation="@dimen/progress_layout_elevation_level_a"
-    android:theme="@style/AppTheme">
+    android:elevation="@dimen/progress_layout_elevation_level_a">
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_bar"

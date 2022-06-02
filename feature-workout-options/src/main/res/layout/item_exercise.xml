@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/m_default_item_margin"
-    android:theme="@style/AppTheme"
     app:cardCornerRadius="@dimen/item_card_corner_radius"
     app:cardElevation="0dp"
     app:cardMaxElevation="0dp">
@@ -31,9 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_tick"
-            android:tint="?attr/colorPrimary"
+            app:tint="?attr/colorPrimary"
             android:visibility="invisible"
-            tools:ignore="ContentDescription,UseAppTint"
+            tools:ignore="ContentDescription"
             tools:visibility="visible" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

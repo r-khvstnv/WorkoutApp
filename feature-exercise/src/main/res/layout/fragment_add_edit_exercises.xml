@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground"
-    android:theme="@style/AppTheme"
-    tools:ignore="ContentDescription,UseAppTint"
-    tools:context=".addedit.AddEditExerciseFragment">
+    tools:context=".addedit.AddEditExerciseFragment"
+    tools:ignore="ContentDescription">
 
     <FrameLayout
         android:id="@+id/_frame_image"
@@ -22,27 +20,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical"
             tools:ignore="UseCompoundDrawables">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleX="2"
                 android:scaleY="2"
                 android:src="@drawable/ic_gallery"
-                android:tint="?attr/colorSecondary"
-                 />
+                app:tint="?attr/colorSecondary" />
 
             <TextView
-                android:layout_marginTop="@dimen/hint_optional_margin_top"
-                android:textSize="@dimen/hint_optional_text_size"
-                android:textColor="?attr/colorSecondary"
-                android:text="@string/title_optional"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:layout_marginTop="@dimen/hint_optional_margin_top"
+                android:text="@string/title_optional"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="@dimen/hint_optional_text_size" />
         </LinearLayout>
 
         <ImageView
@@ -60,7 +57,7 @@
             android:contentDescription="@string/action_delete"
             android:src="@drawable/ic__delete"
             android:visibility="gone"
-            android:tint="?attr/colorError"
+            app:tint="?attr/colorError"
             tools:visibility="visible" />
     </FrameLayout>
 
@@ -102,21 +99,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
         android:layout_marginBottom="5dp"
+        android:backgroundTint="?attr/colorSecondary"
         android:text="@string/action_delete"
         android:textSize="20sp"
-        android:backgroundTint="?attr/colorSecondary"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        tools:visibility="visible"
-        />
+        tools:visibility="visible" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create"

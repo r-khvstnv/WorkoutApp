@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground"
     android:orientation="vertical"
-    android:theme="@style/AppTheme"
     tools:context=".workout.WorkoutFragment">
 
     <!--Rest-->
@@ -22,9 +20,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/m_default_layout_margin"
-            android:fontFamily="@font/roboto_light"
             android:text="@string/title_relax"
             android:textSize="@dimen/rest_title_text_size"
+            app:fontFamily="@font/roboto_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,9 +42,9 @@
             android:id="@+id/_prepare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
             android:text="@string/title_prepare_for"
             android:textSize="@dimen/rest_prepare_text_size"
+            app:fontFamily="@font/roboto_light"
             app:layout_constraintBottom_toTopOf="@id/tv_next_exercise"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

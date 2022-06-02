@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground"
-    android:theme="@style/AppTheme"
     tools:context=".finish.FinishFragment">
 
     <TextView
@@ -13,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/m_default_layout_margin"
-        android:fontFamily="@font/roboto_light"
+        app:fontFamily="@font/roboto_light"
         android:text="@string/title_finish"
         android:textSize="@dimen/rest_title_text_size"
         app:layout_constraintEnd_toEndOf="parent"

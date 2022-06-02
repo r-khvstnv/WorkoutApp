@@ -7,8 +7,7 @@
     android:background="?android:colorBackground"
     android:elevation="@dimen/m_default_elevation"
     android:gravity="center"
-    android:orientation="horizontal"
-    android:theme="@style/AppTheme">
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tv_item_date"

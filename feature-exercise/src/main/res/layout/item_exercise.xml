@@ -5,8 +5,7 @@
     style="@style/CardViewDefault"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/m_default_item_margin"
-    android:theme="@style/AppTheme">
+    android:layout_margin="@dimen/m_default_item_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
             android:id="@+id/tv_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
+            app:fontFamily="@font/roboto_medium"
             android:textColor="?attr/colorPrimary"
             android:textSize="28sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +31,8 @@
             android:src="@drawable/ic__delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:tint="?attr/colorError"
-            tools:ignore="UseAppTint" />
+            app:tint="?attr/colorError"
+             />
 
         <TextView
             android:id="@+id/tv_item_description"

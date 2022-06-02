@@ -3,14 +3,16 @@
 
     <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
-        <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="fontFamily">@font/roboto_light</item>
     </style>
 
     <style name="OptionsTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/options_text_size</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
     <style name="VoiceOptionsRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
@@ -18,6 +20,7 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/voice_r_btn_text_size</item>
         <item name="android:buttonTint">?attr/colorOnPrimary</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
     <style name="DurationImageButton" parent="Widget.AppCompat.ImageButton">
@@ -35,5 +38,6 @@
         <item name="android:textSize">@dimen/duration_value_text_size</item>
         <item name="android:minWidth">@dimen/duration_value_view_min_width</item>
         <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/roboto_medium</item>
     </style>
 </resources>
