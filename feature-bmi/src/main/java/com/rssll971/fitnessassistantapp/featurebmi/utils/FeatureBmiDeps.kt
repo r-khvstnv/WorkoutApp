@@ -1,4 +1,4 @@
-package com.rssll971.fitnessassistantapp.featurebmi.deps
+package com.rssll971.fitnessassistantapp.featurebmi.utils
 
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
@@ -42,7 +42,7 @@ interface FeatureBmiDepsProvider{
 /**
  * Explicit Singleton which must be assigned in WorkoutApplication
  * */
-object FeatureBmiDepsStore: FeatureBmiDepsProvider{
+object FeatureBmiDepsStore: FeatureBmiDepsProvider {
     override var deps: FeatureBmiDeps by Delegates.notNull()
 }
 
@@ -54,6 +54,7 @@ object FeatureBmiDepsStore: FeatureBmiDepsProvider{
  * due to it creates by ViewModelFactory which should be injected too.
  * */
 internal class FeatureBmiComponentsViewModel : ViewModel(){
-    val bmiCalculationComponent = DaggerBmiCalculationComponent.builder().deps(FeatureBmiDepsProvider.deps).build()
+    val bmiCalculationComponent = DaggerBmiCalculationComponent.builder().deps(
+        FeatureBmiDepsProvider.deps).build()
     val bmiHistoryComponent = DaggerBmiHistoryComponent.builder().deps(FeatureBmiDepsProvider.deps).build()
 }

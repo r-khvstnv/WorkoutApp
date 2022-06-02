@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/options_start_fragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.start.OptionsStartFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.start.OptionStartFragment"
         android:label="fragment_options_start"
-        tools:layout="@layout/fragment_options_start">
+        tools:layout="@layout/fragment_option_start">
 
         <action
             android:id="@+id/action_options_start_fragment_to_options_first_fragment"
@@ -18,9 +18,9 @@
 
     <fragment
         android:id="@+id/options_first_fragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionsFirstFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionFirstFragment"
         android:label="fragment_options_first"
-        tools:layout="@layout/fragment_options_first">
+        tools:layout="@layout/fragment_option_first">
 
         <action
             android:id="@+id/action_options_first_fragment_to_options_second_fragment"
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/options_second_fragment"
-        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionsSecondFragment"
+        android:name="com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionSecondFragment"
         android:label="fragment_options_second"
-        tools:layout="@layout/fragment_options_second" />
+        tools:layout="@layout/fragment_option_second" />
 </navigation>

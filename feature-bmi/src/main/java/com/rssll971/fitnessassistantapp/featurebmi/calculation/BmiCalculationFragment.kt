@@ -13,7 +13,7 @@ import androidx.lifecycle.get
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiCalculationBinding
-import com.rssll971.fitnessassistantapp.featurebmi.deps.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 import com.rssll971.fitnessassistantapp.core.R as RCore

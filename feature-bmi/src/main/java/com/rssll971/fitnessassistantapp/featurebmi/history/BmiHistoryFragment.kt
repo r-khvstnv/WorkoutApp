@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
-import com.rssll971.fitnessassistantapp.featurebmi.deps.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
 import javax.inject.Inject
 
 class BmiHistoryFragment : Fragment() {
