@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
 import com.rssll971.fitnessassistantapp.featurebmi.deps.FeatureBmiComponentsViewModel
@@ -21,6 +22,8 @@ class BmiHistoryFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<BmiHistoryViewModel> { viewModelFactory }
+
+    private lateinit var adapterBmi: BmiHistoryAdapter
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this)
@@ -40,8 +43,33 @@ class BmiHistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
+
         binding.fabNewBmi.setOnClickListener {
             findNavController().navigate(R.id.bmi_calculation_fragment)
+        }
+
+        viewModel.bmiList.observe(viewLifecycleOwner){
+            list ->
+            list.let {
+                adapterBmi.updateList(it.reversed())
+                if (it.isNotEmpty()){
+                    binding.clBmi.visibility = View.VISIBLE
+                    binding.tvNoData.visibility = View.GONE
+                } else{
+                    binding.clBmi.visibility = View.GONE
+                    binding.tvNoData.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setupRecyclerView(){
+        adapterBmi = BmiHistoryAdapter(requireContext())
+        binding.included.rvBmiHistory.apply {
+            adapter = adapterBmi
+            layoutManager = LinearLayoutManager(
+                requireContext(), LinearLayoutManager.VERTICAL, false)
         }
     }
 

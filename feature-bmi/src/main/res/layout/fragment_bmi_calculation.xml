@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/m_default_layout_margin"
         android:layout_marginTop="@dimen/subtitle_first_margin_top"
-        android:text="@string/title_height"
+        android:text="@string/title_height_sm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/_title" />
 
@@ -35,6 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@id/_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/_height" />
@@ -46,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/m_default_layout_margin"
         android:layout_marginTop="@dimen/subtitle_second_margin_top"
-        android:text="@string/title_weight"
+        android:text="@string/title_weight_kg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/_height" />
 
@@ -55,13 +56,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@id/_weight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/_weight" />
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/_result_card"
+        android:id="@+id/result_card"
         style="@style/CardViewDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

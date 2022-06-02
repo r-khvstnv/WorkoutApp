@@ -22,6 +22,9 @@
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/fragment_bmi_calculation.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/fragment_bmi_history.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/fragment_calculation.xml" value="0.2359375" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/item_bmi_history.xml" value="0.264" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/item_history.xml" value="0.24895833333333334" />
+        <entry key="..\:/ProjectsFolder/WorkoutApp/feature-bmi/src/main/res/layout/layout_bmi_history_recycler.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_add_edit.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_add_edit_exercises.xml" value="0.25" />
         <entry key="..\:/ProjectsFolder/WorkoutApp/feature-exercise/src/main/res/layout/fragment_all.xml" value="0.25" />

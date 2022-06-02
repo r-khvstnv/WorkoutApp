@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/item_layout_margin"
+    android:background="?android:colorBackground"
+    android:elevation="@dimen/m_default_elevation"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:theme="@style/AppTheme">
+
+    <TextView
+        android:id="@+id/tv_item_date"
+        style="@style/ItemTextView"
+        android:layout_weight="1.5"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <TextView
+        android:id="@+id/tv_item_weight"
+        style="@style/ItemTextView"
+        android:layout_weight="0.8"
+        tools:text="105" />
+
+    <TextView
+        android:id="@+id/tv_item_bmi_index"
+        style="@style/ItemTextView"
+        android:layout_weight="1"
+        tools:text="25" />
+
+    <TextView
+        android:id="@+id/tv_item_bmi_status"
+        style="@style/ItemBmiIndexTextView"
+        android:layout_weight="2"
+        android:paddingVertical="@dimen/item_bmi_index_padding_vertical"
+        android:textColor="?attr/colorOnPrimary"
+        tools:background="@color/color_ex_obese"
+        tools:text="Extremely Obese" />
+</LinearLayout>

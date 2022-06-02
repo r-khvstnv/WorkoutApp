@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="InefficientWeight"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?android:colorBackground"
+        android:elevation="@dimen/m_default_elevation"
+        android:gravity="center"
+        android:paddingVertical="@dimen/item_bmi_index_padding_vertical"
+        >
+        <TextView
+            style="@style/ItemTitleTextView"
+            android:layout_weight="1.2"
+            android:text="@string/title_date"
+            />
+        <TextView
+            style="@style/ItemTitleTextView"
+            android:layout_weight="1"
+            android:text="@string/title_weight"
+            />
+        <TextView
+            style="@style/ItemTitleTextView"
+            android:layout_weight="1"
+            android:text="@string/title_index"
+            />
+        <TextView
+            style="@style/ItemTitleTextView"
+            android:layout_weight="1.8"
+            android:text="@string/title_status"
+            />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_bmi_history"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="@dimen/item_layout_margin"
+        tools:listitem="@layout/item_bmi_history" />
+</LinearLayout>

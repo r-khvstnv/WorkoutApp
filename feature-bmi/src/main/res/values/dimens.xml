@@ -8,4 +8,10 @@
 
     <dimen name="card_title_text_size">32sp</dimen>
     <dimen name="card_subtitle_text_size">24sp</dimen>
+
+    <dimen name="item_layout_margin">2dp</dimen>
+    <dimen name="item_text_size">18sp</dimen>
+    <dimen name="item_title_text_size">22sp</dimen>
+    <dimen name="item_bmi_index_text_size">16sp</dimen>
+    <dimen name="item_bmi_index_padding_vertical">8dp</dimen>
 </resources>

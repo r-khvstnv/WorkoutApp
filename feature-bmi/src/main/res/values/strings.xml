@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_height">Height (sm)</string>
-    <string name="title_weight">Weight (kg)</string>
+    <string name="title_height_sm">Height (sm)</string>
+    <string name="title_weight_kg">Weight (kg)</string>
     <string name="title_result">Result</string>
     <string name="title_bmi_index">BMI Index</string>
     <string name="title_status">Status</string>
     <string name="title_history">History</string>
     <string name="title_bmi_calculator">BMI Calculator</string>
+    <string name="title_date">Date</string>
+    <string name="title_index">Index</string>
+    <string name="title_weight">Weight</string>
 
     <string name="action_calculate_bmi">Calculate BMI</string>
+    <string name="action_clear_history">Clear History</string>
+
+
+    <string name="index_underweight">Underweight</string>
+    <string name="index_normal">Normal</string>
+    <string name="index_overweight">Overweight</string>
+    <string name="index_obese">Obese</string>
+    <string name="index_ex_obese">Extremely Obese</string>
 
 
 </resources>

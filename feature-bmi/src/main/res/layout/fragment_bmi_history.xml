@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme"
     tools:context=".history.BmiHistoryFragment">
 
     <TextView
@@ -16,57 +15,75 @@
         android:textSize="@dimen/error_no_data_text_size" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_bmi"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:colorBackground"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/_history"
-            style="@style/TitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/m_default_layout_margin"
-            android:text="@string/title_history"
-            android:textSize="@dimen/title_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/_statistic"
-            style="@style/CardViewDefault"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_bmi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/m_default_layout_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/_history">
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <FrameLayout
+            <TextView
+                android:id="@+id/_history"
+                style="@style/TitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/m_default_layout_margin"
+                android:text="@string/title_history"
+                android:textSize="@dimen/title_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/_statistic"
+                style="@style/CardViewDefault"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/m_default_layout_margin"
-                android:minHeight="200dp">
-                <!--TODO add workout statistic-->
-            </FrameLayout>
-        </androidx.cardview.widget.CardView>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/_history">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/m_default_layout_margin"
+                    android:minHeight="200dp">
+                    <!--TODO add workout statistic-->
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_bmi_history"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/m_default_layout_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/_statistic" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/included"
+                layout="@layout/layout_bmi_history_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/_statistic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_clear_history"
+                android:layout_margin="@dimen/m_default_layout_margin"
+                />
 
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_clear_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+                android:layout_marginBottom="5dp"
+                android:text="@string/action_clear_history"
+                android:textSize="20sp"
+                app:icon="@drawable/ic__delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_new_bmi"
