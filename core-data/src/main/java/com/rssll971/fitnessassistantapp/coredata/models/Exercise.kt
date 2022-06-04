@@ -4,6 +4,7 @@ data class Exercise(
     val name: String,
     val imagePath: String = "",
     val description: String,
+    val id: Int,
     var isFinished: Boolean = false,
-    val id: Int
+    var isSelected: Boolean = false
 )

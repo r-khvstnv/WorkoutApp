@@ -270,7 +270,6 @@ class AddEditExerciseFragment : BaseFragment() {
                 binding.etTitle.text.toString(),
                 viewModel.imagePath.value.toString(),
                 binding.etDescription.text.toString(),
-                false,
                 /*Apply current id, otherwise assign 0.
                 It's possible, since ID is generated automatically when a new line is created*/
                 viewModel.exerciseForUpdating.value?.id ?: 0

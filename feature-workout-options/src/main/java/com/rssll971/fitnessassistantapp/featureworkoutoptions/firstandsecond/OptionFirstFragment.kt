@@ -39,10 +39,46 @@ class OptionFirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.iBtnNext.setOnClickListener {
-            findNavController().navigate(
-                R.id.options_second_fragment
-            )
+
+        viewModel.restTime.observe(viewLifecycleOwner){
+            binding.tvRestDurValue.text = it.toString()
+        }
+        viewModel.exerciseTime.observe(viewLifecycleOwner){
+            binding.tvExerciseDurValue.text = it.toString()
+        }
+
+
+        with(binding){
+            rBtnVoiceOn.setOnCheckedChangeListener { _, checked ->
+                viewModel.setVoiceAvailability(checked)
+            }
+            ivRestDurDecrease.setOnClickListener {
+                viewModel.decreaseRestTime()
+            }
+            ivRestDurIncrease.setOnClickListener {
+                viewModel.increaseRestTime()
+            }
+            ivExerciseDurDecrease.setOnClickListener {
+                viewModel.decreaseExerciseTime()
+            }
+            ivExerciseDurIncrease.setOnClickListener {
+                viewModel.increaseExerciseTime()
+            }
+
+
+
+
+
+
+
+
+
+
+            iBtnNext.setOnClickListener {
+                findNavController().navigate(
+                    R.id.options_second_fragment
+                )
+            }
         }
     }
 

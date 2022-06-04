@@ -21,6 +21,6 @@ data class ExerciseEntity(
     }
 
     fun toExercise(): Exercise{
-        return Exercise(name, imagePath, description, false, id)
+        return Exercise(name, imagePath, description, id)
     }
 }
