@@ -1,7 +1,11 @@
 package com.rssll971.fitnessassistantapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -21,5 +25,24 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.findNavController()
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id){
+                R.id.bmi_history_fragment -> showNavView()
+                R.id.options_start_fragment -> showNavView()
+                R.id.all_exercises_fragment -> showNavView()
+                R.id.info_fragment -> showNavView()
+                else -> hideNavView()
+            }
+        }
+    }
+
+
+
+    private fun hideNavView(){
+        binding.navView.visibility = View.GONE
+    }
+    private fun showNavView(){
+        binding.navView.visibility = View.VISIBLE
     }
 }

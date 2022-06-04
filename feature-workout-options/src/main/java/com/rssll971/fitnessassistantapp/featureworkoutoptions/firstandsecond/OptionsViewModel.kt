@@ -4,6 +4,9 @@ import androidx.lifecycle.*
 import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
 import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
 import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.models.Statistic
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OptionsViewModel @Inject constructor(
@@ -11,12 +14,15 @@ class OptionsViewModel @Inject constructor(
     private val repoExercise: ExerciseRepository
 ): ViewModel() {
     private val defaultTimeStep: Int = 30
+
     private var _restTime: MutableLiveData<Int> = MutableLiveData(30)
     val restTime: LiveData<Int> get() = _restTime
     private var _exerciseTime: MutableLiveData<Int> = MutableLiveData(30)
     val exerciseTime: LiveData<Int> get() = _exerciseTime
     private var _isVoiceEnabled = MutableLiveData(false)
-    private var _selectedExercisesIdList: MutableLiveData<List<Int>> = MutableLiveData(listOf())
+
+    private var _isStatisticAdded = MutableLiveData(false)
+    val isStatisticAdded: LiveData<Boolean> get() = _isStatisticAdded
 
     val exerciseList: LiveData<List<Exercise>> = repoExercise.getExerciseList().asLiveData()
 
@@ -42,7 +48,20 @@ class OptionsViewModel @Inject constructor(
         }
     }
 
-    fun setSelectedIdsList(list: List<Int>){
-        _selectedExercisesIdList.value = list
+    fun setupStatistic(list: List<Int>, dateInMillis: Long){
+        viewModelScope.launch(Dispatchers.IO){
+            val statistic = Statistic(
+                dateInMillis,
+                restTime.value!!,
+                exerciseTime.value!!,
+                list.size,
+                _isVoiceEnabled.value!!,
+                list,
+                0
+            )
+
+            repoStatistic.insertStatistic(statistic = statistic)
+            _isStatisticAdded.postValue(true)
+        }
     }
 }

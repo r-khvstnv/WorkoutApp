@@ -4,4 +4,7 @@
     <string name="title_exercise_duration">Exercise Duration</string>
     <string name="title_rest_duration">Rest Duration</string>
     <string name="title_select_exercises">Select Exercises</string>
+
+
+    <string name="error_no_exercise_selected">No Exercise Selected</string>
 </resources>

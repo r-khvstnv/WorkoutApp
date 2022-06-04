@@ -43,7 +43,7 @@ class OptionStartFragment : Fragment() {
 
         binding.llStart.setOnClickListener {
             findNavController().navigate(
-                R.id.options_first_fragment
+                R.id.options_nested_graph
             )
         }
     }

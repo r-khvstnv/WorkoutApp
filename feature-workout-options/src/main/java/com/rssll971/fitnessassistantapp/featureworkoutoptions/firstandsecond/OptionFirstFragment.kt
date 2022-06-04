@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionFirstBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSComponentViewModel
@@ -20,7 +21,7 @@ class OptionFirstFragment : Fragment() {
     private val binding get() = _binding!!
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by activityViewModels<OptionsViewModel> { viewModelFactory }
+    private val viewModel by navGraphViewModels<OptionsViewModel>(R.id.options_nested_graph){ viewModelFactory }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this)
@@ -66,14 +67,6 @@ class OptionFirstFragment : Fragment() {
             }
 
 
-
-
-
-
-
-
-
-
             iBtnNext.setOnClickListener {
                 findNavController().navigate(
                     R.id.options_second_fragment
@@ -86,5 +79,4 @@ class OptionFirstFragment : Fragment() {
         _binding = null
         super.onDestroyView()
     }
-
 }

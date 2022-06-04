@@ -10,10 +10,12 @@
         android:name="com.rssll971.fitnessassistantapp.featureworkout.workout.WorkoutFragment"
         android:label="fragment_workout"
         tools:layout="@layout/fragment_workout">
-
         <action
             android:id="@+id/action_workout_fragment_to_finish_fragment"
             app:destination="@id/finish_fragment" />
+        <deepLink
+            app:uri="myApp://workoutFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/finish_fragment"
