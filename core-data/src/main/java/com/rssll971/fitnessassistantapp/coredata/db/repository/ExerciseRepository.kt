@@ -33,4 +33,10 @@ class ExerciseRepository @Inject constructor(database: WorkoutDatabase) {
             list.map { it.toExercise() }
         }
     }
+
+    fun getExerciseListById(idList: List<Int>): Flow<List<Exercise>>{
+        return dao.getExerciseEntitiesById(idList = idList).map { list ->
+            list.map { it.toExercise() }
+        }
+    }
 }

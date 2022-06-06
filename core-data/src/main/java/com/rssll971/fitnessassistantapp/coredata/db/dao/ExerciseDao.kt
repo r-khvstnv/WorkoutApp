@@ -21,4 +21,7 @@ interface ExerciseDao {
 
     @Query("SELECT * FROM ${Constants.EXERCISE_TABLE} WHERE ${Constants.ID} = :id ")
     fun getExerciseEntity(id: Int): Flow<ExerciseEntity>
+
+    @Query("SELECT * FROM ${Constants.EXERCISE_TABLE} WHERE ${Constants.ID} IN (:idList)")
+    fun getExerciseEntitiesById(idList: List<Int>): Flow<List<ExerciseEntity>>
 }

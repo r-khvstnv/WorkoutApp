@@ -28,4 +28,8 @@ class StatisticRepository @Inject constructor(database: WorkoutDatabase) {
             list.map { it.toStatistic() }
         }
     }
+
+    fun getLastStatistic(): Flow<Statistic>{
+        return dao.getLastStatisticEntityRow().map { it.toStatistic() }
+    }
 }

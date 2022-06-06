@@ -18,4 +18,7 @@ interface StatisticDao {
 
     @Query("SELECT * FROM ${Constants.STATISTIC_TABLE} ORDER BY ${Constants.ID}")
     fun getAllStatisticEntities(): Flow<List<StatisticEntity>>
+
+    @Query("SELECT * FROM ${Constants.STATISTIC_TABLE} ORDER BY ${Constants.ID} DESC LIMIT 1")
+    fun getLastStatisticEntityRow(): Flow<StatisticEntity>
 }
