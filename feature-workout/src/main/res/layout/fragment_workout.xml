@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".workout.WorkoutFragment">
+    <!--Workout Progress-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pb_workout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            app:indicatorColor="?attr/colorPrimary"
+            app:trackColor="?attr/colorSecondary"
+            tools:max="10"
+            tools:progress="4" />
+        <TextView
+            android:id="@+id/tv_workout_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="4/10"
+            android:layout_gravity="end"
+            android:textSize="18sp"
+            app:fontFamily="@font/roboto_medium"
+            />
+    </LinearLayout>
+
 
     <!--Rest-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/_relax"
@@ -67,11 +94,11 @@
 
     <!--Workout-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_workout"
+        android:id="@+id/cl_exercise"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/tv_title"
@@ -86,6 +113,20 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Some Exercise Long Title" />
 
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            tools:background="?attr/colorPrimary"
+            android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="0dp"
@@ -95,7 +136,7 @@
             app:layout_constraintBottom_toTopOf="@id/i_exercise_pr"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/iv_image"
             tools:text="@tools:sample/lorem/random" />
 
         <include
@@ -109,4 +150,4 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</LinearLayout>
