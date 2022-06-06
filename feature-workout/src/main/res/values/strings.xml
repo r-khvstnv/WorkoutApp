@@ -4,4 +4,7 @@
     <string name="title_prepare_for">Prepare for</string>
     <string name="st_sec">sec</string>
     <string name="title_finish">Finish</string>
+
+    <string name="title_congratulations">Congratulations</string>
+    <string name="title_done_it">You have done it!</string>
 </resources>

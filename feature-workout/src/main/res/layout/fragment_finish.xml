@@ -4,29 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryContainer"
     tools:context=".finish.FinishFragment">
 
     <TextView
-        android:id="@+id/_finish"
+        android:id="@+id/_title"
+        style="@style/TitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/m_default_layout_margin"
-        app:fontFamily="@font/roboto_light"
-        android:text="@string/title_finish"
-        android:textSize="@dimen/rest_title_text_size"
+        android:text="@string/title_congratulations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--TODO Add congratulations-->
 
+    <ImageView
+        android:id="@+id/_cup"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:src="@drawable/ic_cup"
+        app:layout_constraintBottom_toTopOf="@id/btn_quit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_title"
+        app:layout_constraintVertical_bias="0.2"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/_subtitle"
+        style="@style/SubtitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:text="@string/title_done_it"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/_cup" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_create"
+        android:id="@+id/btn_quit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/m_default_layout_margin"
+        android:backgroundTint="?attr/colorOnPrimaryContainer"
         android:text="@string/action_quit"
+        android:textColor="?attr/colorPrimaryContainer"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -11,6 +11,10 @@
         android:label="fragment_options_start"
         tools:layout="@layout/fragment_option_start">
 
+        <deepLink
+            app:uri="@string/deep_link_option_start_fragment"
+            />
+
         <action
             android:id="@+id/action_options_start_fragment_to_options_first_fragment"
             app:destination="@id/options_nested_graph" />

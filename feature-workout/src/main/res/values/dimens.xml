@@ -21,4 +21,7 @@
 
     <dimen name="exercise_title_text_size">36sp</dimen>
     <dimen name="exercise_description_text_size">20sp</dimen>
+
+    <dimen name="finish_title_text_size">48sp</dimen>
+    <dimen name="finish_subtitle_text_size">32sp</dimen>
 </resources>
