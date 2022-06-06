@@ -10,7 +10,7 @@
 
     <dimen name="progress_layout_size_small">150dp</dimen>
     <dimen name="progress_layout_inner_margin_small">15dp</dimen>
-    <dimen name="progress_value_text_size_small">40sp</dimen>
+    <dimen name="progress_value_text_size_small">36sp</dimen>
     <dimen name="progress_value_margin_top_small">2dp</dimen>
     <dimen name="progress_value_helper_text_size_small">14sp</dimen>
 

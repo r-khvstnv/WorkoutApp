@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_exercise_dur_increase"
         app:layout_constraintEnd_toStartOf="@id/iv_exercise_dur_increase"
         app:layout_constraintTop_toTopOf="@id/iv_exercise_dur_increase"
-        tools:text="300" />
+        tools:text="03:00" />
 
     <ImageButton
         android:id="@+id/iv_exercise_dur_decrease"
@@ -135,7 +135,7 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_rest_dur_increase"
         app:layout_constraintEnd_toStartOf="@id/iv_rest_dur_increase"
         app:layout_constraintTop_toTopOf="@id/iv_rest_dur_increase"
-        tools:text="300" />
+        tools:text="03:00" />
 
     <ImageButton
         android:id="@+id/iv_rest_dur_decrease"

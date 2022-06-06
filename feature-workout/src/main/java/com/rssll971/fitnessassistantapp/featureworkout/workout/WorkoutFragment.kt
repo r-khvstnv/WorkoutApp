@@ -8,15 +8,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
+import com.rssll971.fitnessassistantapp.core.utils.CoreUtils
 import com.rssll971.fitnessassistantapp.core.utils.loadImage
 import com.rssll971.fitnessassistantapp.featureworkout.R
 import com.rssll971.fitnessassistantapp.featureworkout.databinding.FragmentWorkoutBinding
 import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutComponentViewModel
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -36,6 +39,8 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             .workoutComponent
             .inject(this)
         super.onAttach(context)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){}
     }
 
     override fun onCreateView(
@@ -50,7 +55,6 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         viewModel.workoutSettings.observe(viewLifecycleOwner){
             settings ->
@@ -96,12 +100,8 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             progress ->
             progress?.let {
                 with(binding.iRestPr){
-                    progressBar.progress = it
-                    progressValue.text = it.toString()
-                }
-
-                if (it == 0){
-                    viewModel.startExercise()
+                    progressBar.progress = (it / 1000).toInt()
+                    progressValue.text = CoreUtils.getFormattedTime(it)
                 }
             }
         }
@@ -109,12 +109,8 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             progress ->
             progress?.let {
                 with(binding.iExercisePr){
-                    progressBar.progress = it
-                    progressValue.text = it.toString()
-                }
-
-                if (it == 0){
-                    viewModel.startRestOrFinishWorkout()
+                    progressBar.progress = (it / 1000).toInt()
+                    progressValue.text = CoreUtils.getFormattedTime(it)
                 }
             }
         }

@@ -23,10 +23,10 @@ class WorkoutViewModel @Inject constructor(
     private var _isExerciseLayoutShouldBeShown: MutableLiveData<Boolean> = MutableLiveData()
     val isExerciseLayoutShouldBeShown: LiveData<Boolean> get() = _isExerciseLayoutShouldBeShown
 
-    private var _restTimerProgress: MutableLiveData<Int> = MutableLiveData()
-    val restTimerProgress: LiveData<Int> get() = _restTimerProgress
-    private var _exerciseTimerProgress: MutableLiveData<Int> = MutableLiveData()
-    val exerciseTimerProgress: LiveData<Int> get() = _exerciseTimerProgress
+    private var _restTimerProgress: MutableLiveData<Long> = MutableLiveData()
+    val restTimerProgress: LiveData<Long> get() = _restTimerProgress
+    private var _exerciseTimerProgress: MutableLiveData<Long> = MutableLiveData()
+    val exerciseTimerProgress: LiveData<Long> get() = _exerciseTimerProgress
 
     private var _currentExercisePosition = MutableLiveData(-1)
     val currentExercisePosition: LiveData<Int> get() = _currentExercisePosition
@@ -52,18 +52,20 @@ class WorkoutViewModel @Inject constructor(
     private fun setRestTimer(){
         object : CountDownTimer((workoutSettings.value!!.restDuration * 1000).toLong(), 1000){
             override fun onTick(timeL: Long) {
-                _restTimerProgress.postValue((timeL / 1000).toInt())
+                _restTimerProgress.postValue(timeL)
             }
             override fun onFinish() {
+                startExercise()
             }
         }.start()
     }
     private fun setExerciseTimer(){
         object : CountDownTimer((workoutSettings.value!!.exerciseDuration * 1000).toLong(), 1000){
             override fun onTick(timeL: Long) {
-                _exerciseTimerProgress.postValue((timeL / 1000).toInt())
+                _exerciseTimerProgress.postValue(timeL)
             }
             override fun onFinish() {
+                startRestOrFinishWorkout()
             }
         }.start()
     }
@@ -73,7 +75,7 @@ class WorkoutViewModel @Inject constructor(
         _currentExercise.value = exerciseList.value!![_currentExercisePosition.value!!]
     }
 
-    fun startRestOrFinishWorkout(){
+    private fun startRestOrFinishWorkout(){
         if (_currentExercisePosition.value!! < exerciseList.value!!.size - 1){
             updateCurrentExercise()
             setRestTimer()
@@ -82,9 +84,8 @@ class WorkoutViewModel @Inject constructor(
             _isWorkoutFinished.postValue(true)
         }
     }
-    fun startExercise(){
+    private fun startExercise(){
         _isExerciseLayoutShouldBeShown.postValue(true)
         setExerciseTimer()
     }
-
 }
