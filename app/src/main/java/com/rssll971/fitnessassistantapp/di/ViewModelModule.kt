@@ -6,6 +6,7 @@ import com.rssll971.fitnessassistantapp.featurebmi.calculation.BmiCalculationVie
 import com.rssll971.fitnessassistantapp.featurebmi.history.BmiHistoryViewModel
 import com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditExerciseViewModel
 import com.rssll971.fitnessassistantapp.featureexercise.all.AllExercisesViewModel
+import com.rssll971.fitnessassistantapp.featureworkout.workout.WorkoutViewModel
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionsViewModel
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.OptionStartViewModel
 import dagger.Binds
@@ -33,4 +34,7 @@ abstract class ViewModelModule {
     @Binds
     @[IntoMap ViewModelKey(OptionsViewModel::class)]
     abstract fun bindsOptionsViewModel(optionsViewModel: OptionsViewModel): ViewModel
+    @Binds
+    @[IntoMap ViewModelKey(WorkoutViewModel::class)]
+    abstract fun bindsWorkoutViewModel(workoutViewModel: WorkoutViewModel): ViewModel
 }

@@ -14,7 +14,7 @@
             android:id="@+id/action_workout_fragment_to_finish_fragment"
             app:destination="@id/finish_fragment" />
         <deepLink
-            app:uri="myApp://workoutFragment"
+            app:uri="@string/deep_link_workout_fragment"
             />
     </fragment>
     <fragment

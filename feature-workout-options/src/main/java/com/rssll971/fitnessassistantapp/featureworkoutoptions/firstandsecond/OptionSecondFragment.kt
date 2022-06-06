@@ -13,6 +13,7 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
+import com.rssll971.fitnessassistantapp.core.R as RCore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionSecondBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSComponentViewModel
 import javax.inject.Inject
@@ -61,7 +62,7 @@ class OptionSecondFragment : BaseFragment() {
         viewModel.isStatisticAdded.observe(viewLifecycleOwner){
             added ->
             if (added){
-                val deepLink = Uri.parse("myApp://workoutFragment")
+                val deepLink = Uri.parse(getString(RCore.string.deep_link_workout_fragment))
                 findNavController().navigate(deepLink)
             }
         }

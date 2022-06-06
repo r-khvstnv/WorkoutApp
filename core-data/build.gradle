@@ -48,4 +48,6 @@ dependencies {
     implementation ("com.google.dagger:dagger-android-support:$dagger2Ver")
     kapt ("com.google.dagger:dagger-compiler:$dagger2Ver")
     kapt ("com.google.dagger:dagger-android-processor:$dagger2Ver")
+    //gson
+    implementation("com.google.code.gson:gson:2.9.0")
 }

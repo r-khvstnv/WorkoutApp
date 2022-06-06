@@ -7,6 +7,7 @@ import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepositor
 import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
 import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiDeps
 import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDeps
+import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutDeps
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSDeps
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartDeps
 import dagger.BindsInstance
@@ -18,7 +19,8 @@ import javax.inject.Singleton
 interface AppComponent :
     FeatureExercisesDeps,
     FeatureBmiDeps,
-    OptionStartDeps, OptionsFSDeps
+    OptionStartDeps, OptionsFSDeps,
+    WorkoutDeps
 {
 
     @Component.Builder
