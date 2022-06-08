@@ -8,28 +8,44 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m_default_layout_margin"
+            android:background="@drawable/background_oval_shape"
+            android:backgroundTint="?android:colorBackground"
+            android:elevation="@dimen/m_default_elevation"
+            android:padding="5dp"
+            android:src="@drawable/ic_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorOnBackground"
+            tools:ignore="ContentDescription" />
+
         <LinearLayout
             android:id="@+id/ll_start"
             android:layout_width="@dimen/ll_start_size"
             android:layout_height="@dimen/ll_start_size"
-            android:background="@drawable/background_oval_shape"
-            android:backgroundTint="?attr/colorPrimaryContainer"
-            android:gravity="center"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="70dp"
+            android:background="@drawable/background_oval_shape"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            android:elevation="@dimen/m_default_elevation"
+            android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@id/_statistic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <TextView
+                style="@style/TitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TitleTextView"
-                android:text="@string/action_start"
-                />
+                android:text="@string/action_start" />
         </LinearLayout>
 
 
@@ -44,38 +60,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_start">
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/m_default_layout_margin">
+
                 <LinearLayout
                     android:id="@+id/ll_statistic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="20dp"
                         android:text="@string/title_statistic"
                         android:textSize="28sp"
-                        app:fontFamily="@font/roboto_light"
-                        android:layout_marginBottom="20dp"
-                        />
+                        app:fontFamily="@font/roboto_light" />
+
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/line_chart_workout_duration"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:minHeight="200dp"
-                        />
+                        android:minHeight="200dp" />
+
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/line_chart_workout_amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:minHeight="200dp"
                         android:layout_marginTop="10dp"
-                        />
+                        android:minHeight="200dp" />
                 </LinearLayout>
 
                 <TextView

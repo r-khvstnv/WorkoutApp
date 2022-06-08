@@ -1,6 +1,7 @@
 package com.rssll971.fitnessassistantapp.featureworkoutoptions.start
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,6 +61,10 @@ class OptionStartFragment : Fragment() {
                 findNavController().navigate(
                     R.id.options_nested_graph
                 )
+            }
+            ivInfo.setOnClickListener {
+                val deepLink = Uri.parse(getString(R.string.deep_link_info_fragment))
+                findNavController().navigate(deepLink)
             }
         }
 

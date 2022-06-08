@@ -12,9 +12,4 @@
         android:id="@+id/navigation_feature_exercise"
         android:icon="@drawable/ic_fitness"
         android:title="@string/title_exercises" />
-    <item
-        android:id="@+id/navigation_feature_info"
-        android:icon="@drawable/ic_info"
-        android:title="@string/title_info" />
-
 </menu>

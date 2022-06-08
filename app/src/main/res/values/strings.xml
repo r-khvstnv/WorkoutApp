@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">Fitness Assistant</string>
-    <string name="app_ver">1.0.5</string>
-    
     <string name="title_bmi">BMI</string>
     <string name="title_start">Start</string>
     <string name="title_exercises">Exercises</string>

@@ -9,5 +9,9 @@
         android:id="@+id/info_fragment"
         android:name="com.rssll971.fitnessassistantapp.featureinfo.InfoFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info" />
+        tools:layout="@layout/fragment_info">
+        <deepLink
+            app:uri="@string/deep_link_info_fragment"
+            />
+    </fragment>
 </navigation>
