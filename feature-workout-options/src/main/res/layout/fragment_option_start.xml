@@ -1,60 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".start.OptionStartFragment">
 
-    <LinearLayout
-        android:id="@+id/ll_start"
-        android:layout_width="@dimen/ll_start_size"
-        android:layout_height="@dimen/ll_start_size"
-        android:background="@drawable/background_oval_shape"
-        android:backgroundTint="?attr/colorPrimaryContainer"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/_statistic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TitleTextView"
-            android:text="@string/action_start"
-            />
-    </LinearLayout>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/_statistic"
-        style="@style/CardViewDefault"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/m_default_layout_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_start">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/m_default_layout_margin">
-            <!--TODO add workout statistic-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="?attr/colorSecondary" />
-
+        >
+        <LinearLayout
+            android:id="@+id/ll_start"
+            android:layout_width="@dimen/ll_start_size"
+            android:layout_height="@dimen/ll_start_size"
+            android:background="@drawable/background_oval_shape"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            android:gravity="center"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="70dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/_statistic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
             <TextView
-                android:id="@+id/tv_no_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/error_no_data"
-                android:textSize="@dimen/error_no_data_text_size" />
-        </FrameLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                style="@style/TitleTextView"
+                android:text="@string/action_start"
+                />
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/_statistic"
+            style="@style/CardViewDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m_default_layout_margin"
+            android:minHeight="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_start">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/m_default_layout_margin">
+                <LinearLayout
+                    android:id="@+id/ll_statistic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/title_statistic"
+                        android:textSize="28sp"
+                        app:fontFamily="@font/roboto_light"
+                        android:layout_marginBottom="20dp"
+                        />
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/line_chart_workout_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="200dp"
+                        />
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/line_chart_workout_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="200dp"
+                        android:layout_marginTop="10dp"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_no_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/error_no_data"
+                    android:textSize="@dimen/error_no_data_text_size" />
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
