@@ -34,5 +34,5 @@
         android:paddingVertical="@dimen/item_bmi_index_padding_vertical"
         android:textColor="?attr/colorOnPrimary"
         tools:background="@color/color_ex_obese"
-        tools:text="Extremely Obese" />
+        tools:text="@string/index_ex_obese" />
 </LinearLayout>

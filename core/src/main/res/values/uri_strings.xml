@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="deep_link_workout_fragment">myApp://workoutFragmentDeepLink</string>
-    <string name="deep_link_option_start_fragment">myApp://optionStartFragmentDeepLink</string>
-    <string name="deep_link_info_fragment">myApp://infoFragmentDeepLink</string>
+    <string name="deep_link_workout_fragment" translatable="false">myApp://workoutFragmentDeepLink</string>
+    <string name="deep_link_option_start_fragment" translatable="false">myApp://optionStartFragmentDeepLink</string>
+    <string name="deep_link_info_fragment" translatable="false">myApp://infoFragmentDeepLink</string>
 </resources>

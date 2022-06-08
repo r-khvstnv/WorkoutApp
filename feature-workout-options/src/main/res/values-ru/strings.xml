@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_customize_options">Настройте Параметры</string>
+    <string name="title_voice_assistant">Голосовой Ассистент</string>
+    <string name="title_exercise_duration">Длительность Упражнения</string>
+    <string name="title_rest_duration">Длительность Отдыха</string>
+    <string name="title_select_exercises">Выберите Упражения</string>
+    <string name="title_statistic">Статистика</string>
+    <string name="title_workout_duration">Длительность Тренировки</string>
+    <string name="title_exercise_amount">Упражнения/Тренировка</string>
+    <string name="error_no_exercise_selected">Упражнения Не Выбраны</string>
+</resources>

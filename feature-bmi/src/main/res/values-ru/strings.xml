@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_height_sm">Рост (см)</string>
+    <string name="title_weight_kg">Вес (кг)</string>
+    <string name="title_result">Результат</string>
+    <string name="title_bmi_index">BMI Индекс</string>
+    <string name="title_status">Статус</string>
+    <string name="title_history">История</string>
+    <string name="title_bmi_calculator">BMI Калькулятор</string>
+    <string name="title_date">Дата</string>
+    <string name="title_index">Индекс</string>
+    <string name="title_weight">Вес</string>
+    <string name="action_calculate_bmi">Рассчитать BMI</string>
+    <string name="action_clear_history">Очистить Историю</string>
+    <string name="index_underweight">Недостаток в Весе</string>
+    <string name="index_normal">В Норме</string>
+    <string name="index_overweight">Избыточный Вес</string>
+    <string name="index_obese">Ожирение (I)</string>
+    <string name="index_ex_obese">Ожирение (II)</string>
+</resources>

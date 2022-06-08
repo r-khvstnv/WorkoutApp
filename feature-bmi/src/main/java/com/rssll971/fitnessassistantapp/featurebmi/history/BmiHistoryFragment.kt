@@ -139,7 +139,7 @@ class BmiHistoryFragment : Fragment() {
             data = barData
             setVisibleXRangeMaximum(12f)
             moveViewToX(barEntryList.size - 1f)
-            animateY(2000)
+            animateY(1000)
             invalidate()
         }
     }

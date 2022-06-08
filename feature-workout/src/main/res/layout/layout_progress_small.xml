@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/progress_value_margin_top_small"
-            android:textSize="@dimen/progress_value_text_size_small"
             android:textColor="?attr/colorSecondary"
+            android:textSize="@dimen/progress_value_text_size_small"
             tools:text="03:00" />
 
         <TextView

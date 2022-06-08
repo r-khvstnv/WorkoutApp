@@ -30,8 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/t_title"
-        tools:listitem="@layout/item_exercise_selectable"
-        />
+        tools:listitem="@layout/item_exercise_selectable" />
 
     <!--Next Fragment-->
     <com.google.android.material.button.MaterialButton
@@ -42,11 +41,11 @@
         android:backgroundTint="?android:colorBackground"
         android:text="@string/action_start"
         android:textColor="?attr/colorSecondary"
+        android:visibility="gone"
         app:icon="@drawable/ic_chevron_right"
         app:iconGravity="end"
         app:iconTint="?attr/colorSecondary"
-        android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

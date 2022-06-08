@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_relax">Отдохните</string>
+    <string name="title_prepare_for">Подготовьтесь к</string>
+    <string name="st_minutes">мин</string>
+    <string name="title_finish">Конец</string>
+    <string name="title_congratulations">Поздравляем</string>
+    <string name="title_done_it">Вы сделали это!</string>
+</resources>

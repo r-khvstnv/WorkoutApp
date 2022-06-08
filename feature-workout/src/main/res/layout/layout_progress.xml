@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/progress_value_margin_top"
-            app:fontFamily="@font/roboto_light"
             android:textSize="@dimen/progress_value_text_size"
+            app:fontFamily="@font/roboto_light"
             tools:text="03:00" />
 
         <TextView
