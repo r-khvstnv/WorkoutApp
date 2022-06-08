@@ -66,7 +66,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                 with(binding){
                     iRestPr.progressBar.max = it.restDuration
                     iExercisePr.progressBar.max = it.exerciseDuration
-                    pbWorkout.max = it.exerciseAmount
+                    pbWorkout.max = it.selectedExerciseIds.size
                 }
             }
         }
@@ -75,7 +75,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             val tmpPosition = position + 1
             binding.pbWorkout.progress = tmpPosition
             viewModel.workoutSettings.value?.let {
-                binding.tvWorkoutProgress.text = "$tmpPosition/${it.exerciseAmount}"
+                binding.tvWorkoutProgress.text = "$tmpPosition/${it.selectedExerciseIds.size}"
             }
         }
         viewModel.currentExercise.observe(viewLifecycleOwner){

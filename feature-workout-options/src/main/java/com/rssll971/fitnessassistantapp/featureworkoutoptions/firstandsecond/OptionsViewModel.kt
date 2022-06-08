@@ -54,7 +54,6 @@ class OptionsViewModel @Inject constructor(
                 dateInMillis,
                 restTime.value!!,
                 exerciseTime.value!!,
-                list.size,
                 _isVoiceEnabled.value!!,
                 list,
                 0

@@ -13,7 +13,6 @@ data class StatisticEntity(
     @ColumnInfo val date: Long,
     @ColumnInfo val restDuration: Int,
     @ColumnInfo val exerciseDuration: Int,
-    @ColumnInfo val exerciseAmount: Int,
     @ColumnInfo val isVoiceEnable: Boolean,
     @field:TypeConverters(IntTypeConverter::class) val selectedExerciseIds: List<Int>,
 
@@ -25,7 +24,6 @@ data class StatisticEntity(
                 statistic.date,
                 statistic.restDuration,
                 statistic.exerciseDuration,
-                statistic.exerciseAmount,
                 statistic.isVoiceEnable,
                 statistic.selectedExerciseIds,
                 statistic.id
@@ -34,6 +32,6 @@ data class StatisticEntity(
     }
 
     fun toStatistic(): Statistic{
-        return Statistic(date, restDuration, exerciseDuration, exerciseAmount, isVoiceEnable, selectedExerciseIds, id)
+        return Statistic(date, restDuration, exerciseDuration, isVoiceEnable, selectedExerciseIds, id)
     }
 }
