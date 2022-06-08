@@ -11,9 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.color.MaterialColors
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
 import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 
 class BmiHistoryFragment : Fragment() {
@@ -44,6 +51,7 @@ class BmiHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupChartAppearance()
 
         binding.fabNewBmi.setOnClickListener {
             findNavController().navigate(R.id.bmi_calculation_fragment)
@@ -54,8 +62,9 @@ class BmiHistoryFragment : Fragment() {
 
         viewModel.bmiList.observe(viewLifecycleOwner){
             list ->
-            list.let {
+            list?.let {
                 adapterBmi.updateList(it.reversed())
+
                 if (it.isNotEmpty()){
                     binding.clBmi.visibility = View.VISIBLE
                     binding.tvNoData.visibility = View.GONE
@@ -63,6 +72,13 @@ class BmiHistoryFragment : Fragment() {
                     binding.clBmi.visibility = View.GONE
                     binding.tvNoData.visibility = View.VISIBLE
                 }
+            }
+        }
+
+        viewModel.bmiBarEntries.observe(viewLifecycleOwner){
+            entryList ->
+            entryList?.let {
+                updateChartData(it)
             }
         }
     }
@@ -73,6 +89,58 @@ class BmiHistoryFragment : Fragment() {
             adapter = adapterBmi
             layoutManager = LinearLayoutManager(
                 requireContext(), LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun setupChartAppearance(){
+        binding.bmiBarChartVertical.apply {
+            description.isEnabled = false
+            setDrawGridBackground(false)
+            isDragEnabled = true
+            legend.isEnabled = false
+
+            axisRight.isEnabled = false
+            axisRight.setDrawGridLines(false)
+
+            axisLeft.setDrawGridLines(false)
+            axisLeft.textColor = MaterialColors.getColor(this, R.attr.colorOnBackground)
+
+            xAxis.apply {
+                setDrawLabels(true)
+                setDrawGridLines(false)
+                textColor = MaterialColors.getColor(binding.bmiBarChartVertical, R.attr.colorOnBackground)
+                position = XAxis.XAxisPosition.BOTTOM
+                labelRotationAngle = -90f
+                granularity = 1f
+            }
+
+            xAxis.valueFormatter = object : ValueFormatter(){
+                override fun getFormattedValue(value: Float): String {
+                    return viewModel.getDateByIndex(value.toInt())
+                }
+            }
+        }
+
+    }
+
+    private fun updateChartData(barEntryList: List<BarEntry>){
+        val dataSet = BarDataSet(barEntryList, "")
+        val colorList = arrayListOf<Int>()
+        for (entry in barEntryList){
+            colorList.add(Utils.getBmiIndexStatusColor(entry.y, requireContext()))
+        }
+        dataSet.colors = colorList
+        dataSet.setDrawValues(false)
+        val barData = BarData(dataSet)
+
+
+
+        binding.bmiBarChartVertical.apply {
+            data = barData
+            setVisibleXRangeMaximum(12f)
+            moveViewToX(barEntryList.size - 1f)
+            animateY(2000)
+            invalidate()
         }
     }
 

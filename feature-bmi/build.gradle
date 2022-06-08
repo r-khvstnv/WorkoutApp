@@ -58,4 +58,7 @@ dependencies {
     implementation ("com.google.dagger:dagger-android-support:$dagger2Ver")
     kapt ("com.google.dagger:dagger-compiler:$dagger2Ver")
     kapt ("com.google.dagger:dagger-android-processor:$dagger2Ver")
+    //MPAndroidChart
+    def mpAndroidChart = "3.1.0"
+    implementation ("com.github.PhilJay:MPAndroidChart:v$mpAndroidChart")
 }

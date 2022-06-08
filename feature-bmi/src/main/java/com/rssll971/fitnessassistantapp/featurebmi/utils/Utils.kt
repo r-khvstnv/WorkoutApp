@@ -7,7 +7,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-object Utils {
+internal object Utils {
     fun formatToDate(dateInMillis: Long): String{
         val date = Date(dateInMillis)
         val sdf = SimpleDateFormat("dd-MM-yy", Locale.getDefault())
