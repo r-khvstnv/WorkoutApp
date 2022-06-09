@@ -9,6 +9,7 @@ import com.rssll971.fitnessassistantapp.featureexercise.all.AllExercisesViewMode
 import com.rssll971.fitnessassistantapp.featureworkout.workout.WorkoutViewModel
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionsViewModel
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.OptionStartViewModel
+import com.rssll971.fitnessassistantapp.main.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -16,6 +17,9 @@ import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
+    @Binds
+    @[IntoMap ViewModelKey(MainViewModel::class)]
+    abstract fun bindsMainViewModel(mainViewModel: MainViewModel): ViewModel
     @Binds
     @[IntoMap ViewModelKey(AddEditExerciseViewModel::class)]
     abstract fun bindsAddEditExerciseViewModel(addEditExerciseViewModel: AddEditExerciseViewModel): ViewModel

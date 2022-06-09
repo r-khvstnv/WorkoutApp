@@ -11,7 +11,7 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionSta
 
 
 class WorkoutApplication: Application() {
-    private val appComponent: AppComponent by lazy {
+    val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder().application(this).build()
     }
 

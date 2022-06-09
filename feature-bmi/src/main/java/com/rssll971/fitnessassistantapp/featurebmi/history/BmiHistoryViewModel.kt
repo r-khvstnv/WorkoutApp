@@ -1,10 +1,8 @@
 package com.rssll971.fitnessassistantapp.featurebmi.history
 
 import androidx.lifecycle.*
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import com.rssll971.fitnessassistantapp.core.utils.CoreUtils
+import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.coredata.db.repository.BmiRepository
 import com.rssll971.fitnessassistantapp.coredata.models.Bmi
 import kotlinx.coroutines.Dispatchers
@@ -55,7 +53,7 @@ class BmiHistoryViewModel @Inject constructor(private val repository: BmiReposit
 
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
-            CoreUtils.formatDateToDayMonth(it[index])
+            UtilsCore.formatDateToDayMonth(it[index])
         } ?: ""
     }
 }

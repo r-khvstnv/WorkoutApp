@@ -14,12 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
-import com.rssll971.fitnessassistantapp.core.utils.CoreUtils
+import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.core.utils.loadImage
 import com.rssll971.fitnessassistantapp.featureworkout.R
 import com.rssll971.fitnessassistantapp.featureworkout.databinding.FragmentWorkoutBinding
 import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutComponentViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -101,7 +100,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             progress?.let {
                 with(binding.iRestPr){
                     progressBar.progress = (it / 1000).toInt()
-                    progressValue.text = CoreUtils.getFormattedTime(it)
+                    progressValue.text = UtilsCore.getFormattedTime(it)
                 }
             }
         }
@@ -110,7 +109,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             progress?.let {
                 with(binding.iExercisePr){
                     progressBar.progress = (it / 1000).toInt()
-                    progressValue.text = CoreUtils.getFormattedTime(it)
+                    progressValue.text = UtilsCore.getFormattedTime(it)
                 }
             }
         }

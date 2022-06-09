@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.rssll971.fitnessassistantapp.core.utils.CoreUtils
+import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OptionStartViewModel @Inject constructor(private val repository: StatisticRepository) : ViewModel() {
+class OptionStartViewModel @Inject constructor(
+    private val repository: StatisticRepository
+) : ViewModel() {
     private var _isLineChartShouldBeShown = MutableLiveData(false)
     val isLineChartShouldBeShown: LiveData<Boolean> get() = _isLineChartShouldBeShown
     private var _workoutDurationEntries: MutableLiveData<List<Entry>> = MutableLiveData()
@@ -63,7 +63,7 @@ class OptionStartViewModel @Inject constructor(private val repository: Statistic
 
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
-            CoreUtils.formatDateToDayMonth(it[index])
+            UtilsCore.formatDateToDayMonth(it[index])
         } ?: ""
     }
 }

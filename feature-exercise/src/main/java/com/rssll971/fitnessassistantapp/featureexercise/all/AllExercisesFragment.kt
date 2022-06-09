@@ -93,6 +93,7 @@ class AllExercisesFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(
                 requireContext(), LinearLayoutManager.VERTICAL, false
             )
+            setHasFixedSize(true)
         }
     }
 

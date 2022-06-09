@@ -4,7 +4,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-object CoreUtils {
+object UtilsCore {
     fun getFormattedTime(timeL: Long): String{
         val sdf = SimpleDateFormat("mm:ss", Locale.getDefault())
         return sdf.format(timeL)

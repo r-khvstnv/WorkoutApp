@@ -10,6 +10,7 @@ import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDe
 import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutDeps
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSDeps
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartDeps
+import com.rssll971.fitnessassistantapp.main.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -36,4 +37,7 @@ interface AppComponent :
     override val repositoryExercise: ExerciseRepository
     override val repositoryBmi: BmiRepository
     override val repositoryStatistic: StatisticRepository
+
+
+    fun inject(mainActivity: MainActivity)
 }

@@ -11,19 +11,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
-import com.rssll971.fitnessassistantapp.core.utils.CoreUtils
+import com.rssll971.fitnessassistantapp.core.utils.ConstantsCore
+import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionStartBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartComponentViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OptionStartFragment : Fragment() {
@@ -147,7 +150,7 @@ class OptionStartFragment : Fragment() {
 
             valueFormatter = object : ValueFormatter(){
                 override fun getFormattedValue(value: Float): String {
-                    return CoreUtils.getFormattedTime(value.toInt() * 1000L)
+                    return UtilsCore.getFormattedTime(value.toInt() * 1000L)
                 }
             }
         }

@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import com.rssll971.fitnessassistantapp.core.utils.CoreUtils
+import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionFirstBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSComponentViewModel
@@ -43,10 +42,10 @@ class OptionFirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.restTime.observe(viewLifecycleOwner){
-            binding.tvRestDurValue.text = CoreUtils.getFormattedTime(it * 1000L)
+            binding.tvRestDurValue.text = UtilsCore.getFormattedTime(it * 1000L)
         }
         viewModel.exerciseTime.observe(viewLifecycleOwner){
-            binding.tvExerciseDurValue.text = CoreUtils.getFormattedTime(it * 1000L)
+            binding.tvExerciseDurValue.text = UtilsCore.getFormattedTime(it * 1000L)
         }
 
 

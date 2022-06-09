@@ -1,21 +1,29 @@
-package com.rssll971.fitnessassistantapp
+package com.rssll971.fitnessassistantapp.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.rssll971.fitnessassistantapp.R
+import com.rssll971.fitnessassistantapp.WorkoutApplication
+import com.rssll971.fitnessassistantapp.core.utils.ConstantsCore
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as WorkoutApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,6 +42,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.info_fragment -> showNavView()
                 else -> hideNavView()
             }
+        }
+
+
+        val sharedPref = getSharedPreferences(ConstantsCore.WORKOUT_APP_SHARED_PREF, Context.MODE_PRIVATE)
+        val isFirstLaunch: Boolean = sharedPref.getBoolean(ConstantsCore.IS_FIRS_APP_LAUNCH, true)
+        if (isFirstLaunch){
+            viewModel.insertDefaultExercises(sharedPref)
         }
     }
 
