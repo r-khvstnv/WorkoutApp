@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--Info-->
         <ImageView
             android:id="@+id/iv_info"
             android:layout_width="wrap_content"
@@ -18,19 +19,21 @@
             android:background="@drawable/background_oval_shape"
             android:backgroundTint="?android:colorBackground"
             android:elevation="@dimen/m_default_elevation"
-            android:padding="5dp"
+            android:padding="@dimen/info_icon_padding"
             android:src="@drawable/ic_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="?attr/colorOnBackground"
             tools:ignore="ContentDescription" />
 
+
+        <!--Start-->
         <LinearLayout
             android:id="@+id/ll_start"
             android:layout_width="@dimen/ll_start_size"
             android:layout_height="@dimen/ll_start_size"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="70dp"
+            android:layout_marginTop="@dimen/ll_start_margin_top"
+            android:layout_marginBottom="@dimen/ll_start_margin_bottom"
             android:background="@drawable/background_oval_shape"
             android:backgroundTint="?attr/colorPrimaryContainer"
             android:elevation="@dimen/m_default_elevation"
@@ -49,13 +52,14 @@
         </LinearLayout>
 
 
+        <!--Statistic card-->
         <androidx.cardview.widget.CardView
             android:id="@+id/_statistic"
             style="@style/CardViewDefault"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/m_default_layout_margin"
-            android:minHeight="200dp"
+            android:minHeight="@dimen/line_chart_min_height"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,20 +85,23 @@
                         android:textSize="28sp"
                         app:fontFamily="@font/roboto_light" />
 
+
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/line_chart_workout_duration"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:minHeight="200dp" />
+                        android:minHeight="@dimen/line_chart_min_height" />
+
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/line_chart_workout_amount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:minHeight="200dp" />
+                        android:layout_marginTop="@dimen/line_chart_margin_top"
+                        android:minHeight="@dimen/line_chart_min_height" />
                 </LinearLayout>
 
+                <!--No Data-->
                 <TextView
                     android:id="@+id/tv_no_data"
                     android:layout_width="wrap_content"

@@ -36,7 +36,8 @@
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@id/_height"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/_height" />
+        app:layout_constraintStart_toEndOf="@id/_height"
+        tools:ignore="Autofill,LabelFor" />
 
     <TextView
         android:id="@+id/_weight"
@@ -57,7 +58,8 @@
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@id/_weight"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/_weight" />
+        app:layout_constraintStart_toEndOf="@id/_weight"
+        tools:ignore="Autofill,LabelFor" />
 
 
     <androidx.cardview.widget.CardView

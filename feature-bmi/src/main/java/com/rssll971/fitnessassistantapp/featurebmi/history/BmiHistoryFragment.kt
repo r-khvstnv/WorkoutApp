@@ -54,7 +54,9 @@ class BmiHistoryFragment : Fragment() {
         setupChartAppearance()
 
         binding.fabNewBmi.setOnClickListener {
-            findNavController().navigate(R.id.bmi_calculation_fragment)
+            findNavController().navigate(
+                R.id.action_bmi_history_fragment_to_bmi_calculation_fragment
+            )
         }
         binding.btnClearHistory.setOnClickListener {
             viewModel.deleteAllBmi()

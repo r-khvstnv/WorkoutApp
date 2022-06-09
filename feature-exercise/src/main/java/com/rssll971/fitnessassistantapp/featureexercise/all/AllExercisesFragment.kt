@@ -50,7 +50,7 @@ class AllExercisesFragment : BaseFragment() {
 
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(
-                R.id.add_edit_exercise_fragment
+                R.id.action_all_exercises_fragment_to_add_edit_exercise_fragment
             )
         }
 

@@ -28,8 +28,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleX="2"
-                android:scaleY="2"
+                android:scaleX="@integer/image_view_hint_scaling"
+                android:scaleY="@integer/image_view_hint_scaling"
                 android:src="@drawable/ic_gallery"
                 app:tint="?attr/colorSecondary" />
 
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
-            android:minLines="10" />
+            android:minLines="@integer/description_new_min_lines" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -105,10 +105,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/add_edit_bottom_btn_margin_bottom"
         android:backgroundTint="?attr/colorSecondary"
         android:text="@string/action_delete"
-        android:textSize="20sp"
+        android:textSize="@dimen/add_edit_bottom_btn_text_size"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,9 +119,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/add_edit_bottom_btn_margin_bottom"
         android:text="@string/action_create"
-        android:textSize="20sp"
+        android:textSize="@dimen/add_edit_bottom_btn_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_delete" />

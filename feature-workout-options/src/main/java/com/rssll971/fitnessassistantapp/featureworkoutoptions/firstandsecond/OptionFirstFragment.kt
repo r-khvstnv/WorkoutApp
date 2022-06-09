@@ -69,7 +69,7 @@ class OptionFirstFragment : Fragment() {
 
             iBtnNext.setOnClickListener {
                 findNavController().navigate(
-                    R.id.options_second_fragment
+                    R.id.action_options_first_fragment_to_options_second_fragment
                 )
             }
         }

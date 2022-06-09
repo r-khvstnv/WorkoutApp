@@ -16,9 +16,9 @@
             android:id="@+id/tv_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fontFamily="@font/roboto_medium"
             android:textColor="?attr/colorPrimary"
-            android:textSize="28sp"
+            android:textSize="@dimen/item_title_text_size"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Exercise Name" />
@@ -31,16 +31,15 @@
             android:src="@drawable/ic__delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorError"
-             />
+            app:tint="?attr/colorError" />
 
         <TextView
             android:id="@+id/tv_item_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minLines="3"
-            android:maxLines="3"
-            android:textSize="18sp"
+            android:maxLines="@integer/item_description_min_lines"
+            android:minLines="@integer/item_description_max_lines"
+            android:textSize="@dimen/item_description_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

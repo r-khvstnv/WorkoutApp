@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -20,13 +19,10 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
-import com.rssll971.fitnessassistantapp.core.utils.ConstantsCore
 import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionStartBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartComponentViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OptionStartFragment : Fragment() {
@@ -62,7 +58,7 @@ class OptionStartFragment : Fragment() {
 
             llStart.setOnClickListener {
                 findNavController().navigate(
-                    R.id.options_nested_graph
+                    R.id.action_options_start_fragment_to_options_nested_graph
                 )
             }
             ivInfo.setOnClickListener {

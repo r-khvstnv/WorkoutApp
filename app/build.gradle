@@ -72,6 +72,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     //Performance Monitoring library
     implementation 'com.google.firebase:firebase-perf-ktx'
+    //Ads
+    implementation 'com.google.android.gms:play-services-ads:21.0.0'
 
     //room
     def roomVer = "2.4.2"
