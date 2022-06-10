@@ -23,12 +23,14 @@ class BmiHistoryViewModel @Inject constructor(private val repository: BmiReposit
         fetchData()
     }
 
+    /**Method deletes all bmiEntities from database4*/
     fun deleteAllBmi(){
         viewModelScope.launch(Dispatchers.IO){
             repository.deleteAllBmi()
         }
     }
 
+    /**Method fetch data from Database and collect it to corresponding entryList and associatedList*/
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO){
             repository.getBmiList().collect {
@@ -51,6 +53,7 @@ class BmiHistoryViewModel @Inject constructor(private val repository: BmiReposit
     }
 
 
+    /**Method return associated date for requested list index*/
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
             UtilsCore.formatDateToDayMonth(it[index])

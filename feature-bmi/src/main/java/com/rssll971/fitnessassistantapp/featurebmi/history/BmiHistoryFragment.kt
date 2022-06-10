@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -17,13 +16,14 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
+import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
 import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 
-class BmiHistoryFragment : Fragment() {
+class BmiHistoryFragment : BaseFragment() {
     private var _binding: FragmentBmiHistoryBinding? = null
     private val binding get() = _binding!!
     @Inject
@@ -53,11 +53,13 @@ class BmiHistoryFragment : Fragment() {
         setupRecyclerView()
         setupChartAppearance()
 
+        //Navigate to BmiCalculationFragment onClick
         binding.fabNewBmi.setOnClickListener {
             findNavController().navigate(
                 R.id.action_bmi_history_fragment_to_bmi_calculation_fragment
             )
         }
+        //Request to clear bmi table onClick
         binding.btnClearHistory.setOnClickListener {
             viewModel.deleteAllBmi()
         }
@@ -94,6 +96,7 @@ class BmiHistoryFragment : Fragment() {
         }
     }
 
+    /**Method setting up LineChart appearance*/
     private fun setupChartAppearance(){
         binding.bmiBarChartVertical.apply {
             description.isEnabled = false
@@ -116,6 +119,7 @@ class BmiHistoryFragment : Fragment() {
                 granularity = 1f
             }
 
+            /**Instead of x value, show date from associated list*/
             xAxis.valueFormatter = object : ValueFormatter(){
                 override fun getFormattedValue(value: Float): String {
                     return viewModel.getDateByIndex(value.toInt())
@@ -125,17 +129,19 @@ class BmiHistoryFragment : Fragment() {
 
     }
 
+    /**Method updates data in corresponding LineCharts.
+     * Also will be implemented some UI style for dataSet*/
     private fun updateChartData(barEntryList: List<BarEntry>){
         val dataSet = BarDataSet(barEntryList, "")
         val colorList = arrayListOf<Int>()
+        //Add corresponding color to bmiIndex
         for (entry in barEntryList){
             colorList.add(Utils.getBmiIndexStatusColor(entry.y, requireContext()))
         }
         dataSet.colors = colorList
+
         dataSet.setDrawValues(false)
         val barData = BarData(dataSet)
-
-
 
         binding.bmiBarChartVertical.apply {
             data = barData
@@ -146,10 +152,8 @@ class BmiHistoryFragment : Fragment() {
         }
     }
 
-
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
-
 }

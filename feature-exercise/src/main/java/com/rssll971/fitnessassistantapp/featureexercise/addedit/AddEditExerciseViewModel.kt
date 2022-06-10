@@ -16,6 +16,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 class AddEditExerciseViewModel @Inject constructor(private val repository: ExerciseRepository): ViewModel() {
+    /**Variables are used to receive notification
+     * when a database operation completed successfully*/
     private var _isSaved = MutableLiveData(false)
     val isSaved: LiveData<Boolean> get() = _isSaved
     private var _isUpdated = MutableLiveData(false)
@@ -23,6 +25,9 @@ class AddEditExerciseViewModel @Inject constructor(private val repository: Exerc
     private var _isDeleted = MutableLiveData(false)
     val isDeleted: LiveData<Boolean> get() = _isDeleted
 
+    /**Variable notifies Fragment about target actions with exercise
+     * If Fragment received safeArgs, then all actions with the exercise will be aimed at updating it.
+     * Otherwise, Fragment will be used to add new exercise*/
     private var _isExerciseShouldBeUpdated = MutableLiveData(false)
     val isExerciseShouldBeUpdated: MutableLiveData<Boolean> get() = _isExerciseShouldBeUpdated
 
@@ -68,6 +73,8 @@ class AddEditExerciseViewModel @Inject constructor(private val repository: Exerc
         }
     }
 
+    /**Method deletes exercise from database and all unused images,
+     * that have been added before*/
     fun deleteExercise(){
         exerciseForUpdating.value?.let {
             exercise ->

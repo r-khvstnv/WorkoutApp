@@ -14,6 +14,8 @@ data class StatisticEntity(
     @ColumnInfo val restDuration: Int,
     @ColumnInfo val exerciseDuration: Int,
     @ColumnInfo val isVoiceEnable: Boolean,
+    /**Variable allows to transfer data between fragments, using database.
+     * In the future it will help track the statistics of the user's favorite exercises*/
     @field:TypeConverters(IntTypeConverter::class) val selectedExerciseIds: List<Int>,
 
     @PrimaryKey(autoGenerate = true) var id: Int = 0

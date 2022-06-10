@@ -18,10 +18,10 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent :
-    FeatureExercisesDeps,
-    FeatureBmiDeps,
-    OptionStartDeps, OptionsFSDeps,
-    WorkoutDeps
+    FeatureExercisesDeps, //feature-exercise
+    FeatureBmiDeps, //feature-bmi
+    OptionStartDeps, OptionsFSDeps, //feature-workout-options
+    WorkoutDeps //feature-workout
 {
 
     @Component.Builder
@@ -33,11 +33,9 @@ interface AppComponent :
     }
 
     override val viewModelFactory: ViewModelProvider.Factory
-
     override val repositoryExercise: ExerciseRepository
     override val repositoryBmi: BmiRepository
     override val repositoryStatistic: StatisticRepository
-
 
     fun inject(mainActivity: MainActivity)
 }

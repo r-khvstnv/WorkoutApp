@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
 import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
+import com.rssll971.fitnessassistantapp.coredata.models.Statistic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -15,42 +16,43 @@ import javax.inject.Inject
 class OptionStartViewModel @Inject constructor(
     private val repository: StatisticRepository
 ) : ViewModel() {
+    //Handles visibility state of Charts
     private var _isLineChartShouldBeShown = MutableLiveData(false)
     val isLineChartShouldBeShown: LiveData<Boolean> get() = _isLineChartShouldBeShown
+    //LineChart Entries
     private var _workoutDurationEntries: MutableLiveData<List<Entry>> = MutableLiveData()
     private var _workoutExerciseAmountEntries: MutableLiveData<List<Entry>> = MutableLiveData()
     val workoutDurationEntries: LiveData<List<Entry>> get() = _workoutDurationEntries
     val workoutExerciseAmountEntries: LiveData<List<Entry>> get() = _workoutExerciseAmountEntries
-
+    //List with associated datesL
     private var _chartAssociationDateList: MutableLiveData<List<Long>> = MutableLiveData()
 
     init {
         fetchData()
     }
 
+    /**Method fetch data from Database and collect it to corresponding entryLists and associatedList*/
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO){
             repository.getStatisticList().collect {
                 list ->
+                //If empty -> Only change charts visibility state to false
                 if (list.isEmpty()){
                     _isLineChartShouldBeShown.postValue(false)
-                } else{
+                }
+                //If notEmpty -> change charts visibility state to true and assign data
+                else{
                     _isLineChartShouldBeShown.postValue(true)
                     val durationEntries = arrayListOf<Entry>()
                     val exerciseAmountEntries = arrayListOf<Entry>()
                     val associationList = arrayListOf<Long>()
-                    var counter = 10
 
-                    for (i in list.indices){
-                        if (counter != 0){
-                            associationList.add(list[i].date)
-                            durationEntries.add(Entry(i.toFloat(), (list[i].restDuration + list[i].exerciseDuration) * list[i].selectedExerciseIds.size.toFloat()))
-                            exerciseAmountEntries.add(Entry(i.toFloat(), list[i].selectedExerciseIds.size.toFloat()))
-
-                            counter--
-                        } else{
-                            break
-                        }
+                    /**In Charts pass only last 10 entries*/
+                    val tmpList: List<Statistic> = list.takeLast(10).reversed()
+                    for (i in tmpList.indices){
+                        associationList.add(list[i].date)
+                        durationEntries.add(Entry(i.toFloat(), (list[i].restDuration + list[i].exerciseDuration) * list[i].selectedExerciseIds.size.toFloat()))
+                        exerciseAmountEntries.add(Entry(i.toFloat(), list[i].selectedExerciseIds.size.toFloat()))
                     }
 
                     _chartAssociationDateList.postValue(associationList.toList())
@@ -61,6 +63,7 @@ class OptionStartViewModel @Inject constructor(
         }
     }
 
+    /**Method return associated date for requested list index*/
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
             UtilsCore.formatDateToDayMonth(it[index])

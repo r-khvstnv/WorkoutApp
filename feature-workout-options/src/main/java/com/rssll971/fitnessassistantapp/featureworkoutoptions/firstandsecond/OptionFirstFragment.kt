@@ -10,13 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionFirstBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSComponentViewModel
 import javax.inject.Inject
 
-class OptionFirstFragment : Fragment() {
+class OptionFirstFragment : BaseFragment() {
     private var _binding: FragmentOptionFirstBinding? = null
     private val binding get() = _binding!!
     @Inject
@@ -41,6 +42,7 @@ class OptionFirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Observes rest/exercise durations
         viewModel.restTime.observe(viewLifecycleOwner){
             binding.tvRestDurValue.text = UtilsCore.getFormattedTime(it * 1000L)
         }
@@ -67,6 +69,7 @@ class OptionFirstFragment : Fragment() {
             }
 
 
+            /**Navigate to the next fragment (OptionSecondFragment)*/
             iBtnNext.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_options_first_fragment_to_options_second_fragment

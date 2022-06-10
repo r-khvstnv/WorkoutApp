@@ -82,7 +82,7 @@ class BmiCalculationFragment : BaseFragment() {
         return result
     }
 
-    /**Next method reset errors in all available fields*/
+    /**Method resets errors in all available fields*/
     private fun resetFieldsErrors(){
         with(binding){
             etHeight.error = null
@@ -90,6 +90,7 @@ class BmiCalculationFragment : BaseFragment() {
         }
     }
 
+    /**Method checks that user input is valid and after requests bmi calculating*/
     private fun calculateBmi(){
         if (isUserInputIsValid()){
             viewModel.calculateBmi(

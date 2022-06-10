@@ -11,9 +11,9 @@
     <dimen name="bar_chart_min_height">200dp</dimen>
     <dimen name="btn_clear_text_size">20sp</dimen>
 
-    <dimen name="item_layout_margin">2dp</dimen>
-    <dimen name="item_text_size">18sp</dimen>
-    <dimen name="item_title_text_size">20sp</dimen>
+    <dimen name="item_bmi_layout_margin">2dp</dimen>
+    <dimen name="item_bmi_text_size">18sp</dimen>
+    <dimen name="item_bmi_title_text_size">20sp</dimen>
     <dimen name="item_bmi_index_text_size">16sp</dimen>
     <dimen name="item_bmi_index_padding_vertical">8dp</dimen>
 </resources>

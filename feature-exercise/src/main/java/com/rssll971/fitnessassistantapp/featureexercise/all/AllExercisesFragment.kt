@@ -1,14 +1,12 @@
 package com.rssll971.fitnessassistantapp.featureexercise.all
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,7 +37,6 @@ class AllExercisesFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAllExercisesBinding.inflate(inflater, container, false)
-        viewModel.resetDeleteState()
         return binding.root
     }
 
@@ -48,6 +45,7 @@ class AllExercisesFragment : BaseFragment() {
 
         setupRecyclerView()
 
+        //Navigate to AddEditExerciseFragment onClick
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(
                 R.id.action_all_exercises_fragment_to_add_edit_exercise_fragment
@@ -65,19 +63,14 @@ class AllExercisesFragment : BaseFragment() {
                 }
             }
         }
-        viewModel.isDeleted.observe(viewLifecycleOwner){
-            deleted ->
-            if (deleted){
-                showSnackBarMessage(getString(R.string.result_deleted))
-            }
-        }
     }
 
-
+    /**Method setting up exercise recycler view*/
     private fun setupRecyclerView(){
         exercisesAdapter = AllExercisesAdapter(
             requireContext(),
             object : ItemCallback{
+                /**onClick -> Navigate to AddEditExerciseFragment with id as safeArgs*/
                 override fun onClick(id: Int) {
                     findNavController().navigate(
                         AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)
@@ -96,7 +89,6 @@ class AllExercisesFragment : BaseFragment() {
             setHasFixedSize(true)
         }
     }
-
 
     override fun onDestroyView() {
         _binding = null

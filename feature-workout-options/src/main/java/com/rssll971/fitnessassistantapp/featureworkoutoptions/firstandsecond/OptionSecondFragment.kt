@@ -48,6 +48,9 @@ class OptionSecondFragment : BaseFragment() {
 
         setupRecyclerView()
 
+        /**Observes exerciseList.
+         * If list is empty, it will be unavailable to start workout.
+         * Otherwise, user can selected exercises in recyclerView*/
         viewModel.exerciseList.observe(viewLifecycleOwner){
             list ->
             list?.let {
@@ -59,6 +62,8 @@ class OptionSecondFragment : BaseFragment() {
                 }
             }
         }
+        /**Navigate to WorkoutFragment
+         * after all options are configured and chosen at least 1 exercise*/
         viewModel.isStatisticAdded.observe(viewLifecycleOwner){
             added ->
             if (added){
@@ -68,8 +73,9 @@ class OptionSecondFragment : BaseFragment() {
         }
 
 
-
-
+        /**OnClick method checks that some exercises are chosen.
+         * If true it will start setting up workout
+         * false -> Notify user, that there are no selected exercises*/
         binding.iBtnStart.setOnClickListener {
             val list = selectableExercisesAdapter.getSelectedExercisesIdList()
             if (list.isNotEmpty()){

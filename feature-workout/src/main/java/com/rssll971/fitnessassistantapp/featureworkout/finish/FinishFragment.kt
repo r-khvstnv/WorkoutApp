@@ -19,6 +19,7 @@ class FinishFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        //Disable backPress
         requireActivity().onBackPressedDispatcher.addCallback(this){}
     }
 
@@ -33,6 +34,7 @@ class FinishFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Navigate to OptionStartFragment onClick
         binding.btnQuit.setOnClickListener {
             val deepLink = Uri.parse(getString(RCore.string.deep_link_option_start_fragment))
             findNavController().navigate(deepLink)

@@ -38,7 +38,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
             .workoutComponent
             .inject(this)
         super.onAttach(context)
-
+        //Disable backPress
         requireActivity().onBackPressedDispatcher.addCallback(this){}
     }
 

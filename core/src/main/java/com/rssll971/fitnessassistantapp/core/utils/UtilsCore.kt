@@ -1,6 +1,5 @@
 package com.rssll971.fitnessassistantapp.core.utils
 
-import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 

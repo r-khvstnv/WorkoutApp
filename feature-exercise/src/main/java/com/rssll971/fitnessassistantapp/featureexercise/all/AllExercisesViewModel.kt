@@ -12,14 +12,12 @@ import javax.inject.Inject
 
 class AllExercisesViewModel @Inject constructor(private val repository: ExerciseRepository) : ViewModel() {
     val allExercises: LiveData<List<Exercise>> = repository.getExerciseList().asLiveData()
-    private var _isDeleted = MutableLiveData(false)
-    val isDeleted: LiveData<Boolean> get() = _isDeleted
 
+    /**Method deletes exercise from database and it's corresponding image*/
     fun requestExerciseDeleting(exercise: Exercise){
         viewModelScope.launch(Dispatchers.IO) {
             deleteImage(exercise.imagePath)
             repository.deleteExercise(exercise = exercise)
-            _isDeleted.postValue(true)
         }
     }
 
@@ -31,10 +29,4 @@ class AllExercisesViewModel @Inject constructor(private val repository: Exercise
             e.printStackTrace()
         }
     }
-
-    fun resetDeleteState(){
-        _isDeleted.value = false
-    }
-
-
 }

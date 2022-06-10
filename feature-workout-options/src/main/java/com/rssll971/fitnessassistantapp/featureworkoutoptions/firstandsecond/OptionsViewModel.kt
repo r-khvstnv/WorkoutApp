@@ -31,6 +31,7 @@ class OptionsViewModel @Inject constructor(
         _isVoiceEnabled.postValue(enable)
     }
 
+    /**Next methods increase/decrease time by default value*/
     fun increaseRestTime(){
         _restTime.value = _restTime.value!! + defaultTimeStep
     }
@@ -48,6 +49,12 @@ class OptionsViewModel @Inject constructor(
         }
     }
 
+
+    /**Method is used in OptionSecondFragment
+     * Using customized by user data, it adds entity to repository.
+     * Later, the current instance of Statistic will be used in the WorkoutFragment.
+     * Thus, using the statisticRepository, configured data transfer between
+     * OptionSecondFragment -> WorkoutFragment*/
     fun setupStatistic(list: List<Int>, dateInMillis: Long){
         viewModelScope.launch(Dispatchers.IO){
             val statistic = Statistic(

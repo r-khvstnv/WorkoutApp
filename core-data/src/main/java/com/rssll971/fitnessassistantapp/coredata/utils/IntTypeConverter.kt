@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 
-class IntTypeConverter {
+internal class IntTypeConverter {
     @TypeConverter
     fun saveIntList(list: List<Int>): String{
         return Gson().toJson(list)

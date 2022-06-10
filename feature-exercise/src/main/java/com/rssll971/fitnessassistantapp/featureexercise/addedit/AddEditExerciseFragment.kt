@@ -118,7 +118,7 @@ class AddEditExerciseFragment : BaseFragment() {
             path ->
             path?.let {
                 binding.ivImage.loadImage(it)
-                /*Button for current image deleting will appear only if image already added*/
+                /*Button for image deleting will appear only if image already added*/
                 if (it.isNotEmpty()){
                     binding.ivDeleteImage.visibility = View.VISIBLE
                 } else{

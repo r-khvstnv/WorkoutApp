@@ -40,6 +40,6 @@
         android:id="@+id/rv_bmi_history"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginTop="@dimen/item_layout_margin"
+        android:layout_marginTop="@dimen/item_bmi_layout_margin"
         tools:listitem="@layout/item_bmi_history" />
 </LinearLayout>

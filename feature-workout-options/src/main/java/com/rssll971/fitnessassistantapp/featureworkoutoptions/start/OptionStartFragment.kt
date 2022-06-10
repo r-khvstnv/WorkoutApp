@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -19,13 +18,14 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
+import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.R
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.FragmentOptionStartBinding
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartComponentViewModel
 import javax.inject.Inject
 
-class OptionStartFragment : Fragment() {
+class OptionStartFragment : BaseFragment() {
     private var _binding: FragmentOptionStartBinding? = null
     private val binding get() = _binding!!
     @Inject
@@ -38,6 +38,7 @@ class OptionStartFragment : Fragment() {
             .optionStartComponent.inject(this)
         super.onAttach(context)
 
+        //Disable backPress
         requireActivity().onBackPressedDispatcher.addCallback(this){}
     }
 
@@ -70,18 +71,16 @@ class OptionStartFragment : Fragment() {
         viewModel.isLineChartShouldBeShown.observe(viewLifecycleOwner){
             isShouldBeVisible ->
             if (isShouldBeVisible){
-                binding.llStatistic.visibility = View.VISIBLE
-                binding.tvNoData.visibility = View.GONE
+                binding.cvStatistic.visibility = View.VISIBLE
             } else{
-                binding.llStatistic.visibility = View.GONE
-                binding.tvNoData.visibility = View.VISIBLE
+                binding.cvStatistic.visibility = View.GONE
             }
         }
 
         viewModel.workoutDurationEntries.observe(viewLifecycleOwner){
             list ->
             list?.let {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty() && it.size > 2){
                     updateDurationLineChart(it, binding.lineChartWorkoutDuration)
                 }
             }
@@ -90,7 +89,7 @@ class OptionStartFragment : Fragment() {
         viewModel.workoutExerciseAmountEntries.observe(viewLifecycleOwner){
                 list ->
             list?.let {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty() && it.size > 2){
                     updateExerciseAmountLineChart(it, binding.lineChartWorkoutAmount)
                 }
             }
@@ -98,13 +97,15 @@ class OptionStartFragment : Fragment() {
     }
 
 
+    /**Extension method to setting up LineChart appearance*/
     private fun LineChart.setupChartAppearance(){
         setTouchEnabled(false)
         description.isEnabled = true
         setDrawGridBackground(false)
         isDragEnabled = true
         legend.isEnabled = false
-        description.textColor = MaterialColors.getColor(this@setupChartAppearance, R.attr.colorOnBackground)
+        description.textColor = MaterialColors.getColor(
+            this@setupChartAppearance, R.attr.colorOnBackground)
         description.textSize = 18f
 
         axisRight.isEnabled = false
@@ -116,12 +117,14 @@ class OptionStartFragment : Fragment() {
         xAxis.apply {
             setDrawLabels(true)
             setDrawGridLines(false)
-            textColor = MaterialColors.getColor(this@setupChartAppearance, R.attr.colorOnBackground)
+            textColor = MaterialColors.getColor(
+                this@setupChartAppearance, R.attr.colorOnBackground)
             position = XAxis.XAxisPosition.BOTTOM
             labelRotationAngle = -90f
             granularity = 1f
         }
 
+        /**Instead of x value, show date from associated list*/
         xAxis.valueFormatter = object : ValueFormatter(){
             override fun getFormattedValue(value: Float): String {
                 return viewModel.getDateByIndex(value.toInt())
@@ -129,6 +132,9 @@ class OptionStartFragment : Fragment() {
         }
     }
 
+
+    /**Next methods update data in corresponding LineCharts.
+     * Also will be implemented some UI style for each dataSet*/
     private fun updateDurationLineChart(entryList: List<Entry>, lineChart: LineChart){
         val title = getString(R.string.title_workout_duration)
         val durationDataSet = LineDataSet(entryList, title)
@@ -144,6 +150,7 @@ class OptionStartFragment : Fragment() {
             setDrawFilled(true)
             fillColor = MaterialColors.getColor(lineChart, R.attr.colorOutline)
 
+            /**Format y value to time*/
             valueFormatter = object : ValueFormatter(){
                 override fun getFormattedValue(value: Float): String {
                     return UtilsCore.getFormattedTime(value.toInt() * 1000L)
@@ -187,6 +194,7 @@ class OptionStartFragment : Fragment() {
             invalidate()
         }
     }
+
 
     override fun onDestroyView() {
         _binding = null
