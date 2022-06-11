@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2022
+  ~ All rights reserved.
+  ~
+  -->
+
 <resources>
     <color name="color_underweight">#b9c5fe</color>
     <color name="color_normal">#98cdcc</color>

@@ -1,3 +1,11 @@
+<!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2022
+  ~ All rights reserved.
+  ~
+  -->
+
 <resources>
     <color name="md_theme_light_primary">#006973</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>

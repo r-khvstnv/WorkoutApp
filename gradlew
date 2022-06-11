@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
 
+#
+# Created by Ruslan Khvastunov
+# r.khvastunov@gmail.com
+# Copyright (c) 2022
+# All rights reserved.
+#
+#
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X

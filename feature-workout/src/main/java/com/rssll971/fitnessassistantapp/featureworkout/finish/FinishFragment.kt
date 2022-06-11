@@ -1,3 +1,11 @@
+/************************************************
+ * Created by Ruslan Khvastunov                 *
+ * r.khvastunov@gmail.com                       *
+ * Copyright (c) 2022                           *
+ * All rights reserved.                         *
+ *                                              *
+ ************************************************/
+
 package com.rssll971.fitnessassistantapp.featureworkout.finish
 
 import android.content.Context

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2022
+  ~ All rights reserved.
+  ~
+  -->
+
 <resources>
     <dimen name="m_default_item_margin">5dp</dimen>
     <dimen name="error_no_data_text_size">20sp</dimen>

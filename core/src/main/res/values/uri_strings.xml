@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2022
+  ~ All rights reserved.
+  ~
+  -->
+
 <resources>
     <string name="deep_link_workout_fragment" translatable="false">myApp://workoutFragmentDeepLink</string>
     <string name="deep_link_option_start_fragment" translatable="false">myApp://optionStartFragmentDeepLink</string>
