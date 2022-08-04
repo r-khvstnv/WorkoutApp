@@ -15,7 +15,7 @@ _ _ _
 
 ## Introductions
 
-Fitness Assistant provides user a platform whereby he can train using own exercises and track the result. The Project is based on **a multi-module architecture** using modern android development technologies.
+Fitness Assistant provides the user platform whereby he can train using his exercises and track the result. The Project is based on **a multi-module architecture** using modern android development technologies.
 <br/><br/>
 
 ## Previews
@@ -33,16 +33,16 @@ _ _ _
 - **feature-N** - Functional part of Application
 _ _ _
 
-### Dagger Dependecy Graph
+### Dagger Dependency Graph
 ![image](i_previews/dagger_deps.png)
 _ _ _
 
 ### Navigation Graph
 ![image](i_previews/navigation_graph.png)
 
-- ___repository*___ - For data transfering between **OptionSecondFragment** and **WorkoutFragment** are used StatisticEntity and RepositoryStatistic respectively. **OptionSecondFragment** saves all customized options by user and selected exercises. **WorkoutFragment** requests the Latest Row from Statistic Table and then sets up workout.
+- ___repository*___ - For data transferring between **OptionSecondFragment** and **WorkoutFragment** are used StatisticEntity and RepositoryStatistic respectively. **OptionSecondFragment** saves all customized options by the user and selected exercises. **WorkoutFragment** requests the Latest Row from Statistic Table and then sets up the workout.
 
-- ___nested-grapgh**___ - **OptionFirstFragment** and **OptionSecondFragment** are used shared viewModel **(OptionsViewModel)**. For these reason, graph is used for viewModel's lifecycle control.
+- ___nested-grapgh**___ - **OptionFirstFragment** and **OptionSecondFragment** are used shared viewModel **(OptionsViewModel)**. For this reason, the graph is used for viewModel's lifecycle control.
 _ _ _
 <br/>
 
@@ -55,13 +55,13 @@ _ _ _
 	- Room
 	- Navigation Component & safeArgs
 - **Dagger2**
-	 - Multibinding
-	 - Scopes
+	- Multibinding
+	- Scopes
 - **Firebase**
-	 - Performance Monitoring
-	 - Crashlytics 
-	 - Analytics
+	- Performance Monitoring
+	- Crashlytics 
+	- Analytics
 - **Admob**
-- Glide
+- **Glide**
 _ _ _
 <br/>
