@@ -10,13 +10,15 @@ package com.rssll971.fitnessassistantapp.featureexercise.all.di
 
 import com.rssll971.fitnessassistantapp.core.di.annotation.FeatureScope
 import com.rssll971.fitnessassistantapp.featureexercise.all.AllExercisesFragment
-import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDeps
+import com.rssll971.fitnessassistantapp.featureexercise.di.ExercisesModule
+import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExercisesDeps
 import dagger.Component
 
 @[FeatureScope Component(
-    dependencies = [FeatureExercisesDeps::class]
+    dependencies = [FeatureExercisesDeps::class],
+    modules = [ExercisesModule::class]
 )]
-interface AllExercisesComponent {
+internal interface AllExercisesComponent {
     @Component.Builder
     interface Builder{
         fun deps(featureExercisesDeps: FeatureExercisesDeps): Builder

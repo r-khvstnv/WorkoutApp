@@ -28,7 +28,6 @@ import kotlin.properties.Delegates
 interface OptionsFSDeps {
     val repositoryStatistic: StatisticRepository
     val repositoryExercise: ExerciseRepository
-    val viewModelFactory: ViewModelProvider.Factory
 }
 /**
  * Interface provides required instances from appComponent

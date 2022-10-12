@@ -12,8 +12,11 @@ import com.rssll971.fitnessassistantapp.core.di.annotation.FeatureScope
 import com.rssll971.fitnessassistantapp.featureworkout.workout.WorkoutFragment
 import dagger.Component
 
-@[FeatureScope Component(dependencies = [WorkoutDeps::class])]
-interface WorkoutComponent {
+@[FeatureScope Component(
+    dependencies = [WorkoutDeps::class],
+    modules = [WorkoutModule::class]
+)]
+internal interface WorkoutComponent {
     @Component.Builder
     interface Builder{
         fun deps(workoutDeps: WorkoutDeps): Builder

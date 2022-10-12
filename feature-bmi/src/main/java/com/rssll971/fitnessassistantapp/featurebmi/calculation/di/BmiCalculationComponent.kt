@@ -10,11 +10,15 @@ package com.rssll971.fitnessassistantapp.featurebmi.calculation.di
 
 import com.rssll971.fitnessassistantapp.core.di.annotation.FeatureScope
 import com.rssll971.fitnessassistantapp.featurebmi.calculation.BmiCalculationFragment
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiDeps
+import com.rssll971.fitnessassistantapp.featurebmi.di.BmiModule
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiDeps
 import dagger.Component
 
-@[FeatureScope Component(dependencies = [FeatureBmiDeps::class])]
-interface BmiCalculationComponent {
+@[FeatureScope Component(
+    dependencies = [FeatureBmiDeps::class],
+    modules = [BmiModule::class]
+)]
+internal interface BmiCalculationComponent {
     @Component.Builder
     interface Builder{
         fun deps(featureBmiDeps: FeatureBmiDeps): Builder

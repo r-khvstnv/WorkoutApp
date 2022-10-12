@@ -6,15 +6,15 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.di
+package com.rssll971.fitnessassistantapp.core.di.module
 
-import com.rssll971.fitnessassistantapp.core.di.module.ViewModelBuilderModule
-import com.rssll971.fitnessassistantapp.coredata.di.DatabaseModule
+import androidx.lifecycle.ViewModelProvider
+import com.rssll971.fitnessassistantapp.core.factory.ViewModelFactory
+import dagger.Binds
 import dagger.Module
 
-@Module(includes = [
-    ViewModelBuilderModule::class,
-    ViewModelModule::class,
-    DatabaseModule::class
-])
-object AppModule
+@Module
+abstract class ViewModelFactoryModule {
+    @Binds
+    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+}

@@ -6,15 +6,22 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.di
+/************************************************
+ * Created by Ruslan Khvastunov                 *
+ * r.khvastunov@gmail.com                       *
+ * Copyright (c) 2022                           *
+ * All rights reserved.                         *
+ *                                              *
+ ************************************************/
+
+package com.rssll971.fitnessassistantapp.di.app
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
 import com.rssll971.fitnessassistantapp.coredata.db.repository.BmiRepository
 import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
 import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiDeps
-import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDeps
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiDeps
+import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExercisesDeps
 import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutDeps
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSDeps
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartDeps
@@ -40,10 +47,9 @@ interface AppComponent :
         fun build(): AppComponent
     }
 
-    override val viewModelFactory: ViewModelProvider.Factory
     override val repositoryExercise: ExerciseRepository
     override val repositoryBmi: BmiRepository
     override val repositoryStatistic: StatisticRepository
 
-    fun inject(mainActivity: MainActivity)
+
 }

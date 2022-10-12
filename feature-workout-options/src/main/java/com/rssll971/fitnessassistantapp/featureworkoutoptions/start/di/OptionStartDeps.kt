@@ -24,7 +24,6 @@ import kotlin.properties.Delegates
  * Note: Should be inherited in AppComponent
  * */
 interface OptionStartDeps {
-    val viewModelFactory: ViewModelProvider.Factory
     val repositoryStatistic: StatisticRepository
 }
 /**

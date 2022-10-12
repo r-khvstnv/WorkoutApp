@@ -9,10 +9,10 @@
 package com.rssll971.fitnessassistantapp
 
 import android.app.Application
-import com.rssll971.fitnessassistantapp.di.AppComponent
-import com.rssll971.fitnessassistantapp.di.DaggerAppComponent
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiDepsStore
-import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExercisesDepsStore
+import com.rssll971.fitnessassistantapp.di.app.AppComponent
+import com.rssll971.fitnessassistantapp.di.app.DaggerAppComponent
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiDepsStore
+import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExercisesDepsStore
 import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutDepsStore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSDepsStore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartDepsStore
