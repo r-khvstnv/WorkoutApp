@@ -21,16 +21,16 @@ import androidx.lifecycle.get
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiCalculationBinding
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 import com.rssll971.fitnessassistantapp.core.R as RCore
 
-class BmiCalculationFragment : BaseFragment() {
+internal class BmiCalculationFragment : BaseFragment() {
     private var _binding: FragmentBmiCalculationBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<BmiCalculationViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {

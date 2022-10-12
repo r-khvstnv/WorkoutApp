@@ -18,7 +18,7 @@ import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
-class AllExercisesViewModel @Inject constructor(private val repository: ExerciseRepository) : ViewModel() {
+internal class AllExercisesViewModel @Inject constructor(private val repository: ExerciseRepository) : ViewModel() {
     val allExercises: LiveData<List<Exercise>> = repository.getExerciseList().asLiveData()
 
     /**Method deletes exercise from database and it's corresponding image*/

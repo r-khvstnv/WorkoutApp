@@ -38,7 +38,7 @@ import com.rssll971.fitnessassistantapp.core.R as RCore
 
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAddEditExercisesBinding
 import com.rssll971.fitnessassistantapp.featureexercise.utils.Constants
-import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExerciseComponentsViewModel
+import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExerciseComponentsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -47,12 +47,12 @@ import java.io.FileOutputStream
 import java.util.*
 import javax.inject.Inject
 
-class AddEditExerciseFragment : BaseFragment() {
+internal class AddEditExerciseFragment : BaseFragment() {
     private var _binding: FragmentAddEditExercisesBinding? = null
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var vmFactory: ViewModelProvider.Factory
+    internal lateinit var vmFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<AddEditExerciseViewModel> { vmFactory }
 
     private val args: AddEditExerciseFragmentArgs by navArgs()

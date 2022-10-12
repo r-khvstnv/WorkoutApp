@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val repository: ExerciseRepository): ViewModel() {
+internal class MainViewModel @Inject constructor(private val repository: ExerciseRepository): ViewModel() {
 
     /**Method adds defaultExercises to database
      * Based on system language, corresponding exercises are added.

@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OptionsViewModel @Inject constructor(
+internal class OptionsViewModel @Inject constructor(
     private val repoStatistic: StatisticRepository,
     private val repoExercise: ExerciseRepository
 ): ViewModel() {

@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class BmiHistoryViewModel @Inject constructor(private val repository: BmiRepository): ViewModel() {
+internal class BmiHistoryViewModel @Inject constructor(private val repository: BmiRepository): ViewModel() {
     private var _bmiList: MutableLiveData<List<Bmi>> = MutableLiveData()
     val bmiList: LiveData<List<Bmi>> get() = _bmiList
 

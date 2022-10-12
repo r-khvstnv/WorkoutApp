@@ -33,11 +33,11 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.Fragme
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartComponentViewModel
 import javax.inject.Inject
 
-class OptionStartFragment : BaseFragment() {
+internal class OptionStartFragment : BaseFragment() {
     private var _binding: FragmentOptionStartBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<OptionStartViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {

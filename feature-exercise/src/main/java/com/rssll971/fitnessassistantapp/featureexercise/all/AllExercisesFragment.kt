@@ -22,15 +22,15 @@ import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.coredata.models.Exercise
 import com.rssll971.fitnessassistantapp.featureexercise.R
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAllExercisesBinding
-import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExerciseComponentsViewModel
+import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExerciseComponentsViewModel
 import com.rssll971.fitnessassistantapp.featureexercise.utils.ItemCallback
 import javax.inject.Inject
 
-class AllExercisesFragment : BaseFragment() {
+internal class AllExercisesFragment : BaseFragment() {
     private var _binding: FragmentAllExercisesBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var vmFactory: ViewModelProvider.Factory
+    internal lateinit var vmFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<AllExercisesViewModel> { vmFactory }
 
     private lateinit var exercisesAdapter: AllExercisesAdapter

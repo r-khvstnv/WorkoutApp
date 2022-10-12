@@ -23,7 +23,7 @@ import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
-class AddEditExerciseViewModel @Inject constructor(private val repository: ExerciseRepository): ViewModel() {
+internal class AddEditExerciseViewModel @Inject constructor(private val repository: ExerciseRepository): ViewModel() {
     /**Variables are used to receive notification
      * when a database operation completed successfully*/
     private var _isSaved = MutableLiveData(false)

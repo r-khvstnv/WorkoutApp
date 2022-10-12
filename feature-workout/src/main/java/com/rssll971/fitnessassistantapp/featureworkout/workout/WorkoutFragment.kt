@@ -30,11 +30,11 @@ import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutCompone
 import java.util.*
 import javax.inject.Inject
 
-class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
+internal class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
     private var _binding: FragmentWorkoutBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<WorkoutViewModel> { viewModelFactory }
 
     private var textToSpeech: TextToSpeech? = null

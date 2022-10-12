@@ -27,15 +27,15 @@ import com.google.android.material.color.MaterialColors
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 
-class BmiHistoryFragment : BaseFragment() {
+internal class BmiHistoryFragment : BaseFragment() {
     private var _binding: FragmentBmiHistoryBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<BmiHistoryViewModel> { viewModelFactory }
 
     private lateinit var adapterBmi: BmiHistoryAdapter

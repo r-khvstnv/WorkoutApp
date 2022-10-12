@@ -27,11 +27,11 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.
 import javax.inject.Inject
 
 
-class OptionSecondFragment : BaseFragment() {
+internal class OptionSecondFragment : BaseFragment() {
     private var _binding: FragmentOptionSecondBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by navGraphViewModels<OptionsViewModel>(R.id.options_nested_graph){ viewModelFactory }
 
     private lateinit var selectableExercisesAdapter: SelectableExercisesAdapter

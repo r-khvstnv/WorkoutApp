@@ -8,7 +8,6 @@
 
 package com.rssll971.fitnessassistantapp.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -28,17 +27,18 @@ import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.WorkoutApplication
 import com.rssll971.fitnessassistantapp.core.utils.ConstantsCore
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
+import com.rssll971.fitnessassistantapp.di.main.DaggerMainComponent
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
-    @SuppressLint("MissingPermission")
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        (applicationContext as WorkoutApplication).appComponent.inject(this)
+        injector()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -98,5 +98,13 @@ class MainActivity : AppCompatActivity() {
     private fun showNavAndAdView(){
         binding.navView.visibility = View.VISIBLE
         binding.adViewMain.visibility = View.VISIBLE
+    }
+
+    private fun injector(){
+        val mainComponent = DaggerMainComponent
+            .builder()
+            .appComponent((applicationContext as WorkoutApplication).appComponent)
+            .build()
+        mainComponent.inject(this)
     }
 }

@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OptionStartViewModel @Inject constructor(
+internal class OptionStartViewModel @Inject constructor(
     private val repository: StatisticRepository
 ) : ViewModel() {
     //Handles visibility state of Charts

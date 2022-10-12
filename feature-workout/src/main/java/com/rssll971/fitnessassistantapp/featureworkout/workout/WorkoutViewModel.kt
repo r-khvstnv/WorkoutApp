@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WorkoutViewModel @Inject constructor(
+internal class WorkoutViewModel @Inject constructor(
     private val repoStatistic: StatisticRepository,
     private val repoExercise: ExerciseRepository
 ) : ViewModel() {

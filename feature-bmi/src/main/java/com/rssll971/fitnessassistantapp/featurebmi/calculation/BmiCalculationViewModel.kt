@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.pow
 
-class BmiCalculationViewModel @Inject constructor( private val repository: BmiRepository) : ViewModel() {
+internal class BmiCalculationViewModel @Inject constructor( private val repository: BmiRepository) : ViewModel() {
     private var _bmi: MutableLiveData<Bmi> = MutableLiveData()
     val bmi: LiveData<Bmi> get() = _bmi
 
