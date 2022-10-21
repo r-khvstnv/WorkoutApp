@@ -6,10 +6,18 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.coredata.db.dao
+/************************************************
+ * Created by Ruslan Khvastunov                 *
+ * r.khvastunov@gmail.com                       *
+ * Copyright (c) 2022                           *
+ * All rights reserved.                         *
+ *                                              *
+ ************************************************/
+
+package com.rssll971.fitnessassistantapp.coredata.data.db.dao
 
 import androidx.room.*
-import com.rssll971.fitnessassistantapp.coredata.db.entity.StatisticEntity
+import com.rssll971.fitnessassistantapp.coredata.data.db.entity.StatisticEntity
 import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 import kotlinx.coroutines.flow.Flow
 

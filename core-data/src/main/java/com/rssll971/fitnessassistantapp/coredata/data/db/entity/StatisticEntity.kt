@@ -6,13 +6,23 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.coredata.db.entity
+/************************************************
+ * Created by Ruslan Khvastunov                 *
+ * r.khvastunov@gmail.com                       *
+ * Copyright (c) 2022                           *
+ * All rights reserved.                         *
+ *                                              *
+ ************************************************/
+
+
+
+package com.rssll971.fitnessassistantapp.coredata.data.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.rssll971.fitnessassistantapp.coredata.models.Statistic
+import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
 import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 import com.rssll971.fitnessassistantapp.coredata.utils.IntTypeConverter
 
@@ -29,19 +39,19 @@ data class StatisticEntity(
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 ){
     companion object{
-        fun fromStatistic(statistic: Statistic): StatisticEntity{
+        fun fromStatistic(statisticParam: StatisticParam): StatisticEntity {
             return StatisticEntity(
-                statistic.date,
-                statistic.restDuration,
-                statistic.exerciseDuration,
-                statistic.isVoiceEnable,
-                statistic.selectedExerciseIds,
-                statistic.id
+                statisticParam.date,
+                statisticParam.restDuration,
+                statisticParam.exerciseDuration,
+                statisticParam.isVoiceEnable,
+                statisticParam.selectedExerciseIds,
+                statisticParam.id
             )
         }
     }
 
-    fun toStatistic(): Statistic{
-        return Statistic(date, restDuration, exerciseDuration, isVoiceEnable, selectedExerciseIds, id)
+    fun toStatistic(): StatisticParam {
+        return StatisticParam(date, restDuration, exerciseDuration, isVoiceEnable, selectedExerciseIds, id)
     }
 }

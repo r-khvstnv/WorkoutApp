@@ -9,9 +9,9 @@
 
 package com.rssll971.fitnessassistantapp.coredata.data.repository.source
 
-import com.rssll971.fitnessassistantapp.coredata.db.WorkoutDatabase
-import com.rssll971.fitnessassistantapp.coredata.db.dao.BmiDao
-import com.rssll971.fitnessassistantapp.coredata.db.entity.BmiEntity
+import com.rssll971.fitnessassistantapp.coredata.data.db.WorkoutDatabase
+import com.rssll971.fitnessassistantapp.coredata.data.db.dao.BmiDao
+import com.rssll971.fitnessassistantapp.coredata.data.db.entity.BmiEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

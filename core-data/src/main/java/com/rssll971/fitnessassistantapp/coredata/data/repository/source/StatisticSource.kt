@@ -9,9 +9,9 @@
 
 package com.rssll971.fitnessassistantapp.coredata.data.repository.source
 
-import com.rssll971.fitnessassistantapp.coredata.db.WorkoutDatabase
-import com.rssll971.fitnessassistantapp.coredata.db.dao.StatisticDao
-import com.rssll971.fitnessassistantapp.coredata.db.entity.StatisticEntity
+import com.rssll971.fitnessassistantapp.coredata.data.db.WorkoutDatabase
+import com.rssll971.fitnessassistantapp.coredata.data.db.dao.StatisticDao
+import com.rssll971.fitnessassistantapp.coredata.data.db.entity.StatisticEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

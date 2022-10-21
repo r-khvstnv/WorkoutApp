@@ -6,12 +6,13 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.coredata.models
+package com.rssll971.fitnessassistantapp.coredata.domain.model
 
-data class BmiParam(
+data class StatisticParam(
     val date: Long,
-    val weight: Float,
-    val height: Float,
-    val bmiIndex: Float,
+    val restDuration: Int,
+    val exerciseDuration: Int,
+    val isVoiceEnable: Boolean,
+    val selectedExerciseIds: List<Int>,
     val id: Int
 )

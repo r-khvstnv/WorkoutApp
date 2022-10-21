@@ -6,11 +6,12 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.coredata.models
+package com.rssll971.fitnessassistantapp.coredata.domain.model
 
-data class ExerciseParam(
-    val name: String,
-    val imagePath: String = "",
-    val description: String,
+data class BmiParam(
+    val date: Long,
+    val weight: Float,
+    val height: Float,
+    val bmiIndex: Float,
     val id: Int
 )

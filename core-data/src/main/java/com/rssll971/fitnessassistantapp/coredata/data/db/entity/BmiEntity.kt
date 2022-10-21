@@ -6,12 +6,21 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.coredata.db.entity
+/************************************************
+ * Created by Ruslan Khvastunov                 *
+ * r.khvastunov@gmail.com                       *
+ * Copyright (c) 2022                           *
+ * All rights reserved.                         *
+ *                                              *
+ ************************************************/
+
+
+package com.rssll971.fitnessassistantapp.coredata.data.db.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rssll971.fitnessassistantapp.coredata.models.Bmi
+import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
 import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 
 @Entity(tableName = Constants.BMI_TABLE)
@@ -24,12 +33,12 @@ data class BmiEntity(
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 ){
     companion object{
-        fun fromBmi(bmi: Bmi): BmiEntity{
-            return BmiEntity(bmi.date, bmi.weight, bmi.height, bmi.bmiIndex, bmi.id)
+        fun fromBmi(bmiParam: BmiParam): BmiEntity {
+            return BmiEntity(bmiParam.date, bmiParam.weight, bmiParam.height, bmiParam.bmiIndex, bmiParam.id)
         }
     }
 
-    fun toBmi(): Bmi{
-        return Bmi(date, weight, height, bmiIndex, id)
+    fun toBmi(): BmiParam {
+        return BmiParam(date, weight, height, bmiIndex, id)
     }
 }

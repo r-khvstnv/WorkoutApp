@@ -8,7 +8,7 @@
 
 package com.rssll971.fitnessassistantapp.coredata.utils
 
-import com.rssll971.fitnessassistantapp.coredata.models.ExerciseParam
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 
 object DefaultExercises {
     fun getRuExerciseList(): List<ExerciseParam>{
