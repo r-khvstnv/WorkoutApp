@@ -8,9 +8,9 @@
 
 package com.rssll971.fitnessassistantapp.featureexercise.utils
 
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 
 internal interface ItemCallback {
     fun onClick(id: Int)
-    fun onDelete(exercise: Exercise)
+    fun onDelete(exerciseParam: ExerciseParam)
 }

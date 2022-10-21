@@ -14,13 +14,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.ItemExerciseSelectableBinding
 
 class SelectableExercisesAdapter(
     private val context: Context
 ): RecyclerView.Adapter<SelectableExercisesAdapter.ViewHolder>() {
-    private var exerciseList: List<Exercise> = listOf()
+    private var exerciseParamList: List<ExerciseParam> = listOf()
     private var selectedIdList: ArrayList<Int> = arrayListOf()
 
     class ViewHolder(val binding: ItemExerciseSelectableBinding): RecyclerView.ViewHolder(binding.root)
@@ -32,7 +32,7 @@ class SelectableExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val exercise = exerciseList[position]
+        val exercise = exerciseParamList[position]
 
         with(holder.binding){
             tvItemName.text = exercise.name
@@ -50,7 +50,7 @@ class SelectableExercisesAdapter(
     }
 
     override fun getItemCount(): Int {
-        return exerciseList.size
+        return exerciseParamList.size
     }
 
     private fun addOrDeleteIdFromList(value: Int, position: Int){
@@ -63,8 +63,8 @@ class SelectableExercisesAdapter(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateExerciseList(list: List<Exercise>){
-        exerciseList = list
+    fun updateExerciseList(list: List<ExerciseParam>){
+        exerciseParamList = list
         notifyDataSetChanged()
     }
 

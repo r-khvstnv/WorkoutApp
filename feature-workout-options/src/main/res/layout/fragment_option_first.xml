@@ -73,7 +73,7 @@
     <!---->
 
 
-    <!--Exercise Duration-->
+    <!--ExerciseParam Duration-->
     <ImageButton
         android:id="@+id/iv_exercise_dur_increase"
         style="@style/DurationImageButton"

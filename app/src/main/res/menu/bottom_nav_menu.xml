@@ -12,6 +12,7 @@
         android:id="@+id/navigation_feature_bmi"
         android:icon="@drawable/ic_chart"
         android:title="@string/title_bmi" />
+
     <item
         android:id="@+id/navigation_feature_workout_options"
         android:icon="@drawable/ic_start"

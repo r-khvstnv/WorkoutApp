@@ -19,7 +19,7 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.featureexercise.R
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAllExercisesBinding
 import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExerciseComponentsViewModel
@@ -84,8 +84,8 @@ internal class AllExercisesFragment : BaseFragment() {
                         AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)
                     )
                 }
-                override fun onDelete(exercise: Exercise) {
-                    viewModel.requestExerciseDeleting(exercise = exercise)
+                override fun onDelete(exerciseParam: ExerciseParam) {
+                    viewModel.requestExerciseDeleting(exerciseParam = exerciseParam)
                 }
             })
 

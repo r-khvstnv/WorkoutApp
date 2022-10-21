@@ -60,7 +60,7 @@
         </LinearLayout>
 
 
-        <!--Statistic card-->
+        <!--StatisticParam card-->
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_statistic"
             style="@style/CardViewDefault"

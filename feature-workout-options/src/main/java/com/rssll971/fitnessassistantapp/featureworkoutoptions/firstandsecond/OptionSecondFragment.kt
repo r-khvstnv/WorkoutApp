@@ -56,10 +56,10 @@ internal class OptionSecondFragment : BaseFragment() {
 
         setupRecyclerView()
 
-        /**Observes exerciseList.
+        /**Observes exerciseParamList.
          * If list is empty, it will be unavailable to start workout.
          * Otherwise, user can selected exercises in recyclerView*/
-        viewModel.exerciseList.observe(viewLifecycleOwner){
+        viewModel.exerciseParamList.observe(viewLifecycleOwner){
             list ->
             list?.let {
                 if (it.isNotEmpty()){

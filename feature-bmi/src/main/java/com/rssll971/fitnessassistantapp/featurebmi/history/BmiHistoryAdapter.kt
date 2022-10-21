@@ -13,13 +13,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rssll971.fitnessassistantapp.coredata.models.Bmi
+import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.ItemBmiHistoryBinding
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 
 class BmiHistoryAdapter(private val context: Context):
     RecyclerView.Adapter<BmiHistoryAdapter.ViewHolder>() {
-    private var bmiList: List<Bmi> = listOf()
+    private var bmiParamList: List<BmiParam> = listOf()
 
         class ViewHolder(val binding: ItemBmiHistoryBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -30,7 +30,7 @@ class BmiHistoryAdapter(private val context: Context):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val bmi = bmiList[position]
+        val bmi = bmiParamList[position]
 
         with(holder.binding){
             tvItemDate.text = Utils.formatToDate(bmi.date)
@@ -42,12 +42,12 @@ class BmiHistoryAdapter(private val context: Context):
     }
 
     override fun getItemCount(): Int {
-        return bmiList.size
+        return bmiParamList.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list: List<Bmi>){
-        bmiList = list
+    fun updateList(list: List<BmiParam>){
+        bmiParamList = list
         notifyDataSetChanged()
     }
 }

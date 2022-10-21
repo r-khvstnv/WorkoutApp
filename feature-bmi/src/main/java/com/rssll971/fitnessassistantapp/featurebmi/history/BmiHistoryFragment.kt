@@ -67,12 +67,12 @@ internal class BmiHistoryFragment : BaseFragment() {
                 R.id.action_bmi_history_fragment_to_bmi_calculation_fragment
             )
         }
-        //Request to clear bmi table onClick
+        //Request to clear bmiParam table onClick
         binding.btnClearHistory.setOnClickListener {
             viewModel.deleteAllBmi()
         }
 
-        viewModel.bmiList.observe(viewLifecycleOwner){
+        viewModel.bmiParamList.observe(viewLifecycleOwner){
             list ->
             list?.let {
                 adapterBmi.updateList(it.reversed())

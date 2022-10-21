@@ -33,7 +33,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.core.utils.loadImage
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.core.R as RCore
 
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAddEditExercisesBinding
@@ -112,7 +112,7 @@ internal class AddEditExerciseFragment : BaseFragment() {
                 }
             }
         }
-        viewModel.exerciseForUpdating.observe(viewLifecycleOwner){
+        viewModel.exerciseParamForUpdating.observe(viewLifecycleOwner){
             exercise ->
             exercise?.let {
                 with(binding){
@@ -274,20 +274,20 @@ internal class AddEditExerciseFragment : BaseFragment() {
     private fun requestExerciseSaving(){
         if (isUserInputIsValid()){
 
-            val exercise = Exercise(
+            val exerciseParam = ExerciseParam(
                 binding.etTitle.text.toString(),
                 viewModel.imagePath.value.toString(),
                 binding.etDescription.text.toString(),
                 /*Apply current id, otherwise assign 0.
                 It's possible, since ID is generated automatically when a new line is created*/
-                viewModel.exerciseForUpdating.value?.id ?: 0
+                viewModel.exerciseParamForUpdating.value?.id ?: 0
             )
 
             /*Decide whether to add or update exercise*/
             if (viewModel.isExerciseShouldBeUpdated.value == true){
-                viewModel.updateExercise(exercise = exercise)
+                viewModel.updateExercise(exerciseParam = exerciseParam)
             } else{
-                viewModel.addExercise(exercise = exercise)
+                viewModel.addExercise(exerciseParam = exerciseParam)
             }
         }
     }

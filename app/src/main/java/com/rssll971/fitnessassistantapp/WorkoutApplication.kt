@@ -17,7 +17,6 @@ import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutDepsSto
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSDepsStore
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartDepsStore
 
-
 class WorkoutApplication: Application() {
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder().application(this).build()

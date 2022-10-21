@@ -85,7 +85,7 @@ internal class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                 binding.tvWorkoutProgress.text = "$tmpPosition/${it.selectedExerciseIds.size}"
             }
         }
-        viewModel.currentExercise.observe(viewLifecycleOwner){
+        viewModel.currentExerciseParam.observe(viewLifecycleOwner){
             exercise ->
             exercise?.let {
                 with(binding){
@@ -129,7 +129,7 @@ internal class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                         clRest.visibility = View.GONE
                         clExercise.visibility = View.VISIBLE
                         if (isVoiceAssistantEnabled){
-                            speakOut(viewModel.currentExercise.value!!.description)
+                            speakOut(viewModel.currentExerciseParam.value!!.description)
                         }
                     } else{
                         clRest.visibility = View.VISIBLE

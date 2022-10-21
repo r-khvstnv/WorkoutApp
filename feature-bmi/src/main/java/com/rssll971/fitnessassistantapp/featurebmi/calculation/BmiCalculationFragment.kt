@@ -56,7 +56,7 @@ internal class BmiCalculationFragment : BaseFragment() {
             calculateBmi()
         }
 
-        viewModel.bmi.observe(viewLifecycleOwner){
+        viewModel.bmiParam.observe(viewLifecycleOwner){
             bmi ->
             bmi?.let {
                 with(binding){
@@ -98,7 +98,7 @@ internal class BmiCalculationFragment : BaseFragment() {
         }
     }
 
-    /**Method checks that user input is valid and after requests bmi calculating*/
+    /**Method checks that user input is valid and after requests bmiParam calculating*/
     private fun calculateBmi(){
         if (isUserInputIsValid()){
             viewModel.calculateBmi(
