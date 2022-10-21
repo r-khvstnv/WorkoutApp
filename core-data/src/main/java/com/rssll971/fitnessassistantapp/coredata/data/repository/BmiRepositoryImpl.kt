@@ -16,28 +16,29 @@
 
 package com.rssll971.fitnessassistantapp.coredata.data.repository
 
-import com.rssll971.fitnessassistantapp.coredata.data.db.WorkoutDatabase
-import com.rssll971.fitnessassistantapp.coredata.data.db.dao.BmiDao
-import com.rssll971.fitnessassistantapp.coredata.data.db.entity.BmiEntity
+import com.rssll971.fitnessassistantapp.coredata.data.mapper.BmiEntityToParamMapper
+import com.rssll971.fitnessassistantapp.coredata.data.mapper.BmiParamToEntityMapper
+import com.rssll971.fitnessassistantapp.coredata.data.repository.source.BmiSource
 import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
+import com.rssll971.fitnessassistantapp.coredata.domain.repository.BmiRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class BmiRepositoryImpl @Inject constructor(database: WorkoutDatabase) {
-    private val dao: BmiDao = database.getBmiDao()
+internal class BmiRepositoryImpl @Inject constructor(
+    private val bmiSource: BmiSource,
+    private val entityToParamMapper: BmiEntityToParamMapper,
+    private val paramToEntityMapper: BmiParamToEntityMapper
+): BmiRepository {
 
-    suspend fun insertBmi(bmiParam: BmiParam){
-        dao.insertBmiEntity(BmiEntity.fromBmi(bmiParam = bmiParam))
+    override suspend fun insertBmi(bmiParam: BmiParam){
+        val entity = paramToEntityMapper.map(bmiParam)
+        bmiSource.insertBmi(bmiEntity = entity)
     }
 
-    suspend fun deleteAllBmi(){
-        dao.deleteAllEntities()
-    }
+    override suspend fun deleteAllBmi() = bmiSource.deleteAllBmi()
 
-    fun getBmiList(): Flow<List<BmiParam>>{
-        return dao.getAllBmiEntities().map { list ->
-            list.map { it.toBmi() }
-        }
+    override fun getBmiList(): Flow<List<BmiParam>> = bmiSource.getAllBmi().map { list ->
+        list.map { entityToParamMapper.map(it) }
     }
 }
