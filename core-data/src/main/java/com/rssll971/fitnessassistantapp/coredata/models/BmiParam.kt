@@ -8,7 +8,7 @@
 
 package com.rssll971.fitnessassistantapp.coredata.models
 
-data class Bmi(
+data class BmiParam(
     val date: Long,
     val weight: Float,
     val height: Float,

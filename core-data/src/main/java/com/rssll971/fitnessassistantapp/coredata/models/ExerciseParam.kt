@@ -8,7 +8,7 @@
 
 package com.rssll971.fitnessassistantapp.coredata.models
 
-data class Exercise(
+data class ExerciseParam(
     val name: String,
     val imagePath: String = "",
     val description: String,

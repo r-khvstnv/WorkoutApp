@@ -8,7 +8,7 @@
 
 package com.rssll971.fitnessassistantapp.coredata.models
 
-data class Statistic(
+data class StatisticParam(
     val date: Long,
     val restDuration: Int,
     val exerciseDuration: Int,
