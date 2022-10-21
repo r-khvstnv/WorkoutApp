@@ -10,8 +10,7 @@ package com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di
 
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetAllStatisticUseCase
 import kotlin.properties.Delegates
 
 
@@ -24,7 +23,7 @@ import kotlin.properties.Delegates
  * Note: Should be inherited in AppComponent
  * */
 interface OptionStartDeps {
-    val repositoryStatistic: StatisticRepository
+    val getAllStatisticUseCase: GetAllStatisticUseCase
 }
 /**
  * Interface provides required instances from appComponent

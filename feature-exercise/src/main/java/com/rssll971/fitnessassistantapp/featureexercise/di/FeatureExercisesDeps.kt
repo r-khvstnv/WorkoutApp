@@ -6,19 +6,11 @@
  *                                              *
  ************************************************/
 
-/************************************************
- * Created by Ruslan Khvastunov                 *
- * r.khvastunov@gmail.com                       *
- * Copyright (c) 2022                           *
- * All rights reserved.                         *
- *                                              *
- ************************************************/
-
 package com.rssll971.fitnessassistantapp.featureexercise.di
 
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.*
 import com.rssll971.fitnessassistantapp.featureexercise.addedit.di.DaggerAddEditComponent
 import com.rssll971.fitnessassistantapp.featureexercise.all.di.DaggerAllExercisesComponent
 import kotlin.properties.Delegates
@@ -36,7 +28,11 @@ import kotlin.properties.Delegates
  * Note: Should be inherited in AppComponent
  * */
 interface FeatureExercisesDeps{
-    val repositoryExercise: ExerciseRepository
+    val addExerciseUseCase: AddExerciseUseCase
+    val deleteExerciseUseCase: DeleteExerciseUseCase
+    val getAllExercisesUseCase: GetAllExercisesUseCase
+    val getExerciseByIdUseCase: GetExerciseByIdUseCase
+    val updateExerciseUseCase: UpdateExerciseUseCase
 }
 
 /**

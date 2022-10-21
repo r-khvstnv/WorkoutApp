@@ -9,17 +9,17 @@
 package com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond
 
 import androidx.lifecycle.*
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
-import com.rssll971.fitnessassistantapp.coredata.models.Statistic
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
+import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetAllExercisesUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.AddStatisticUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 internal class OptionsViewModel @Inject constructor(
-    private val repoStatistic: StatisticRepository,
-    private val repoExercise: ExerciseRepository
+    private val getAllExercisesUseCase: GetAllExercisesUseCase,
+    private val addStatisticUseCase: AddStatisticUseCase
 ): ViewModel() {
     private val defaultTimeStep: Int = 30
 
@@ -32,7 +32,7 @@ internal class OptionsViewModel @Inject constructor(
     private var _isStatisticAdded = MutableLiveData(false)
     val isStatisticAdded: LiveData<Boolean> get() = _isStatisticAdded
 
-    val exerciseList: LiveData<List<Exercise>> = repoExercise.getExerciseList().asLiveData()
+    val exerciseParamList: LiveData<List<ExerciseParam>> = getAllExercisesUseCase.invoke().asLiveData()
 
 
     fun setVoiceAvailability(enable: Boolean){
@@ -60,12 +60,12 @@ internal class OptionsViewModel @Inject constructor(
 
     /**Method is used in OptionSecondFragment
      * Using customized by user data, it adds entity to repository.
-     * Later, the current instance of Statistic will be used in the WorkoutFragment.
+     * Later, the current instance of StatisticParam will be used in the WorkoutFragment.
      * Thus, using the statisticRepository, configured data transfer between
      * OptionSecondFragment -> WorkoutFragment*/
     fun setupStatistic(list: List<Int>, dateInMillis: Long){
         viewModelScope.launch(Dispatchers.IO){
-            val statistic = Statistic(
+            val statisticParam = StatisticParam(
                 dateInMillis,
                 restTime.value!!,
                 exerciseTime.value!!,
@@ -74,7 +74,7 @@ internal class OptionsViewModel @Inject constructor(
                 0
             )
 
-            repoStatistic.insertStatistic(statistic = statistic)
+            addStatisticUseCase.invoke(param = statisticParam)
             _isStatisticAdded.postValue(true)
         }
     }

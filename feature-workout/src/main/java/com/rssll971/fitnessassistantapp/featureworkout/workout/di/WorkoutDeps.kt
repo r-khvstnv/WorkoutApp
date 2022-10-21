@@ -10,9 +10,7 @@ package com.rssll971.fitnessassistantapp.featureworkout.workout.di
 
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetExercisesByIdListUseCase
 import kotlin.properties.Delegates
 
 
@@ -25,8 +23,7 @@ import kotlin.properties.Delegates
  * Note: Should be inherited in AppComponent
  * */
 interface WorkoutDeps {
-    val repositoryStatistic: StatisticRepository
-    val repositoryExercise: ExerciseRepository
+    val getExercisesByIdListUseCase: GetExercisesByIdListUseCase
 }
 /**
  * Interface provides required instances from appComponent

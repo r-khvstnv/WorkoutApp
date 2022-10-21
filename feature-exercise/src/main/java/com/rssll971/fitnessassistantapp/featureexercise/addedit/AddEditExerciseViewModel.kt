@@ -12,10 +12,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.AddExerciseUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.DeleteExerciseUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetExerciseByIdUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.UpdateExerciseUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,7 +25,12 @@ import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
-internal class AddEditExerciseViewModel @Inject constructor(private val repository: ExerciseRepository): ViewModel() {
+internal class AddEditExerciseViewModel @Inject constructor(
+    private val addExerciseUseCase: AddExerciseUseCase,
+    private val deleteExerciseUseCase: DeleteExerciseUseCase,
+    private val getExerciseByIdUseCase: GetExerciseByIdUseCase,
+    private val updateExerciseUseCase: UpdateExerciseUseCase
+): ViewModel() {
     /**Variables are used to receive notification
      * when a database operation completed successfully*/
     private var _isSaved = MutableLiveData(false)
@@ -39,8 +46,8 @@ internal class AddEditExerciseViewModel @Inject constructor(private val reposito
     private var _isExerciseShouldBeUpdated = MutableLiveData(false)
     val isExerciseShouldBeUpdated: MutableLiveData<Boolean> get() = _isExerciseShouldBeUpdated
 
-    private var _exerciseForUpdating: MutableLiveData<Exercise> = MutableLiveData()
-    val exerciseForUpdating: LiveData<Exercise> get() = _exerciseForUpdating
+    private var _exerciseParamForUpdating: MutableLiveData<ExerciseParam> = MutableLiveData()
+    val exerciseParamForUpdating: LiveData<ExerciseParam> get() = _exerciseParamForUpdating
 
     private var _imagePath = MutableLiveData("")
     val imagePath: LiveData<String> get() = _imagePath
@@ -54,9 +61,9 @@ internal class AddEditExerciseViewModel @Inject constructor(private val reposito
      * - imagePath separately*/
     fun requestExerciseForUpdating(id: Int){
         viewModelScope.launch(Dispatchers.IO){
-            repository.getExercise(id = id).take(1).collect {
+            getExerciseByIdUseCase.invoke(id = id).take(1).collect {
                 exercise ->
-                _exerciseForUpdating.postValue(exercise)
+                _exerciseParamForUpdating.postValue(exercise)
                 _isExerciseShouldBeUpdated.postValue(true)
                 withContext(Dispatchers.Main){
                     setImagePath(exercise.imagePath)
@@ -65,18 +72,18 @@ internal class AddEditExerciseViewModel @Inject constructor(private val reposito
         }
     }
 
-    fun addExercise(exercise: Exercise){
+    fun addExercise(exerciseParam: ExerciseParam){
         viewModelScope.launch(Dispatchers.IO){
             deleteAllUnnecessaryImages()
-            repository.insertExercise(exercise = exercise)
+            addExerciseUseCase.invoke(param = exerciseParam)
             _isSaved.postValue(true)
         }
     }
 
-    fun updateExercise(exercise: Exercise){
+    fun updateExercise(exerciseParam: ExerciseParam){
         viewModelScope.launch(Dispatchers.IO){
             deleteAllUnnecessaryImages()
-            repository.updateExercise(exercise = exercise)
+            updateExerciseUseCase.invoke(param = exerciseParam)
             _isUpdated.postValue(true)
         }
     }
@@ -84,12 +91,12 @@ internal class AddEditExerciseViewModel @Inject constructor(private val reposito
     /**Method deletes exercise from database and all unused images,
      * that have been added before*/
     fun deleteExercise(){
-        exerciseForUpdating.value?.let {
+        exerciseParamForUpdating.value?.let {
             exercise ->
 
             viewModelScope.launch(Dispatchers.IO){
                 deleteAllUnnecessaryImages()
-                repository.deleteExercise(exercise = exercise)
+                deleteExerciseUseCase.invoke(param = exercise)
                 _isDeleted.postValue(true)
             }
         }

@@ -6,20 +6,13 @@
  *                                              *
  ************************************************/
 
-/************************************************
- * Created by Ruslan Khvastunov                 *
- * r.khvastunov@gmail.com                       *
- * Copyright (c) 2022                           *
- * All rights reserved.                         *
- *                                              *
- ************************************************/
-
 package com.rssll971.fitnessassistantapp.featurebmi.di
 
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.rssll971.fitnessassistantapp.coredata.db.repository.BmiRepository
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.AddBmiUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.DeleteAllBmiUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.GetAllBmiUseCase
 import com.rssll971.fitnessassistantapp.featurebmi.calculation.di.DaggerBmiCalculationComponent
 import com.rssll971.fitnessassistantapp.featurebmi.history.di.DaggerBmiHistoryComponent
 import kotlin.properties.Delegates
@@ -38,7 +31,9 @@ import kotlin.properties.Delegates
  * Note: Should be inherited in AppComponent
  * */
 interface FeatureBmiDeps{
-    val repositoryBmi: BmiRepository
+    val addBmiUseCase: AddBmiUseCase
+    val deleteAllBmiUseCase: DeleteAllBmiUseCase
+    val getAllBmiUseCase: GetAllBmiUseCase
 }
 
 /**

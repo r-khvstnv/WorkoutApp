@@ -11,16 +11,19 @@ package com.rssll971.fitnessassistantapp.featurebmi.history
 import androidx.lifecycle.*
 import com.github.mikephil.charting.data.BarEntry
 import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
-import com.rssll971.fitnessassistantapp.coredata.db.repository.BmiRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Bmi
+import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.DeleteAllBmiUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.GetAllBmiUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal class BmiHistoryViewModel @Inject constructor(private val repository: BmiRepository): ViewModel() {
-    private var _bmiList: MutableLiveData<List<Bmi>> = MutableLiveData()
-    val bmiList: LiveData<List<Bmi>> get() = _bmiList
+internal class BmiHistoryViewModel @Inject constructor(
+    private val getAllBmiUseCase: GetAllBmiUseCase,
+    private val deleteAllBmiUseCase: DeleteAllBmiUseCase,
+): ViewModel() {
+    private var _bmiParamList: MutableLiveData<List<BmiParam>> = MutableLiveData()
+    val bmiParamList: LiveData<List<BmiParam>> get() = _bmiParamList
 
     private var _bmiBarEntries: MutableLiveData<List<BarEntry>> = MutableLiveData()
     val bmiBarEntries: LiveData<List<BarEntry>> get() = _bmiBarEntries
@@ -34,16 +37,16 @@ internal class BmiHistoryViewModel @Inject constructor(private val repository: B
     /**Method deletes all bmiEntities from database4*/
     fun deleteAllBmi(){
         viewModelScope.launch(Dispatchers.IO){
-            repository.deleteAllBmi()
+            deleteAllBmiUseCase.invoke()
         }
     }
 
     /**Method fetch data from Database and collect it to corresponding entryList and associatedList*/
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO){
-            repository.getBmiList().collect {
+            getAllBmiUseCase.invoke().collect {
                 list ->
-                _bmiList.postValue(list)
+                _bmiParamList.postValue(list)
 
                 if (list.isNotEmpty()){
                     val barEntryList = arrayListOf<BarEntry>()

@@ -6,12 +6,11 @@
  *                                              *
  ************************************************/
 
-package com.rssll971.fitnessassistantapp.di.app
+package com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic
 
-import com.rssll971.fitnessassistantapp.coredata.di.UseCaseModule
-import dagger.Module
+import com.rssll971.fitnessassistantapp.coredata.domain.repository.StatisticRepository
+import javax.inject.Inject
 
-@Module(includes = [
-    UseCaseModule::class
-])
-object AppModule
+class GetAllStatisticUseCase @Inject constructor(private val repository: StatisticRepository) {
+    operator fun invoke() = repository.getAllStatistic()
+}

@@ -10,25 +10,23 @@ package com.rssll971.fitnessassistantapp.featureworkout.workout
 
 import android.os.CountDownTimer
 import androidx.lifecycle.*
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
-import com.rssll971.fitnessassistantapp.coredata.models.Statistic
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
+import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetExercisesByIdListUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 internal class WorkoutViewModel @Inject constructor(
-    private val repoStatistic: StatisticRepository,
-    private val repoExercise: ExerciseRepository
+    private val getExercisesByIdListUseCase: GetExercisesByIdListUseCase,
 ) : ViewModel() {
-    //Store all necessary information about current workout
-    val workoutSettings: LiveData<Statistic> = repoStatistic.getLastStatistic().asLiveData()
+    //Store all necessary information about current workout TODO change impl
+    val workoutSettings: LiveData<StatisticParam> = liveData { StatisticParam(
+        100, 30, 30, false, listOf(0,1), 0) }
 
-    private var exerciseList: MutableLiveData<List<Exercise>> = MutableLiveData()
+    private var exerciseParamList: MutableLiveData<List<ExerciseParam>> = MutableLiveData()
     //Handle exerciseLayout visibility State
     private var _isExerciseLayoutShouldBeShown: MutableLiveData<Boolean> = MutableLiveData()
     val isExerciseLayoutShouldBeShown: LiveData<Boolean> get() = _isExerciseLayoutShouldBeShown
@@ -41,20 +39,20 @@ internal class WorkoutViewModel @Inject constructor(
     private var _currentExercisePosition = MutableLiveData(-1)
     val currentExercisePosition: LiveData<Int> get() = _currentExercisePosition
 
-    private var _currentExercise: MutableLiveData<Exercise> = MutableLiveData()
-    val currentExercise: LiveData<Exercise> get() = _currentExercise
+    private var _currentExerciseParam: MutableLiveData<ExerciseParam> = MutableLiveData()
+    val currentExerciseParam: LiveData<ExerciseParam> get() = _currentExerciseParam
 
     private var _isWorkoutFinished = MutableLiveData(false)
     val isWorkoutFinished: LiveData<Boolean> get() = _isWorkoutFinished
 
 
     /**Method requests exercises from database.
-     * After will assign them to exerciseList and call startRestOrFinishWorkout() method*/
+     * After will assign them to exerciseParamList and call startRestOrFinishWorkout() method*/
     fun requestExercises(ids: List<Int>){
         viewModelScope.launch(Dispatchers.IO){
-            repoExercise.getExerciseListById(ids).take(1).collect {
+            getExercisesByIdListUseCase.invoke(ids = ids).take(1).collect {
                 list ->
-                exerciseList.postValue(list)
+                exerciseParamList.postValue(list)
                 withContext(Dispatchers.Main){
                     startRestOrFinishWorkout()
                 }
@@ -91,19 +89,19 @@ internal class WorkoutViewModel @Inject constructor(
 
 
     /**Method increment currentExercisePosition and after
-     * update currentExercise instance using exerciseList and new position*/
+     * update currentExerciseParam instance using exerciseParamList and new position*/
     private fun updateCurrentExercise(){
         _currentExercisePosition.value = _currentExercisePosition.value!! + 1
-        _currentExercise.value = exerciseList.value!![_currentExercisePosition.value!!]
+        _currentExerciseParam.value = exerciseParamList.value!![_currentExercisePosition.value!!]
     }
 
 
-    /**Method firstly checks that currentExercisePosition is not out of bounds of exerciseList
+    /**Method firstly checks that currentExercisePosition is not out of bounds of exerciseParamList
      * true -> requests updateCurrentExercise/setRestTimer methods
      *         changes state of _isExerciseLayoutShouldBeShown to true
      * false -> changes state of _isWorkoutFinished to true*/
     private fun startRestOrFinishWorkout(){
-        if (_currentExercisePosition.value!! < exerciseList.value!!.size - 1){
+        if (_currentExercisePosition.value!! < exerciseParamList.value!!.size - 1){
             updateCurrentExercise()
             setRestTimer()
             _isExerciseLayoutShouldBeShown.postValue(false)
