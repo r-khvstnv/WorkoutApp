@@ -29,7 +29,7 @@ internal class StatisticRepositoryImpl @Inject constructor(
         statisticSource.insertStatistic(statisticEntity = entity)
     }
 
-    override suspend fun getAllStatistic(): Flow<List<StatisticParam>> =
+    override fun getAllStatistic(): Flow<List<StatisticParam>> =
         statisticSource.getAllStatistic().map {
             list ->
             list.map { entityToParamMapper.map(it) }
