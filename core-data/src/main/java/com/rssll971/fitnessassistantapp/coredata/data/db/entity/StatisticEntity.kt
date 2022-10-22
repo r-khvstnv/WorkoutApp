@@ -6,16 +6,6 @@
  *                                              *
  ************************************************/
 
-/************************************************
- * Created by Ruslan Khvastunov                 *
- * r.khvastunov@gmail.com                       *
- * Copyright (c) 2022                           *
- * All rights reserved.                         *
- *                                              *
- ************************************************/
-
-
-
 package com.rssll971.fitnessassistantapp.coredata.data.db.entity
 
 import androidx.room.ColumnInfo
@@ -27,7 +17,7 @@ import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 import com.rssll971.fitnessassistantapp.coredata.utils.IntTypeConverter
 
 @Entity(tableName = Constants.STATISTIC_TABLE)
-data class StatisticEntity(
+internal data class StatisticEntity(
     @ColumnInfo val date: Long,
     @ColumnInfo val restDuration: Int,
     @ColumnInfo val exerciseDuration: Int,
@@ -37,21 +27,4 @@ data class StatisticEntity(
     @field:TypeConverters(IntTypeConverter::class) val selectedExerciseIds: List<Int>,
 
     @PrimaryKey(autoGenerate = true) var id: Int = 0
-){
-    companion object{
-        fun fromStatistic(statisticParam: StatisticParam): StatisticEntity {
-            return StatisticEntity(
-                statisticParam.date,
-                statisticParam.restDuration,
-                statisticParam.exerciseDuration,
-                statisticParam.isVoiceEnable,
-                statisticParam.selectedExerciseIds,
-                statisticParam.id
-            )
-        }
-    }
-
-    fun toStatistic(): StatisticParam {
-        return StatisticParam(date, restDuration, exerciseDuration, isVoiceEnable, selectedExerciseIds, id)
-    }
-}
+)

@@ -13,6 +13,7 @@ import androidx.lifecycle.*
 import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetExercisesByIdListUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetLastStatisticUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
@@ -21,10 +22,10 @@ import javax.inject.Inject
 
 internal class WorkoutViewModel @Inject constructor(
     private val getExercisesByIdListUseCase: GetExercisesByIdListUseCase,
+    private val getLastStatisticUseCase: GetLastStatisticUseCase
 ) : ViewModel() {
-    //Store all necessary information about current workout TODO change impl
-    val workoutSettings: LiveData<StatisticParam> = liveData { StatisticParam(
-        100, 30, 30, false, listOf(0,1), 0) }
+    //Store all necessary information about current workout
+    val workoutSettings: LiveData<StatisticParam> = getLastStatisticUseCase.invoke().asLiveData()
 
     private var exerciseParamList: MutableLiveData<List<ExerciseParam>> = MutableLiveData()
     //Handle exerciseLayout visibility State

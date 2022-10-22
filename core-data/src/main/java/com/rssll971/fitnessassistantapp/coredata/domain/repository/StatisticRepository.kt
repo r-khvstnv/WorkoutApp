@@ -14,4 +14,5 @@ import kotlinx.coroutines.flow.Flow
 interface StatisticRepository {
     suspend fun insertStatistic(statisticParam: StatisticParam)
     fun getAllStatistic(): Flow<List<StatisticParam>>
+    fun getLastStatistic(): Flow<StatisticParam>
 }

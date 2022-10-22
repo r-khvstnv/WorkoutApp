@@ -6,14 +6,6 @@
  *                                              *
  ************************************************/
 
-/************************************************
- * Created by Ruslan Khvastunov                 *
- * r.khvastunov@gmail.com                       *
- * Copyright (c) 2022                           *
- * All rights reserved.                         *
- *                                              *
- ************************************************/
-
 package com.rssll971.fitnessassistantapp.coredata.data.repository
 
 import com.rssll971.fitnessassistantapp.coredata.data.mapper.BmiEntityToParamMapper

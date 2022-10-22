@@ -6,14 +6,6 @@
  *                                              *
  ************************************************/
 
-/************************************************
- * Created by Ruslan Khvastunov                 *
- * r.khvastunov@gmail.com                       *
- * Copyright (c) 2022                           *
- * All rights reserved.                         *
- *                                              *
- ************************************************/
-
 package com.rssll971.fitnessassistantapp.coredata.data.db.dao
 
 import androidx.room.*
@@ -22,7 +14,7 @@ import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BmiDao {
+internal interface BmiDao {
     @Insert
     suspend fun insertBmiEntity(bmiEntity: BmiEntity)
 

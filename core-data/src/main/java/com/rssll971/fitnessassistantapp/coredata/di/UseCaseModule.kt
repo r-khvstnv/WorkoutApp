@@ -10,10 +10,14 @@ package com.rssll971.fitnessassistantapp.coredata.di
 
 import com.rssll971.fitnessassistantapp.coredata.domain.repository.BmiRepository
 import com.rssll971.fitnessassistantapp.coredata.domain.repository.ExerciseRepository
+import com.rssll971.fitnessassistantapp.coredata.domain.repository.StatisticRepository
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.AddBmiUseCase
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.DeleteAllBmiUseCase
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.GetAllBmiUseCase
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.*
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.AddStatisticUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetAllStatisticUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetLastStatisticUseCase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -39,4 +43,12 @@ class UseCaseModule {
     fun providesUpdateExerciseUseCase(repository: ExerciseRepository) = UpdateExerciseUseCase(repository)
     @[Singleton Provides]
     fun providesGetExercisesByIdListUseCase(repository: ExerciseRepository) = GetExercisesByIdListUseCase(repository)
+
+    @[Singleton Provides]
+    fun providesAddStatisticUseCase(repository: StatisticRepository) = AddStatisticUseCase(repository)
+    @[Singleton Provides]
+    fun providesGetAllStatisticUseCase(repository: StatisticRepository) = GetAllStatisticUseCase(repository)
+    @[Singleton Provides]
+    fun providesGetLastStatisticUseCase(repository: StatisticRepository) = GetLastStatisticUseCase(repository)
+
 }

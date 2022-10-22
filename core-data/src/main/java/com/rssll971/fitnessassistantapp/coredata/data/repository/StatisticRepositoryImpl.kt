@@ -34,4 +34,7 @@ internal class StatisticRepositoryImpl @Inject constructor(
             list ->
             list.map { entityToParamMapper.map(it) }
         }
+
+    override fun getLastStatistic(): Flow<StatisticParam> =
+        statisticSource.getLastStatistic().map { entityToParamMapper.map(it) }
 }

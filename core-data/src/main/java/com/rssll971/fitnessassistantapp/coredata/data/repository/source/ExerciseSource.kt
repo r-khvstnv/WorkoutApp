@@ -15,7 +15,7 @@ import com.rssll971.fitnessassistantapp.coredata.data.db.entity.ExerciseEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ExerciseSource @Inject constructor(workoutDatabase: WorkoutDatabase) {
+internal class ExerciseSource @Inject constructor(workoutDatabase: WorkoutDatabase) {
     private val dao: ExerciseDao = workoutDatabase.getExerciseDao()
 
     suspend fun insertExercise(exerciseEntity: ExerciseEntity){

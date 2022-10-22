@@ -6,14 +6,6 @@
  *                                              *
  ************************************************/
 
-/************************************************
- * Created by Ruslan Khvastunov                 *
- * r.khvastunov@gmail.com                       *
- * Copyright (c) 2022                           *
- * All rights reserved.                         *
- *                                              *
- ************************************************/
-
 package com.rssll971.fitnessassistantapp.coredata.data.db
 
 import androidx.room.Database
@@ -36,7 +28,7 @@ import com.rssll971.fitnessassistantapp.coredata.utils.IntTypeConverter
     exportSchema = false
 )
 @TypeConverters(IntTypeConverter::class)
-abstract class WorkoutDatabase: RoomDatabase() {
+internal abstract class WorkoutDatabase: RoomDatabase() {
     abstract fun getBmiDao(): BmiDao
     abstract fun getExerciseDao(): ExerciseDao
     abstract fun getStatisticDao(): StatisticDao

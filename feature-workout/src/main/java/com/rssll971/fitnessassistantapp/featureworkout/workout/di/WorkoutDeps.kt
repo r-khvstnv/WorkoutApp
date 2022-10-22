@@ -11,6 +11,7 @@ package com.rssll971.fitnessassistantapp.featureworkout.workout.di
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetExercisesByIdListUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetLastStatisticUseCase
 import kotlin.properties.Delegates
 
 
@@ -24,6 +25,7 @@ import kotlin.properties.Delegates
  * */
 interface WorkoutDeps {
     val getExercisesByIdListUseCase: GetExercisesByIdListUseCase
+    val getLastStatisticUseCase: GetLastStatisticUseCase
 }
 /**
  * Interface provides required instances from appComponent

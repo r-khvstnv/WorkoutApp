@@ -20,7 +20,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class SourceModule {
+internal class SourceModule {
     @[Singleton Provides]
     fun providesWorkoutDatabase(application: Application): WorkoutDatabase {
         return Room.databaseBuilder(

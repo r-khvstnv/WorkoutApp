@@ -15,6 +15,7 @@ import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.GetAllBmiUse
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.*
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.AddStatisticUseCase
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetAllStatisticUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetLastStatisticUseCase
 import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiDeps
 import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExercisesDeps
 import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutDeps
@@ -54,5 +55,6 @@ interface AppComponent :
 
     override val addStatisticUseCase: AddStatisticUseCase
     override val getAllStatisticUseCase: GetAllStatisticUseCase
+    override val getLastStatisticUseCase: GetLastStatisticUseCase
 
 }
