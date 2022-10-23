@@ -24,7 +24,7 @@ internal class WorkoutViewModel @Inject constructor(
     private val getExercisesByIdListUseCase: GetExercisesByIdListUseCase,
     private val getLastStatisticUseCase: GetLastStatisticUseCase
 ) : ViewModel() {
-    //Store all necessary information about current workout
+    /**Stores all information for current workout*/
     val workoutSettings: LiveData<StatisticParam> = getLastStatisticUseCase.invoke().asLiveData()
 
     private var exerciseParamList: MutableLiveData<List<ExerciseParam>> = MutableLiveData()
@@ -47,8 +47,10 @@ internal class WorkoutViewModel @Inject constructor(
     val isWorkoutFinished: LiveData<Boolean> get() = _isWorkoutFinished
 
 
-    /**Method requests exercises from database.
-     * After will assign them to exerciseParamList and call startRestOrFinishWorkout() method*/
+    /**
+     * Method requests Exercises from source by them [ids].
+     * Exercises will be assign to the [exerciseParamList] and [startRestOrFinishWorkout] will be called.
+     * */
     fun requestExercises(ids: List<Int>){
         viewModelScope.launch(Dispatchers.IO){
             getExercisesByIdListUseCase.invoke(ids = ids).take(1).collect {
@@ -61,9 +63,12 @@ internal class WorkoutViewModel @Inject constructor(
         }
     }
 
-
-    /**Method launch restTimer using value from workoutSettings.
-     * onFinish request startExercise method*/
+    /**
+     * Method launch restTimer using value from [workoutSettings].
+     *
+     * [android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_restTimerProgress].
+     * [android.os.CountDownTimer.onFinish] -> [startExercise] will be called.
+     * */
     private fun setRestTimer(){
         object : CountDownTimer((workoutSettings.value!!.restDuration * 1000).toLong(), 1000){
             override fun onTick(timeL: Long) {
@@ -75,8 +80,12 @@ internal class WorkoutViewModel @Inject constructor(
         }.start()
     }
 
-    /**Method launch exerciseTimer using value from workoutSettings.
-     * onFinish request startRestOrFinishWorkout method*/
+    /**
+     * Method launch ExerciseTimer using value from [workoutSettings].
+     *
+     * [android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_exerciseTimerProgress].
+     * [android.os.CountDownTimer.onFinish] -> [startRestOrFinishWorkout] will be called.
+     * */
     private fun setExerciseTimer(){
         object : CountDownTimer((workoutSettings.value!!.exerciseDuration * 1000).toLong(), 1000){
             override fun onTick(timeL: Long) {
@@ -88,19 +97,23 @@ internal class WorkoutViewModel @Inject constructor(
         }.start()
     }
 
-
-    /**Method increment currentExercisePosition and after
-     * update currentExerciseParam instance using exerciseParamList and new position*/
+    /**
+     * Method increments [_currentExercisePosition] and after
+     * update [_currentExerciseParam] instance using [exerciseParamList] and new position.
+     * */
     private fun updateCurrentExercise(){
         _currentExercisePosition.value = _currentExercisePosition.value!! + 1
         _currentExerciseParam.value = exerciseParamList.value!![_currentExercisePosition.value!!]
     }
 
-
-    /**Method firstly checks that currentExercisePosition is not out of bounds of exerciseParamList
-     * true -> requests updateCurrentExercise/setRestTimer methods
-     *         changes state of _isExerciseLayoutShouldBeShown to true
-     * false -> changes state of _isWorkoutFinished to true*/
+    /**
+     * Method firstly checks that [_currentExercisePosition] is not out of bounds of [exerciseParamList].
+     *
+     * true -> requests [updateCurrentExercise] and [setRestTimer] methods,
+     * changes [_isExerciseLayoutShouldBeShown] to true.
+     *
+     * false -> changes state of [_isWorkoutFinished] to true
+     * */
     private fun startRestOrFinishWorkout(){
         if (_currentExercisePosition.value!! < exerciseParamList.value!!.size - 1){
             updateCurrentExercise()
@@ -111,8 +124,10 @@ internal class WorkoutViewModel @Inject constructor(
         }
     }
 
-    /**Method starts exercise.
-     * It changes state of _isExerciseLayoutShouldBeShown to false and calls setExerciseTimer method*/
+    /**
+     * Method starts exercise.
+     * It changes state of [_isExerciseLayoutShouldBeShown] to false and calls [setExerciseTimer].
+     * */
     private fun startExercise(){
         _isExerciseLayoutShouldBeShown.postValue(true)
         setExerciseTimer()

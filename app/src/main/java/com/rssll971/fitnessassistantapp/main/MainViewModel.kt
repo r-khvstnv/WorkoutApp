@@ -26,9 +26,11 @@ internal class MainViewModel @Inject constructor(
     private val addExerciseUseCase: AddExerciseUseCase
 ): ViewModel() {
 
-    /**Method adds defaultExercises to database
+    /**
+     * Method adds defaultExercises to database.
      * Based on system language, corresponding exercises are added.
-     * After successful insertion, sharedPreference value IS_FIRS_APP_LAUNCH will be changed to false*/
+     * After successful insertion, sharedPreference value IS_FIRS_APP_LAUNCH will be changed to false
+     * */
     fun insertDefaultExercises(sharedPreferences: SharedPreferences){
         viewModelScope.launch(Dispatchers.IO){
             val defaultExerciseListParam: List<ExerciseParam> = if (Locale.getDefault().language == "ru"){

@@ -34,14 +34,19 @@ internal class BmiHistoryViewModel @Inject constructor(
         fetchData()
     }
 
-    /**Method deletes all bmiEntities from database4*/
+    /**
+     * Method deletes all Bmi records in source.
+     * */
     fun deleteAllBmi(){
         viewModelScope.launch(Dispatchers.IO){
             deleteAllBmiUseCase.invoke()
         }
     }
 
-    /**Method fetch data from Database and collect it to corresponding entryList and associatedList*/
+    /**
+     * Method fetch data from source and collect it to corresponding
+     * [_bmiParamList] and [_chartAssociationDateList].
+     * */
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO){
             getAllBmiUseCase.invoke().collect {
@@ -64,7 +69,9 @@ internal class BmiHistoryViewModel @Inject constructor(
     }
 
 
-    /**Method return associated date for requested list index*/
+    /**
+     * Method return associated date [String] for requested [index] from [_chartAssociationDateList].
+     * */
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
             UtilsCore.formatDateToDayMonth(it[index])

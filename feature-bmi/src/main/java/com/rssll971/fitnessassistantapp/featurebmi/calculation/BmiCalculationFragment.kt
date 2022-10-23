@@ -70,9 +70,11 @@ internal class BmiCalculationFragment : BaseFragment() {
 
 
 
-    /**Method firstly request error resetting and after
+    /**
+     * Method firstly request [resetFieldsErrors] and after
      * will check that fields are not empty.
-     * Otherwise show error message in corresponding field*/
+     * Otherwise, will be shown an error message in the corresponding field.
+     * */
     private fun isUserInputIsValid(): Boolean{
         var result = false
         val error: String = getString(RCore.string.error_empty_field)
@@ -90,7 +92,9 @@ internal class BmiCalculationFragment : BaseFragment() {
         return result
     }
 
-    /**Method resets errors in all available fields*/
+    /**
+     * Method resets errors in all available fields.
+     * */
     private fun resetFieldsErrors(){
         with(binding){
             etHeight.error = null
@@ -98,7 +102,9 @@ internal class BmiCalculationFragment : BaseFragment() {
         }
     }
 
-    /**Method checks that user input is valid and after requests bmiParam calculating*/
+    /**
+     * Method checks that user input is valid and after requests bmiParam calculating.
+     * */
     private fun calculateBmi(){
         if (isUserInputIsValid()){
             viewModel.calculateBmi(

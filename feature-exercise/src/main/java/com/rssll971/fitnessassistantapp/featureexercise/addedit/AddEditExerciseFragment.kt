@@ -162,8 +162,10 @@ internal class AddEditExerciseFragment : BaseFragment() {
     }
 
 
-    /**Result handler for storage permission. If permission is granted it calls
-     * galleryLauncher()*/
+    /**
+     * Result handler for storage permission. If permission is granted it calls
+     * [galleryLauncher].
+     * */
     private val storagePermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ){ isGranted: Boolean ->
@@ -174,8 +176,10 @@ internal class AddEditExerciseFragment : BaseFragment() {
         }
     }
 
-    /**Method request gallery, previously checked that permission for this purpose is granted.
-     * Otherwise will request permission*/
+    /**
+     * Method requests gallery, previously checked that permission for this purpose is granted.
+     * Otherwise, permission will be requested using [storagePermissionLauncher]
+     * */
     private fun galleryLauncher(){
         when{
             ContextCompat.checkSelfPermission(
@@ -193,9 +197,9 @@ internal class AddEditExerciseFragment : BaseFragment() {
         }
     }
 
-    /**Method handles result of galleryLauncher.
-     * If RESULT_OK, it will load bitmap to corresponding UI element and
-     * saves bitmap in internal storage of app*/
+    /**
+     * Method handles result of [galleryLauncher].
+     * If [android.app.Activity.RESULT_OK], it will call [saveImageToInternalStorage]*/
     private val galleryResultLauncher =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -215,7 +219,11 @@ internal class AddEditExerciseFragment : BaseFragment() {
         }
 
 
-    /**Method saves image to internal package storage and assigns it's imagePath in viewModel*/
+    /**
+     * Method saves [bitmap] to the internal package storage and
+     * calls [com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditExerciseViewModel.setImagePath]
+     * with [java.io.File.getAbsolutePath] as param.
+     * */
     private fun saveImageToInternalStorage(bitmap: Bitmap){
         lifecycleScope.launch(Dispatchers.IO){
             val wrapper = ContextWrapper(context?.applicationContext)
@@ -238,9 +246,11 @@ internal class AddEditExerciseFragment : BaseFragment() {
     }
 
 
-    /**Method firstly request error resetting and after
+    /**
+     * Method firstly request [resetFieldsErrors] and after
      * will check that fields are not empty.
-     * Otherwise show error message in corresponding field*/
+     * Otherwise, will be shown an error message in the corresponding field.
+     * */
     private fun isUserInputIsValid(): Boolean{
         var result = false
         val error: String = getString(RCore.string.error_empty_field)
@@ -258,7 +268,9 @@ internal class AddEditExerciseFragment : BaseFragment() {
         return result
     }
 
-    /**Next method reset errors in all available fields*/
+    /**
+     * Method resets errors in all available fields.
+     * */
     private fun resetFieldsErrors(){
         with(binding){
             etTitle.error = null
@@ -267,9 +279,14 @@ internal class AddEditExerciseFragment : BaseFragment() {
     }
 
 
-    /**Method handles all actions related to exercise adding/updating
-     * Firstly check that all fields are filled. After, rely on purpose of user
-     * request adding new exercise or updating existed
+    /**
+     * Method handles all actions related to Exercise record adding/updating.
+     * Firstly will be checked that all fields are filled.
+     *
+     * After, rely on
+     * [com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditExerciseViewModel.isExerciseShouldBeUpdated]
+     * param, will be called [com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditExerciseViewModel.updateExercise]
+     * or [com.rssll971.fitnessassistantapp.featureexercise.addedit.AddEditExerciseViewModel.addExercise]
      * */
     private fun requestExerciseSaving(){
         if (isUserInputIsValid()){
@@ -293,7 +310,7 @@ internal class AddEditExerciseFragment : BaseFragment() {
     }
 
 
-    /**Method navigateUp using NavController*/
+    /**Method navigates Up using NavController*/
     private fun navigateUp(){
         findNavController().navigateUp()
     }

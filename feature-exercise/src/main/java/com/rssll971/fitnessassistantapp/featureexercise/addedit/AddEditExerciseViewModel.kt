@@ -31,6 +31,7 @@ internal class AddEditExerciseViewModel @Inject constructor(
     private val getExerciseByIdUseCase: GetExerciseByIdUseCase,
     private val updateExerciseUseCase: UpdateExerciseUseCase
 ): ViewModel() {
+    //TODO Replace with sealed class
     /**Variables are used to receive notification
      * when a database operation completed successfully*/
     private var _isSaved = MutableLiveData(false)
@@ -40,9 +41,11 @@ internal class AddEditExerciseViewModel @Inject constructor(
     private var _isDeleted = MutableLiveData(false)
     val isDeleted: LiveData<Boolean> get() = _isDeleted
 
-    /**Variable notifies Fragment about target actions with exercise
+    /*
+     * Variable notifies Fragment about target actions with exercise
      * If Fragment received safeArgs, then all actions with the exercise will be aimed at updating it.
-     * Otherwise, Fragment will be used to add new exercise*/
+     * Otherwise, Fragment will be used to add new exercise
+     * */
     private var _isExerciseShouldBeUpdated = MutableLiveData(false)
     val isExerciseShouldBeUpdated: MutableLiveData<Boolean> get() = _isExerciseShouldBeUpdated
 
@@ -51,14 +54,18 @@ internal class AddEditExerciseViewModel @Inject constructor(
 
     private var _imagePath = MutableLiveData("")
     val imagePath: LiveData<String> get() = _imagePath
-    /**Serves to clear the storage of unused images,
-     * that could be added during the save/update process*/
+    /**
+     * Serves to clear the storage of unused images,
+     * that could be added during the save/update process
+     * */
     private var oldImagePathsList = MutableLiveData<ArrayList<String>>(arrayListOf())
 
-    /**Method request exercise from db using it's Id and after will assign:
-     * - exercise itself
-     * - _isExerciseShouldBeUpdated to true
-     * - imagePath separately*/
+    /**
+     * Method request Exercise record from source using it's [id] and after will be:
+     * - [_exerciseParamForUpdating] assigned
+     * - [_isExerciseShouldBeUpdated] changed to true
+     * - [setImagePath] called
+     * */
     fun requestExerciseForUpdating(id: Int){
         viewModelScope.launch(Dispatchers.IO){
             getExerciseByIdUseCase.invoke(id = id).take(1).collect {
@@ -72,6 +79,9 @@ internal class AddEditExerciseViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Method adds [exerciseParam] record to the source.
+     * */
     fun addExercise(exerciseParam: ExerciseParam){
         viewModelScope.launch(Dispatchers.IO){
             deleteAllUnnecessaryImages()
@@ -79,7 +89,9 @@ internal class AddEditExerciseViewModel @Inject constructor(
             _isSaved.postValue(true)
         }
     }
-
+    /**
+     * Method updates [exerciseParam] record in the source.
+     * */
     fun updateExercise(exerciseParam: ExerciseParam){
         viewModelScope.launch(Dispatchers.IO){
             deleteAllUnnecessaryImages()
@@ -87,11 +99,11 @@ internal class AddEditExerciseViewModel @Inject constructor(
             _isUpdated.postValue(true)
         }
     }
-
-    /**Method deletes exercise from database and all unused images,
-     * that have been added before*/
+    /**
+     * Method deletes Exercise ([_exerciseParamForUpdating]) from the source and calls [deleteAllUnnecessaryImages].
+     * */
     fun deleteExercise(){
-        exerciseParamForUpdating.value?.let {
+        _exerciseParamForUpdating.value?.let {
             exercise ->
 
             viewModelScope.launch(Dispatchers.IO){
@@ -102,12 +114,22 @@ internal class AddEditExerciseViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Method sets [path] to [_imagePath] and add it to the [oldImagePathsList].
+     * */
     fun setImagePath(path: String){
-        _imagePath.value = path
+        _imagePath.postValue(path)
         oldImagePathsList.value?.add(path)
     }
 
-    /**Method deletes only current Image from internal directory*/
+    /**
+     * Method deletes current image only and it's mention in instances.
+     *
+     * Will be deleted:
+     * - image itself
+     * - path in [oldImagePathsList]
+     * - and [setImagePath] will be changed
+     * */
     fun deleteCurrentImage(){
         imagePath.value?.let {
             path ->
@@ -129,8 +151,10 @@ internal class AddEditExerciseViewModel @Inject constructor(
         }
     }
 
-    /**Method deletes all images added during the save/update process */
-    private suspend fun deleteAllUnnecessaryImages(){
+    /**
+     * Method deletes all unused images, using paths in the [oldImagePathsList].
+     * */
+    private fun deleteAllUnnecessaryImages(){
         oldImagePathsList.value?.let {
             list ->
 

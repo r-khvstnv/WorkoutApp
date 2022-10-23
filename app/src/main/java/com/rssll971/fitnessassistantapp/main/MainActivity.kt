@@ -43,6 +43,7 @@ internal class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         /**Ads*/
         MobileAds.initialize(this)
         val adRequest = AdRequest.Builder().build()
@@ -69,7 +70,10 @@ internal class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.findNavController()
         navView.setupWithNavController(navController)
 
-        /**NavigationView/AdView are visible only for startDestination Fragments*/
+
+        /**
+         * NavigationView/AdView are visible only for Fragments represented in bottom menu
+         * */
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.bmi_history_fragment -> showNavAndAdView()
@@ -80,8 +84,9 @@ internal class MainActivity : AppCompatActivity() {
             }
         }
 
-        /**SharedPreference stores Boolean value of firstLaunch
-         * Accordingly, defaultExercises will be added to database only on first app launch
+        /**
+         * SharedPreference stores the Boolean value of firstLaunch.
+         * Accordingly, defaultExercises should be added to the database only on first app launch
          * */
         val sharedPref = getSharedPreferences(ConstantsCore.WORKOUT_APP_SHARED_PREF, Context.MODE_PRIVATE)
         val isFirstLaunch: Boolean = sharedPref.getBoolean(ConstantsCore.IS_FIRS_APP_LAUNCH, true)
@@ -90,7 +95,9 @@ internal class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**Methods handle NavigationView/AdView visibility*/
+    /**
+     * Methods handle NavigationView/AdView visibility
+     * */
     private fun hideNavAndAdView(){
         binding.navView.visibility = View.GONE
         binding.adViewMain.visibility = View.GONE

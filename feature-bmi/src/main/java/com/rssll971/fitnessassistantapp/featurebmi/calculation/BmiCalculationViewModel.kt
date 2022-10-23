@@ -25,7 +25,9 @@ internal class BmiCalculationViewModel @Inject constructor(
     private var _bmiParam: MutableLiveData<BmiParam> = MutableLiveData()
     val bmiParam: LiveData<BmiParam> get() = _bmiParam
 
-    /**Method calculates BmiIndex and after requests to save it*/
+    /**
+     * Method calculates BmiIndex and after requests to save new Bmi record.
+     * */
     fun calculateBmi(dateInMillis: Long, height: Float, weight: Float){
         val tmpHeight: Float = height / 100f
         val index: Float = weight / (tmpHeight.pow(2))
@@ -40,7 +42,9 @@ internal class BmiCalculationViewModel @Inject constructor(
         insertBmi(bmiParam = bmiParam)
     }
 
-    /**Method inserts bmiParam to database*/
+    /**
+     * Method add new Bmi record to source
+     * */
     private fun insertBmi(bmiParam: BmiParam){
         viewModelScope.launch(Dispatchers.IO){
             addBmiUseCase.invoke(param = bmiParam)

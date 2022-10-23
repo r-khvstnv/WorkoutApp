@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -18,8 +17,6 @@
         android:name="com.rssll971.fitnessassistantapp.featureinfo.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info">
-        <deepLink
-            app:uri="@string/deep_link_info_fragment"
-            />
+        <deepLink app:uri="@string/deep_link_info_fragment" />
     </fragment>
 </navigation>

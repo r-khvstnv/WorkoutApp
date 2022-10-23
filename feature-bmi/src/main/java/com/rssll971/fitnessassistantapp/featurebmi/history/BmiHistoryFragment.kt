@@ -38,7 +38,7 @@ internal class BmiHistoryFragment : BaseFragment() {
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<BmiHistoryViewModel> { viewModelFactory }
 
-    private lateinit var adapterBmi: BmiHistoryAdapter
+    private val adapterBmi: BmiHistoryAdapter by lazy { BmiHistoryAdapter(requireContext()) }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this)
@@ -96,7 +96,6 @@ internal class BmiHistoryFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView(){
-        adapterBmi = BmiHistoryAdapter(requireContext())
         binding.included.rvBmiHistory.apply {
             adapter = adapterBmi
             layoutManager = LinearLayoutManager(
@@ -104,7 +103,9 @@ internal class BmiHistoryFragment : BaseFragment() {
         }
     }
 
-    /**Method setting up LineChart appearance*/
+    /**
+     * Method setting up LineChart appearance.
+     * */
     private fun setupChartAppearance(){
         binding.bmiBarChartVertical.apply {
             description.isEnabled = false
@@ -137,8 +138,10 @@ internal class BmiHistoryFragment : BaseFragment() {
 
     }
 
-    /**Method updates data in corresponding LineCharts.
-     * Also will be implemented some UI style for dataSet*/
+    /**
+     * Method updates data in corresponding LineCharts.
+     * Also will be implemented some UI style for dataSet.
+     * */
     private fun updateChartData(barEntryList: List<BarEntry>){
         val dataSet = BarDataSet(barEntryList, "")
         val colorList = arrayListOf<Int>()

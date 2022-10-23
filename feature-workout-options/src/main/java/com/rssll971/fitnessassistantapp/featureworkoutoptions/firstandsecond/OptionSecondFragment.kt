@@ -34,7 +34,9 @@ internal class OptionSecondFragment : BaseFragment() {
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by navGraphViewModels<OptionsViewModel>(R.id.options_nested_graph){ viewModelFactory }
 
-    private lateinit var selectableExercisesAdapter: SelectableExercisesAdapter
+    private val selectableExercisesAdapter: SelectableExercisesAdapter by lazy {
+        SelectableExercisesAdapter(requireContext())
+    }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this)
@@ -95,7 +97,6 @@ internal class OptionSecondFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView(){
-        selectableExercisesAdapter = SelectableExercisesAdapter(requireContext())
         binding.rvExercises.apply {
             adapter = selectableExercisesAdapter
             layoutManager = LinearLayoutManager(

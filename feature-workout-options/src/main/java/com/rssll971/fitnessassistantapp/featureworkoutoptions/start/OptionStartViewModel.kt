@@ -38,7 +38,12 @@ internal class OptionStartViewModel @Inject constructor(
         fetchData()
     }
 
-    /**Method fetch data from Database and collect it to corresponding entryLists and associatedList*/
+    /**
+     * Method fetches Statistic data from source. If data doesn't exist, [_isLineChartShouldBeShown] will be set to false.
+     * Otherwise, will be set: [_isLineChartShouldBeShown] = true and [_chartAssociationDateList],
+     * [_workoutDurationEntries], [_workoutExerciseAmountEntries].
+     *
+     * */
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO){
             getAllStatisticUseCase.invoke().collect {
@@ -56,9 +61,14 @@ internal class OptionStartViewModel @Inject constructor(
 
                     /**In Charts pass only last 10 entries*/
                     val tmpList: List<StatisticParam> = list.takeLast(10).reversed()
+
                     for (i in tmpList.indices){
                         associationList.add(list[i].date)
-                        durationEntries.add(Entry(i.toFloat(), (list[i].restDuration + list[i].exerciseDuration) * list[i].selectedExerciseIds.size.toFloat()))
+                        durationEntries.add(
+                            Entry(
+                                i.toFloat(),
+                                (list[i].restDuration + list[i].exerciseDuration) * list[i].selectedExerciseIds.size.toFloat()
+                            ))
                         exerciseAmountEntries.add(Entry(i.toFloat(), list[i].selectedExerciseIds.size.toFloat()))
                     }
 
@@ -70,7 +80,9 @@ internal class OptionStartViewModel @Inject constructor(
         }
     }
 
-    /**Method return associated date for requested list index*/
+    /**
+     * Method return associated date [String] for requested [index] from [_chartAssociationDateList].
+     * */
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
             UtilsCore.formatDateToDayMonth(it[index])

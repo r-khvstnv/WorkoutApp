@@ -24,7 +24,9 @@ internal class AllExercisesViewModel @Inject constructor(
 ) : ViewModel() {
     val allExercises: LiveData<List<ExerciseParam>> = getAllExercisesUseCase.invoke().asLiveData()
 
-    /**Method deletes exerciseParam from database and it's corresponding image*/
+    /**
+     * Method deletes [exerciseParam] record in the source and it's corresponding image.
+     * */
     fun requestExerciseDeleting(exerciseParam: ExerciseParam){
         viewModelScope.launch(Dispatchers.IO) {
             deleteImage(exerciseParam.imagePath)

@@ -11,7 +11,6 @@ package com.rssll971.fitnessassistantapp.coredata.data.db.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
 import com.rssll971.fitnessassistantapp.coredata.utils.Constants
 
 @Entity(tableName = Constants.BMI_TABLE)

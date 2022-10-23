@@ -25,7 +25,7 @@ class WorkoutApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        /**Pass an instance of appComponent to corresponding Feature Dependency Stores*/
+        /* Pass an instance of appComponent to the corresponding Feature Dependency Stores*/
         appComponent.let {
             FeatureExercisesDepsStore.deps = it
             FeatureBmiDepsStore.deps = it

@@ -36,7 +36,10 @@ internal class AllExercisesFragment : BaseFragment() {
     private lateinit var exercisesAdapter: AllExercisesAdapter
 
     override fun onAttach(context: Context) {
-        ViewModelProvider(this).get<FeatureExerciseComponentsViewModel>().allExercisesComponent.inject(this)
+        ViewModelProvider(this)
+            .get<FeatureExerciseComponentsViewModel>()
+            .allExercisesComponent
+            .inject(this)
         super.onAttach(context)
     }
 
@@ -78,7 +81,9 @@ internal class AllExercisesFragment : BaseFragment() {
         exercisesAdapter = AllExercisesAdapter(
             requireContext(),
             object : ItemCallback{
-                /**onClick -> Navigate to AddEditExerciseFragment with id as safeArgs*/
+                /**
+                 * [onClick] -> Navigate to theAddEditExerciseFragment with [id] argument.
+                 * */
                 override fun onClick(id: Int) {
                     findNavController().navigate(
                         AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)

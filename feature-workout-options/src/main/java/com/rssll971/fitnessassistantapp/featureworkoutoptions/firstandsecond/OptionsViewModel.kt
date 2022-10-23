@@ -58,11 +58,9 @@ internal class OptionsViewModel @Inject constructor(
     }
 
 
-    /**Method is used in OptionSecondFragment
-     * Using customized by user data, it adds entity to repository.
-     * Later, the current instance of StatisticParam will be used in the WorkoutFragment.
-     * Thus, using the statisticRepository, configured data transfer between
-     * OptionSecondFragment -> WorkoutFragment*/
+    /**
+     * Method is used to add Statistic to the source.
+     * */
     fun setupStatistic(list: List<Int>, dateInMillis: Long){
         viewModelScope.launch(Dispatchers.IO){
             val statisticParam = StatisticParam(

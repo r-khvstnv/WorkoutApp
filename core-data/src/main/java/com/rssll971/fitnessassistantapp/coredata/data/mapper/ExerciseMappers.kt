@@ -12,7 +12,7 @@ import com.rssll971.fitnessassistantapp.coredata.data.db.entity.ExerciseEntity
 import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.coredata.utils.Mapper
 
-
+/** Maps data from [ExerciseEntity] to [ExerciseParam]*/
 internal class ExerciseEntityToParamMapper: Mapper<ExerciseEntity, ExerciseParam>{
     override fun map(input: ExerciseEntity): ExerciseParam = with(input){
         ExerciseParam(
@@ -24,6 +24,7 @@ internal class ExerciseEntityToParamMapper: Mapper<ExerciseEntity, ExerciseParam
     }
 }
 
+/** Maps data from [ExerciseParam] to [ExerciseEntity]*/
 internal class ExerciseParamToEntityMapper: Mapper<ExerciseParam, ExerciseEntity>{
     override fun map(input: ExerciseParam): ExerciseEntity = with(input){
         ExerciseEntity(
