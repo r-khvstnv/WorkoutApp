@@ -15,7 +15,7 @@ _ _ _
 
 ## Introductions
 
-Fitness Assistant provides the user platform whereby he can train using his exercises and track the result. The Project is based on **a multi-module architecture** using modern android development technologies.
+Fitness Assistant provides a user platform whereby he can train using his exercises and track the result. The Project is based on **a multi-module architecture** using modern android development technologies.
 <br/><br/>
 
 ## Previews
@@ -25,6 +25,9 @@ _ _ _
 <br/><br/>
 
 ## Technology Overview
+
+<span style="color: red">___NOTE: See dev-mm branch___</span>
+
 ### Modules Structure
 ![image](i_previews/modules_structure.png)
 - **core** - Elements and Technological Solutions used by project modules everywhere
@@ -33,16 +36,20 @@ _ _ _
 - **feature-N** - Functional part of Application
 _ _ _
 
+### Architecture  Diagram
+![image](i_previews/clean_layers.png)
+_ _ _
+
 ### Dagger Dependency Graph
-![image](i_previews/dagger_deps.png)
+![image](i_previews/dagger_deps2.png)
 _ _ _
 
 ### Navigation Graph
 ![image](i_previews/navigation_graph.png)
 
-- ___repository*___ - For data transferring between **OptionSecondFragment** and **WorkoutFragment** are used StatisticEntity and RepositoryStatistic respectively. **OptionSecondFragment** saves all customized options by the user and selected exercises. **WorkoutFragment** requests the Latest Row from Statistic Table and then sets up the workout.
+- ___repository*___ - For data transferring between **OptionSecondFragment** and **WorkoutFragment** are used Statistic data and StatisticSource respectively. **OptionSecondFragment** saves all customized options by the user and selected exercises. **WorkoutFragment** requests the Latest Row from Statistic Source and then sets up the workout.
 
-- ___nested-grapgh**___ - **OptionFirstFragment** and **OptionSecondFragment** are used shared viewModel **(OptionsViewModel)**. For this reason, the graph is used for viewModel's lifecycle control.
+- ___nested-grapgh**___ - **OptionFirstFragment** and **OptionSecondFragment** are used shared ViewModel **(OptionsViewModel)**. For this reason, the graph is used for viewModel's lifecycle control.
 _ _ _
 <br/>
 
@@ -59,7 +66,7 @@ _ _ _
 	- Scopes
 - **Firebase**
 	- Performance Monitoring
-	- Crashlytics 
+	- Crashlytics
 	- Analytics
 - **Admob**
 - **Glide**
