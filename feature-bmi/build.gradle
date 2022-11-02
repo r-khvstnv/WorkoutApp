@@ -46,14 +46,14 @@ dependencies {
     implementation(project(":core-data"))
     implementation(project(":core-theme"))
 
-    def nav_ver = '2.5.2'
+    def nav_ver = '2.5.3'
     def lifecycle_ver = '2.5.1'
     def dagger2_ver = '2.44'
     def mp_android_chart_ver = '3.1.0'
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_ver"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_ver"
