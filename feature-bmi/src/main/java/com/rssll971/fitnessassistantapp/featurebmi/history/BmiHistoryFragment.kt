@@ -75,7 +75,7 @@ internal class BmiHistoryFragment : BaseFragment() {
         viewModel.bmiParamList.observe(viewLifecycleOwner){
             list ->
             list?.let {
-                adapterBmi.updateList(it.reversed())
+                adapterBmi.submitList(it.reversed())
 
                 if (it.isNotEmpty()){
                     binding.clBmi.visibility = View.VISIBLE

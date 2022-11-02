@@ -66,7 +66,7 @@ internal class AllExercisesFragment : BaseFragment() {
         viewModel.allExercises.observe(viewLifecycleOwner){
             list ->
             list?.let {
-                exercisesAdapter.updateList(list = list)
+                exercisesAdapter.submitList(it)
                 if (list.isNotEmpty()){
                     binding.tvNoData.visibility = View.GONE
                 } else{

@@ -8,18 +8,18 @@
 
 package com.rssll971.fitnessassistantapp.featurebmi.history
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.ItemBmiHistoryBinding
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 
-class BmiHistoryAdapter(private val context: Context):
-    RecyclerView.Adapter<BmiHistoryAdapter.ViewHolder>() {
-    private var bmiParamList: List<BmiParam> = listOf()
+internal class BmiHistoryAdapter(private val context: Context):
+    ListAdapter<BmiParam, BmiHistoryAdapter.ViewHolder>(BmiHistoryDiff()) {
 
         class ViewHolder(val binding: ItemBmiHistoryBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -30,7 +30,7 @@ class BmiHistoryAdapter(private val context: Context):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val bmi = bmiParamList[position]
+        val bmi = getItem(position)
 
         with(holder.binding){
             tvItemDate.text = Utils.formatToDate(bmi.date)
@@ -40,14 +40,15 @@ class BmiHistoryAdapter(private val context: Context):
             tvItemBmiStatus.setBackgroundColor(Utils.getBmiIndexStatusColor(bmi.bmiIndex, context = context))
         }
     }
+}
 
-    override fun getItemCount(): Int {
-        return bmiParamList.size
+private class BmiHistoryDiff: DiffUtil.ItemCallback<BmiParam>() {
+    override fun areItemsTheSame(oldItem: BmiParam, newItem: BmiParam): Boolean {
+        return oldItem == newItem
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list: List<BmiParam>){
-        bmiParamList = list
-        notifyDataSetChanged()
+    override fun areContentsTheSame(oldItem: BmiParam, newItem: BmiParam): Boolean {
+        return oldItem.id == newItem.id && oldItem.date == newItem.date
     }
+
 }

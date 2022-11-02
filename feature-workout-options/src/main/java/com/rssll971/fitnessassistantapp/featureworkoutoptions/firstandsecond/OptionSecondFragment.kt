@@ -65,7 +65,7 @@ internal class OptionSecondFragment : BaseFragment() {
             list ->
             list?.let {
                 if (it.isNotEmpty()){
-                    selectableExercisesAdapter.updateExerciseList(it.reversed())
+                    selectableExercisesAdapter.submitList(it.reversed())
                     binding.iBtnStart.visibility = View.VISIBLE
                 } else{
                     binding.iBtnStart.visibility = View.GONE
