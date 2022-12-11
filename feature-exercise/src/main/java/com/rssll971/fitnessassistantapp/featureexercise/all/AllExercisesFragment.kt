@@ -19,11 +19,9 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
-import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.featureexercise.R
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAllExercisesBinding
 import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExerciseComponentsViewModel
-import com.rssll971.fitnessassistantapp.featureexercise.utils.ItemCallback
 import javax.inject.Inject
 
 internal class AllExercisesFragment : BaseFragment() {
@@ -79,20 +77,10 @@ internal class AllExercisesFragment : BaseFragment() {
     /**Method setting up exercise recycler view*/
     private fun setupRecyclerView(){
         exercisesAdapter = AllExercisesAdapter(
-            requireContext(),
-            object : ItemCallback{
-                /**
-                 * [onClick] -> Navigate to theAddEditExerciseFragment with [id] argument.
-                 * */
-                override fun onClick(id: Int) {
-                    findNavController().navigate(
-                        AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)
-                    )
-                }
-                override fun onDelete(exerciseParam: ExerciseParam) {
-                    viewModel.requestExerciseDeleting(exerciseParam = exerciseParam)
-                }
-            })
+            context = requireContext(),
+            onItemClicked = this::navigateToEditExerciseFragmentById,
+            onItemDelete = viewModel::requestExerciseDeleting
+        )
 
         binding.rvExercises.apply {
             adapter = exercisesAdapter
@@ -101,6 +89,12 @@ internal class AllExercisesFragment : BaseFragment() {
             )
             setHasFixedSize(true)
         }
+    }
+
+    private fun navigateToEditExerciseFragmentById(id: Int){
+        findNavController().navigate(
+            AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)
+        )
     }
 
     override fun onDestroyView() {

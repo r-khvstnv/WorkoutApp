@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.ItemExerciseBinding
-import com.rssll971.fitnessassistantapp.featureexercise.utils.ItemCallback
 
 internal class AllExercisesAdapter(
     private val context: Context,
-    private val callback: ItemCallback
+    private val onItemClicked: (Int) -> Unit,
+    private val onItemDelete: (ExerciseParam) -> Unit,
 ): ListAdapter<ExerciseParam, AllExercisesAdapter.ViewHolder>(AllExercisesDiff()) {
 
     class ViewHolder(val binding: ItemExerciseBinding): RecyclerView.ViewHolder(binding.root)
@@ -39,12 +39,12 @@ internal class AllExercisesAdapter(
             tvItemDescription.text = exercise.description
 
             ivItemDelete.setOnClickListener {
-                callback.onDelete(exerciseParam = exercise)
+                onItemDelete(exercise)
             }
         }
 
         holder.itemView.setOnClickListener {
-            callback.onClick(exercise.id)
+            onItemClicked(exercise.id)
         }
     }
 }
