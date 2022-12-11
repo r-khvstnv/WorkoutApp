@@ -27,6 +27,24 @@ buildscript {
     }
 }
 
+ext{
+    core_ktx_ver = '1.9.0'
+    app_compat_ver = '1.5.1'
+    material_ver = '1.7.0'
+    constraintlayout_ver = '2.1.4'
+    junit_ver = '4.13.2'
+    ext_junit_ver = '1.1.4'
+    espresso_ver = '3.5.0'
+    nav_ver = '2.5.3'
+    lifecycle_ver = '2.5.1'
+    dagger2_ver = '2.44.2'
+    glide_ver = '4.14.2'
+    ads_ver = '21.3.0'
+    room_ver = '2.4.3'
+    gson_ver = '2.9.0'
+    mp_android_chart_ver = '3.1.0'
+}
+
 allprojects {
     repositories {
         google()
