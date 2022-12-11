@@ -23,7 +23,7 @@ import kotlin.properties.Delegates
  * Interface for implicit dependency on AppComponent
  * (due to feature-module doesn't know anything about app-module).
  * As declared properties listed all methods required for further injection
- * in corresponding feature-module.
+ * in the corresponding feature module.
  *
  * Note: Should be inherited in AppComponent
  * */
@@ -49,7 +49,7 @@ interface FeatureExercisesDepsProvider{
 }
 
 /**
- * Explicit Singleton which must be assigned in WorkoutApplication
+ * Explicit Singleton which must be assigned in [WorkoutApplication][com.rssll971.fitnessassistantapp.WorkoutApplication]
  * */
 object FeatureExercisesDepsStore: FeatureExercisesDepsProvider {
     override var deps: FeatureExercisesDeps by Delegates.notNull()
@@ -59,8 +59,8 @@ object FeatureExercisesDepsStore: FeatureExercisesDepsProvider {
 /**
  * ViewModel stores all instances of Components.
  * This implementation simplifies Component lifecycle handling.
- * Note: We can't store instances in original (related to Fragment) ViewModel,
- * due to it creates by ViewModelFactory which should be injected too.
+ * Note: We can't store instances in the original (related to Fragment) ViewModel,
+ * due to it being created by ViewModelFactory which should be injected too.
  * */
 internal class FeatureExerciseComponentsViewModel : ViewModel(){
     val allExercisesComponent = DaggerAllExercisesComponent.builder().deps(

@@ -66,8 +66,9 @@ internal class WorkoutViewModel @Inject constructor(
     /**
      * Method launch restTimer using value from [workoutSettings].
      *
-     * [android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_restTimerProgress].
-     * [android.os.CountDownTimer.onFinish] -> [startExercise] will be called.
+     * [onTick][android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_restTimerProgress];
+     *
+     * [onFinish][android.os.CountDownTimer.onFinish] -> [startExercise] will be called.
      * */
     private fun setRestTimer(){
         object : CountDownTimer((workoutSettings.value!!.restDuration * 1000).toLong(), 1000){
@@ -83,8 +84,8 @@ internal class WorkoutViewModel @Inject constructor(
     /**
      * Method launch ExerciseTimer using value from [workoutSettings].
      *
-     * [android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_exerciseTimerProgress].
-     * [android.os.CountDownTimer.onFinish] -> [startRestOrFinishWorkout] will be called.
+     * [onTick][android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_exerciseTimerProgress].
+     * [onFinish][android.os.CountDownTimer.onFinish] -> [startRestOrFinishWorkout] will be called.
      * */
     private fun setExerciseTimer(){
         object : CountDownTimer((workoutSettings.value!!.exerciseDuration * 1000).toLong(), 1000){
