@@ -1,54 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
-  ~ Copyright (c) 2022
+  ~ Copyright (c) 2023
   ~ All rights reserved.
   ~
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="MyTopAppBarComponent" />
-
-    <style name="MyTopAppBarComponent.Button">
-        <item name="android:layout_width">?actionBarSize</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@drawable/ripple_def</item>
-    </style>
-
-    <style name="MyTopAppBarComponent.Button.Back">
-        <item name="tint">?attr/colorPrimary</item>
-        <item name="android:layout_gravity">center_vertical|start</item>
-    </style>
-
-    <style name="MyTopAppBarComponent.Button.Action">
-        <item name="tint">?attr/colorSecondary</item>
-        <item name="android:layout_gravity">center_vertical|end</item>
-    </style>
-
-    <style name="MyTopAppBarComponent.TextView">
-        <item name="fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">?attr/colorPrimary</item>
+<resources>
+    <style name="ButtonDef">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">@dimen/m_button_height</item>
+        <item name="android:background">@drawable/ripple_shape_rectangle_rad10</item>
+        <item name="android:textSize">@dimen/m_button_text_size</item>
+        <item name="android:elevation">@dimen/m_button_elevation</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    
+    <style name="ButtonDef.Primary">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="iconTint">?attr/colorOnPrimary</item>
     </style>
 
-    <style name="MyTopAppBarComponent.TextView.Title">
-        <item name="android:textSize">@dimen/top_app_bar_title_text_size</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:textAlignment">center</item>
+    <style name="ButtonDef.Secondary">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="iconTint">?attr/colorOnSecondary</item>
     </style>
 
-    <style name="MyTopAppBarComponent.TextView.Subtitle">
-        <item name="android:textSize">@dimen/top_app_bar_subtitle_text_size</item>
-        <item name="android:layout_gravity">center_vertical|end</item>
-        <item name="android:textAlignment">textEnd</item>
-        <item name="fontFamily">@font/roboto_regular</item>
-    </style>
-
-    <style name="MyTopAppBarComponent.FrameLayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?actionBarSize</item>
-        <item name="android:background">?android:colorBackground</item>
-        <item name="elevation">@dimen/top_app_bar_elevation</item>
+    <style name="ButtonDef.ActionNext">
+        <item name="backgroundTint">?android:colorBackground</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="iconTint">?attr/colorSecondary</item>
+        <item name="iconGravity">end</item>
     </style>
 </resources>
