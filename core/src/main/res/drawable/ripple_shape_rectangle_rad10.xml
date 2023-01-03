@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2023
+  ~ All rights reserved.
+  ~
+  -->
+
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="?attr/colorOutline">
+    <item android:drawable="@drawable/shape_rectangle_rad10"/>
+</ripple>

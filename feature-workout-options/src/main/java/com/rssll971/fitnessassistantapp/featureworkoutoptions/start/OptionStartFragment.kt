@@ -65,7 +65,7 @@ internal class OptionStartFragment : BaseFragment() {
             lineChartWorkoutDuration.setupChartAppearance()
             lineChartWorkoutAmount.setupChartAppearance()
 
-            llStart.setOnClickListener {
+            btnStart.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_options_start_fragment_to_options_nested_graph
                 )

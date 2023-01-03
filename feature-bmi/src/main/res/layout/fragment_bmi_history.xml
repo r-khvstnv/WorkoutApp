@@ -81,13 +81,11 @@
 
                 <Button
                     android:id="@+id/btn_clear_history"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    style="@style/ButtonDef.Primary"
+                    android:layout_width="match_parent"
                     android:layout_marginHorizontal="@dimen/m_default_layout_margin"
                     android:layout_marginBottom="@dimen/m_default_fab_margin"
                     android:text="@string/action_clear_history"
-                    android:textSize="@dimen/btn_clear_text_size"
                     app:icon="@drawable/ic__delete" />
             </LinearLayout>
         </LinearLayout>

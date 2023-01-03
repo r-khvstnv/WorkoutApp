@@ -6,94 +6,88 @@
   ~
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".start.OptionStartFragment">
 
-    <LinearLayout
+    <FrameLayout style="@style/MyTopAppBarComponent.FrameLayout">
+
+        <TextView
+            style="@style/MyTopAppBarComponent.TextView.Title"
+            android:text="@string/title_new_workout" />
+
+        <ImageButton
+            android:id="@+id/iv_info"
+            style="@style/MyTopAppBarComponent.Button.Action"
+            android:src="@drawable/ic_info"
+            app:tint="?attr/colorPrimary"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <!--StatisticParam card-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_statistic"
+        style="@style/CardViewDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:minHeight="@dimen/line_chart_min_height">
 
-        <FrameLayout style="@style/MyTopAppBarComponent.FrameLayout">
-
-            <TextView
-                style="@style/MyTopAppBarComponent.TextView.Title"
-                android:text="@string/title_new_workout" />
-
-            <ImageButton
-                android:id="@+id/iv_info"
-                style="@style/MyTopAppBarComponent.Button.Action"
-                android:src="@drawable/ic_info"
-                app:tint="?attr/colorPrimary"
-                tools:ignore="ContentDescription" />
-        </FrameLayout>
-
-
-        <!--StatisticParam card-->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_statistic"
-            style="@style/CardViewDefault"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/m_default_layout_margin"
-            android:minHeight="@dimen/line_chart_min_height">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/m_default_layout_margin"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:text="@string/title_statistic"
-                    android:textSize="28sp"
-                    app:fontFamily="@font/roboto_light" />
-
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/line_chart_workout_duration"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:minHeight="@dimen/line_chart_min_height" />
-
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/line_chart_workout_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/line_chart_margin_top"
-                    android:minHeight="@dimen/line_chart_min_height" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <!--Start-->
-        <LinearLayout
-            android:id="@+id/ll_start"
-            android:layout_width="@dimen/ll_start_size"
-            android:layout_height="@dimen/ll_start_size"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/ll_start_margin_top"
-            android:layout_marginBottom="@dimen/ll_start_margin_bottom"
-            android:background="@drawable/background_oval_shape"
-            android:backgroundTint="?attr/colorPrimaryContainer"
-            android:elevation="@dimen/m_default_elevation"
-            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                style="@style/TitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_start" />
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="@string/title_statistic"
+                android:textSize="28sp"
+                app:fontFamily="@font/roboto_light" />
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart_workout_duration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="@dimen/line_chart_min_height" />
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart_workout_amount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/line_chart_margin_top"
+                android:minHeight="@dimen/line_chart_min_height" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <!--Start-->
+    <Button
+        android:id="@+id/btn_start"
+        style="@style/ButtonDef.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:text="@string/action_start"
+        android:textSize="32sp"
+        app:fontFamily="@font/roboto_regular" />
+</LinearLayout>

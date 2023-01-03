@@ -131,11 +131,8 @@
 
     <Button
         android:id="@+id/btn_calculate"
+        style="@style/ButtonDef.Secondary"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:layout_margin="@dimen/m_default_layout_margin"
-        android:backgroundTint="?attr/colorSecondary"
-        android:text="@string/action_calculate"
-        android:textSize="@dimen/card_subtitle_text_size"
-        app:fontFamily="@font/roboto_bold" />
+        android:text="@string/action_calculate" />
 </LinearLayout>

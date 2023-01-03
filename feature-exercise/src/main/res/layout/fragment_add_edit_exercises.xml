@@ -116,7 +116,7 @@
             android:minLines="@integer/description_new_min_lines" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <View
+    <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -124,15 +124,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete"
+        style="@style/ButtonDef.Secondary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
         android:layout_marginBottom="@dimen/add_edit_bottom_btn_margin_bottom"
-        android:backgroundTint="?attr/colorSecondary"
         android:text="@string/action_delete"
-        android:textSize="@dimen/add_edit_bottom_btn_text_size"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible" />
 </LinearLayout>

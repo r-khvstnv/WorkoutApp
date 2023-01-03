@@ -6,11 +6,12 @@
   ~
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/m_default_layout_margin"
     tools:context=".InfoFragment">
 
@@ -18,34 +19,30 @@
         android:id="@+id/_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxEms="5"
         android:text="@string/app_name"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="?attr/colorPrimary"
         android:textSize="@dimen/title_text_size"
-        app:fontFamily="@font/roboto_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:fontFamily="@font/roboto_regular" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_launcher_whistle"
-        app:layout_constraintBottom_toTopOf="@id/_app_version"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/_app_name"
-        app:layout_constraintVertical_bias="1"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/_app_version"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:gravity="bottom"
+        android:layout_marginBottom="20dp"
         android:text="@string/app_ver"
         android:textColor="?attr/colorOnBackground"
         android:textSize="@dimen/version_text_size"
-        app:fontFamily="@font/roboto_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:fontFamily="@font/roboto_medium" />
+</LinearLayout>
