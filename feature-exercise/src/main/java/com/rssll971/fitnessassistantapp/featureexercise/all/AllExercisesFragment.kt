@@ -55,7 +55,7 @@ internal class AllExercisesFragment : BaseFragment() {
         setupRecyclerView()
 
         //Navigate to AddEditExerciseFragment onClick
-        binding.fabAdd.setOnClickListener {
+        binding.ibAddNewExercise.setOnClickListener {
             findNavController().navigate(
                 R.id.action_all_exercises_fragment_to_add_edit_exercise_fragment
             )

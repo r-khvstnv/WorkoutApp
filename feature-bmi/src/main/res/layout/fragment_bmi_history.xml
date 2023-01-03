@@ -26,75 +26,71 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_bmi"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/_history"
-                style="@style/TitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/m_default_layout_margin"
-                android:text="@string/title_history"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <FrameLayout style="@style/MyTopAppBarComponent.FrameLayout">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/_statistic"
-                style="@style/CardViewDefault"
+                <TextView
+                    style="@style/MyTopAppBarComponent.TextView.Title"
+                    android:text="@string/title_history" />
+
+                <ImageButton
+                    android:id="@+id/ib_calculate_new_bmi"
+                    style="@style/MyTopAppBarComponent.Button.Action"
+                    android:contentDescription="@string/action_calculate_bmi"
+                    android:src="@drawable/ic_calculate" />
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/cl_bmi"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/m_default_layout_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/_history">
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/bmi_bar_chart_vertical"
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/_statistic"
+                    style="@style/CardViewDefault"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/m_default_layout_margin"
-                    android:minHeight="@dimen/bar_chart_min_height" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/m_default_layout_margin">
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/bmi_bar_chart_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/m_default_layout_margin"
+                        android:minHeight="@dimen/bar_chart_min_height" />
+                </androidx.cardview.widget.CardView>
 
 
-            <include
-                android:id="@+id/included"
-                layout="@layout/layout_bmi_history_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/m_default_layout_margin"
-                app:layout_constraintBottom_toTopOf="@id/btn_clear_history"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/_statistic" />
+                <include
+                    android:id="@+id/included"
+                    layout="@layout/layout_bmi_history_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/m_default_layout_margin" />
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_clear_history"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/m_default_layout_margin"
-                android:layout_marginBottom="@dimen/m_default_fab_margin"
-                android:text="@string/action_clear_history"
-                android:textSize="@dimen/btn_clear_text_size"
-                app:icon="@drawable/ic__delete"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/btn_clear_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="@dimen/m_default_layout_margin"
+                    android:layout_marginBottom="@dimen/m_default_fab_margin"
+                    android:text="@string/action_clear_history"
+                    android:textSize="@dimen/btn_clear_text_size"
+                    app:icon="@drawable/ic__delete" />
+            </LinearLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_new_bmi"
-        style="@style/ExtendedFab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_calculate_bmi"
-        app:icon="@drawable/ic_add" />
 </FrameLayout>

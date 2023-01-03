@@ -16,6 +16,7 @@
     <string name="title_statistic">Statistic</string>
     <string name="title_workout_duration">Workout Duration</string>
     <string name="title_exercise_amount">Exercises/Workout</string>
+    <string name="title_new_workout">New Workout</string>
 
     <string name="error_no_exercise_selected">No Exercise Selected</string>
 </resources>

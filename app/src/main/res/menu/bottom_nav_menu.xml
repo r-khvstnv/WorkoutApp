@@ -19,5 +19,5 @@
     <item
         android:id="@+id/navigation_feature_exercise"
         android:icon="@drawable/ic_fitness"
-        android:title="@string/title_exercises" />
+        android:title="@string/title_all_exercises" />
 </menu>

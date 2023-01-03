@@ -26,6 +26,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
+import com.rssll971.fitnessassistantapp.featurebmi.calculation.BmiCalculationFragment
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
 import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
@@ -62,10 +63,8 @@ internal class BmiHistoryFragment : BaseFragment() {
         setupChartAppearance()
 
         //Navigate to BmiCalculationFragment onClick
-        binding.fabNewBmi.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_bmi_history_fragment_to_bmi_calculation_fragment
-            )
+        binding.ibCalculateNewBmi.setOnClickListener {
+            BmiCalculationFragment().show(parentFragmentManager, "tag")
         }
         //Request to clear bmiParam table onClick
         binding.btnClearHistory.setOnClickListener {

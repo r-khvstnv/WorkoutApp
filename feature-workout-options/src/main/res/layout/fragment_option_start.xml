@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -14,50 +13,24 @@
     android:layout_height="match_parent"
     tools:context=".start.OptionStartFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <!--Info-->
-        <ImageView
-            android:id="@+id/iv_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/m_default_layout_margin"
-            android:background="@drawable/background_oval_shape"
-            android:backgroundTint="?android:colorBackground"
-            android:elevation="@dimen/m_default_elevation"
-            android:padding="@dimen/info_icon_padding"
-            android:src="@drawable/ic_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorOnBackground"
-            tools:ignore="ContentDescription" />
-
-
-        <!--Start-->
-        <LinearLayout
-            android:id="@+id/ll_start"
-            android:layout_width="@dimen/ll_start_size"
-            android:layout_height="@dimen/ll_start_size"
-            android:layout_marginTop="@dimen/ll_start_margin_top"
-            android:layout_marginBottom="@dimen/ll_start_margin_bottom"
-            android:background="@drawable/background_oval_shape"
-            android:backgroundTint="?attr/colorPrimaryContainer"
-            android:elevation="@dimen/m_default_elevation"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@id/cv_statistic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <FrameLayout style="@style/MyTopAppBarComponent.FrameLayout">
 
             <TextView
-                style="@style/TitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/action_start" />
-        </LinearLayout>
+                style="@style/MyTopAppBarComponent.TextView.Title"
+                android:text="@string/title_new_workout" />
+
+            <ImageButton
+                android:id="@+id/iv_info"
+                style="@style/MyTopAppBarComponent.Button.Action"
+                android:src="@drawable/ic_info"
+                app:tint="?attr/colorPrimary"
+                tools:ignore="ContentDescription" />
+        </FrameLayout>
 
 
         <!--StatisticParam card-->
@@ -67,11 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/m_default_layout_margin"
-            android:minHeight="@dimen/line_chart_min_height"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_start">
+            android:minHeight="@dimen/line_chart_min_height">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,5 +73,27 @@
                     android:minHeight="@dimen/line_chart_min_height" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--Start-->
+        <LinearLayout
+            android:id="@+id/ll_start"
+            android:layout_width="@dimen/ll_start_size"
+            android:layout_height="@dimen/ll_start_size"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/ll_start_margin_top"
+            android:layout_marginBottom="@dimen/ll_start_margin_bottom"
+            android:background="@drawable/background_oval_shape"
+            android:backgroundTint="?attr/colorPrimaryContainer"
+            android:elevation="@dimen/m_default_elevation"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_start" />
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

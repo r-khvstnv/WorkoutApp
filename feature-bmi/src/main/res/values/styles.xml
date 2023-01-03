@@ -17,8 +17,8 @@
     <style name="SubTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/subtitle_text_size</item>
         <item name="android:textColor">?attr/colorPrimary</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 
 

@@ -89,11 +89,14 @@ internal class AddEditExerciseFragment : BaseFragment() {
             ivDeleteImage.setOnClickListener {
                 viewModel.deleteCurrentImage()
             }
-            btnCreate.setOnClickListener {
+            ibConfirmExerciseEditing.setOnClickListener {
                 requestExerciseSaving()
             }
             btnDelete.setOnClickListener {
                 viewModel.deleteExercise()
+            }
+            ibExerciseBack.setOnClickListener {
+                findNavController().popBackStack()
             }
         }
 
@@ -104,10 +107,8 @@ internal class AddEditExerciseFragment : BaseFragment() {
                 /*If exercise for updating is available,
                 btn Delete will be visible and btn Create will have "Update" label*/
                 if (isForUpdate){
-                    btnCreate.text = getString(RCore.string.action_update)
                     btnDelete.visibility = View.VISIBLE
                 } else{
-                    btnCreate.text = getString(RCore.string.action_create)
                     btnDelete.visibility = View.GONE
                 }
             }
