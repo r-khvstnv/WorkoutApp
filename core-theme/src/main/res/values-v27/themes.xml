@@ -1,3 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2023
+  ~ All rights reserved.
+  ~
+  -->
+
 <resources>
 
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
@@ -33,5 +41,9 @@
         <item name="fontFamily">@font/roboto_family</item>
         <item name="android:fontFamily">@font/roboto_family</item>
 
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 </resources>
