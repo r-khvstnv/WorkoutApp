@@ -13,9 +13,12 @@
     <dimen name="add_edit_bottom_btn_margin_bottom">5dp</dimen>
     <dimen name="add_edit_bottom_btn_text_size">20sp</dimen>
 
-    <dimen name="hint_optional_text_size">18sp</dimen>
+    <dimen name="hint_optional_text_size">16sp</dimen>
     <dimen name="hint_optional_margin_top">10dp</dimen>
 
-    <dimen name="item_title_text_size">28sp</dimen>
-    <dimen name="item_description_text_size">18sp</dimen>
+    <dimen name="item_title_text_size">22sp</dimen>
+    <dimen name="item_description_text_size">16sp</dimen>
+    <dimen name="item_elevation">2dp</dimen>
+    <dimen name="item_title_margin_end">8dp</dimen>
+    <dimen name="item_description_margin_top">8dp</dimen>
 </resources>

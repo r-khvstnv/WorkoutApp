@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 
 
-class InfoFragment : BaseFragment() {
+internal class InfoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

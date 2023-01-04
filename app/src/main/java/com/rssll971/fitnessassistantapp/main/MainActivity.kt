@@ -8,7 +8,6 @@
 
 package com.rssll971.fitnessassistantapp.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -28,20 +27,22 @@ import com.rssll971.fitnessassistantapp.R
 import com.rssll971.fitnessassistantapp.WorkoutApplication
 import com.rssll971.fitnessassistantapp.core.utils.ConstantsCore
 import com.rssll971.fitnessassistantapp.databinding.ActivityMainBinding
+import com.rssll971.fitnessassistantapp.di.main.DaggerMainComponent
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+internal class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<MainViewModel> { viewModelFactory }
 
-    @SuppressLint("MissingPermission")
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        (applicationContext as WorkoutApplication).appComponent.inject(this)
+        injector()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         /**Ads*/
         MobileAds.initialize(this)
@@ -69,7 +70,10 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.findNavController()
         navView.setupWithNavController(navController)
 
-        /**NavigationView/AdView are visible only for startDestination Fragments*/
+
+        /**
+         * NavigationView/AdView are visible only for Fragments represented in bottom menu
+         * */
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.bmi_history_fragment -> showNavAndAdView()
@@ -80,8 +84,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /**SharedPreference stores Boolean value of firstLaunch
-         * Accordingly, defaultExercises will be added to database only on first app launch
+        /**
+         * SharedPreference stores the Boolean value of firstLaunch.
+         * Accordingly, defaultExercises should be added to the database only on first app launch
          * */
         val sharedPref = getSharedPreferences(ConstantsCore.WORKOUT_APP_SHARED_PREF, Context.MODE_PRIVATE)
         val isFirstLaunch: Boolean = sharedPref.getBoolean(ConstantsCore.IS_FIRS_APP_LAUNCH, true)
@@ -90,7 +95,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**Methods handle NavigationView/AdView visibility*/
+    /**
+     * Methods handle NavigationView/AdView visibility
+     * */
     private fun hideNavAndAdView(){
         binding.navView.visibility = View.GONE
         binding.adViewMain.visibility = View.GONE
@@ -98,5 +105,13 @@ class MainActivity : AppCompatActivity() {
     private fun showNavAndAdView(){
         binding.navView.visibility = View.VISIBLE
         binding.adViewMain.visibility = View.VISIBLE
+    }
+
+    private fun injector(){
+        val mainComponent = DaggerMainComponent
+            .builder()
+            .appComponent((applicationContext as WorkoutApplication).appComponent)
+            .build()
+        mainComponent.inject(this)
     }
 }

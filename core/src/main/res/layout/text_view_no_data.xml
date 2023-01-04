@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2023
+  ~ All rights reserved.
+  ~
+  -->
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="@string/error_no_data"
+    android:textSize="@dimen/error_no_data_text_size"/>

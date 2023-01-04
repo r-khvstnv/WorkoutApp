@@ -14,15 +14,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.Entry
 import com.rssll971.fitnessassistantapp.core.utils.UtilsCore
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Statistic
+import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetAllStatisticUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class OptionStartViewModel @Inject constructor(
-    private val repository: StatisticRepository
+internal class OptionStartViewModel @Inject constructor(
+    private val getAllStatisticUseCase: GetAllStatisticUseCase,
 ) : ViewModel() {
     //Handles visibility state of Charts
     private var _isLineChartShouldBeShown = MutableLiveData(false)
@@ -39,27 +38,37 @@ class OptionStartViewModel @Inject constructor(
         fetchData()
     }
 
-    /**Method fetch data from Database and collect it to corresponding entryLists and associatedList*/
+    /**
+     * Method fetches Statistic data from source. If data doesn't exist, [_isLineChartShouldBeShown] will be set to false.
+     * Otherwise, will be set: [_isLineChartShouldBeShown] = true and [_chartAssociationDateList],
+     * [_workoutDurationEntries], [_workoutExerciseAmountEntries].
+     *
+     * */
     private fun fetchData(){
         viewModelScope.launch(Dispatchers.IO){
-            repository.getStatisticList().collect {
+            getAllStatisticUseCase.invoke().collect {
                 list ->
                 //If empty -> Only change charts visibility state to false
                 if (list.isEmpty()){
                     _isLineChartShouldBeShown.postValue(false)
                 }
                 //If notEmpty -> change charts visibility state to true and assign data
-                else{
+                else if(list.size >= 2){
                     _isLineChartShouldBeShown.postValue(true)
                     val durationEntries = arrayListOf<Entry>()
                     val exerciseAmountEntries = arrayListOf<Entry>()
                     val associationList = arrayListOf<Long>()
 
                     /**In Charts pass only last 10 entries*/
-                    val tmpList: List<Statistic> = list.takeLast(10).reversed()
+                    val tmpList: List<StatisticParam> = list.takeLast(10).reversed()
+
                     for (i in tmpList.indices){
                         associationList.add(list[i].date)
-                        durationEntries.add(Entry(i.toFloat(), (list[i].restDuration + list[i].exerciseDuration) * list[i].selectedExerciseIds.size.toFloat()))
+                        durationEntries.add(
+                            Entry(
+                                i.toFloat(),
+                                (list[i].restDuration + list[i].exerciseDuration) * list[i].selectedExerciseIds.size.toFloat()
+                            ))
                         exerciseAmountEntries.add(Entry(i.toFloat(), list[i].selectedExerciseIds.size.toFloat()))
                     }
 
@@ -71,7 +80,9 @@ class OptionStartViewModel @Inject constructor(
         }
     }
 
-    /**Method return associated date for requested list index*/
+    /**
+     * Method return associated date [String] for requested [index] from [_chartAssociationDateList].
+     * */
     fun getDateByIndex(index: Int): String{
         return _chartAssociationDateList.value?.let {
             UtilsCore.formatDateToDayMonth(it[index])

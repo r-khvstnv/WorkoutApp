@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -19,7 +18,7 @@
     <!--Title-->
     <TextView
         android:id="@+id/_options"
-        style="@style/TitleTextView"
+        style="@style/OptionsTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/m_default_layout_margin"
@@ -73,7 +72,7 @@
     <!---->
 
 
-    <!--Exercise Duration-->
+    <!--ExerciseParam Duration-->
     <ImageButton
         android:id="@+id/iv_exercise_dur_increase"
         style="@style/DurationImageButton"
@@ -173,15 +172,10 @@
     <!--Next Fragment-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/i_btn_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonDef.ActionNext"
         android:layout_margin="@dimen/sub_elements_margin_horizontal"
-        android:backgroundTint="?android:colorBackground"
         android:text="@string/action_next"
-        android:textColor="?attr/colorSecondary"
         app:icon="@drawable/ic_chevron_right"
-        app:iconGravity="end"
-        app:iconTint="?attr/colorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

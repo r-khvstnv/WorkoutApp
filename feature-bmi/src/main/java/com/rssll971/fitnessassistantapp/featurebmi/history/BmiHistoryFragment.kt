@@ -16,7 +16,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -26,19 +25,20 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
+import com.rssll971.fitnessassistantapp.featurebmi.calculation.BmiCalculationFragment
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiHistoryBinding
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 
-class BmiHistoryFragment : BaseFragment() {
+internal class BmiHistoryFragment : BaseFragment() {
     private var _binding: FragmentBmiHistoryBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<BmiHistoryViewModel> { viewModelFactory }
 
-    private lateinit var adapterBmi: BmiHistoryAdapter
+    private val adapterBmi: BmiHistoryAdapter by lazy { BmiHistoryAdapter(requireContext()) }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this)
@@ -62,20 +62,18 @@ class BmiHistoryFragment : BaseFragment() {
         setupChartAppearance()
 
         //Navigate to BmiCalculationFragment onClick
-        binding.fabNewBmi.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_bmi_history_fragment_to_bmi_calculation_fragment
-            )
+        binding.ibCalculateNewBmi.setOnClickListener {
+            BmiCalculationFragment().show(parentFragmentManager, "tag")
         }
-        //Request to clear bmi table onClick
+        //Request to clear bmiParam table onClick
         binding.btnClearHistory.setOnClickListener {
             viewModel.deleteAllBmi()
         }
 
-        viewModel.bmiList.observe(viewLifecycleOwner){
+        viewModel.bmiParamList.observe(viewLifecycleOwner){
             list ->
             list?.let {
-                adapterBmi.updateList(it.reversed())
+                adapterBmi.submitList(it.reversed())
 
                 if (it.isNotEmpty()){
                     binding.clBmi.visibility = View.VISIBLE
@@ -96,7 +94,6 @@ class BmiHistoryFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView(){
-        adapterBmi = BmiHistoryAdapter(requireContext())
         binding.included.rvBmiHistory.apply {
             adapter = adapterBmi
             layoutManager = LinearLayoutManager(
@@ -104,7 +101,9 @@ class BmiHistoryFragment : BaseFragment() {
         }
     }
 
-    /**Method setting up LineChart appearance*/
+    /**
+     * Method setting up LineChart appearance.
+     * */
     private fun setupChartAppearance(){
         binding.bmiBarChartVertical.apply {
             description.isEnabled = false
@@ -137,8 +136,10 @@ class BmiHistoryFragment : BaseFragment() {
 
     }
 
-    /**Method updates data in corresponding LineCharts.
-     * Also will be implemented some UI style for dataSet*/
+    /**
+     * Method updates data in corresponding LineCharts.
+     * Also will be implemented some UI style for dataSet.
+     * */
     private fun updateChartData(barEntryList: List<BarEntry>){
         val dataSet = BarDataSet(barEntryList, "")
         val colorList = arrayListOf<Int>()

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Ruslan Khvastunov
+  ~ r.khvastunov@gmail.com
+  ~ Copyright (c) 2023
+  ~ All rights reserved.
+  ~
+  -->
+
+<resources>
+    <style name="ButtonDef">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/m_button_height</item>
+        <item name="android:background">@drawable/ripple_shape_rectangle_rad10</item>
+        <item name="android:textSize">@dimen/m_button_text_size</item>
+        <item name="android:elevation">@dimen/m_button_elevation</item>
+
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+    
+    <style name="ButtonDef.Primary">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="iconTint">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="ButtonDef.Secondary">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="iconTint">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="ButtonDef.ActionNext">
+        <item name="backgroundTint">?android:colorBackground</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="iconTint">?attr/colorSecondary</item>
+        <item name="iconGravity">end</item>
+    </style>
+</resources>

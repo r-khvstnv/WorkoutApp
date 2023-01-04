@@ -8,6 +8,15 @@
   -->
 
 <resources>
-    <dimen name="m_default_item_margin">5dp</dimen>
+    <dimen name="m_default_item_margin">4dp</dimen>
     <dimen name="error_no_data_text_size">20sp</dimen>
+    <dimen name="m_button_height">54dp</dimen>
+    <dimen name="m_button_text_size">20sp</dimen>
+    <dimen name="m_button_elevation">8dp</dimen>
+
+
+    <!--Default TopAppBar for all screens-->
+    <dimen name="top_app_bar_title_text_size">20sp</dimen>
+    <dimen name="top_app_bar_subtitle_text_size">16sp</dimen>
+    <dimen name="top_app_bar_elevation">4dp</dimen>
 </resources>

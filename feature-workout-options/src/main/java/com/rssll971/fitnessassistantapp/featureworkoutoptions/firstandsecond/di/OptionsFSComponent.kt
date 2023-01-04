@@ -13,8 +13,11 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.Opt
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.OptionSecondFragment
 import dagger.Component
 
-@[FeatureScope Component(dependencies = [OptionsFSDeps::class])]
-interface OptionsFSComponent {
+@[FeatureScope Component(
+    dependencies = [OptionsFSDeps::class],
+    modules = [OptionsFSModule::class]
+)]
+internal interface OptionsFSComponent {
     @Component.Builder
     interface Builder{
         fun deps(optionsFSDeps: OptionsFSDeps): Builder

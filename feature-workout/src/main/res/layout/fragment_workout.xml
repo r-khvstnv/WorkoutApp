@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -14,41 +13,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".workout.WorkoutFragment">
-    <!--Workout Progress-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/pb_workout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="false"
-            app:indicatorColor="?attr/colorPrimary"
-            app:trackColor="?attr/colorSecondary"
-            tools:max="10"
-            tools:progress="4" />
+    <FrameLayout style="@style/MyTopAppBarComponent.FrameLayout">
+
+        <ImageButton
+            android:id="@+id/ib_workout_close"
+            style="@style/MyTopAppBarComponent.Button.Back"
+            android:src="@drawable/ic_close"
+            tools:ignore="ContentDescription" />
+
 
         <TextView
             android:id="@+id/tv_workout_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            style="@style/MyTopAppBarComponent.Button.Action"
+            android:gravity="center"
             android:textSize="@dimen/text_view_progress_text_size"
             app:fontFamily="@font/roboto_medium"
             tools:text="4/10" />
-    </LinearLayout>
+    </FrameLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/pb_workout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="false"
+        app:indicatorColor="?attr/colorPrimary"
+        tools:max="10"
+        tools:progress="4" />
 
 
     <!--Rest-->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/cl_rest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/_relax"
@@ -57,21 +60,23 @@
             android:layout_margin="@dimen/m_default_layout_margin"
             android:text="@string/title_relax"
             android:textSize="@dimen/rest_title_text_size"
-            app:fontFamily="@font/roboto_light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:fontFamily="@font/roboto_regular" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2" />
 
         <include
             android:id="@+id/i_rest_pr"
             layout="@layout/layout_progress"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/_prepare"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/_relax"
-            app:layout_constraintVertical_bias="0.3" />
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/_prepare"
@@ -79,72 +84,73 @@
             android:layout_height="wrap_content"
             android:text="@string/title_prepare_for"
             android:textSize="@dimen/rest_prepare_text_size"
-            app:fontFamily="@font/roboto_light"
             app:layout_constraintBottom_toTopOf="@id/tv_next_exercise"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_next_exercise"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/m_default_layout_margin"
             android:layout_marginBottom="@dimen/rest_next_exercise_margin_bottom"
-            android:gravity="center"
-            android:minLines="2"
+            android:gravity="center_horizontal"
+            android:lines="2"
             android:textSize="@dimen/rest_next_exercise_text_size"
+            app:fontFamily="@font/roboto_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintVertical_bias="1"
             tools:text="Some next exercise" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <!--Workout-->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/cl_exercise"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/m_default_layout_margin"
             android:gravity="center"
-            android:minLines="2"
+            android:lines="2"
             android:textSize="@dimen/exercise_title_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Some Exercise Long Title" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m_default_layout_margin" />
 
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/m_default_layout_margin"
             android:minHeight="200dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:background="?attr/colorPrimary"
             tools:ignore="ContentDescription"
             tools:visibility="visible" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/m_default_layout_margin" />
+
         <TextView
             android:id="@+id/tv_description"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/m_default_layout_margin"
+            android:layout_weight="1"
             android:textSize="@dimen/exercise_description_text_size"
-            app:layout_constraintBottom_toTopOf="@id/i_exercise_pr"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_image"
             tools:text="@tools:sample/lorem/random" />
 
         <include
@@ -152,10 +158,7 @@
             layout="@layout/layout_progress_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/m_default_layout_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_margin="@dimen/m_default_layout_margin" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </LinearLayout>

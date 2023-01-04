@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -11,6 +10,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_app"
     app:startDestination="@id/navigation_feature_workout_options">
+
     <include app:graph="@navigation/navigation_bmi" />
     <include app:graph="@navigation/navigation_exercise" />
     <include app:graph="@navigation/navigation_workout" />

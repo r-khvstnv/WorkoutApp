@@ -13,6 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 
+/**
+ * Unified ViewModel factory with DI supporting.
+ *
+ * [ViewModel] should be provided to constructor with corresponding ViewModelKey.
+ * */
 class ViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>,
             @JvmSuppressWildcards Provider<ViewModel>>): ViewModelProvider.Factory {

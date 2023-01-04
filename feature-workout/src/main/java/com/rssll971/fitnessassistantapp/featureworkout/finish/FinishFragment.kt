@@ -21,7 +21,7 @@ import com.rssll971.fitnessassistantapp.featureworkout.databinding.FragmentFinis
 import com.rssll971.fitnessassistantapp.core.R as RCore
 
 
-class FinishFragment : Fragment() {
+internal class FinishFragment : Fragment() {
     private var _binding: FragmentFinishBinding? = null
     private val binding get() = _binding!!
 

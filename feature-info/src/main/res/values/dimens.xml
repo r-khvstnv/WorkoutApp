@@ -8,6 +8,6 @@
   -->
 
 <resources>
-    <dimen name="title_text_size">48sp</dimen>
+    <dimen name="title_text_size">36sp</dimen>
     <dimen name="version_text_size">18sp</dimen>
 </resources>

@@ -17,4 +17,5 @@
     <string name="title_workout_duration">Длительность Тренировки</string>
     <string name="title_exercise_amount">Упражнения/Тренировка</string>
     <string name="error_no_exercise_selected">Упражнения Не Выбраны</string>
+    <string name="title_new_workout">Новая Тренировка</string>
 </resources>

@@ -10,6 +10,7 @@ package com.rssll971.fitnessassistantapp.featureworkout.workout
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -30,11 +31,11 @@ import com.rssll971.fitnessassistantapp.featureworkout.workout.di.WorkoutCompone
 import java.util.*
 import javax.inject.Inject
 
-class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
+internal class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
     private var _binding: FragmentWorkoutBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<WorkoutViewModel> { viewModelFactory }
 
     private var textToSpeech: TextToSpeech? = null
@@ -85,7 +86,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                 binding.tvWorkoutProgress.text = "$tmpPosition/${it.selectedExerciseIds.size}"
             }
         }
-        viewModel.currentExercise.observe(viewLifecycleOwner){
+        viewModel.currentExerciseParam.observe(viewLifecycleOwner){
             exercise ->
             exercise?.let {
                 with(binding){
@@ -129,7 +130,7 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                         clRest.visibility = View.GONE
                         clExercise.visibility = View.VISIBLE
                         if (isVoiceAssistantEnabled){
-                            speakOut(viewModel.currentExercise.value!!.description)
+                            speakOut(viewModel.currentExerciseParam.value!!.description)
                         }
                     } else{
                         clRest.visibility = View.VISIBLE
@@ -145,6 +146,12 @@ class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                     R.id.action_workout_fragment_to_finish_fragment
                 )
             }
+        }
+
+
+        binding.ibWorkoutClose.setOnClickListener {
+            val deepLink = Uri.parse(getString(com.rssll971.fitnessassistantapp.core.R.string.deep_link_option_start_fragment))
+            findNavController().navigate(deepLink)
         }
     }
 

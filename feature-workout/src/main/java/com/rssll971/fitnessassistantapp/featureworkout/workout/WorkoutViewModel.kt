@@ -10,25 +10,24 @@ package com.rssll971.fitnessassistantapp.featureworkout.workout
 
 import android.os.CountDownTimer
 import androidx.lifecycle.*
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
-import com.rssll971.fitnessassistantapp.coredata.models.Statistic
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
+import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetExercisesByIdListUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.GetLastStatisticUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class WorkoutViewModel @Inject constructor(
-    private val repoStatistic: StatisticRepository,
-    private val repoExercise: ExerciseRepository
+internal class WorkoutViewModel @Inject constructor(
+    private val getExercisesByIdListUseCase: GetExercisesByIdListUseCase,
+    private val getLastStatisticUseCase: GetLastStatisticUseCase
 ) : ViewModel() {
-    //Store all necessary information about current workout
-    val workoutSettings: LiveData<Statistic> = repoStatistic.getLastStatistic().asLiveData()
+    /**Stores all information for current workout*/
+    val workoutSettings: LiveData<StatisticParam> = getLastStatisticUseCase.invoke().asLiveData()
 
-    private var exerciseList: MutableLiveData<List<Exercise>> = MutableLiveData()
+    private var exerciseParamList: MutableLiveData<List<ExerciseParam>> = MutableLiveData()
     //Handle exerciseLayout visibility State
     private var _isExerciseLayoutShouldBeShown: MutableLiveData<Boolean> = MutableLiveData()
     val isExerciseLayoutShouldBeShown: LiveData<Boolean> get() = _isExerciseLayoutShouldBeShown
@@ -41,20 +40,22 @@ class WorkoutViewModel @Inject constructor(
     private var _currentExercisePosition = MutableLiveData(-1)
     val currentExercisePosition: LiveData<Int> get() = _currentExercisePosition
 
-    private var _currentExercise: MutableLiveData<Exercise> = MutableLiveData()
-    val currentExercise: LiveData<Exercise> get() = _currentExercise
+    private var _currentExerciseParam: MutableLiveData<ExerciseParam> = MutableLiveData()
+    val currentExerciseParam: LiveData<ExerciseParam> get() = _currentExerciseParam
 
     private var _isWorkoutFinished = MutableLiveData(false)
     val isWorkoutFinished: LiveData<Boolean> get() = _isWorkoutFinished
 
 
-    /**Method requests exercises from database.
-     * After will assign them to exerciseList and call startRestOrFinishWorkout() method*/
+    /**
+     * Method requests Exercises from source by them [ids].
+     * Exercises will be assign to the [exerciseParamList] and [startRestOrFinishWorkout] will be called.
+     * */
     fun requestExercises(ids: List<Int>){
         viewModelScope.launch(Dispatchers.IO){
-            repoExercise.getExerciseListById(ids).take(1).collect {
+            getExercisesByIdListUseCase.invoke(ids = ids).take(1).collect {
                 list ->
-                exerciseList.postValue(list)
+                exerciseParamList.postValue(list)
                 withContext(Dispatchers.Main){
                     startRestOrFinishWorkout()
                 }
@@ -62,9 +63,13 @@ class WorkoutViewModel @Inject constructor(
         }
     }
 
-
-    /**Method launch restTimer using value from workoutSettings.
-     * onFinish request startExercise method*/
+    /**
+     * Method launch restTimer using value from [workoutSettings].
+     *
+     * [onTick][android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_restTimerProgress];
+     *
+     * [onFinish][android.os.CountDownTimer.onFinish] -> [startExercise] will be called.
+     * */
     private fun setRestTimer(){
         object : CountDownTimer((workoutSettings.value!!.restDuration * 1000).toLong(), 1000){
             override fun onTick(timeL: Long) {
@@ -76,8 +81,12 @@ class WorkoutViewModel @Inject constructor(
         }.start()
     }
 
-    /**Method launch exerciseTimer using value from workoutSettings.
-     * onFinish request startRestOrFinishWorkout method*/
+    /**
+     * Method launch ExerciseTimer using value from [workoutSettings].
+     *
+     * [onTick][android.os.CountDownTimer.onTick] -> new [timeL] will be set to [_exerciseTimerProgress].
+     * [onFinish][android.os.CountDownTimer.onFinish] -> [startRestOrFinishWorkout] will be called.
+     * */
     private fun setExerciseTimer(){
         object : CountDownTimer((workoutSettings.value!!.exerciseDuration * 1000).toLong(), 1000){
             override fun onTick(timeL: Long) {
@@ -89,21 +98,25 @@ class WorkoutViewModel @Inject constructor(
         }.start()
     }
 
-
-    /**Method increment currentExercisePosition and after
-     * update currentExercise instance using exerciseList and new position*/
+    /**
+     * Method increments [_currentExercisePosition] and after
+     * update [_currentExerciseParam] instance using [exerciseParamList] and new position.
+     * */
     private fun updateCurrentExercise(){
         _currentExercisePosition.value = _currentExercisePosition.value!! + 1
-        _currentExercise.value = exerciseList.value!![_currentExercisePosition.value!!]
+        _currentExerciseParam.value = exerciseParamList.value!![_currentExercisePosition.value!!]
     }
 
-
-    /**Method firstly checks that currentExercisePosition is not out of bounds of exerciseList
-     * true -> requests updateCurrentExercise/setRestTimer methods
-     *         changes state of _isExerciseLayoutShouldBeShown to true
-     * false -> changes state of _isWorkoutFinished to true*/
+    /**
+     * Method firstly checks that [_currentExercisePosition] is not out of bounds of [exerciseParamList].
+     *
+     * true -> requests [updateCurrentExercise] and [setRestTimer] methods,
+     * changes [_isExerciseLayoutShouldBeShown] to true.
+     *
+     * false -> changes state of [_isWorkoutFinished] to true
+     * */
     private fun startRestOrFinishWorkout(){
-        if (_currentExercisePosition.value!! < exerciseList.value!!.size - 1){
+        if (_currentExercisePosition.value!! < exerciseParamList.value!!.size - 1){
             updateCurrentExercise()
             setRestTimer()
             _isExerciseLayoutShouldBeShown.postValue(false)
@@ -112,8 +125,10 @@ class WorkoutViewModel @Inject constructor(
         }
     }
 
-    /**Method starts exercise.
-     * It changes state of _isExerciseLayoutShouldBeShown to false and calls setExerciseTimer method*/
+    /**
+     * Method starts exercise.
+     * It changes state of [_isExerciseLayoutShouldBeShown] to false and calls [setExerciseTimer].
+     * */
     private fun startExercise(){
         _isExerciseLayoutShouldBeShown.postValue(true)
         setExerciseTimer()

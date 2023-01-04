@@ -10,10 +10,8 @@ package com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di
 
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.db.repository.StatisticRepository
-import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartDepsProvider
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetAllExercisesUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.AddStatisticUseCase
 import kotlin.properties.Delegates
 
 
@@ -21,14 +19,13 @@ import kotlin.properties.Delegates
  * Interface for implicit dependency on AppComponent
  * (due to feature-module doesn't know anything about app-module).
  * As declared properties listed all methods required for further injection
- * in corresponding feature-module.
+ * in the corresponding feature module.
  *
  * Note: Should be inherited in AppComponent
  * */
 interface OptionsFSDeps {
-    val repositoryStatistic: StatisticRepository
-    val repositoryExercise: ExerciseRepository
-    val viewModelFactory: ViewModelProvider.Factory
+    val getAllExercisesUseCase: GetAllExercisesUseCase
+    val addStatisticUseCase: AddStatisticUseCase
 }
 /**
  * Interface provides required instances from appComponent
@@ -42,7 +39,7 @@ interface OptionsFSDepsProvider{
     companion object: OptionsFSDepsProvider by OptionsFSDepsStore
 }
 /**
- * Explicit Singleton which must be assigned in WorkoutApplication
+ * Explicit Singleton which must be assigned in [WorkoutApplication][com.rssll971.fitnessassistantapp.WorkoutApplication]
  * */
 object OptionsFSDepsStore: OptionsFSDepsProvider{
     override var deps: OptionsFSDeps by Delegates.notNull()
@@ -50,8 +47,8 @@ object OptionsFSDepsStore: OptionsFSDepsProvider{
 /**
  * ViewModel stores all instances of Components.
  * This implementation simplifies Component lifecycle handling.
- * Note: We can't store instances in original (related to Fragment) ViewModel,
- * due to it creates by ViewModelFactory which should be injected too.
+ * Note: We can't store instances in the original (related to Fragment) ViewModel,
+ * due to it being created by ViewModelFactory which should be injected too.
  * */
 internal class OptionsFSComponentViewModel: ViewModel(){
     val optionsFSComponent = DaggerOptionsFSComponent.builder().deps(OptionsFSDepsProvider.deps).build()

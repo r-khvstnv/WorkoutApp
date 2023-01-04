@@ -19,24 +19,25 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rssll971.fitnessassistantapp.core.base.BaseFragment
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
 import com.rssll971.fitnessassistantapp.featureexercise.R
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.FragmentAllExercisesBinding
-import com.rssll971.fitnessassistantapp.featureexercise.utils.FeatureExerciseComponentsViewModel
-import com.rssll971.fitnessassistantapp.featureexercise.utils.ItemCallback
+import com.rssll971.fitnessassistantapp.featureexercise.di.FeatureExerciseComponentsViewModel
 import javax.inject.Inject
 
-class AllExercisesFragment : BaseFragment() {
+internal class AllExercisesFragment : BaseFragment() {
     private var _binding: FragmentAllExercisesBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var vmFactory: ViewModelProvider.Factory
+    internal lateinit var vmFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<AllExercisesViewModel> { vmFactory }
 
     private lateinit var exercisesAdapter: AllExercisesAdapter
 
     override fun onAttach(context: Context) {
-        ViewModelProvider(this).get<FeatureExerciseComponentsViewModel>().allExercisesComponent.inject(this)
+        ViewModelProvider(this)
+            .get<FeatureExerciseComponentsViewModel>()
+            .allExercisesComponent
+            .inject(this)
         super.onAttach(context)
     }
 
@@ -54,7 +55,7 @@ class AllExercisesFragment : BaseFragment() {
         setupRecyclerView()
 
         //Navigate to AddEditExerciseFragment onClick
-        binding.fabAdd.setOnClickListener {
+        binding.ibAddNewExercise.setOnClickListener {
             findNavController().navigate(
                 R.id.action_all_exercises_fragment_to_add_edit_exercise_fragment
             )
@@ -63,7 +64,7 @@ class AllExercisesFragment : BaseFragment() {
         viewModel.allExercises.observe(viewLifecycleOwner){
             list ->
             list?.let {
-                exercisesAdapter.updateList(list = list)
+                exercisesAdapter.submitList(it)
                 if (list.isNotEmpty()){
                     binding.tvNoData.visibility = View.GONE
                 } else{
@@ -76,18 +77,10 @@ class AllExercisesFragment : BaseFragment() {
     /**Method setting up exercise recycler view*/
     private fun setupRecyclerView(){
         exercisesAdapter = AllExercisesAdapter(
-            requireContext(),
-            object : ItemCallback{
-                /**onClick -> Navigate to AddEditExerciseFragment with id as safeArgs*/
-                override fun onClick(id: Int) {
-                    findNavController().navigate(
-                        AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)
-                    )
-                }
-                override fun onDelete(exercise: Exercise) {
-                    viewModel.requestExerciseDeleting(exercise = exercise)
-                }
-            })
+            context = requireContext(),
+            onItemClicked = this::navigateToEditExerciseFragmentById,
+            onItemDelete = viewModel::requestExerciseDeleting
+        )
 
         binding.rvExercises.apply {
             adapter = exercisesAdapter
@@ -96,6 +89,12 @@ class AllExercisesFragment : BaseFragment() {
             )
             setHasFixedSize(true)
         }
+    }
+
+    private fun navigateToEditExerciseFragmentById(id: Int){
+        findNavController().navigate(
+            AllExercisesFragmentDirections.actionAllExercisesFragmentToAddEditExerciseFragment(id)
+        )
     }
 
     override fun onDestroyView() {

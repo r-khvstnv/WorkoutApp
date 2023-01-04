@@ -10,7 +10,6 @@ package com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +24,11 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.Fragme
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.OptionsFSComponentViewModel
 import javax.inject.Inject
 
-class OptionFirstFragment : BaseFragment() {
+internal class OptionFirstFragment : BaseFragment() {
     private var _binding: FragmentOptionFirstBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by navGraphViewModels<OptionsViewModel>(R.id.options_nested_graph){ viewModelFactory }
 
     override fun onAttach(context: Context) {

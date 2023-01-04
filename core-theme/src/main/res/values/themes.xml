@@ -32,5 +32,6 @@
 
         <item name="fontFamily">@font/roboto_family</item>
         <item name="android:fontFamily">@font/roboto_family</item>
+
     </style>
 </resources>

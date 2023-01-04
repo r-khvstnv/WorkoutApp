@@ -11,4 +11,8 @@
     <string name="title">Title</string>
     <string name="title_description">Description</string>
     <string name="title_optional">Optional</string>
+
+    <string name="title_all_exercises">All Exercises</string>
+    <string name="title_exercise">Exercise</string>
+
 </resources>

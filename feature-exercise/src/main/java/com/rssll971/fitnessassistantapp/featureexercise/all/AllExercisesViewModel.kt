@@ -9,27 +9,32 @@
 package com.rssll971.fitnessassistantapp.featureexercise.all
 
 import androidx.lifecycle.*
-import com.rssll971.fitnessassistantapp.coredata.db.repository.ExerciseRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.DeleteExerciseUseCase
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetAllExercisesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
-class AllExercisesViewModel @Inject constructor(private val repository: ExerciseRepository) : ViewModel() {
-    val allExercises: LiveData<List<Exercise>> = repository.getExerciseList().asLiveData()
+internal class AllExercisesViewModel @Inject constructor(
+    private val getAllExercisesUseCase: GetAllExercisesUseCase,
+    private val deleteExerciseUseCase: DeleteExerciseUseCase
+) : ViewModel() {
+    val allExercises: LiveData<List<ExerciseParam>> = getAllExercisesUseCase.invoke().asLiveData()
 
-    /**Method deletes exercise from database and it's corresponding image*/
-    fun requestExerciseDeleting(exercise: Exercise){
+    /**
+     * Method deletes [exerciseParam] record in the source and it's corresponding image.
+     * */
+    fun requestExerciseDeleting(exerciseParam: ExerciseParam){
         viewModelScope.launch(Dispatchers.IO) {
-            deleteImage(exercise.imagePath)
-            repository.deleteExercise(exercise = exercise)
+            deleteImage(exerciseParam.imagePath)
+            deleteExerciseUseCase.invoke(param = exerciseParam)
         }
     }
 
-    private suspend fun deleteImage(path: String){
+    private fun deleteImage(path: String){
         val file = File(path)
         try {
             file.delete()

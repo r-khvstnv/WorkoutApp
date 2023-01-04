@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -7,67 +6,76 @@
   ~
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".calculation.BmiCalculationFragment">
+    android:layout_height="wrap_content"
+    android:background="?android:colorBackground"
+    android:orientation="vertical"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:context=".calculation.BmiCalculationFragment"
+    tools:ignore="ContentDescription">
 
-    <TextView
-        android:id="@+id/_title"
-        style="@style/TitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/m_default_layout_margin"
-        android:text="@string/title_bmi_calculator"
-        android:textColor="?attr/colorSecondary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout style="@style/MyTopAppBarComponent.FrameLayout">
 
-    <TextView
-        android:id="@+id/_height"
-        style="@style/SubTitleTextView"
-        android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/ib_calculator_back"
+            style="@style/MyTopAppBarComponent.Button.Back"
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            style="@style/MyTopAppBarComponent.TextView.Title"
+            android:text="@string/title_bmi_calculator"
+            android:textColor="?attr/colorSecondary" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/m_default_layout_margin"
+        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
         android:layout_marginTop="@dimen/subtitle_first_margin_top"
-        android:text="@string/title_height_sm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/_title" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/et_height"
-        android:layout_width="0dp"
+        <TextView
+            android:id="@+id/_height"
+            style="@style/SubTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_height_sm" />
+
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            tools:ignore="Autofill,LabelFor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@id/_height"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/_height"
-        tools:ignore="Autofill,LabelFor" />
-
-    <TextView
-        android:id="@+id/_weight"
-        style="@style/SubTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/m_default_layout_margin"
         android:layout_marginTop="@dimen/subtitle_second_margin_top"
-        android:text="@string/title_weight_kg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/_height" />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/et_weight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/m_default_layout_margin"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@id/_weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/_weight"
-        tools:ignore="Autofill,LabelFor" />
+        <TextView
+            android:id="@+id/_weight"
+            style="@style/SubTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_weight_kg" />
+
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            tools:ignore="Autofill,LabelFor" />
+    </LinearLayout>
 
 
     <androidx.cardview.widget.CardView
@@ -76,13 +84,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/m_default_layout_margin"
-        android:layout_marginVertical="@dimen/subtitle_second_margin_top"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/btn_calculate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/_weight"
-        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginVertical="@dimen/card_margin_top"
+        android:visibility="invisible"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -126,15 +129,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btn_calculate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/ButtonDef.Secondary"
+        android:layout_width="match_parent"
         android:layout_margin="@dimen/m_default_layout_margin"
-        android:text="@string/action_calculate"
-        android:textSize="@dimen/card_subtitle_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="@string/action_calculate" />
+</LinearLayout>

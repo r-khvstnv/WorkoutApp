@@ -11,4 +11,6 @@
     <string name="title">Название</string>
     <string name="title_description">Описание</string>
     <string name="title_optional">Опционально</string>
+    <string name="title_all_exercises">Все Упражнения</string>
+    <string name="title_exercise">Упражнение</string>
 </resources>

@@ -9,6 +9,6 @@
 <resources>
     <string name="title_bmi" translatable="false">BMI</string>
     <string name="title_start" translatable="false">Start</string>
-    <string name="title_exercises" translatable="false">Exercises</string>
+    <string name="title_all_exercises" translatable="false">Exercises</string>
     <string name="title_info" translatable="false">Info</string>
 </resources>

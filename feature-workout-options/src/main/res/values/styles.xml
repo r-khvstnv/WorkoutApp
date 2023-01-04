@@ -9,7 +9,7 @@
 
 <resources>
 
-    <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
+    <style name="OptionsTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/colorOnPrimaryContainer</item>
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:fontFamily">@font/roboto_light</item>

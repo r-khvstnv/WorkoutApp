@@ -8,11 +8,11 @@
 
 package com.rssll971.fitnessassistantapp.coredata.utils
 
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 
 object DefaultExercises {
-    fun getRuExerciseList(): List<Exercise>{
-        val burpee = Exercise(
+    fun getRuExerciseList(): List<ExerciseParam>{
+        val burpee = ExerciseParam(
             "Бёрпи с отжиманиями",
             "",
             "Исходное положение: стоя на полу.\n" +
@@ -22,7 +22,7 @@ object DefaultExercises {
                     "В прыжке подтяните ноги обратно к рукам и встаньте, вернувшись в исходное положение.",
             0
         )
-        val sideBar = Exercise(
+        val sideBar = ExerciseParam(
             "Динамическая боковая планка",
             "",
             "Исходное положение: боковая планка на предплечьях, " +
@@ -32,7 +32,7 @@ object DefaultExercises {
                     "Если хотите усложнить упражнение, можете дополнительно удерживать на боку утяжелитель.",
             0
         )
-        val lunges = Exercise(
+        val lunges = ExerciseParam(
             "Прямые и обратные выпады",
             "",
             "Исходное положение: стоя на полу.\n" +
@@ -43,7 +43,7 @@ object DefaultExercises {
                     "Повторите те же движения, начиная с другой ноги.",
             0
         )
-        val kneePlacket = Exercise(
+        val kneePlacket = ExerciseParam(
             "Планка с подтягиванием коленей",
             "",
             "Исходное положение: планка на вытянутых руках, живот подтянут, ноги прямые.\n" +
@@ -52,7 +52,7 @@ object DefaultExercises {
                     "Для увеличения нагрузки вы можете чередовать подтягивание коленей с отжиманиями.",
             0
         )
-        val kneeTwists = Exercise(
+        val kneeTwists = ExerciseParam(
             "Скручивания локтем к колену",
             "",
             "Исходное положение: лёжа на спине, ноги подняты и согнуты в коленях, ладони сложены на затылке.\n" +
@@ -65,8 +65,8 @@ object DefaultExercises {
         return listOf(burpee, sideBar, lunges, kneePlacket, kneeTwists)
     }
 
-    fun getEngExerciseList(): List<Exercise>{
-        val burpee = Exercise(
+    fun getEngExerciseList(): List<ExerciseParam>{
+        val burpee = ExerciseParam(
             "Burpee with push-ups",
             "",
             "Starting position: standing on the floor. \nSit down and place your palms on the floor. " +
@@ -74,7 +74,7 @@ object DefaultExercises {
                     "Push up once. In the jump, pull your legs back to your arms and stand back to the starting position.",
             0
         )
-        val sideBar = Exercise(
+        val sideBar = ExerciseParam(
             "Dynamic side bar",
             "",
             "Starting position: side plank on the forearms, the elbow is located exactly under the shoulder joint. \n" +
@@ -83,7 +83,7 @@ object DefaultExercises {
                     "If you want to complicate the exercise, you can additionally hold the weight on your side.",
             0
         )
-        val lunges = Exercise(
+        val lunges = ExerciseParam(
             "Direct and reverse lunges",
             "",
             "Starting position: standing on the floor. \nStep your right leg forward and squat down, " +
@@ -94,7 +94,7 @@ object DefaultExercises {
                     "Repeat the same movements starting with the other leg.",
             0
         )
-        val kneePlacket = Exercise(
+        val kneePlacket = ExerciseParam(
             "Knee placket",
             "",
             "Starting position: plank on outstretched arms, belly tucked up, legs straight. \n" +
@@ -103,7 +103,7 @@ object DefaultExercises {
                     "To increase the load, you can alternate knee pulling with push-ups.",
             0
         )
-        val kneeTwists = Exercise(
+        val kneeTwists = ExerciseParam(
             "Elbow to knee twists",
             "",
             "Starting position: lying on your back, legs raised and bent at the knees, palms folded at the back of the head. \n" +

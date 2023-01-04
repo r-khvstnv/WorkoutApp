@@ -12,25 +12,26 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import com.rssll971.fitnessassistantapp.core.base.BaseFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiCalculationBinding
-import com.rssll971.fitnessassistantapp.featurebmi.utils.FeatureBmiComponentsViewModel
+import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiComponentsViewModel
 import com.rssll971.fitnessassistantapp.featurebmi.utils.Utils
 import javax.inject.Inject
 import com.rssll971.fitnessassistantapp.core.R as RCore
 
-class BmiCalculationFragment : BaseFragment() {
+internal class BmiCalculationFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentBmiCalculationBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<BmiCalculationViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -44,7 +45,11 @@ class BmiCalculationFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentBmiCalculationBinding.inflate(inflater, container, false)
+        //wrap app theme for bottom sheet
+        val contextThemeWrapper = ContextThemeWrapper(activity, R.style.AppTheme)
+        //inflate theme
+        val mInflater = inflater.cloneInContext(contextThemeWrapper).inflate(R.layout.fragment_bmi_calculation, container, false)
+        _binding = FragmentBmiCalculationBinding.bind(mInflater)
         return binding.root
     }
 
@@ -56,7 +61,11 @@ class BmiCalculationFragment : BaseFragment() {
             calculateBmi()
         }
 
-        viewModel.bmi.observe(viewLifecycleOwner){
+        binding.ibCalculatorBack.setOnClickListener {
+            dialog?.dismiss()
+        }
+
+        viewModel.bmiParam.observe(viewLifecycleOwner){
             bmi ->
             bmi?.let {
                 with(binding){
@@ -70,9 +79,11 @@ class BmiCalculationFragment : BaseFragment() {
 
 
 
-    /**Method firstly request error resetting and after
+    /**
+     * Method firstly request [resetFieldsErrors] and after
      * will check that fields are not empty.
-     * Otherwise show error message in corresponding field*/
+     * Otherwise, will be shown an error message in the corresponding field.
+     * */
     private fun isUserInputIsValid(): Boolean{
         var result = false
         val error: String = getString(RCore.string.error_empty_field)
@@ -90,7 +101,9 @@ class BmiCalculationFragment : BaseFragment() {
         return result
     }
 
-    /**Method resets errors in all available fields*/
+    /**
+     * Method resets errors in all available fields.
+     * */
     private fun resetFieldsErrors(){
         with(binding){
             etHeight.error = null
@@ -98,7 +111,9 @@ class BmiCalculationFragment : BaseFragment() {
         }
     }
 
-    /**Method checks that user input is valid and after requests bmi calculating*/
+    /**
+     * Method checks that user input is valid and after requests bmiParam calculating.
+     * */
     private fun calculateBmi(){
         if (isUserInputIsValid()){
             viewModel.calculateBmi(

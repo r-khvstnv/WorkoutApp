@@ -27,14 +27,16 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.firstandsecond.di.
 import javax.inject.Inject
 
 
-class OptionSecondFragment : BaseFragment() {
+internal class OptionSecondFragment : BaseFragment() {
     private var _binding: FragmentOptionSecondBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by navGraphViewModels<OptionsViewModel>(R.id.options_nested_graph){ viewModelFactory }
 
-    private lateinit var selectableExercisesAdapter: SelectableExercisesAdapter
+    private val selectableExercisesAdapter: SelectableExercisesAdapter by lazy {
+        SelectableExercisesAdapter(requireContext())
+    }
 
     override fun onAttach(context: Context) {
         ViewModelProvider(this)
@@ -56,14 +58,14 @@ class OptionSecondFragment : BaseFragment() {
 
         setupRecyclerView()
 
-        /**Observes exerciseList.
+        /**Observes exerciseParamList.
          * If list is empty, it will be unavailable to start workout.
          * Otherwise, user can selected exercises in recyclerView*/
-        viewModel.exerciseList.observe(viewLifecycleOwner){
+        viewModel.exerciseParamList.observe(viewLifecycleOwner){
             list ->
             list?.let {
                 if (it.isNotEmpty()){
-                    selectableExercisesAdapter.updateExerciseList(it.reversed())
+                    selectableExercisesAdapter.submitList(it.reversed())
                     binding.iBtnStart.visibility = View.VISIBLE
                 } else{
                     binding.iBtnStart.visibility = View.GONE
@@ -95,7 +97,6 @@ class OptionSecondFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView(){
-        selectableExercisesAdapter = SelectableExercisesAdapter(requireContext())
         binding.rvExercises.apply {
             adapter = selectableExercisesAdapter
             layoutManager = LinearLayoutManager(

@@ -12,36 +12,42 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rssll971.fitnessassistantapp.coredata.db.repository.BmiRepository
-import com.rssll971.fitnessassistantapp.coredata.models.Bmi
+import com.rssll971.fitnessassistantapp.coredata.domain.model.BmiParam
+import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.AddBmiUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.pow
 
-class BmiCalculationViewModel @Inject constructor( private val repository: BmiRepository) : ViewModel() {
-    private var _bmi: MutableLiveData<Bmi> = MutableLiveData()
-    val bmi: LiveData<Bmi> get() = _bmi
+internal class BmiCalculationViewModel @Inject constructor(
+    private val addBmiUseCase: AddBmiUseCase
+) : ViewModel() {
+    private var _bmiParam: MutableLiveData<BmiParam> = MutableLiveData()
+    val bmiParam: LiveData<BmiParam> get() = _bmiParam
 
-    /**Method calculates BmiIndex and after requests to save it*/
+    /**
+     * Method calculates BmiIndex and after requests to save new Bmi record.
+     * */
     fun calculateBmi(dateInMillis: Long, height: Float, weight: Float){
         val tmpHeight: Float = height / 100f
         val index: Float = weight / (tmpHeight.pow(2))
-        val bmi = Bmi(
+        val bmiParam = BmiParam(
             dateInMillis,
             weight = weight,
             height = height,
             index,
             0
         )
-        _bmi.postValue(bmi)
-        insertBmi(bmi = bmi)
+        _bmiParam.postValue(bmiParam)
+        insertBmi(bmiParam = bmiParam)
     }
 
-    /**Method inserts bmi to database*/
-    private fun insertBmi(bmi: Bmi){
+    /**
+     * Method add new Bmi record to source
+     * */
+    private fun insertBmi(bmiParam: BmiParam){
         viewModelScope.launch(Dispatchers.IO){
-            repository.insertBmi(bmi = bmi)
+            addBmiUseCase.invoke(param = bmiParam)
         }
     }
 }

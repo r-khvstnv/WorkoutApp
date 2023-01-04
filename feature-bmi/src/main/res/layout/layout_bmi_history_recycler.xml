@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -47,7 +46,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_bmi_history"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
+        android:minHeight="300dp"
         android:layout_marginTop="@dimen/item_bmi_layout_margin"
         tools:listitem="@layout/item_bmi_history" />
 </LinearLayout>

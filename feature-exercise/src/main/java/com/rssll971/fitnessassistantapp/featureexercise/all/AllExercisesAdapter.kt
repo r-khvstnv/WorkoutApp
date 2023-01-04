@@ -8,21 +8,20 @@
 
 package com.rssll971.fitnessassistantapp.featureexercise.all
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.rssll971.fitnessassistantapp.coredata.models.Exercise
+import com.rssll971.fitnessassistantapp.coredata.domain.model.ExerciseParam
 import com.rssll971.fitnessassistantapp.featureexercise.databinding.ItemExerciseBinding
-import com.rssll971.fitnessassistantapp.featureexercise.utils.ItemCallback
 
 internal class AllExercisesAdapter(
     private val context: Context,
-    private val callback: ItemCallback
-): RecyclerView.Adapter<AllExercisesAdapter.ViewHolder>() {
-
-    private var exerciseList: List<Exercise> = listOf()
+    private val onItemClicked: (Int) -> Unit,
+    private val onItemDelete: (ExerciseParam) -> Unit,
+): ListAdapter<ExerciseParam, AllExercisesAdapter.ViewHolder>(AllExercisesDiff()) {
 
     class ViewHolder(val binding: ItemExerciseBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -33,30 +32,32 @@ internal class AllExercisesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val exercise = exerciseList[position]
+        val exercise = getItem(position)
 
         with(holder.binding){
             tvItemName.text = exercise.name
             tvItemDescription.text = exercise.description
 
             ivItemDelete.setOnClickListener {
-                callback.onDelete(exercise = exercise)
+                onItemDelete(exercise)
             }
         }
 
         holder.itemView.setOnClickListener {
-            callback.onClick(exercise.id)
+            onItemClicked(exercise.id)
         }
     }
+}
 
-    override fun getItemCount(): Int {
-        return exerciseList.size
+private class AllExercisesDiff: DiffUtil.ItemCallback<ExerciseParam>(){
+    override fun areItemsTheSame(oldItem: ExerciseParam, newItem: ExerciseParam): Boolean {
+        return oldItem == newItem
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list: List<Exercise>){
-        exerciseList = list
-        notifyDataSetChanged()
+    override fun areContentsTheSame(oldItem: ExerciseParam, newItem: ExerciseParam): Boolean {
+        return oldItem.id == newItem.id &&
+                oldItem.name == newItem.name &&
+                oldItem.description == newItem.description &&
+                oldItem.imagePath == newItem.imagePath
     }
-
 }

@@ -33,11 +33,11 @@ import com.rssll971.fitnessassistantapp.featureworkoutoptions.databinding.Fragme
 import com.rssll971.fitnessassistantapp.featureworkoutoptions.start.di.OptionStartComponentViewModel
 import javax.inject.Inject
 
-class OptionStartFragment : BaseFragment() {
+internal class OptionStartFragment : BaseFragment() {
     private var _binding: FragmentOptionStartBinding? = null
     private val binding get() = _binding!!
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by viewModels<OptionStartViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -65,7 +65,7 @@ class OptionStartFragment : BaseFragment() {
             lineChartWorkoutDuration.setupChartAppearance()
             lineChartWorkoutAmount.setupChartAppearance()
 
-            llStart.setOnClickListener {
+            btnStart.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_options_start_fragment_to_options_nested_graph
                 )
@@ -79,9 +79,13 @@ class OptionStartFragment : BaseFragment() {
         viewModel.isLineChartShouldBeShown.observe(viewLifecycleOwner){
             isShouldBeVisible ->
             if (isShouldBeVisible){
-                binding.cvStatistic.visibility = View.VISIBLE
+                binding.tvNoData.visibility = View.GONE
+                binding.lineChartWorkoutDuration.visibility = View.VISIBLE
+                binding.lineChartWorkoutAmount.visibility = View.VISIBLE
             } else{
-                binding.cvStatistic.visibility = View.GONE
+                binding.tvNoData.visibility = View.VISIBLE
+                binding.lineChartWorkoutDuration.visibility = View.INVISIBLE
+                binding.lineChartWorkoutAmount.visibility = View.INVISIBLE
             }
         }
 

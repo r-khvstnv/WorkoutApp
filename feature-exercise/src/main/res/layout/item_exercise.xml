@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Created by Ruslan Khvastunov
   ~ r.khvastunov@gmail.com
   ~ Copyright (c) 2022
@@ -13,45 +12,51 @@
     style="@style/CardViewDefault"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/m_default_item_margin">
+    android:layout_margin="@dimen/m_default_item_margin"
+    app:cardElevation="@dimen/item_elevation">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/m_default_layout_margin">
+        android:layout_margin="@dimen/m_default_layout_margin"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_item_name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="@dimen/item_title_text_size"
-            app:fontFamily="@font/roboto_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Exercise Name" />
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
-        <ImageView
-            android:id="@+id/iv_item_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/action_delete"
-            android:src="@drawable/ic__delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/colorError" />
+            <TextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/item_title_margin_end"
+                android:layout_weight="1"
+                android:lines="1"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="@dimen/item_title_text_size"
+                app:fontFamily="@font/roboto_medium"
+                tools:text="Exercise Name" />
+
+
+            <ImageView
+                android:id="@+id/iv_item_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:contentDescription="@string/action_delete"
+                android:src="@drawable/ic__delete"
+                app:tint="?attr/colorError" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_item_description"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLines="@integer/item_description_min_lines"
-            android:minLines="@integer/item_description_max_lines"
+            android:layout_marginTop="@dimen/item_description_margin_top"
+            android:lines="3"
             android:textSize="@dimen/item_description_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
             tools:text="@tools:sample/lorem/random" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
