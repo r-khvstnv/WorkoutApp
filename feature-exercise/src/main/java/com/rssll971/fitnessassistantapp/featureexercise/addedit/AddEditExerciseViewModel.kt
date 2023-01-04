@@ -31,7 +31,6 @@ internal class AddEditExerciseViewModel @Inject constructor(
     private val getExerciseByIdUseCase: GetExerciseByIdUseCase,
     private val updateExerciseUseCase: UpdateExerciseUseCase
 ): ViewModel() {
-    //TODO Replace with sealed class
     /**Variables are used to receive notification
      * when a database operation completed successfully*/
     private var _isSaved = MutableLiveData(false)

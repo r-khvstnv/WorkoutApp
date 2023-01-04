@@ -9,9 +9,7 @@
 package com.rssll971.fitnessassistantapp.featurebmi.calculation
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.ContextThemeWrapper
@@ -21,9 +19,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.rssll971.fitnessassistantapp.core.base.BaseFragment
 import com.rssll971.fitnessassistantapp.featurebmi.R
 import com.rssll971.fitnessassistantapp.featurebmi.databinding.FragmentBmiCalculationBinding
 import com.rssll971.fitnessassistantapp.featurebmi.di.FeatureBmiComponentsViewModel
@@ -49,7 +45,7 @@ internal class BmiCalculationFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //wrap app theme for bottom sheet //todo comments bottom sheet
+        //wrap app theme for bottom sheet
         val contextThemeWrapper = ContextThemeWrapper(activity, R.style.AppTheme)
         //inflate theme
         val mInflater = inflater.cloneInContext(contextThemeWrapper).inflate(R.layout.fragment_bmi_calculation, container, false)
