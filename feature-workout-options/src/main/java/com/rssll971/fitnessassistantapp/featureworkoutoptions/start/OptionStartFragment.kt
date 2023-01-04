@@ -79,9 +79,13 @@ internal class OptionStartFragment : BaseFragment() {
         viewModel.isLineChartShouldBeShown.observe(viewLifecycleOwner){
             isShouldBeVisible ->
             if (isShouldBeVisible){
-                binding.cvStatistic.visibility = View.VISIBLE
+                binding.tvNoData.visibility = View.GONE
+                binding.lineChartWorkoutDuration.visibility = View.VISIBLE
+                binding.lineChartWorkoutAmount.visibility = View.VISIBLE
             } else{
-                binding.cvStatistic.visibility = View.GONE
+                binding.tvNoData.visibility = View.VISIBLE
+                binding.lineChartWorkoutDuration.visibility = View.INVISIBLE
+                binding.lineChartWorkoutAmount.visibility = View.INVISIBLE
             }
         }
 

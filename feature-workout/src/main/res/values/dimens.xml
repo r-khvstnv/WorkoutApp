@@ -26,8 +26,8 @@
 
     <dimen name="rest_next_exercise_margin_bottom">100dp</dimen>
     <dimen name="rest_title_text_size">48sp</dimen>
-    <dimen name="rest_prepare_text_size">36sp</dimen>
-    <dimen name="rest_next_exercise_text_size">24sp</dimen>
+    <dimen name="rest_prepare_text_size">20sp</dimen>
+    <dimen name="rest_next_exercise_text_size">28sp</dimen>
 
     <dimen name="exercise_title_text_size">36sp</dimen>
     <dimen name="exercise_description_text_size">20sp</dimen>

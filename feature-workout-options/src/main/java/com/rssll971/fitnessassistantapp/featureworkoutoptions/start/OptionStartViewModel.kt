@@ -53,7 +53,7 @@ internal class OptionStartViewModel @Inject constructor(
                     _isLineChartShouldBeShown.postValue(false)
                 }
                 //If notEmpty -> change charts visibility state to true and assign data
-                else{
+                else if(list.size >= 2){
                     _isLineChartShouldBeShown.postValue(true)
                     val durationEntries = arrayListOf<Entry>()
                     val exerciseAmountEntries = arrayListOf<Entry>()

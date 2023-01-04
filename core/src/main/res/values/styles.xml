@@ -13,6 +13,7 @@
         <item name="android:background">@drawable/ripple_shape_rectangle_rad10</item>
         <item name="android:textSize">@dimen/m_button_text_size</item>
         <item name="android:elevation">@dimen/m_button_elevation</item>
+
         <item name="fontFamily">@font/roboto_medium</item>
     </style>
     

@@ -10,6 +10,7 @@ package com.rssll971.fitnessassistantapp.featureworkout.workout
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -145,6 +146,12 @@ internal class WorkoutFragment : BaseFragment(), TextToSpeech.OnInitListener {
                     R.id.action_workout_fragment_to_finish_fragment
                 )
             }
+        }
+
+
+        binding.ibWorkoutClose.setOnClickListener {
+            val deepLink = Uri.parse(getString(com.rssll971.fitnessassistantapp.core.R.string.deep_link_option_start_fragment))
+            findNavController().navigate(deepLink)
         }
     }
 

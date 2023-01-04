@@ -12,13 +12,9 @@
     android:layout_height="match_parent"
     tools:context=".all.AllExercisesFragment">
 
-    <TextView
+    <include
         android:id="@+id/tv_no_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/error_no_data"
-        android:textSize="@dimen/error_no_data_text_size" />
+        layout="@layout/text_view_no_data" />
 
     <LinearLayout
         android:layout_width="match_parent"
