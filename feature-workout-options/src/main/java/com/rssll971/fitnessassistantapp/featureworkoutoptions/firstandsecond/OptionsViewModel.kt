@@ -14,25 +14,35 @@ import com.rssll971.fitnessassistantapp.coredata.domain.model.StatisticParam
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.exercise.GetAllExercisesUseCase
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.statistic.AddStatisticUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-internal class OptionsViewModel @Inject constructor(
+//todo back internal property
+class OptionsViewModel @Inject constructor(
     private val getAllExercisesUseCase: GetAllExercisesUseCase,
     private val addStatisticUseCase: AddStatisticUseCase
 ): ViewModel() {
     private val defaultTimeStep: Int = 30
 
-    private var _restTime: MutableLiveData<Int> = MutableLiveData(30)
+    private var _restTime: MutableLiveData<Int> = MutableLiveData(60)
     val restTime: LiveData<Int> get() = _restTime
-    private var _exerciseTime: MutableLiveData<Int> = MutableLiveData(30)
+    private var _exerciseTime: MutableLiveData<Int> = MutableLiveData(60)
     val exerciseTime: LiveData<Int> get() = _exerciseTime
     private var _isVoiceEnabled = MutableLiveData(false)
 
     private var _isStatisticAdded = MutableLiveData(false)
     val isStatisticAdded: LiveData<Boolean> get() = _isStatisticAdded
 
-    val exerciseParamList: LiveData<List<ExerciseParam>> = getAllExercisesUseCase.invoke().asLiveData()
+    //todo change to correct impl
+    //val exerciseParamList: LiveData<List<ExerciseParam>> = getAllExercisesUseCase.invoke().asLiveData()
+    val exerciseParamList: LiveData<List<ExerciseParam>> = flowOf(listOf(
+        ExerciseParam(
+            "exercise",
+            imagePath = "somePath",
+            description = "desc",
+            id = 8
+        )
+    )).asLiveData()
 
 
     fun setVoiceAvailability(enable: Boolean){
