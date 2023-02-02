@@ -15,6 +15,7 @@ import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.DeleteAllBmi
 import com.rssll971.fitnessassistantapp.coredata.domain.usecase.bmi.GetAllBmiUseCase
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
@@ -30,6 +31,11 @@ class BmiUseCasesTest {
         26f,
         1
     )
+
+    @AfterEach
+    fun tearDown(){
+        Mockito.reset(repository)
+    }
 
     @Test
     fun `Is bmi data saved at least once`() = runBlocking{

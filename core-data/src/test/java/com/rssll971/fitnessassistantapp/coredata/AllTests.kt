@@ -22,4 +22,4 @@ import org.junit.platform.suite.api.Suite
     ExerciseUseCasesTest::class,
     StatisticUseCasesTest::class
 )
-class AllTests
+class AllTests //todo make correct impl

@@ -78,4 +78,6 @@ dependencies {
     //Required for test uniting
     testImplementation ("org.junit.platform:junit-platform-suite-api:1.9.2")
     testImplementation ("org.junit.platform:junit-platform-runner:1.9.2")
+    //Required for mocking final classes
+    testImplementation 'org.mockito:mockito-inline:4.0.0'
 }
